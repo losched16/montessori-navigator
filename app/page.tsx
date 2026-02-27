@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
-import MarketingPage from './(marketing)/page'
+import MarketingPage from '@/components/MarketingPage'
 
 export default function Home() {
   const [loading, setLoading] = useState(true)
