@@ -5,7 +5,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { getAgePlane, getAgePlaneLabel, formatAge, getDevelopmentLevelLabel, getCurriculumAreaLabel, getObservationTypeLabel } from '@/lib/utils'
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY!,
+  apiKey: process.env.NAVIGATOR_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY!,
 })
 
 export async function POST(request: NextRequest) {
