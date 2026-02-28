@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { FamilyContext } from './supabase'
 import { getAgePlane, getAgePlaneLabel, getDevelopmentLevelLabel, getCurriculumAreaLabel, formatAge } from './utils'
+import { ARTICLES } from './articles'
 
 const anthropic = new Anthropic({
   apiKey: process.env.NAVIGATOR_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY!,
@@ -273,6 +274,19 @@ ${MONTESSORI_KNOWLEDGE}
 ${DISCIPLINE_KNOWLEDGE}
 
 ${PARENT_SUPPORT_KNOWLEDGE}
+
+MONTESSORI FOUNDATION ARTICLE LIBRARY:
+You have access to ${ARTICLES.length} articles from the Montessori Foundation & Montessori Family Alliance (montessori.org). When relevant to a parent's question, reference these articles and suggest they read them in the Library section of the app.
+
+Article summaries by topic:
+${ARTICLES.slice(0, 80).map(a => `- "${a.title}" by ${a.author} [/dashboard/library/${a.slug}] (${a.categories.filter(c => c !== 'MFA').join(', ')}): ${a.excerpt.substring(0, 120)}`).join('\n')}
+
+When referencing articles:
+1. Naturally weave in: "There's a great article in your Library about this..."
+2. Mention the title and author when relevant
+3. Use the path format: "You can find it in your Library under '[article title]'"
+4. Don't just link-dump — explain WHY this article is relevant to their situation
+5. Use article content to inform your answers with Foundation-approved perspectives
 
 USING FAMILY DATA:
 1. Check if development levels, observations, or traits are relevant to the question
