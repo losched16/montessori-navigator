@@ -93,6 +93,7 @@ export default function DashboardHome() {
   const [planCount, setPlanCount] = useState(0)
   const [milestoneCount, setMilestoneCount] = useState(0)
   const [threadCount, setThreadCount] = useState(0)
+  const [skillCount, setSkillCount] = useState(0)
   const [devLevels, setDevLevels] = useState<Record<string, Array<{ area: string; level: number | null }>>>({})
   const [daysSinceObs, setDaysSinceObs] = useState<number | null>(null)
   const supabase = createClient()
@@ -139,6 +140,12 @@ export default function DashboardHome() {
       // Threads
       const { count: tc } = await supabase.from('chat_threads').select('*', { count: 'exact', head: true }).eq('parent_id', parent.id)
       setThreadCount(tc || 0)
+
+      // Skills mastered (across all children)
+      if (childIds.length > 0) {
+        const { count: sc } = await supabase.from('child_skill_progress').select('*', { count: 'exact', head: true }).in('child_id', childIds).eq('status', 'mastered')
+        setSkillCount(sc || 0)
+      }
 
       // Dev levels per child
       if (childIds.length > 0) {
@@ -387,10 +394,11 @@ export default function DashboardHome() {
 
       {/* ═══ Stats Row ═══ */}
       {children.length > 0 && (
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-5 gap-2">
           {[
             { value: totalObs, label: 'Observations', href: '/dashboard/children' },
             { value: milestoneCount, label: 'Milestones', href: '/dashboard/milestones' },
+            { value: skillCount, label: 'Skills', href: '/dashboard/curriculum' },
             { value: planCount, label: 'Plans', href: '/dashboard/plans' },
             { value: threadCount, label: 'Chats', href: '/dashboard/chat' },
           ].map(s => (

@@ -1,8 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { getAllAreas, getStrandsByArea, getSkillsByArea } from '@/lib/scope-sequence'
+import { createClient } from '@/lib/supabase'
+import type { Child } from '@/lib/supabase'
+import { formatAge } from '@/lib/utils'
+import { getAllAreas, getStrandsByArea } from '@/lib/scope-sequence'
 
 const AREAS = getAllAreas()
 
@@ -45,8 +48,56 @@ const AREA_DESCRIPTIONS: Record<string, string> = {
   toddlers: 'Walking, talking, self-care, and the explosion of independence from 12 to 36 months.',
 }
 
+interface AreaProgress {
+  mastered: number
+  inProgress: number
+}
+
 export default function CurriculumPage() {
   const [search, setSearch] = useState('')
+  const [children, setChildren] = useState<Child[]>([])
+  const [selectedChildId, setSelectedChildId] = useState<string | null>(null)
+  const [areaProgress, setAreaProgress] = useState<Record<string, AreaProgress>>({})
+
+  const supabase = createClient()
+
+  // Load children
+  useEffect(() => {
+    const load = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+      const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
+      if (!parent) return
+      const { data: kids } = await supabase.from('children').select('*').eq('parent_id', parent.id).order('created_at')
+      if (kids && kids.length > 0) {
+        setChildren(kids)
+        setSelectedChildId(kids[0].id)
+      }
+    }
+    load()
+  }, [])
+
+  // Load progress when child changes
+  useEffect(() => {
+    if (!selectedChildId) return
+    const loadProgress = async () => {
+      const { data } = await supabase
+        .from('child_skill_progress')
+        .select('skill_area, status')
+        .eq('child_id', selectedChildId)
+
+      const progress: Record<string, AreaProgress> = {}
+      if (data) {
+        for (const row of data) {
+          if (!progress[row.skill_area]) progress[row.skill_area] = { mastered: 0, inProgress: 0 }
+          if (row.status === 'mastered') progress[row.skill_area].mastered++
+          else if (row.status === 'in_progress') progress[row.skill_area].inProgress++
+        }
+      }
+      setAreaProgress(progress)
+    }
+    loadProgress()
+  }, [selectedChildId])
 
   const filteredAreas = search
     ? AREAS.filter(a =>
@@ -56,20 +107,57 @@ export default function CurriculumPage() {
       )
     : AREAS
 
+  // Total progress across all areas
+  const totalMastered = Object.values(areaProgress).reduce((sum, p) => sum + p.mastered, 0)
+  const totalInProgress = Object.values(areaProgress).reduce((sum, p) => sum + p.inProgress, 0)
+  const totalSkills = AREAS.reduce((sum, a) => sum + a.count, 0)
+
   return (
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-navy-600">Curriculum Guide</h1>
         <p className="text-gray-500 text-sm mt-1">
-          2,566 skills across 10 curriculum areas — from the Montessori Foundation&apos;s official Scope &amp; Sequence
+          {totalSkills} skills across {AREAS.length} curriculum areas — from the Montessori Foundation&apos;s official Scope &amp; Sequence
         </p>
       </div>
+
+      {/* Child Selector */}
+      {children.length > 0 && (
+        <div className="bg-white border border-gray-100 rounded-xl p-4 mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <div>
+              <div className="text-xs text-gray-400 uppercase tracking-wide mb-2 sm:mb-0">Tracking progress for</div>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {children.map(child => (
+                <button
+                  key={child.id}
+                  onClick={() => setSelectedChildId(child.id)}
+                  className={`px-3 py-1.5 rounded-lg text-sm transition ${
+                    selectedChildId === child.id
+                      ? 'bg-teal-50 text-teal-600 font-medium border border-teal-200'
+                      : 'bg-gray-50 text-gray-500 border border-gray-100 hover:bg-gray-100'
+                  }`}
+                >
+                  {child.name}
+                  {child.date_of_birth && <span className="text-gray-400 ml-1">· {formatAge(child.date_of_birth)}</span>}
+                </button>
+              ))}
+            </div>
+            {selectedChildId && totalMastered > 0 && (
+              <div className="sm:ml-auto text-xs text-gray-500">
+                {totalMastered} of {totalSkills} skills mastered
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Info card */}
       <div className="bg-gradient-to-br from-[#f8f5ff] to-white border border-[#ede7f6] rounded-xl p-5 mb-6">
         <h3 className="text-sm font-semibold text-[#4a2c82] mb-2">How to Use This Guide</h3>
         <p className="text-sm text-gray-600 leading-relaxed">
-          Browse each curriculum area to see the specific skills your child will develop at each age. Each skill includes a <strong>parent-friendly explanation</strong> of what it means and why it matters. Use this to understand what to look for when observing your child and to track their progress in the Milestones section.
+          Browse each curriculum area to see the specific skills your child will develop at each age. Click into any area to <strong>check off skills</strong> as your child masters them. Each skill includes a parent-friendly explanation of what it means and why it matters.
         </p>
       </div>
 
@@ -89,6 +177,8 @@ export default function CurriculumPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredAreas.map(area => {
           const strands = getStrandsByArea(area.key)
+          const prog = areaProgress[area.key]
+          const hasProg = prog && (prog.mastered > 0 || prog.inProgress > 0)
           return (
             <Link
               key={area.key}
@@ -113,6 +203,33 @@ export default function CurriculumPage() {
                     <p className="text-xs text-gray-500 leading-relaxed mt-1.5">
                       {AREA_DESCRIPTIONS[area.key] || ''}
                     </p>
+
+                    {/* Progress bar (only shown when child has progress) */}
+                    {selectedChildId && hasProg && (
+                      <div className="mt-3">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[10px] text-gray-500">
+                            {prog.mastered} mastered{prog.inProgress > 0 ? ` · ${prog.inProgress} in progress` : ''}
+                          </span>
+                          <span className="text-[10px] text-teal-600 font-medium">
+                            {Math.round((prog.mastered / area.count) * 100)}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                          <div className="h-full flex">
+                            <div
+                              className="bg-teal-500 transition-all"
+                              style={{ width: `${(prog.mastered / area.count) * 100}%` }}
+                            />
+                            <div
+                              className="bg-amber-400 transition-all"
+                              style={{ width: `${(prog.inProgress / area.count) * 100}%` }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     <div className="flex flex-wrap gap-1 mt-3">
                       {strands.slice(0, 4).map(strand => (
                         <span key={strand} className="px-2 py-0.5 bg-gray-50 text-gray-500 rounded text-[10px]">

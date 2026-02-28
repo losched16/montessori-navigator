@@ -179,6 +179,21 @@ export interface FamilyNote {
   created_at: string
 }
 
+export type SkillStatus = 'not_started' | 'in_progress' | 'mastered'
+
+export interface ChildSkillProgress {
+  id: string
+  child_id: string
+  skill_index: number
+  skill_area: string
+  status: SkillStatus
+  date_started: string | null
+  date_mastered: string | null
+  notes: string | null
+  created_at: string
+  updated_at: string
+}
+
 // ================================================
 // HELPER: Get current parent profile
 // ================================================

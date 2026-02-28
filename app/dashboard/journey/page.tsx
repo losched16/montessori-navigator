@@ -13,6 +13,8 @@ interface JourneyStats {
   chatThreads: number
   currentStreak: number
   longestStreak: number
+  skillsMastered: number
+  skillsInProgress: number
   recentMilestones: Array<{ milestone_name: string; achieved_date: string; curriculum_area: string }>
   observationsByMonth: Array<{ month: string; count: number }>
   areaDistribution: Array<{ area: string; count: number }>
@@ -128,6 +130,19 @@ export default function JourneyPage() {
       .select('*', { count: 'exact', head: true })
       .eq('parent_id', parent.id)
 
+    // Get curriculum skill progress
+    const { count: skillsMasteredCount } = await supabase
+      .from('child_skill_progress')
+      .select('*', { count: 'exact', head: true })
+      .eq('child_id', selectedChildId)
+      .eq('status', 'mastered')
+
+    const { count: skillsInProgressCount } = await supabase
+      .from('child_skill_progress')
+      .select('*', { count: 'exact', head: true })
+      .eq('child_id', selectedChildId)
+      .eq('status', 'in_progress')
+
     // Calculate streak
     const obs = observations || []
     const uniqueDates = [...new Set(obs.map(o => o.date.split('T')[0]))].sort()
@@ -212,6 +227,8 @@ export default function JourneyPage() {
       chatThreads: threadCount || 0,
       currentStreak,
       longestStreak,
+      skillsMastered: skillsMasteredCount || 0,
+      skillsInProgress: skillsInProgressCount || 0,
       recentMilestones: (achievedMilestones || []).map(m => ({
         milestone_name: m.milestone_name,
         achieved_date: m.achieved_date || '',
@@ -278,10 +295,11 @@ export default function JourneyPage() {
             </div>
 
             {/* Summary stats */}
-            <div className="grid grid-cols-4 gap-3 mt-5">
+            <div className="grid grid-cols-5 gap-3 mt-5">
               {[
                 { value: stats.totalObservations, label: 'Observations' },
                 { value: stats.milestonesAchieved, label: 'Milestones' },
+                { value: stats.skillsMastered, label: 'Skills' },
                 { value: stats.plansCreated, label: 'Plans' },
                 { value: stats.chatThreads, label: 'Conversations' },
               ].map((stat, i) => (
@@ -411,6 +429,34 @@ export default function JourneyPage() {
                 </div>
                 <p className="text-xs text-gray-400 mt-2">
                   Every child moves at their own pace. This isn&apos;t a race — it&apos;s a map of where they&apos;ve been.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Curriculum skill progress */}
+          {(stats.skillsMastered > 0 || stats.skillsInProgress > 0) && (
+            <div className="mb-6">
+              <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Curriculum Skills</h3>
+              <div className="bg-white border border-gray-100 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-gray-600">{stats.skillsMastered} mastered · {stats.skillsInProgress} in progress</span>
+                  <span className="text-sm text-teal-600 font-medium">{Math.round((stats.skillsMastered / 2566) * 100)}%</span>
+                </div>
+                <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full flex">
+                    <div
+                      className="bg-gradient-to-r from-teal-400 to-teal-500 rounded-l-full transition-all duration-700"
+                      style={{ width: `${(stats.skillsMastered / 2566) * 100}%` }}
+                    />
+                    <div
+                      className="bg-amber-400 transition-all duration-700"
+                      style={{ width: `${(stats.skillsInProgress / 2566) * 100}%` }}
+                    />
+                  </div>
+                </div>
+                <p className="text-xs text-gray-400 mt-2">
+                  Out of 2,566 skills in the Montessori scope &amp; sequence. Track progress in the <a href="/dashboard/curriculum" className="text-teal-500 hover:underline">Curriculum Guide</a>.
                 </p>
               </div>
             </div>
