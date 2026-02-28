@@ -62,6 +62,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     { href: '/dashboard/schools', label: 'Schools', icon: '🏫' },
     { href: '/dashboard/notes', label: 'Notes', icon: '📝' },
     { href: '/dashboard/environment', label: 'Environment', icon: '🏡' },
+    { href: '/dashboard/curriculum', label: 'Curriculum', icon: '🎯' },
     { href: '/dashboard/library', label: 'Library', icon: '📚' },
   ]
 
