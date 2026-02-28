@@ -146,12 +146,40 @@ export default function CurriculumAreaPage() {
     }
   }
 
-  const getStatusIcon = (skillIndex: number) => {
+  const getStatusInfo = (skillIndex: number) => {
     const progress = progressMap.get(skillIndex)
-    if (!progress) return { icon: '○', color: 'text-gray-300 hover:text-gray-400', label: 'Not started' }
-    if (progress.status === 'in_progress') return { icon: '◐', color: 'text-amber-400 hover:text-amber-500', label: 'In progress' }
-    if (progress.status === 'mastered') return { icon: '●', color: 'text-teal-500 hover:text-teal-600', label: 'Mastered' }
-    return { icon: '○', color: 'text-gray-300 hover:text-gray-400', label: 'Not started' }
+    if (!progress) return {
+      bgColor: 'bg-gray-100 hover:bg-gray-200 border-gray-200',
+      checkColor: '',
+      label: 'Not started',
+      shortLabel: '',
+      showCheck: false,
+      showHalf: false,
+    }
+    if (progress.status === 'in_progress') return {
+      bgColor: 'bg-amber-50 hover:bg-amber-100 border-amber-300',
+      checkColor: 'text-amber-500',
+      label: 'In progress — click to mark mastered',
+      shortLabel: 'Started',
+      showCheck: false,
+      showHalf: true,
+    }
+    if (progress.status === 'mastered') return {
+      bgColor: 'bg-teal-50 hover:bg-teal-100 border-teal-300',
+      checkColor: 'text-teal-600',
+      label: 'Mastered — click to reset',
+      shortLabel: 'Done',
+      showCheck: true,
+      showHalf: false,
+    }
+    return {
+      bgColor: 'bg-gray-100 hover:bg-gray-200 border-gray-200',
+      checkColor: '',
+      label: 'Not started',
+      shortLabel: '',
+      showCheck: false,
+      showHalf: false,
+    }
   }
 
   // Calculate progress counts
@@ -291,7 +319,7 @@ export default function CurriculumAreaPage() {
               />
             </div>
           </div>
-          <div className="flex gap-4 mt-2">
+          <div className="flex flex-wrap items-center gap-4 mt-2">
             <span className="text-[10px] text-gray-400 flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-teal-500 inline-block" /> Mastered ({progressPercent}%)
             </span>
@@ -300,6 +328,9 @@ export default function CurriculumAreaPage() {
             </span>
             <span className="text-[10px] text-gray-400 flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-gray-200 inline-block" /> Not Started
+            </span>
+            <span className="text-[10px] text-gray-500 ml-auto italic">
+              Click the circle next to each skill to update status
             </span>
           </div>
         </div>
@@ -350,6 +381,19 @@ export default function CurriculumAreaPage() {
         </div>
       </div>
 
+      {/* Getting started hint — shown when child is selected but no progress yet */}
+      {selectedChildId && masteredCount === 0 && inProgressCount === 0 && !loadingProgress && (
+        <div className="bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-100 rounded-xl p-4 mb-6 flex items-start gap-3">
+          <span className="text-xl shrink-0">💡</span>
+          <div>
+            <p className="text-sm font-medium text-teal-800 mb-1">Track Your Child&apos;s Progress</p>
+            <p className="text-xs text-teal-700 leading-relaxed">
+              Click the <span className="inline-flex items-center mx-0.5 px-1.5 py-0.5 bg-white border border-gray-200 rounded text-[10px] text-gray-500">○</span> circle next to any skill to mark it as <strong>In Progress</strong>. Click again to mark as <strong>Mastered</strong>, and once more to reset. Your progress is saved automatically.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Skills grouped by strand */}
       {Object.entries(groupedByStrand).length > 0 ? (
         <div className="space-y-6">
@@ -388,7 +432,7 @@ export default function CurriculumAreaPage() {
                 <div className="divide-y divide-gray-50">
                   {skills.map((skill) => {
                     const isExpanded = expandedSkill === skill.index
-                    const statusInfo = getStatusIcon(skill.index)
+                    const statusInfo = getStatusInfo(skill.index)
                     return (
                       <div key={skill.index} className="px-5 py-3">
                         <div className="flex items-start gap-3">
@@ -396,10 +440,26 @@ export default function CurriculumAreaPage() {
                           {selectedChildId && (
                             <button
                               onClick={() => cycleStatus(skill.index)}
-                              className={`text-xl leading-none mt-0.5 shrink-0 transition ${statusInfo.color}`}
+                              className={`flex items-center gap-1.5 px-2 py-1 rounded-lg border text-xs shrink-0 transition ${statusInfo.bgColor}`}
                               title={statusInfo.label}
                             >
-                              {statusInfo.icon}
+                              <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition ${
+                                statusInfo.showCheck ? 'border-teal-500 bg-teal-500' :
+                                statusInfo.showHalf ? 'border-amber-400 bg-amber-100' :
+                                'border-gray-300 bg-white'
+                              }`}>
+                                {statusInfo.showCheck && (
+                                  <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                  </svg>
+                                )}
+                                {statusInfo.showHalf && (
+                                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                                )}
+                              </span>
+                              {statusInfo.shortLabel && (
+                                <span className={statusInfo.checkColor}>{statusInfo.shortLabel}</span>
+                              )}
                             </button>
                           )}
 
