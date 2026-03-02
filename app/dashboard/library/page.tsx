@@ -2,10 +2,11 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { getAllArticles, getAllCategories, type Article } from '@/lib/articles'
+import { getAllArticles, getAllCategories, getAllTags, type Article } from '@/lib/articles'
 
 const ARTICLES = getAllArticles()
 const CATEGORIES = getAllCategories()
+const TAGS = getAllTags()
 
 // Simplified category groupings for the filter UI
 const CATEGORY_GROUPS: Record<string, string[]> = {
@@ -23,6 +24,7 @@ type SortOption = 'newest' | 'oldest' | 'title_asc' | 'title_desc'
 export default function LibraryPage() {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [selectedTag, setSelectedTag] = useState<string>('all')
   const [sort, setSort] = useState<SortOption>('newest')
   const [page, setPage] = useState(1)
   const perPage = 12
@@ -54,6 +56,11 @@ export default function LibraryPage() {
       }
     }
 
+    // Filter by tag
+    if (selectedTag !== 'all') {
+      results = results.filter(a => a.tags.includes(selectedTag))
+    }
+
     // Sort
     switch (sort) {
       case 'newest':
@@ -71,7 +78,7 @@ export default function LibraryPage() {
     }
 
     return results
-  }, [search, selectedCategory, sort])
+  }, [search, selectedCategory, selectedTag, sort])
 
   const totalPages = Math.ceil(filteredArticles.length / perPage)
   const paginatedArticles = filteredArticles.slice((page - 1) * perPage, page * perPage)
@@ -132,6 +139,18 @@ export default function LibraryPage() {
             <option value="all">All Categories</option>
             {Object.keys(CATEGORY_GROUPS).map(group => (
               <option key={group} value={group}>{group}</option>
+            ))}
+          </select>
+
+          {/* Tag filter */}
+          <select
+            value={selectedTag}
+            onChange={e => handleFilterChange(setSelectedTag, e.target.value)}
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+          >
+            <option value="all">All Tags</option>
+            {TAGS.map(tag => (
+              <option key={tag} value={tag}>{tag}</option>
             ))}
           </select>
 
