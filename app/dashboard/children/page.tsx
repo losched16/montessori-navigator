@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
-import type { Child, ChildDevelopmentLevel, Observation } from '@/lib/supabase'
+import type { ChildDevelopmentLevel, Observation } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel, getDevelopmentLevelLabel, getCurriculumAreaLabel, getObservationTypeLabel } from '@/lib/utils'
+import { useChild } from '@/lib/child-context'
 
 const CURRICULUM_AREAS = [
   'practical_life', 'sensorial', 'language', 'mathematics',
@@ -22,8 +23,7 @@ const OBSERVATION_TYPES = [
 ]
 
 export default function ChildrenPage() {
-  const [children, setChildren] = useState<Child[]>([])
-  const [selectedChildId, setSelectedChildId] = useState<string | null>(null)
+  const { children, selectedChildId, setSelectedChildId, selectedChild } = useChild()
   const [devLevels, setDevLevels] = useState<ChildDevelopmentLevel[]>([])
   const [observations, setObservations] = useState<Observation[]>([])
   const [parentId, setParentId] = useState<string | null>(null)
@@ -40,25 +40,14 @@ export default function ChildrenPage() {
   const supabase = createClient()
 
   useEffect(() => {
-    const load = async () => {
+    const loadParentId = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
       const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
       if (!parent) return
       setParentId(parent.id)
-
-      const { data: kids } = await supabase
-        .from('children')
-        .select('*')
-        .eq('parent_id', parent.id)
-        .order('created_at')
-
-      if (kids && kids.length > 0) {
-        setChildren(kids)
-        setSelectedChildId(kids[0].id)
-      }
     }
-    load()
+    loadParentId()
   }, [])
 
   useEffect(() => {
@@ -73,8 +62,6 @@ export default function ChildrenPage() {
     }
     loadChild()
   }, [selectedChildId])
-
-  const selectedChild = children.find(c => c.id === selectedChildId)
 
   const updateLevel = async (area: string, level: number) => {
     if (!selectedChildId) return

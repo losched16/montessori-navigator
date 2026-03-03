@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
-import type { Child, ChildSkillProgress, SkillStatus } from '@/lib/supabase'
+import type { ChildSkillProgress, SkillStatus } from '@/lib/supabase'
 import { formatAge } from '@/lib/utils'
 import { getSkillsByArea, getStrandsByArea, getSkillsWithIndicesByArea, type ScopeSequenceSkill } from '@/lib/scope-sequence'
+import { useChild } from '@/lib/child-context'
 
 const AREA_LABELS: Record<string, string> = {
   practical_life: 'Practical Life',
@@ -45,8 +46,7 @@ export default function CurriculumAreaPage() {
   const [ageFilter, setAgeFilter] = useState<string>('all')
 
   // Child context
-  const [children, setChildren] = useState<Child[]>([])
-  const [selectedChildId, setSelectedChildId] = useState<string | null>(null)
+  const { children, selectedChildId, setSelectedChildId } = useChild()
   const [progressMap, setProgressMap] = useState<Map<number, ChildSkillProgress>>(new Map())
   const [loadingProgress, setLoadingProgress] = useState(false)
 
@@ -56,22 +56,6 @@ export default function CurriculumAreaPage() {
   const allSkills = getSkillsByArea(area)
   const strands = getStrandsByArea(area)
   const areaLabel = AREA_LABELS[area] || area
-
-  // Load children
-  useEffect(() => {
-    const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
-      const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
-      if (!parent) return
-      const { data: kids } = await supabase.from('children').select('*').eq('parent_id', parent.id).order('created_at')
-      if (kids && kids.length > 0) {
-        setChildren(kids)
-        setSelectedChildId(kids[0].id)
-      }
-    }
-    load()
-  }, [])
 
   // Load skill progress when child changes
   useEffect(() => {

@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
-import type { Child } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel } from '@/lib/utils'
+import { useChild } from '@/lib/child-context'
 
 interface JourneyStats {
   totalObservations: number
@@ -62,28 +62,11 @@ const SEASON_PROMPTS = [
 ]
 
 export default function JourneyPage() {
-  const [children, setChildren] = useState<Child[]>([])
-  const [selectedChildId, setSelectedChildId] = useState<string | null>(null)
+  const { children, selectedChildId, setSelectedChildId, selectedChild } = useChild()
   const [stats, setStats] = useState<JourneyStats | null>(null)
   const [loading, setLoading] = useState(true)
 
   const supabase = createClient()
-
-  useEffect(() => {
-    const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
-      const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
-      if (!parent) return
-
-      const { data: kids } = await supabase.from('children').select('*').eq('parent_id', parent.id).order('created_at')
-      if (kids && kids.length > 0) {
-        setChildren(kids)
-        setSelectedChildId(kids[0].id)
-      }
-    }
-    load()
-  }, [])
 
   useEffect(() => {
     if (!selectedChildId) return
@@ -241,7 +224,6 @@ export default function JourneyPage() {
     setLoading(false)
   }
 
-  const selectedChild = children.find(c => c.id === selectedChildId)
   const currentQuarter = Math.ceil((new Date().getMonth() + 1) / 3)
   const seasonPrompt = SEASON_PROMPTS.find(s => s.quarter === currentQuarter)
 

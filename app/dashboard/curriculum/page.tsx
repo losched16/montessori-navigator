@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
-import type { Child } from '@/lib/supabase'
 import { formatAge } from '@/lib/utils'
 import { getAllAreas, getStrandsByArea } from '@/lib/scope-sequence'
+import { useChild } from '@/lib/child-context'
 
 const AREAS = getAllAreas()
 
@@ -55,27 +55,10 @@ interface AreaProgress {
 
 export default function CurriculumPage() {
   const [search, setSearch] = useState('')
-  const [children, setChildren] = useState<Child[]>([])
-  const [selectedChildId, setSelectedChildId] = useState<string | null>(null)
+  const { children, selectedChildId, setSelectedChildId } = useChild()
   const [areaProgress, setAreaProgress] = useState<Record<string, AreaProgress>>({})
 
   const supabase = createClient()
-
-  // Load children
-  useEffect(() => {
-    const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
-      const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
-      if (!parent) return
-      const { data: kids } = await supabase.from('children').select('*').eq('parent_id', parent.id).order('created_at')
-      if (kids && kids.length > 0) {
-        setChildren(kids)
-        setSelectedChildId(kids[0].id)
-      }
-    }
-    load()
-  }, [])
 
   // Load progress when child changes
   useEffect(() => {
