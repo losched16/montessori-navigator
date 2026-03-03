@@ -179,6 +179,16 @@ export interface FamilyNote {
   created_at: string
 }
 
+export interface SavedMemory {
+  id: string
+  parent_id: string
+  message_id: string | null
+  content: string
+  label: string | null
+  child_id: string | null
+  created_at: string
+}
+
 export type SkillStatus = 'not_started' | 'in_progress' | 'mastered'
 
 export interface ChildSkillProgress {
@@ -228,6 +238,7 @@ export interface FamilyContext {
   recentPlans: string[]
   memorySummary: string | null
   activities: Activity[]
+  savedMemories: SavedMemory[]
 }
 
 export async function getFamilyContext(supabase: any, parentId: string): Promise<FamilyContext | null> {
@@ -320,6 +331,14 @@ export async function getFamilyContext(supabase: any, parentId: string): Promise
     .select('*')
     .limit(100)
 
+  // Get saved memories
+  const { data: savedMemories } = await supabase
+    .from('saved_memories')
+    .select('*')
+    .eq('parent_id', parentId)
+    .order('created_at', { ascending: false })
+    .limit(20)
+
   return {
     parent,
     children: enrichedChildren,
@@ -329,5 +348,6 @@ export async function getFamilyContext(supabase: any, parentId: string): Promise
     recentPlans: (plans || []).map((p: any) => p.title),
     memorySummary: memory?.summary || null,
     activities: activities || [],
+    savedMemories: savedMemories || [],
   }
 }

@@ -262,6 +262,7 @@ ${adaptationGuide}
 ${styleGuide}
 ${Object.keys(context.parentPreferences).length > 0 ? `\nLEARNED PREFERENCES:\n${Object.entries(context.parentPreferences).map(([k,v])=>`- ${k}: ${v}`).join('\n')}` : ''}
 ${context.memorySummary ? `\nFAMILY CONTEXT (previous conversations):\n${context.memorySummary}` : ''}
+${context.savedMemories?.length ? `\nPARENT'S SAVED MEMORIES (${context.savedMemories.length} items the parent chose to save — these are important to them):\n${context.savedMemories.map(m => `- ${m.label ? `[${m.label}] ` : ''}${m.content.substring(0, 200)}`).join('\n')}\n\nThese saved memories reflect what the parent found most valuable. Reference them naturally when relevant.` : ''}
 ${childrenSection}
 ${homeSection}
 ${context.familyNotes?.length ? `\nFAMILY NOTES:\n${context.familyNotes.filter(n=>n.pinned).map(n=>`[PINNED] ${n.note}`).join('\n')}\n${context.familyNotes.filter(n=>!n.pinned).slice(0,5).map(n=>n.note).join('\n')}` : ''}

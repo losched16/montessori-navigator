@@ -61,6 +61,8 @@ export async function POST(request: NextRequest) {
       currentThreadId = thread?.id
     }
 
+    let assistantMessageId: string | null = null
+
     if (currentThreadId) {
       // Save user message
       await supabase.from('chat_messages').insert({
@@ -70,12 +72,14 @@ export async function POST(request: NextRequest) {
       })
 
       // Save assistant response
-      await supabase.from('chat_messages').insert({
+      const { data: assistantMsg } = await supabase.from('chat_messages').insert({
         thread_id: currentThreadId,
         role: 'assistant',
         content: response.message,
         memory_suggestions: response.memory_suggestions,
-      })
+      }).select('id').single()
+
+      assistantMessageId = assistantMsg?.id || null
     }
 
     // Auto-save high-confidence memory suggestions
@@ -121,6 +125,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       message: response.message,
       threadId: currentThreadId,
+      messageId: assistantMessageId || null,
       memory_suggestions: suggestions,
     })
   } catch (error) {

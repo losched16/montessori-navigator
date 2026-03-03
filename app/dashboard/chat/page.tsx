@@ -7,6 +7,8 @@ import YouTubeEmbed from '@/components/youtube-embed'
 interface Message {
   role: 'user' | 'assistant'
   content: string
+  id?: string
+  saved?: boolean
 }
 
 export default function ChatPage() {
@@ -47,12 +49,32 @@ export default function ChatPage() {
   const loadThread = async (id: string) => {
     const { data } = await supabase
       .from('chat_messages')
-      .select('role, content')
+      .select('id, role, content')
       .eq('thread_id', id)
       .order('created_at')
 
     if (data) {
-      setMessages(data.filter(m => m.role !== 'system') as Message[])
+      const msgs = data.filter(m => m.role !== 'system') as Message[]
+
+      // Check which assistant messages are already saved
+      const { data: { user } } = await supabase.auth.getUser()
+      if (user) {
+        const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
+        if (parent) {
+          const msgIds = msgs.filter(m => m.role === 'assistant' && m.id).map(m => m.id!)
+          if (msgIds.length > 0) {
+            const { data: saved } = await supabase
+              .from('saved_memories')
+              .select('message_id')
+              .eq('parent_id', parent.id)
+              .in('message_id', msgIds)
+            const savedIds = new Set((saved || []).map((s: any) => s.message_id))
+            msgs.forEach(m => { if (m.id && savedIds.has(m.id)) m.saved = true })
+          }
+        }
+      }
+
+      setMessages(msgs)
       setThreadId(id)
       setShowThreads(false)
     }
@@ -94,7 +116,7 @@ export default function ChatPage() {
       if (data.error) {
         setMessages(prev => [...prev, { role: 'assistant', content: 'I had trouble responding. Please try again.' }])
       } else {
-        setMessages(prev => [...prev, { role: 'assistant', content: data.message }])
+        setMessages(prev => [...prev, { role: 'assistant', content: data.message, id: data.messageId || undefined }])
         if (data.threadId && !threadId) {
           setThreadId(data.threadId)
           loadThreads()
@@ -111,6 +133,32 @@ export default function ChatPage() {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSend()
+    }
+  }
+
+  const toggleSaveMemory = async (msgIndex: number) => {
+    const msg = messages[msgIndex]
+    if (!msg || msg.role !== 'assistant') return
+
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return
+    const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
+    if (!parent) return
+
+    if (msg.saved) {
+      // Unsave
+      if (msg.id) {
+        await supabase.from('saved_memories').delete().eq('parent_id', parent.id).eq('message_id', msg.id)
+      }
+      setMessages(prev => prev.map((m, i) => i === msgIndex ? { ...m, saved: false } : m))
+    } else {
+      // Save
+      await supabase.from('saved_memories').insert({
+        parent_id: parent.id,
+        message_id: msg.id || null,
+        content: msg.content,
+      })
+      setMessages(prev => prev.map((m, i) => i === msgIndex ? { ...m, saved: true } : m))
     }
   }
 
@@ -216,6 +264,21 @@ export default function ChatPage() {
                 }`}>
                   {msg.role === 'assistant' ? renderMessageContent(msg.content) : msg.content}
                 </div>
+                {msg.role === 'assistant' && (
+                  <div className="mt-2 pt-2 border-t border-gray-50 flex justify-end">
+                    <button
+                      onClick={() => toggleSaveMemory(i)}
+                      className={`text-xs flex items-center gap-1 px-2 py-1 rounded-md transition ${
+                        msg.saved
+                          ? 'text-amber-600 bg-amber-50 hover:bg-amber-100'
+                          : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
+                      }`}
+                      title={msg.saved ? 'Remove from memories' : 'Save to memories'}
+                    >
+                      {msg.saved ? '★ Saved' : '☆ Save'}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           ))}

@@ -47,6 +47,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
     { href: '/dashboard/plans', label: 'Plans', icon: '📋' },
     { href: '/dashboard/reports', label: 'Reports', icon: '📊' },
     { href: '/dashboard/schools', label: 'Schools', icon: '🏫' },
+    { href: '/dashboard/memories', label: 'Memories', icon: '💭' },
     { href: '/dashboard/notes', label: 'Notes', icon: '📝' },
     { href: '/dashboard/environment', label: 'Environment', icon: '🏡' },
     { href: '/dashboard/library', label: 'Library', icon: '📚' },
