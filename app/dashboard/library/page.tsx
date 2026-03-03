@@ -194,6 +194,9 @@ export default function LibraryPage() {
 
               {/* Title */}
               <h3 className="text-sm font-semibold text-navy-600 leading-snug mb-2 group-hover:text-teal-600 transition line-clamp-2">
+                {article.videoIds && article.videoIds.length > 0 && (
+                  <span className="inline-block mr-1.5 text-red-500 align-middle">▶</span>
+                )}
                 {article.title}
               </h3>
 

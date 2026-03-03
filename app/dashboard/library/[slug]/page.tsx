@@ -3,6 +3,7 @@
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { getArticleBySlug, getArticlesByCategory, type Article } from '@/lib/articles'
+import YouTubeEmbed from '@/components/youtube-embed'
 
 export default function ArticlePage() {
   const params = useParams()
@@ -144,6 +145,15 @@ export default function ArticlePage() {
 
         {/* Divider */}
         <div className="border-t border-gray-100 mb-8" />
+
+        {/* Video embeds */}
+        {article.videoIds && article.videoIds.length > 0 && (
+          <div className="space-y-4 mb-8">
+            {article.videoIds.map(id => (
+              <YouTubeEmbed key={id} videoId={id} title={article.title} />
+            ))}
+          </div>
+        )}
 
         {/* Content */}
         <div className="prose-custom">

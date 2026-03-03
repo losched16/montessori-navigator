@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { createClient } from '@/lib/supabase'
+import YouTubeEmbed from '@/components/youtube-embed'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -113,6 +114,17 @@ export default function ChatPage() {
     }
   }
 
+  const renderMessageContent = (content: string) => {
+    const parts = content.split(/\[VIDEO:([a-zA-Z0-9_-]+)\]/)
+    if (parts.length === 1) return content
+    return parts.map((part, i) => {
+      if (i % 2 === 1) {
+        return <div key={i} className="my-3"><YouTubeEmbed videoId={part} /></div>
+      }
+      return part ? <span key={i}>{part}</span> : null
+    })
+  }
+
   const suggestedQuestions = [
     "What activities should we try this week?",
     "How do I handle tantrums the Montessori way?",
@@ -202,7 +214,7 @@ export default function ChatPage() {
                 <div className={`text-sm leading-relaxed whitespace-pre-wrap ${
                   msg.role === 'assistant' ? 'prose-navigator' : ''
                 }`}>
-                  {msg.content}
+                  {msg.role === 'assistant' ? renderMessageContent(msg.content) : msg.content}
                 </div>
               </div>
             </div>

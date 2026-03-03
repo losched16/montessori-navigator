@@ -10,6 +10,7 @@ export interface ScopeSequenceSkill {
   applicableAges: string[]
   serialNum: number | null
   explanation: string
+  videoIds?: string[]
 }
 
 export const SCOPE_SEQUENCE: ScopeSequenceSkill[] = [

@@ -8,6 +8,7 @@ import type { ChildSkillProgress, SkillStatus } from '@/lib/supabase'
 import { formatAge } from '@/lib/utils'
 import { getSkillsByArea, getStrandsByArea, getSkillsWithIndicesByArea, type ScopeSequenceSkill } from '@/lib/scope-sequence'
 import { useChild } from '@/lib/child-context'
+import YouTubeEmbed from '@/components/youtube-embed'
 
 const AREA_LABELS: Record<string, string> = {
   practical_life: 'Practical Life',
@@ -509,6 +510,14 @@ export default function CurriculumAreaPage() {
                             {progressMap.get(skill.index)?.date_started && progressMap.get(skill.index)?.status === 'in_progress' && (
                               <div className="mt-2 text-[10px] text-amber-600">
                                 Started on {progressMap.get(skill.index)!.date_started}
+                              </div>
+                            )}
+                            {skill.videoIds && skill.videoIds.length > 0 && (
+                              <div className="mt-4 space-y-3">
+                                <div className="text-xs font-semibold text-[#4a2c82] uppercase tracking-wide">Related Videos</div>
+                                {skill.videoIds.map(vid => (
+                                  <YouTubeEmbed key={vid} videoId={vid} title={skill.skill} />
+                                ))}
                               </div>
                             )}
                           </div>

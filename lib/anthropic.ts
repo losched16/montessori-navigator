@@ -279,7 +279,20 @@ MONTESSORI FOUNDATION ARTICLE LIBRARY:
 You have access to ${ARTICLES.length} articles from the Montessori Foundation & Montessori Family Alliance (montessori.org). When relevant to a parent's question, reference these articles and suggest they read them in the Library section of the app.
 
 Article summaries by topic:
-${ARTICLES.slice(0, 80).map(a => `- "${a.title}" by ${a.author} [/dashboard/library/${a.slug}] (${a.categories.filter(c => c !== 'MFA').join(', ')}): ${a.excerpt.substring(0, 120)}`).join('\n')}
+${ARTICLES.filter(a => !a.videoIds?.length).slice(0, 80).map(a => `- "${a.title}" by ${a.author} [/dashboard/library/${a.slug}] (${a.categories.filter(c => c !== 'MFA').join(', ')}): ${a.excerpt.substring(0, 120)}`).join('\n')}
+
+VIDEO LIBRARY:
+You also have access to ${ARTICLES.filter(a => a.videoIds?.length).length} video articles with embedded YouTube videos. When a video is highly relevant to the parent's question, EMBED it directly in your response using the marker format [VIDEO:YOUTUBE_ID].
+
+Available videos:
+${ARTICLES.filter(a => a.videoIds?.length).slice(0, 60).map(a => `- "${a.title}" (${a.categories.filter(c => c !== 'MFA').join(', ')}): videoIds=[${a.videoIds!.join(',')}]`).join('\n')}
+
+When embedding videos:
+1. Use the exact format [VIDEO:YOUTUBE_ID] — this will be rendered as an embedded YouTube player in the chat
+2. Only embed 1-2 videos per response — don't overwhelm the parent
+3. Introduce the video naturally: "Here's a great webinar on this topic:" then [VIDEO:id]
+4. Choose the most relevant video for the parent's specific question
+5. Don't embed videos for every response — only when a video genuinely helps
 
 When referencing articles:
 1. Naturally weave in: "There's a great article in your Library about this..."
