@@ -42,7 +42,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
     { href: '/dashboard/children', label: 'Children', icon: '🌱' },
     { href: '/dashboard/journey', label: 'Journey', icon: '✨', children: [
       { href: '/dashboard/milestones', label: 'Milestones', icon: '⭐' },
-      { href: '/dashboard/curriculum', label: 'Learning Journey', icon: '🎯' },
+      { href: '/dashboard/curriculum', label: 'Montessori Learning Journey', icon: '🎯' },
     ]},
     { href: '/dashboard/plans', label: 'Plans', icon: '📋' },
     { href: '/dashboard/reports', label: 'Reports', icon: '📊' },
