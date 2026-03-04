@@ -18,12 +18,17 @@ export default function ChatPage() {
   const [threadId, setThreadId] = useState<string | null>(null)
   const [threads, setThreads] = useState<Array<{ id: string; title: string; created_at: string }>>([])
   const [showThreads, setShowThreads] = useState(false)
+  const [showSaveTip, setShowSaveTip] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const supabase = createClient()
 
   useEffect(() => {
     loadThreads()
+    // Show save tip for first-time users
+    if (!localStorage.getItem('montessori_save_tip_dismissed')) {
+      setShowSaveTip(true)
+    }
   }, [])
 
   useEffect(() => {
@@ -134,6 +139,11 @@ export default function ChatPage() {
       e.preventDefault()
       handleSend()
     }
+  }
+
+  const dismissSaveTip = () => {
+    setShowSaveTip(false)
+    localStorage.setItem('montessori_save_tip_dismissed', 'true')
   }
 
   const toggleSaveMemory = async (msgIndex: number) => {
@@ -265,17 +275,28 @@ export default function ChatPage() {
                   {msg.role === 'assistant' ? renderMessageContent(msg.content) : msg.content}
                 </div>
                 {msg.role === 'assistant' && (
-                  <div className="mt-2 pt-2 border-t border-gray-50 flex justify-end">
+                  <div className="mt-3 pt-2 border-t border-gray-100">
+                    {/* First-time callout - shown once on the first assistant message */}
+                    {showSaveTip && i === messages.findIndex(m => m.role === 'assistant') && (
+                      <div className="mb-2 p-2.5 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2">
+                        <span className="text-amber-500 mt-0.5 shrink-0">💡</span>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs text-amber-800 leading-relaxed">
+                            <span className="font-semibold">Tip:</span> Found something helpful? Tap <span className="font-semibold">Save to Memories</span> below any response to keep it. Your saved memories appear in the Memories section and help your Guide give better advice over time.
+                          </p>
+                        </div>
+                        <button onClick={dismissSaveTip} className="text-amber-400 hover:text-amber-600 text-sm shrink-0 leading-none mt-0.5">✕</button>
+                      </div>
+                    )}
                     <button
                       onClick={() => toggleSaveMemory(i)}
-                      className={`text-xs flex items-center gap-1 px-2 py-1 rounded-md transition ${
+                      className={`w-full flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-medium transition ${
                         msg.saved
-                          ? 'text-amber-600 bg-amber-50 hover:bg-amber-100'
-                          : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
+                          ? 'text-amber-700 bg-amber-50 border border-amber-200 hover:bg-amber-100'
+                          : 'text-gray-500 bg-gray-50 border border-gray-150 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200'
                       }`}
-                      title={msg.saved ? 'Remove from memories' : 'Save to memories'}
                     >
-                      {msg.saved ? '★ Saved' : '☆ Save'}
+                      {msg.saved ? '★ Saved to Memories' : '☆ Save to Memories'}
                     </button>
                   </div>
                 )}
