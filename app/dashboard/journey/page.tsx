@@ -68,14 +68,20 @@ export default function JourneyPage() {
   const { children, selectedChildId, setSelectedChildId, selectedChild } = useChild()
   const [stats, setStats] = useState<JourneyStats | null>(null)
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<'progress' | 'development'>('development')
+  const [activeTab, setActiveTab] = useState<'progress' | 'development' | null>(null)
   const [selectedMonthId, setSelectedMonthId] = useState<string | null>(null)
 
   const supabase = createClient()
 
-  // Get development guides
+  // Check if child is under 3 years (36 months) — development guide is baby/toddler only
+  const childAgeMonths = selectedChild?.date_of_birth
+    ? Math.floor((Date.now() - new Date(selectedChild.date_of_birth).getTime()) / (1000 * 60 * 60 * 24 * 30.44))
+    : null
+  const showDevGuide = childAgeMonths !== null && childAgeMonths <= 36
+
+  // Get development guides (only relevant for babies/toddlers)
   const allGuides = getAllMonthlyGuides()
-  const childGuide = selectedChild?.date_of_birth
+  const childGuide = showDevGuide && selectedChild?.date_of_birth
     ? getGuideForChildAge(selectedChild.date_of_birth)
     : null
   const activeMonthId = selectedMonthId || childGuide?.id || allGuides[0]?.id
@@ -306,32 +312,34 @@ export default function JourneyPage() {
             </div>
           </div>
 
-          {/* Tab switcher */}
-          <div className="flex gap-1 mb-6 bg-gray-100 p-1 rounded-xl">
-            <button
-              onClick={() => setActiveTab('development')}
-              className={`flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition ${
-                activeTab === 'development'
-                  ? 'bg-white text-navy-600 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
-            >
-              <span>📖</span> Development Guide
-            </button>
-            <button
-              onClick={() => setActiveTab('progress')}
-              className={`flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition ${
-                activeTab === 'progress'
-                  ? 'bg-white text-navy-600 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
-            >
-              <span>📊</span> Progress Tracker
-            </button>
-          </div>
+          {/* Tab switcher — only show if child is under 3 */}
+          {showDevGuide && (
+            <div className="flex gap-1 mb-6 bg-gray-100 p-1 rounded-xl">
+              <button
+                onClick={() => setActiveTab('development')}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition ${
+                  (activeTab ?? 'development') === 'development'
+                    ? 'bg-white text-navy-600 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                <span>📖</span> Development Guide
+              </button>
+              <button
+                onClick={() => setActiveTab('progress')}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition ${
+                  (activeTab ?? 'development') === 'progress'
+                    ? 'bg-white text-navy-600 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                <span>📊</span> Progress Tracker
+              </button>
+            </div>
+          )}
 
-          {/* Development Guide Tab */}
-          {activeTab === 'development' && activeGuide && (
+          {/* Development Guide Tab — only for babies/toddlers (0-36 months) */}
+          {showDevGuide && (activeTab ?? 'development') === 'development' && activeGuide && (
             <>
               <MonthSelector
                 guides={allGuides}
@@ -346,8 +354,8 @@ export default function JourneyPage() {
             </>
           )}
 
-          {/* Progress Tracker Tab */}
-          {activeTab !== 'progress' ? null : (
+          {/* Progress Tracker Tab — always visible for older kids, tab-controlled for babies */}
+          {(!showDevGuide || (activeTab ?? 'development') === 'progress') && (
           <>
           {/* Growth moments */}
           {stats.growthMoments.length > 0 && (
@@ -519,7 +527,7 @@ export default function JourneyPage() {
           )}
 
           {/* Empty encouragement for new users */}
-          {stats.totalObservations === 0 && stats.milestonesAchieved === 0 && activeTab === 'progress' && (
+          {stats.totalObservations === 0 && stats.milestonesAchieved === 0 && (!showDevGuide || (activeTab ?? 'development') === 'progress') && (
             <div className="text-center py-12">
               <div className="text-4xl mb-3">🌱</div>
               <h3 className="text-lg font-semibold text-navy-600 mb-2">Your journey starts here</h3>
