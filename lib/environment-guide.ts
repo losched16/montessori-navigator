@@ -36,6 +36,13 @@ export interface InspirationVideo {
   agePlanes: AgePlane[]
 }
 
+export interface InspirationPhoto {
+  src: string       // path relative to /public (e.g. '/images/environment/floor-bed.jpg')
+  alt: string
+  caption: string
+  agePlanes: AgePlane[]
+}
+
 export interface RelatedArticleRef {
   slug: string
   relevance: string
@@ -59,6 +66,7 @@ export interface RoomGuide {
   recommendedItems: RecommendedItem[]
   safetyGuidelines: SafetyGuideline[]
   inspirationVideos: InspirationVideo[]
+  inspirationPhotos: InspirationPhoto[]
   relatedArticles: RelatedArticleRef[]
   quickWins: string[]
 }
@@ -257,6 +265,7 @@ export const ROOM_GUIDES: RoomGuide[] = [
         agePlanes: ['0-3', '3-6', '6-9'],
       },
     ],
+    inspirationPhotos: [],
     relatedArticles: [
       {
         slug: 'a-montessori-inspired-home-room-by-room-checklist',
@@ -505,6 +514,14 @@ export const ROOM_GUIDES: RoomGuide[] = [
         agePlanes: ['0-3', '3-6', '6-9'],
       },
     ],
+    inspirationPhotos: [
+      {
+        src: '/images/environment/floor-bed.jpg',
+        alt: 'Montessori floor bed in a child\'s room',
+        caption: 'A floor bed empowers even the youngest child to get in and out of bed independently, fostering autonomy from the very start.',
+        agePlanes: [],
+      },
+    ],
     relatedArticles: [
       {
         slug: 'a-montessori-inspired-home-room-by-room-checklist',
@@ -741,6 +758,7 @@ export const ROOM_GUIDES: RoomGuide[] = [
       },
     ],
     inspirationVideos: [],
+    inspirationPhotos: [],
     relatedArticles: [
       {
         slug: 'a-montessori-inspired-home-room-by-room-checklist',
@@ -939,6 +957,7 @@ export const ROOM_GUIDES: RoomGuide[] = [
       },
     ],
     inspirationVideos: [],
+    inspirationPhotos: [],
     relatedArticles: [
       {
         slug: 'a-montessori-inspired-home-room-by-room-checklist',
@@ -1198,6 +1217,50 @@ export const ROOM_GUIDES: RoomGuide[] = [
         agePlanes: ['0-3', '3-6', '6-9'],
       },
     ],
+    inspirationPhotos: [
+      {
+        src: '/images/environment/living-room-setup.jpg',
+        alt: 'Montessori-prepared living room with low shelves and child-accessible materials',
+        caption: 'A living room arranged with low, open shelves gives children independent access to carefully chosen activities.',
+        agePlanes: [],
+      },
+      {
+        src: '/images/environment/play-area.jpg',
+        alt: 'Dedicated play area with organized Montessori materials',
+        caption: 'A clearly defined play area with a work rug and rotating selection of materials invites purposeful, concentrated activity.',
+        agePlanes: [],
+      },
+      {
+        src: '/images/environment/playroom.jpg',
+        alt: 'Bright Montessori playroom with natural light and orderly shelves',
+        caption: 'An orderly, uncluttered playroom with natural light supports the child\'s ability to choose, focus, and return materials with care.',
+        agePlanes: [],
+      },
+      {
+        src: '/images/environment/girl-painting.jpg',
+        alt: 'Young girl painting at a child-sized easel',
+        caption: 'A child-height easel with real paints and brushes lets the child explore creative expression independently.',
+        agePlanes: [],
+      },
+      {
+        src: '/images/environment/girls-art.jpg',
+        alt: 'Children engaged in art activities at a low table',
+        caption: 'Open-ended art materials on accessible shelves encourage self-directed creative work and collaboration.',
+        agePlanes: [],
+      },
+      {
+        src: '/images/environment/girl-reading.jpg',
+        alt: 'Girl reading independently in a cozy corner',
+        caption: 'A comfortable, well-lit reading corner with forward-facing book display nurtures a love of reading and independent choice.',
+        agePlanes: [],
+      },
+      {
+        src: '/images/environment/reading-nook.jpg',
+        alt: 'Montessori reading nook with cushions and child-level bookshelves',
+        caption: 'A dedicated reading nook with soft seating and books at the child\'s eye level creates an inviting space for literacy and quiet reflection.',
+        agePlanes: [],
+      },
+    ],
     relatedArticles: [
       {
         slug: 'a-montessori-inspired-home-room-by-room-checklist',
@@ -1402,6 +1465,14 @@ export const ROOM_GUIDES: RoomGuide[] = [
       },
     ],
     inspirationVideos: [],
+    inspirationPhotos: [
+      {
+        src: '/images/environment/boy-outdoor.jpg',
+        alt: 'Boy exploring nature in an outdoor Montessori environment',
+        caption: 'Time outdoors connects the child to the natural world, building observation skills, gross motor strength, and a sense of wonder.',
+        agePlanes: [],
+      },
+    ],
     relatedArticles: [
       {
         slug: 'a-montessori-inspired-home-room-by-room-checklist',
@@ -1452,6 +1523,9 @@ export function getRoomGuidesForAge(agePlane: AgePlane): RoomGuide[] {
     ),
     inspirationVideos: guide.inspirationVideos.filter(
       (video) => video.agePlanes.length === 0 || video.agePlanes.includes(agePlane)
+    ),
+    inspirationPhotos: guide.inspirationPhotos.filter(
+      (photo) => photo.agePlanes.length === 0 || photo.agePlanes.includes(agePlane)
     ),
   }))
 }

@@ -8,6 +8,7 @@ import { ROOM_GUIDES, getRoomGuidesForAge, type RoomType, type RoomGuide } from 
 
 import RoomHero from '@/components/environment/RoomHero'
 import QuickWins from '@/components/environment/QuickWins'
+import InspirationPhotos from '@/components/environment/InspirationPhotos'
 import InspirationVideos from '@/components/environment/InspirationVideos'
 import SetupGuide from '@/components/environment/SetupGuide'
 import ShoppingGuide from '@/components/environment/ShoppingGuide'
@@ -86,6 +87,7 @@ export default function EnvironmentPage() {
         <div>
           <RoomHero guide={currentGuide} />
           <QuickWins wins={currentGuide.quickWins} />
+          <InspirationPhotos photos={currentGuide.inspirationPhotos} />
           <InspirationVideos videos={currentGuide.inspirationVideos} />
           <SetupGuide tips={currentGuide.setupTips} />
           <ShoppingGuide items={currentGuide.recommendedItems} />

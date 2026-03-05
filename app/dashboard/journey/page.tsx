@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel } from '@/lib/utils'
 import { useChild } from '@/lib/child-context'
+import { getAllMonthlyGuides, getGuideForChildAge } from '@/lib/monthly-development'
+import MonthlyDevelopment from '@/components/journey/MonthlyDevelopment'
+import MonthSelector from '@/components/journey/MonthSelector'
 
 interface JourneyStats {
   totalObservations: number
@@ -65,8 +68,18 @@ export default function JourneyPage() {
   const { children, selectedChildId, setSelectedChildId, selectedChild } = useChild()
   const [stats, setStats] = useState<JourneyStats | null>(null)
   const [loading, setLoading] = useState(true)
+  const [activeTab, setActiveTab] = useState<'progress' | 'development'>('development')
+  const [selectedMonthId, setSelectedMonthId] = useState<string | null>(null)
 
   const supabase = createClient()
+
+  // Get development guides
+  const allGuides = getAllMonthlyGuides()
+  const childGuide = selectedChild?.date_of_birth
+    ? getGuideForChildAge(selectedChild.date_of_birth)
+    : null
+  const activeMonthId = selectedMonthId || childGuide?.id || allGuides[0]?.id
+  const activeGuide = allGuides.find(g => g.id === activeMonthId) || allGuides[0]
 
   useEffect(() => {
     if (!selectedChildId) return
@@ -293,6 +306,49 @@ export default function JourneyPage() {
             </div>
           </div>
 
+          {/* Tab switcher */}
+          <div className="flex gap-1 mb-6 bg-gray-100 p-1 rounded-xl">
+            <button
+              onClick={() => setActiveTab('development')}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition ${
+                activeTab === 'development'
+                  ? 'bg-white text-navy-600 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <span>📖</span> Development Guide
+            </button>
+            <button
+              onClick={() => setActiveTab('progress')}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition ${
+                activeTab === 'progress'
+                  ? 'bg-white text-navy-600 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <span>📊</span> Progress Tracker
+            </button>
+          </div>
+
+          {/* Development Guide Tab */}
+          {activeTab === 'development' && activeGuide && (
+            <>
+              <MonthSelector
+                guides={allGuides}
+                selectedId={activeMonthId}
+                onSelect={(id) => setSelectedMonthId(id)}
+                highlightedId={childGuide?.id}
+              />
+              <MonthlyDevelopment
+                guide={activeGuide}
+                childName={childGuide?.id === activeMonthId ? selectedChild?.name : undefined}
+              />
+            </>
+          )}
+
+          {/* Progress Tracker Tab */}
+          {activeTab !== 'progress' ? null : (
+          <>
           {/* Growth moments */}
           {stats.growthMoments.length > 0 && (
             <div className="mb-6">
@@ -459,8 +515,11 @@ export default function JourneyPage() {
             </div>
           )}
 
+          </>
+          )}
+
           {/* Empty encouragement for new users */}
-          {stats.totalObservations === 0 && stats.milestonesAchieved === 0 && (
+          {stats.totalObservations === 0 && stats.milestonesAchieved === 0 && activeTab === 'progress' && (
             <div className="text-center py-12">
               <div className="text-4xl mb-3">🌱</div>
               <h3 className="text-lg font-semibold text-navy-600 mb-2">Your journey starts here</h3>
