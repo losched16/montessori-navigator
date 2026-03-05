@@ -7,10 +7,12 @@ import { createClient } from '@/lib/supabase'
 import type { Parent } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel } from '@/lib/utils'
 import { ChildProvider, useChild } from '@/lib/child-context'
+import { isStartHereHidden } from '@/lib/start-here-progress'
 
 function DashboardInner({ children }: { children: React.ReactNode }) {
   const [parent, setParent] = useState<Parent | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [showStartHere, setShowStartHere] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
   const supabase = createClient()
@@ -29,7 +31,13 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
       setParent(parentData)
     }
     loadParent()
+    setShowStartHere(!isStartHereHidden())
   }, [])
+
+  // Re-check start-here visibility on navigation (in case user dismissed/completed it)
+  useEffect(() => {
+    setShowStartHere(!isStartHereHidden())
+  }, [pathname])
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
@@ -38,6 +46,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { href: '/dashboard', label: 'Home', icon: '🏠' },
+    ...(showStartHere ? [{ href: '/dashboard/start-here', label: 'Start Here', icon: '🚀' }] : []),
     { href: '/dashboard/chat', label: 'Guide', icon: '💬' },
     { href: '/dashboard/children', label: 'Children', icon: '🌱' },
     { href: '/dashboard/journey', label: 'Journey', icon: '✨', children: [
