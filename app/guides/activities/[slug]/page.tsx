@@ -99,8 +99,8 @@ export default function ActivityPage({ params }: { params: { slug: string } }) {
               </div>
 
               {act.diyTip && (
-                <div className="bg-teal-50 rounded-lg p-3">
-                  <h4 className="text-xs font-semibold text-teal-700 mb-1">DIY Tip</h4>
+                <div className="bg-warm-50 rounded-lg p-3">
+                  <h4 className="text-xs font-semibold text-warm-700 mb-1">DIY Tip</h4>
                   <p className="text-sm text-gray-600 leading-relaxed">{act.diyTip}</p>
                 </div>
               )}
@@ -117,7 +117,7 @@ export default function ActivityPage({ params }: { params: { slug: string } }) {
         <div className="space-y-2">
           {page.environmentTips.map((tip, i) => (
             <div key={i} className="flex items-start gap-2.5 text-sm text-gray-600">
-              <span className="text-teal-500 mt-0.5">✦</span>
+              <span className="text-warm-600 mt-0.5">✦</span>
               <span className="leading-relaxed">{tip}</span>
             </div>
           ))}

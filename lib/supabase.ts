@@ -189,6 +189,34 @@ export interface SavedMemory {
   created_at: string
 }
 
+export interface RoomVision {
+  id: string
+  parent_id: string
+  room: string
+  age_plane: string | null
+  original_image_path: string
+  generated_image_path: string | null
+  analysis: {
+    room_description: string
+    current_layout: string[]
+    child_height_elements: string[]
+    adult_height_elements: string[]
+    safety_concerns: string[]
+    strengths: string[]
+    recommendations: Array<{
+      title: string
+      description: string
+      priority: 'essential' | 'recommended' | 'nice_to_have'
+      estimated_cost: 'free' | '$' | '$$' | '$$$'
+    }>
+    transformation_description: string
+  }
+  generation_prompt: string | null
+  status: 'analyzing' | 'generating' | 'complete' | 'failed'
+  error_message: string | null
+  created_at: string
+}
+
 export type SkillStatus = 'not_started' | 'in_progress' | 'mastered'
 
 export interface ChildSkillProgress {

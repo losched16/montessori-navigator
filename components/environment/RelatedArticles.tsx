@@ -27,7 +27,7 @@ export default function RelatedArticles({ articleRefs }: { articleRefs: RelatedA
             href={`/dashboard/library/${article.slug}`}
             className="bg-white border border-gray-100 rounded-xl p-4 hover:border-gray-200 hover:shadow-sm transition group"
           >
-            <h4 className="text-sm font-medium text-navy-600 leading-snug group-hover:text-teal-600 transition line-clamp-2 mb-1">
+            <h4 className="text-sm font-medium text-navy-600 leading-snug group-hover:text-warm-600 transition line-clamp-2 mb-1">
               {article.videoIds && article.videoIds.length > 0 && (
                 <span className="inline-block mr-1.5 text-red-500 align-middle">▶</span>
               )}

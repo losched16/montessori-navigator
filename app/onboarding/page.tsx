@@ -176,13 +176,13 @@ export default function OnboardingPage() {
           {[1, 2, 3, 4].map(s => (
             <div key={s} className="flex items-center gap-2">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
-                s === step ? 'bg-teal-500 text-white' :
-                s < step ? 'bg-teal-100 text-teal-600' :
+                s === step ? 'bg-warm-500 text-white' :
+                s < step ? 'bg-warm-100 text-warm-700' :
                 'bg-gray-100 text-gray-400'
               }`}>
                 {s < step ? '✓' : s}
               </div>
-              {s < 4 && <div className={`w-8 h-0.5 ${s < step ? 'bg-teal-300' : 'bg-gray-200'}`} />}
+              {s < 4 && <div className={`w-8 h-0.5 ${s < step ? 'bg-warm-300' : 'bg-gray-200'}`} />}
             </div>
           ))}
         </div>
@@ -205,7 +205,7 @@ export default function OnboardingPage() {
                         onClick={() => setEducationContext(ctx.value)}
                         className={`w-full text-left p-3 rounded-lg border transition ${
                           educationContext === ctx.value
-                            ? 'border-teal-500 bg-teal-50'
+                            ? 'border-warm-500 bg-warm-50'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
@@ -225,7 +225,7 @@ export default function OnboardingPage() {
                         onClick={() => setExperience(exp.value)}
                         className={`text-left p-3 rounded-lg border transition ${
                           experience === exp.value
-                            ? 'border-teal-500 bg-teal-50'
+                            ? 'border-warm-500 bg-warm-50'
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
@@ -250,7 +250,7 @@ export default function OnboardingPage() {
                         onClick={() => setCommunicationStyle(style.value)}
                         className={`p-3 rounded-lg border text-sm font-medium transition ${
                           communicationStyle === style.value
-                            ? 'border-teal-500 bg-teal-50 text-navy-600'
+                            ? 'border-warm-500 bg-warm-50 text-navy-600'
                             : 'border-gray-200 hover:border-gray-300 text-gray-600'
                         }`}
                       >
@@ -264,7 +264,7 @@ export default function OnboardingPage() {
               <button
                 onClick={() => setStep(2)}
                 disabled={!educationContext || !experience}
-                className="w-full mt-6 bg-teal-500 hover:bg-teal-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-40"
+                className="w-full mt-6 bg-warm-500 hover:bg-warm-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-40"
               >
                 Continue
               </button>
@@ -296,7 +296,7 @@ export default function OnboardingPage() {
                           type="text"
                           value={child.name}
                           onChange={e => updateChild(index, 'name', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                           placeholder="First name"
                         />
                       </div>
@@ -306,7 +306,7 @@ export default function OnboardingPage() {
                           type="date"
                           value={child.dateOfBirth}
                           onChange={e => updateChild(index, 'dateOfBirth', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                         />
                       </div>
                     </div>
@@ -316,7 +316,7 @@ export default function OnboardingPage() {
                       <select
                         value={child.environment}
                         onChange={e => updateChild(index, 'environment', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                       >
                         <option value="">Select...</option>
                         {CHILD_ENVIRONMENTS.map(env => (
@@ -332,7 +332,7 @@ export default function OnboardingPage() {
                           type="text"
                           value={child.schoolName}
                           onChange={e => updateChild(index, 'schoolName', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                           placeholder="School name"
                         />
                       </div>
@@ -344,7 +344,7 @@ export default function OnboardingPage() {
                         type="text"
                         value={child.notes}
                         onChange={e => updateChild(index, 'notes', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                        className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                         placeholder="e.g., struggling with transitions, loves animals, very active"
                       />
                     </div>
@@ -353,7 +353,7 @@ export default function OnboardingPage() {
 
                 <button
                   onClick={addChild}
-                  className="w-full py-2 border border-dashed border-gray-300 rounded-lg text-sm text-gray-500 hover:border-teal-400 hover:text-teal-500 transition"
+                  className="w-full py-2 border border-dashed border-gray-300 rounded-lg text-sm text-gray-500 hover:border-warm-400 hover:text-warm-600 transition"
                 >
                   + Add another child
                 </button>
@@ -366,7 +366,7 @@ export default function OnboardingPage() {
                 <button
                   onClick={() => setStep(3)}
                   disabled={!children.some(c => c.name.trim())}
-                  className="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-40"
+                  className="flex-1 bg-warm-500 hover:bg-warm-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-40"
                 >
                   Continue
                 </button>
@@ -387,13 +387,13 @@ export default function OnboardingPage() {
                     onClick={() => toggleFocus(area.value)}
                     className={`w-full text-left p-3 rounded-lg border transition ${
                       focusAreas.includes(area.value)
-                        ? 'border-teal-500 bg-teal-50'
+                        ? 'border-warm-500 bg-warm-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-5 h-5 rounded border flex items-center justify-center text-xs ${
-                        focusAreas.includes(area.value) ? 'bg-teal-500 border-teal-500 text-white' : 'border-gray-300'
+                        focusAreas.includes(area.value) ? 'bg-warm-500 border-warm-500 text-white' : 'border-gray-300'
                       }`}>
                         {focusAreas.includes(area.value) && '✓'}
                       </div>
@@ -413,7 +413,7 @@ export default function OnboardingPage() {
                 <button
                   onClick={() => setStep(4)}
                   disabled={focusAreas.length === 0}
-                  className="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-40"
+                  className="flex-1 bg-warm-500 hover:bg-warm-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-40"
                 >
                   Continue
                 </button>
@@ -454,7 +454,7 @@ export default function OnboardingPage() {
                   <div className="text-xs text-gray-500 uppercase tracking-wide mb-2">Focus Areas</div>
                   <div className="flex flex-wrap gap-2">
                     {focusAreas.map(f => (
-                      <span key={f} className="px-2 py-1 bg-teal-100 text-teal-700 text-xs rounded-full">
+                      <span key={f} className="px-2 py-1 bg-warm-100 text-warm-700 text-xs rounded-full">
                         {FOCUS_AREAS.find(a => a.value === f)?.label}
                       </span>
                     ))}
@@ -469,7 +469,7 @@ export default function OnboardingPage() {
                 <button
                   onClick={handleComplete}
                   disabled={loading}
-                  className="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50"
+                  className="flex-1 bg-warm-500 hover:bg-warm-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50"
                 >
                   {loading ? 'Setting up...' : 'Start Using Navigator'}
                 </button>

@@ -150,8 +150,8 @@ export default function CurriculumAreaPage() {
       showHalf: true,
     }
     if (progress.status === 'mastered') return {
-      bgColor: 'bg-teal-50 hover:bg-teal-100 border-teal-300',
-      checkColor: 'text-teal-600',
+      bgColor: 'bg-warm-50 hover:bg-warm-100 border-warm-300',
+      checkColor: 'text-warm-700',
       label: 'Mastered — click to reset',
       shortLabel: 'Done',
       showCheck: true,
@@ -177,7 +177,7 @@ export default function CurriculumAreaPage() {
       <div className="text-center py-20">
         <div className="text-4xl mb-4">📋</div>
         <h1 className="text-xl font-semibold text-navy-600 mb-2">Area Not Found</h1>
-        <Link href="/dashboard/curriculum" className="text-sm text-teal-600 hover:underline">
+        <Link href="/dashboard/curriculum" className="text-sm text-warm-700 hover:underline">
           ← Back to Curriculum Guide
         </Link>
       </div>
@@ -231,7 +231,7 @@ export default function CurriculumAreaPage() {
     if (age.includes('Birth') || age.includes('month')) return 'bg-rose-50 text-rose-600'
     if (age === 'Age 3') return 'bg-purple-50 text-purple-600'
     if (age === 'Age 4') return 'bg-blue-50 text-blue-600'
-    if (age === 'K') return 'bg-teal-50 text-teal-600'
+    if (age === 'K') return 'bg-warm-50 text-warm-700'
     if (age === 'First' || age === 'Second' || age === 'Third') return 'bg-emerald-50 text-emerald-600'
     return 'bg-amber-50 text-amber-600'
   }
@@ -240,7 +240,7 @@ export default function CurriculumAreaPage() {
     <div>
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-        <Link href="/dashboard/curriculum" className="hover:text-teal-600 transition">Curriculum</Link>
+        <Link href="/dashboard/curriculum" className="hover:text-warm-700 transition">Curriculum</Link>
         <span>→</span>
         <span className="text-gray-600">{areaLabel}</span>
       </div>
@@ -269,7 +269,7 @@ export default function CurriculumAreaPage() {
                 onClick={() => setSelectedChildId(child.id)}
                 className={`px-3 py-1.5 rounded-lg text-sm transition ${
                   selectedChildId === child.id
-                    ? 'bg-teal-50 text-teal-600 font-medium border border-teal-200'
+                    ? 'bg-warm-50 text-warm-700 font-medium border border-warm-300'
                     : 'bg-gray-50 text-gray-500 border border-gray-100 hover:bg-gray-100'
                 }`}
               >
@@ -295,7 +295,7 @@ export default function CurriculumAreaPage() {
           <div className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
             <div className="h-full flex">
               <div
-                className="bg-teal-500 transition-all duration-300"
+                className="bg-warm-500 transition-all duration-300"
                 style={{ width: `${(masteredCount / allSkills.length) * 100}%` }}
               />
               <div
@@ -306,7 +306,7 @@ export default function CurriculumAreaPage() {
           </div>
           <div className="flex flex-wrap items-center gap-4 mt-2">
             <span className="text-[10px] text-gray-400 flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-teal-500 inline-block" /> Mastered ({progressPercent}%)
+              <span className="w-2 h-2 rounded-full bg-warm-500 inline-block" /> Mastered ({progressPercent}%)
             </span>
             <span className="text-[10px] text-gray-400 flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-amber-400 inline-block" /> In Progress
@@ -332,7 +332,7 @@ export default function CurriculumAreaPage() {
               placeholder="Search skills..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
             />
           </div>
 
@@ -340,7 +340,7 @@ export default function CurriculumAreaPage() {
           <select
             value={selectedStrand}
             onChange={e => setSelectedStrand(e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
           >
             <option value="all">All Strands</option>
             {strands.map(strand => (
@@ -352,7 +352,7 @@ export default function CurriculumAreaPage() {
           <select
             value={ageFilter}
             onChange={e => setAgeFilter(e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
           >
             <option value="all">All Ages</option>
             {allAges.map(age => (
@@ -368,11 +368,11 @@ export default function CurriculumAreaPage() {
 
       {/* Getting started hint — shown when child is selected but no progress yet */}
       {selectedChildId && masteredCount === 0 && inProgressCount === 0 && !loadingProgress && (
-        <div className="bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-100 rounded-xl p-4 mb-6 flex items-start gap-3">
+        <div className="bg-gradient-to-r from-warm-50 to-emerald-50 border border-warm-200 rounded-xl p-4 mb-6 flex items-start gap-3">
           <span className="text-xl shrink-0">💡</span>
           <div>
-            <p className="text-sm font-medium text-teal-800 mb-1">Track Your Child&apos;s Progress</p>
-            <p className="text-xs text-teal-700 leading-relaxed">
+            <p className="text-sm font-medium text-warm-800 mb-1">Track Your Child&apos;s Progress</p>
+            <p className="text-xs text-warm-700 leading-relaxed">
               Click the <span className="inline-flex items-center mx-0.5 px-1.5 py-0.5 bg-white border border-gray-200 rounded text-[10px] text-gray-500">○</span> circle next to any skill to mark it as <strong>In Progress</strong>. Click again to mark as <strong>Mastered</strong>, and once more to reset. Your progress is saved automatically.
             </p>
           </div>
@@ -399,7 +399,7 @@ export default function CurriculumAreaPage() {
                         <div className="w-20 bg-gray-200 rounded-full h-1.5 overflow-hidden">
                           <div className="h-full flex">
                             <div
-                              className="bg-teal-500 transition-all"
+                              className="bg-warm-500 transition-all"
                               style={{ width: `${strandProg.total > 0 ? (strandProg.mastered / strandProg.total) * 100 : 0}%` }}
                             />
                             <div
@@ -429,7 +429,7 @@ export default function CurriculumAreaPage() {
                               title={statusInfo.label}
                             >
                               <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 transition ${
-                                statusInfo.showCheck ? 'border-teal-500 bg-teal-500' :
+                                statusInfo.showCheck ? 'border-warm-500 bg-warm-500' :
                                 statusInfo.showHalf ? 'border-amber-400 bg-amber-100' :
                                 'border-gray-300 bg-white'
                               }`}>
@@ -457,7 +457,7 @@ export default function CurriculumAreaPage() {
                               <div className="flex-1 min-w-0">
                                 <p className={`text-sm leading-relaxed ${
                                   progressMap.get(skill.index)?.status === 'mastered'
-                                    ? 'text-teal-700'
+                                    ? 'text-warm-700'
                                     : progressMap.get(skill.index)?.status === 'in_progress'
                                       ? 'text-amber-700'
                                       : 'text-gray-700'
@@ -503,7 +503,7 @@ export default function CurriculumAreaPage() {
                               ))}
                             </div>
                             {progressMap.get(skill.index)?.date_mastered && (
-                              <div className="mt-2 text-[10px] text-teal-600">
+                              <div className="mt-2 text-[10px] text-warm-700">
                                 ✓ Mastered on {progressMap.get(skill.index)!.date_mastered}
                               </div>
                             )}
@@ -540,7 +540,7 @@ export default function CurriculumAreaPage() {
 
       {/* Back link */}
       <div className="mt-8">
-        <Link href="/dashboard/curriculum" className="text-sm text-teal-600 hover:underline">
+        <Link href="/dashboard/curriculum" className="text-sm text-warm-700 hover:underline">
           ← Back to Curriculum Guide
         </Link>
       </div>

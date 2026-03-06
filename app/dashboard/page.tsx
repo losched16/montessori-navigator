@@ -214,7 +214,7 @@ export default function DashboardHome() {
 
       {/* ═══ New user welcome ═══ */}
       {children.length === 0 && (
-        <div className="bg-gradient-to-br from-navy-600 to-teal-600 rounded-2xl p-6 text-white mb-6">
+        <div className="bg-gradient-to-br from-navy-700 to-navy-500 rounded-2xl p-6 text-white mb-6">
           <div className="text-3xl mb-3">🌱</div>
           <h2 className="text-lg font-bold mb-1">Welcome to Navigator</h2>
           <p className="text-white/70 text-sm leading-relaxed mb-4">
@@ -228,7 +228,7 @@ export default function DashboardHome() {
 
       {/* ═══ Suggested next action ═══ */}
       {children.length > 0 && (
-        <Link href={nextAction.href} className="block bg-gradient-to-r from-teal-500 to-teal-600 rounded-xl p-4 text-white mb-6 hover:shadow-lg transition group">
+        <Link href={nextAction.href} className="block bg-gradient-to-r from-navy-700 to-navy-500 rounded-xl p-4 text-white mb-6 hover:shadow-lg transition group">
           <div className="flex items-center gap-3">
             <div className="text-2xl">{nextAction.icon}</div>
             <div>
@@ -250,7 +250,7 @@ export default function DashboardHome() {
             <div>
               <div className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-1">Today&apos;s Observation Prompt</div>
               <p className="text-sm text-navy-600 leading-relaxed">{todayPrompt.prompt}</p>
-              <Link href="/dashboard/children" className="text-xs text-teal-500 font-medium mt-2 inline-block hover:underline">
+              <Link href="/dashboard/children" className="text-xs text-warm-600 font-medium mt-2 inline-block hover:underline">
                 Log observation for {todayPrompt.childName} →
               </Link>
             </div>
@@ -265,9 +265,9 @@ export default function DashboardHome() {
           { href: '/dashboard/plans', icon: '📋', label: 'New Plan' },
           { href: '/dashboard/children', icon: '📓', label: 'Observe' },
         ].map(a => (
-          <Link key={a.href} href={a.href} className="p-3 bg-white border border-gray-100 rounded-xl hover:border-teal-200 transition text-center group">
+          <Link key={a.href} href={a.href} className="p-3 bg-white border border-gray-100 rounded-xl hover:border-warm-300 transition text-center group">
             <div className="text-xl mb-1">{a.icon}</div>
-            <div className="text-xs font-medium text-gray-600 group-hover:text-teal-600">{a.label}</div>
+            <div className="text-xs font-medium text-gray-600 group-hover:text-warm-600">{a.label}</div>
           </Link>
         ))}
       </div>
@@ -324,7 +324,7 @@ export default function DashboardHome() {
                 .slice(0, 2)
 
               return (
-                <Link key={child.id} href="/dashboard/children" className="block bg-white border border-gray-100 rounded-xl p-4 hover:border-teal-200 transition">
+                <Link key={child.id} href="/dashboard/children" className="block bg-white border border-gray-100 rounded-xl p-4 hover:border-warm-300 transition">
                   <div className="flex items-center justify-between mb-2">
                     <div>
                       <span className="font-medium text-navy-600">{child.name}</span>
@@ -335,7 +335,7 @@ export default function DashboardHome() {
                   {topAreas.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
                       {topAreas.map(a => (
-                        <span key={a.area} className="text-[10px] px-2 py-0.5 bg-teal-50 text-teal-600 rounded-full">
+                        <span key={a.area} className="text-[10px] px-2 py-0.5 bg-warm-50 text-warm-700 rounded-full">
                           {getCurriculumAreaLabel(a.area)}: {getDevelopmentLevelLabel(a.level!)}
                         </span>
                       ))}
@@ -358,7 +358,7 @@ export default function DashboardHome() {
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
             <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Recent Observations</div>
-            <Link href="/dashboard/children" className="text-xs text-teal-500 hover:underline">View all</Link>
+            <Link href="/dashboard/children" className="text-xs text-warm-600 hover:underline">View all</Link>
           </div>
           <div className="space-y-1.5">
             {recentObs.map(obs => (
@@ -366,7 +366,7 @@ export default function DashboardHome() {
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-xs font-medium text-teal-600">{obs.child_name}</span>
+                      <span className="text-xs font-medium text-warm-700">{obs.child_name}</span>
                       <span className="text-[10px] text-gray-400">{getObservationTypeLabel(obs.type)}</span>
                     </div>
                     <p className="text-sm text-gray-700 line-clamp-1">{obs.description}</p>
@@ -386,7 +386,7 @@ export default function DashboardHome() {
           <p className="text-xs text-gray-500 mb-3 max-w-sm mx-auto">
             Observation is the parent&apos;s most powerful tool. Start by watching what your child does — without judgment, without interruption.
           </p>
-          <Link href="/dashboard/children" className="text-xs text-teal-500 font-medium hover:underline">
+          <Link href="/dashboard/children" className="text-xs text-warm-600 font-medium hover:underline">
             Log your first observation →
           </Link>
         </div>
@@ -402,7 +402,7 @@ export default function DashboardHome() {
             { value: planCount, label: 'Plans', href: '/dashboard/plans' },
             { value: threadCount, label: 'Chats', href: '/dashboard/chat' },
           ].map(s => (
-            <Link key={s.label} href={s.href} className="p-3 bg-white border border-gray-100 rounded-xl text-center hover:border-teal-200 transition">
+            <Link key={s.label} href={s.href} className="p-3 bg-white border border-gray-100 rounded-xl text-center hover:border-warm-300 transition">
               <div className="text-lg font-bold text-navy-600">{s.value}</div>
               <div className="text-[10px] text-gray-400">{s.label}</div>
             </Link>
@@ -419,9 +419,9 @@ export default function DashboardHome() {
             { href: '/dashboard/journey', icon: '✨', label: 'View Journey', desc: 'Your family\'s growth story' },
             { href: '/dashboard/environment', icon: '🏡', label: 'Home Setup', desc: 'Track your prepared environment' },
           ].map(a => (
-            <Link key={a.href} href={a.href} className="p-3 bg-white border border-gray-100 rounded-xl hover:border-teal-200 transition group">
+            <Link key={a.href} href={a.href} className="p-3 bg-white border border-gray-100 rounded-xl hover:border-warm-300 transition group">
               <div className="text-lg mb-1">{a.icon}</div>
-              <div className="text-xs font-medium text-navy-600 group-hover:text-teal-600">{a.label}</div>
+              <div className="text-xs font-medium text-navy-600 group-hover:text-warm-600">{a.label}</div>
               <div className="text-[10px] text-gray-400">{a.desc}</div>
             </Link>
           ))}

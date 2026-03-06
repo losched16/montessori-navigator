@@ -139,7 +139,7 @@ export default function MilestonesPage() {
                 key={child.id}
                 onClick={() => { setSelectedChildId(child.id); setFilterArea('all') }}
                 className={`px-3 py-1.5 text-sm rounded-lg transition ${
-                  selectedChildId === child.id ? 'bg-teal-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  selectedChildId === child.id ? 'bg-warm-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
                 {child.name}
@@ -161,7 +161,7 @@ export default function MilestonesPage() {
           <button
             onClick={initializeMilestones}
             disabled={initializing}
-            className="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-lg transition disabled:opacity-50"
+            className="px-6 py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-50"
           >
             {initializing ? 'Loading milestones...' : 'Load Milestones'}
           </button>
@@ -189,13 +189,13 @@ export default function MilestonesPage() {
                   />
                   <defs>
                     <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#14b8a6" />
-                      <stop offset="100%" stopColor="#0d9488" />
+                      <stop offset="0%" stopColor="#d4a843" />
+                      <stop offset="100%" stopColor="#b8922e" />
                     </linearGradient>
                   </defs>
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-sm font-bold text-teal-600">{progressPct}%</span>
+                  <span className="text-sm font-bold text-warm-700">{progressPct}%</span>
                 </div>
               </div>
             </div>
@@ -207,12 +207,12 @@ export default function MilestonesPage() {
                   key={ap.area}
                   onClick={() => setFilterArea(filterArea === ap.area ? 'all' : ap.area)}
                   className={`p-2 rounded-lg text-center transition ${
-                    filterArea === ap.area ? 'bg-teal-50 ring-1 ring-teal-300' : 'bg-gray-50 hover:bg-gray-100'
+                    filterArea === ap.area ? 'bg-warm-50 ring-1 ring-warm-300' : 'bg-gray-50 hover:bg-gray-100'
                   }`}
                 >
                   <div className="text-xs text-gray-500 truncate mb-1">{getCurriculumAreaLabel(ap.area)}</div>
                   <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="h-full bg-teal-400 rounded-full" style={{ width: `${ap.pct}%` }} />
+                    <div className="h-full bg-warm-400 rounded-full" style={{ width: `${ap.pct}%` }} />
                   </div>
                   <div className="text-[10px] text-gray-400 mt-0.5">{ap.achieved}/{ap.total}</div>
                 </button>
@@ -223,7 +223,7 @@ export default function MilestonesPage() {
           {/* Filter label */}
           {filterArea !== 'all' && (
             <div className="flex items-center justify-between mb-3">
-              <span className="text-sm text-teal-600 font-medium">Showing: {getCurriculumAreaLabel(filterArea)}</span>
+              <span className="text-sm text-warm-700 font-medium">Showing: {getCurriculumAreaLabel(filterArea)}</span>
               <button onClick={() => setFilterArea('all')} className="text-xs text-gray-400 hover:text-gray-600">Show all</button>
             </div>
           )}
@@ -240,7 +240,7 @@ export default function MilestonesPage() {
                     className="w-full flex items-start gap-3 p-3 text-left hover:bg-gray-50/50 transition"
                   >
                     <div className={`w-5 h-5 mt-0.5 rounded-full border-2 flex items-center justify-center shrink-0 transition ${
-                      m.achieved ? 'bg-teal-500 border-teal-500' : 'border-gray-300'
+                      m.achieved ? 'bg-warm-500 border-warm-500' : 'border-gray-300'
                     }`}>
                       {m.achieved && (
                         <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -249,14 +249,14 @@ export default function MilestonesPage() {
                       )}
                     </div>
                     <div className="min-w-0">
-                      <div className={`text-sm font-medium transition ${m.achieved ? 'text-teal-600' : 'text-navy-600'}`}>
+                      <div className={`text-sm font-medium transition ${m.achieved ? 'text-warm-700' : 'text-navy-600'}`}>
                         {m.milestone_name}
                       </div>
                       {m.description && (
                         <div className="text-xs text-gray-400 mt-0.5 leading-relaxed">{m.description}</div>
                       )}
                       {m.achieved && m.achieved_date && (
-                        <div className="text-xs text-teal-500 mt-0.5">
+                        <div className="text-xs text-warm-600 mt-0.5">
                           Achieved {new Date(m.achieved_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                         </div>
                       )}

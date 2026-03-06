@@ -52,13 +52,13 @@ function ProgressRing({ percent, size = 72 }: { percent: number; size?: number }
 // Priority label styling
 // ---------------------------------------------------------------------------
 const PRIORITY_STYLES = {
-  essential: { border: 'border-l-teal-500', label: 'Essential', labelColor: 'text-teal-700 bg-teal-50' },
+  essential: { border: 'border-l-warm-500', label: 'Essential', labelColor: 'text-warm-700 bg-warm-50' },
   recommended: { border: 'border-l-blue-400', label: 'Recommended', labelColor: 'text-blue-700 bg-blue-50' },
   explore: { border: 'border-l-gray-300', label: 'Explore', labelColor: 'text-gray-600 bg-gray-100' },
 }
 
 const RHYTHM_STYLES: Record<string, { bg: string; border: string; text: string; badge: string }> = {
-  teal: { bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-800', badge: 'bg-teal-100 text-teal-700' },
+  warm: { bg: 'bg-warm-50', border: 'border-warm-300', text: 'text-warm-800', badge: 'bg-warm-100 text-warm-700' },
   blue: { bg: 'bg-blue-50', border: 'border-blue-200', text: 'text-blue-800', badge: 'bg-blue-100 text-blue-700' },
   violet: { bg: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-800', badge: 'bg-violet-100 text-violet-700' },
   amber: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-800', badge: 'bg-amber-100 text-amber-700' },
@@ -151,7 +151,7 @@ export default function StartHerePage() {
       {/* HERO BANNER                                                      */}
       {/* ================================================================ */}
       {isCompleted ? (
-        <div className="bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl p-6 text-white mb-6">
+        <div className="bg-gradient-to-br from-emerald-500 to-warm-500 rounded-2xl p-6 text-white mb-6">
           <div className="flex items-center gap-4">
             <div className="text-3xl">🎉</div>
             <div>
@@ -168,14 +168,14 @@ export default function StartHerePage() {
             </button>
             <Link
               href="/dashboard"
-              className="px-3 py-1.5 text-xs font-medium bg-white text-teal-700 rounded-lg hover:bg-white/90 transition"
+              className="px-3 py-1.5 text-xs font-medium bg-white text-warm-700 rounded-lg hover:bg-white/90 transition"
             >
               Go to Dashboard →
             </Link>
           </div>
         </div>
       ) : (
-        <div className="bg-gradient-to-br from-navy-600 to-teal-600 rounded-2xl p-6 text-white mb-6">
+        <div className="bg-gradient-to-br from-navy-700 to-navy-500 rounded-2xl p-6 text-white mb-6">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
@@ -257,7 +257,7 @@ export default function StartHerePage() {
                   {!isDone && (
                     <Link
                       href={action.href}
-                      className="inline-block mt-1.5 text-xs text-teal-600 font-medium hover:underline"
+                      className="inline-block mt-1.5 text-xs text-warm-700 font-medium hover:underline"
                     >
                       Go to {action.title.split(' ').slice(-1)} →
                     </Link>
@@ -283,8 +283,8 @@ export default function StartHerePage() {
 
         {/* Essential */}
         <div className="mb-2">
-          <div className="text-[10px] font-bold text-teal-700 uppercase tracking-widest mb-2 flex items-center gap-1.5">
-            <div className="w-3 h-0.5 bg-teal-500 rounded" />
+          <div className="text-[10px] font-bold text-warm-700 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+            <div className="w-3 h-0.5 bg-warm-500 rounded" />
             Start with these
           </div>
           <div className="space-y-2 mb-5">
@@ -386,7 +386,7 @@ export default function StartHerePage() {
                           <p className="text-xs text-gray-500 leading-relaxed mt-0.5">{item.whyItMatters}</p>
                           <Link
                             href={item.href}
-                            className="inline-block mt-1 text-xs text-teal-600 font-medium hover:underline"
+                            className="inline-block mt-1 text-xs text-warm-700 font-medium hover:underline"
                           >
                             Open {item.feature} →
                           </Link>
@@ -423,7 +423,7 @@ export default function StartHerePage() {
               {completionPct >= 50 && (
                 <button
                   onClick={handleMarkComplete}
-                  className="px-3 py-1.5 text-xs font-medium text-white bg-teal-500 hover:bg-teal-600 rounded-lg transition"
+                  className="px-3 py-1.5 text-xs font-medium text-white bg-warm-500 hover:bg-warm-600 rounded-lg transition"
                 >
                   Mark as Complete ✓
                 </button>
@@ -468,7 +468,7 @@ function FeatureCardItem({
             {isExplored ? (
               <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-500">✓ Explored</span>
             ) : (
-              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-teal-50 text-teal-600">New</span>
+              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-warm-50 text-warm-700">New</span>
             )}
           </div>
           <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{feature.tagline}</p>
@@ -484,7 +484,7 @@ function FeatureCardItem({
             <ul className="space-y-1.5">
               {feature.whatYouCanDo.map((item, i) => (
                 <li key={i} className="text-xs text-gray-700 leading-relaxed flex items-start gap-2">
-                  <span className="text-teal-400 mt-0.5 shrink-0">•</span>
+                  <span className="text-warm-400 mt-0.5 shrink-0">•</span>
                   {item}
                 </li>
               ))}
@@ -502,7 +502,7 @@ function FeatureCardItem({
           <Link
             href={feature.href}
             onClick={onTryIt}
-            className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-white bg-teal-500 hover:bg-teal-600 rounded-lg transition"
+            className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-white bg-warm-500 hover:bg-warm-600 rounded-lg transition"
           >
             Try {feature.label} →
           </Link>

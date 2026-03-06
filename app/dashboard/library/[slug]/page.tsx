@@ -17,7 +17,7 @@ export default function ArticlePage() {
         <div className="text-4xl mb-4">📄</div>
         <h1 className="text-xl font-semibold text-navy-600 mb-2">Article Not Found</h1>
         <p className="text-gray-500 mb-6">The article you&apos;re looking for doesn&apos;t exist.</p>
-        <Link href="/dashboard/library" className="text-sm text-teal-600 hover:underline">
+        <Link href="/dashboard/library" className="text-sm text-warm-700 hover:underline">
           ← Back to Library
         </Link>
       </div>
@@ -35,7 +35,7 @@ export default function ArticlePage() {
     if (category.includes('Education') || category.includes('Curriculum')) return 'bg-blue-50 text-blue-600'
     if (category.includes('Book')) return 'bg-amber-50 text-amber-600'
     if (category.includes('Video') || category.includes('Webinar')) return 'bg-red-50 text-red-600'
-    if (category.includes('Tomorrow')) return 'bg-teal-50 text-teal-600'
+    if (category.includes('Tomorrow')) return 'bg-warm-50 text-warm-700'
     if (category.includes('Grandparent')) return 'bg-pink-50 text-pink-600'
     return 'bg-gray-50 text-gray-600'
   }
@@ -77,7 +77,7 @@ export default function ArticlePage() {
               <li key={j} className="text-[15px] text-gray-700 leading-relaxed flex items-start gap-2">
                 {item.startsWith('•') ? (
                   <>
-                    <span className="text-teal-500 mt-1 shrink-0">•</span>
+                    <span className="text-warm-600 mt-1 shrink-0">•</span>
                     <span>{item.substring(1).trim()}</span>
                   </>
                 ) : (
@@ -100,7 +100,7 @@ export default function ArticlePage() {
     <div className="max-w-3xl mx-auto">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-        <Link href="/dashboard/library" className="hover:text-teal-600 transition">Library</Link>
+        <Link href="/dashboard/library" className="hover:text-warm-600 transition">Library</Link>
         <span>→</span>
         <span className="text-gray-600 truncate">{article.title}</span>
       </div>
@@ -179,7 +179,7 @@ export default function ArticlePage() {
                 href={`/dashboard/library/${related.slug}`}
                 className="p-4 bg-white border border-gray-100 rounded-xl hover:border-gray-200 hover:shadow-sm transition group"
               >
-                <h4 className="text-sm font-medium text-navy-600 leading-snug group-hover:text-teal-600 transition line-clamp-2 mb-1">
+                <h4 className="text-sm font-medium text-navy-600 leading-snug group-hover:text-warm-600 transition line-clamp-2 mb-1">
                   {related.title}
                 </h4>
                 <p className="text-[11px] text-gray-400">{related.author}</p>
@@ -191,7 +191,7 @@ export default function ArticlePage() {
 
       {/* Back to library */}
       <div className="mt-8 pb-8">
-        <Link href="/dashboard/library" className="text-sm text-teal-600 hover:underline">
+        <Link href="/dashboard/library" className="text-sm text-warm-700 hover:underline">
           ← Back to Library
         </Link>
       </div>

@@ -377,7 +377,7 @@ export default function SettingsPage() {
                 type="text"
                 value={displayName}
                 onChange={e => setDisplayName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
               />
             </div>
 
@@ -389,7 +389,7 @@ export default function SettingsPage() {
                     key={opt.value}
                     onClick={() => setExperience(opt.value)}
                     className={`w-full text-left px-3 py-2 rounded-lg border text-sm transition ${
-                      experience === opt.value ? 'border-teal-500 bg-teal-50 text-teal-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                      experience === opt.value ? 'border-warm-500 bg-warm-50 text-warm-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'
                     }`}
                   >
                     {opt.label}
@@ -403,7 +403,7 @@ export default function SettingsPage() {
               <select
                 value={educationContext}
                 onChange={e => setEducationContext(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
               >
                 <option value="">Select...</option>
                 {CONTEXT_OPTIONS.map(opt => (
@@ -420,7 +420,7 @@ export default function SettingsPage() {
                     key={opt.value}
                     onClick={() => setCommStyle(opt.value)}
                     className={`w-full text-left px-3 py-2 rounded-lg border text-sm transition ${
-                      commStyle === opt.value ? 'border-teal-500 bg-teal-50 text-teal-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                      commStyle === opt.value ? 'border-warm-500 bg-warm-50 text-warm-700' : 'border-gray-200 text-gray-600 hover:border-gray-300'
                     }`}
                   >
                     {opt.label}
@@ -432,7 +432,7 @@ export default function SettingsPage() {
             <button
               onClick={saveProfile}
               disabled={profileSaving}
-              className="w-full py-2.5 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-lg transition disabled:opacity-50"
+              className="w-full py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-50"
             >
               {profileSaving ? 'Saving...' : profileSaved ? '✓ Saved' : 'Save Profile'}
             </button>
@@ -458,7 +458,7 @@ export default function SettingsPage() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => startEditChild(child)}
-                      className="px-3 py-1 text-xs text-teal-600 bg-teal-50 hover:bg-teal-100 rounded-lg transition"
+                      className="px-3 py-1 text-xs text-warm-700 bg-warm-50 hover:bg-warm-100 rounded-lg transition"
                     >
                       Edit
                     </button>
@@ -496,7 +496,7 @@ export default function SettingsPage() {
                     type="text"
                     value={childName}
                     onChange={e => setChildName(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                   />
                 </div>
                 <div>
@@ -505,7 +505,7 @@ export default function SettingsPage() {
                     type="date"
                     value={childDob}
                     onChange={e => setChildDob(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                   />
                 </div>
                 <div>
@@ -513,7 +513,7 @@ export default function SettingsPage() {
                   <select
                     value={childEnv}
                     onChange={e => setChildEnv(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                   >
                     <option value="">Select...</option>
                     {ENV_OPTIONS.map(opt => (
@@ -527,7 +527,7 @@ export default function SettingsPage() {
                     type="text"
                     value={childSchool}
                     onChange={e => setChildSchool(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                     placeholder="If attending a school"
                   />
                 </div>
@@ -536,7 +536,7 @@ export default function SettingsPage() {
                   <textarea
                     value={childNotes}
                     onChange={e => setChildNotes(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                     rows={2}
                     placeholder="Anything helpful for the AI to know"
                   />
@@ -545,7 +545,7 @@ export default function SettingsPage() {
                   <button
                     onClick={saveChild}
                     disabled={childSaving || !childName.trim() || !childDob}
-                    className="flex-1 py-2.5 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-lg transition disabled:opacity-40"
+                    className="flex-1 py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-40"
                   >
                     {childSaving ? 'Saving...' : editingChild ? 'Update' : 'Add Child'}
                   </button>
@@ -573,7 +573,7 @@ export default function SettingsPage() {
                 type="password"
                 value={newPassword}
                 onChange={e => setNewPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                 placeholder="At least 8 characters"
               />
             </div>
@@ -583,18 +583,18 @@ export default function SettingsPage() {
                 type="password"
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
               />
             </div>
             {passwordMessage && (
-              <p className={`text-sm ${passwordMessage.includes('success') ? 'text-teal-600' : 'text-red-500'}`}>
+              <p className={`text-sm ${passwordMessage.includes('success') ? 'text-warm-700' : 'text-red-500'}`}>
                 {passwordMessage}
               </p>
             )}
             <button
               onClick={changePassword}
               disabled={passwordSaving || !newPassword || !confirmPassword}
-              className="w-full py-2.5 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-lg transition disabled:opacity-40"
+              className="w-full py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-40"
             >
               {passwordSaving ? 'Updating...' : 'Update Password'}
             </button>

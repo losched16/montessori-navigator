@@ -26,13 +26,13 @@ const AREA_COLORS: Record<string, string> = {
   practical_life: 'from-amber-500 to-orange-500',
   sensorial: 'from-pink-500 to-rose-500',
   language: 'from-blue-500 to-indigo-500',
-  mathematics: 'from-emerald-500 to-teal-500',
+  mathematics: 'from-emerald-500 to-warm-500',
   science: 'from-purple-500 to-violet-500',
   geography: 'from-cyan-500 to-blue-500',
   history: 'from-yellow-500 to-amber-500',
   cosmic_studies: 'from-indigo-500 to-purple-500',
   infants: 'from-rose-400 to-pink-400',
-  toddlers: 'from-teal-400 to-emerald-400',
+  toddlers: 'from-warm-400 to-emerald-400',
 }
 
 const AREA_DESCRIPTIONS: Record<string, string> = {
@@ -118,7 +118,7 @@ export default function CurriculumPage() {
                   onClick={() => setSelectedChildId(child.id)}
                   className={`px-3 py-1.5 rounded-lg text-sm transition ${
                     selectedChildId === child.id
-                      ? 'bg-teal-50 text-teal-600 font-medium border border-teal-200'
+                      ? 'bg-warm-50 text-warm-700 font-medium border border-warm-300'
                       : 'bg-gray-50 text-gray-500 border border-gray-100 hover:bg-gray-100'
                   }`}
                 >
@@ -152,7 +152,7 @@ export default function CurriculumPage() {
           placeholder="Search curriculum areas..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+          className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
         />
       </div>
 
@@ -176,7 +176,7 @@ export default function CurriculumPage() {
                   <span className="text-2xl">{AREA_ICONS[area.key] || '📋'}</span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-semibold text-navy-600 group-hover:text-teal-600 transition">
+                      <h3 className="text-sm font-semibold text-navy-600 group-hover:text-warm-600 transition">
                         {area.label}
                       </h3>
                       <span className="text-xs text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full shrink-0 ml-2">
@@ -194,14 +194,14 @@ export default function CurriculumPage() {
                           <span className="text-[10px] text-gray-500">
                             {prog.mastered} mastered{prog.inProgress > 0 ? ` · ${prog.inProgress} in progress` : ''}
                           </span>
-                          <span className="text-[10px] text-teal-600 font-medium">
+                          <span className="text-[10px] text-warm-700 font-medium">
                             {Math.round((prog.mastered / area.count) * 100)}%
                           </span>
                         </div>
                         <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
                           <div className="h-full flex">
                             <div
-                              className="bg-teal-500 transition-all"
+                              className="bg-warm-500 transition-all"
                               style={{ width: `${(prog.mastered / area.count) * 100}%` }}
                             />
                             <div

@@ -15,6 +15,7 @@ import ShoppingGuide from '@/components/environment/ShoppingGuide'
 import SafetyChecklist from '@/components/environment/SafetyChecklist'
 import RelatedArticles from '@/components/environment/RelatedArticles'
 import MySetupTracker from '@/components/environment/MySetupTracker'
+import RoomVision from '@/components/environment/RoomVision'
 
 export default function EnvironmentPage() {
   const [selectedRoom, setSelectedRoom] = useState<RoomType>('entryway')
@@ -56,9 +57,9 @@ export default function EnvironmentPage() {
 
       {/* Age filter badge */}
       {selectedChild && agePlane && (
-        <div className="flex items-center gap-2 px-3 py-2 bg-teal-50 border border-teal-100 rounded-lg mb-4">
+        <div className="flex items-center gap-2 px-3 py-2 bg-warm-50 border border-warm-200 rounded-lg mb-4">
           <span className="text-sm">👶</span>
-          <span className="text-sm text-teal-700">
+          <span className="text-sm text-warm-700">
             Showing tips for <strong>{selectedChild.name}</strong> ({getAgePlaneLabel(agePlane as any)})
           </span>
         </div>
@@ -72,8 +73,8 @@ export default function EnvironmentPage() {
             onClick={() => setSelectedRoom(room.room)}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition shrink-0 ${
               selectedRoom === room.room
-                ? 'bg-teal-500 text-white shadow-sm'
-                : 'bg-white border border-gray-200 text-gray-600 hover:border-teal-300 hover:text-teal-600'
+                ? 'bg-warm-500 text-white shadow-sm'
+                : 'bg-white border border-gray-200 text-gray-600 hover:border-warm-300 hover:text-warm-600'
             }`}
           >
             <span className="text-lg">{room.icon}</span>
@@ -88,6 +89,7 @@ export default function EnvironmentPage() {
           <RoomHero guide={currentGuide} />
           <QuickWins wins={currentGuide.quickWins} />
           <InspirationPhotos photos={currentGuide.inspirationPhotos} />
+          <RoomVision room={selectedRoom} parentId={parentId} agePlane={agePlane} />
           <InspirationVideos videos={currentGuide.inspirationVideos} />
           <SetupGuide tips={currentGuide.setupTips} />
           <ShoppingGuide items={currentGuide.recommendedItems} />

@@ -142,7 +142,7 @@ export default function MonthlyDevelopment({ guide, childName }: Props) {
             <ul className="space-y-1.5">
               {guide.handDevelopment.map((item, i) => (
                 <li key={i} className="text-sm text-gray-700 leading-relaxed flex items-start gap-2">
-                  <span className="text-teal-400 mt-1 shrink-0">•</span>
+                  <span className="text-warm-400 mt-1 shrink-0">•</span>
                   {item}
                 </li>
               ))}
@@ -169,13 +169,13 @@ export default function MonthlyDevelopment({ guide, childName }: Props) {
           )}
           {guide.communicationTips.length > 0 && (
             <div className="mt-3 pt-3 border-t border-gray-100">
-              <h4 className="text-xs font-semibold text-teal-600 uppercase tracking-wider mb-2">💡 Tips for parents</h4>
+              <h4 className="text-xs font-semibold text-warm-600 uppercase tracking-wider mb-2">💡 Tips for parents</h4>
               <div className="space-y-2">
                 {guide.communicationTips.map((tip, i) => (
-                  <div key={i} className="bg-teal-50 border border-teal-100 rounded-lg p-3">
+                  <div key={i} className="bg-warm-50 border border-warm-200 rounded-lg p-3">
                     <div className="flex items-start gap-2">
-                      <span className="text-teal-600 font-bold text-sm shrink-0">{i + 1}.</span>
-                      <p className="text-sm text-teal-800 leading-relaxed">{tip}</p>
+                      <span className="text-warm-600 font-bold text-sm shrink-0">{i + 1}.</span>
+                      <p className="text-sm text-warm-800 leading-relaxed">{tip}</p>
                     </div>
                   </div>
                 ))}
@@ -227,7 +227,7 @@ export default function MonthlyDevelopment({ guide, childName }: Props) {
         <ul className="space-y-1.5">
           {guide.independenceGains.map((item, i) => (
             <li key={i} className="text-sm text-gray-700 leading-relaxed flex items-start gap-2">
-              <span className="text-teal-400 mt-1 shrink-0">✦</span>
+              <span className="text-warm-400 mt-1 shrink-0">✦</span>
               {item}
             </li>
           ))}

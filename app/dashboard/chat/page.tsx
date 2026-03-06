@@ -199,7 +199,7 @@ export default function ChatPage() {
         <div className="p-3">
           <button
             onClick={startNewChat}
-            className="w-full py-2 px-3 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition"
+            className="w-full py-2 px-3 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
           >
             + New Conversation
           </button>
@@ -211,7 +211,7 @@ export default function ChatPage() {
               onClick={() => loadThread(thread.id)}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm truncate transition ${
                 threadId === thread.id
-                  ? 'bg-teal-50 text-teal-600'
+                  ? 'bg-warm-50 text-warm-700'
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
@@ -234,7 +234,7 @@ export default function ChatPage() {
           >
             ☰ Chats
           </button>
-          <button onClick={startNewChat} className="ml-auto text-sm text-teal-500 font-medium">
+          <button onClick={startNewChat} className="ml-auto text-sm text-warm-600 font-medium">
             + New
           </button>
         </div>
@@ -253,7 +253,7 @@ export default function ChatPage() {
                   <button
                     key={i}
                     onClick={() => { setInput(q); inputRef.current?.focus() }}
-                    className="text-left p-3 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg hover:border-teal-300 hover:text-teal-600 transition"
+                    className="text-left p-3 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg hover:border-warm-300 hover:text-warm-600 transition"
                   >
                     {q}
                   </button>
@@ -266,7 +266,7 @@ export default function ChatPage() {
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[85%] sm:max-w-[70%] rounded-2xl px-4 py-3 ${
                 msg.role === 'user'
-                  ? 'bg-teal-500 text-white'
+                  ? 'bg-warm-500 text-white'
                   : 'bg-white border border-gray-100 text-gray-700'
               }`}>
                 <div className={`text-sm leading-relaxed whitespace-pre-wrap ${
@@ -293,7 +293,7 @@ export default function ChatPage() {
                       className={`w-full flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-medium transition ${
                         msg.saved
                           ? 'text-amber-700 bg-amber-50 border border-amber-200 hover:bg-amber-100'
-                          : 'text-gray-500 bg-gray-50 border border-gray-150 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200'
+                          : 'text-gray-500 bg-gray-50 border border-gray-150 hover:bg-warm-50 hover:text-warm-600 hover:border-warm-300'
                       }`}
                     >
                       {msg.saved ? '★ Saved to Memories' : '☆ Save to Memories'}
@@ -308,9 +308,9 @@ export default function ChatPage() {
             <div className="flex justify-start">
               <div className="bg-white border border-gray-100 rounded-2xl px-4 py-3">
                 <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <div className="w-2 h-2 bg-teal-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
             </div>
@@ -329,7 +329,7 @@ export default function ChatPage() {
               onKeyDown={handleKeyDown}
               placeholder="Ask about Montessori parenting, curriculum, activities..."
               rows={1}
-              className="flex-1 resize-none px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none max-h-32"
+              className="flex-1 resize-none px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none max-h-32"
               style={{ minHeight: '42px' }}
               onInput={(e) => {
                 const target = e.target as HTMLTextAreaElement
@@ -340,7 +340,7 @@ export default function ChatPage() {
             <button
               onClick={handleSend}
               disabled={!input.trim() || loading}
-              className="px-4 py-2.5 bg-teal-500 hover:bg-teal-600 text-white rounded-xl transition disabled:opacity-40 disabled:hover:bg-teal-500"
+              className="px-4 py-2.5 bg-warm-500 hover:bg-warm-600 text-white rounded-xl transition disabled:opacity-40 disabled:hover:bg-warm-500"
             >
               <span className="text-sm font-medium">Send</span>
             </button>

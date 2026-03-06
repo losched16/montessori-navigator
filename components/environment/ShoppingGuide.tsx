@@ -58,7 +58,7 @@ export default function ShoppingGuide({ items }: { items: RecommendedItem[] }) {
                           href={`https://www.amazon.com/s?k=${encodeURIComponent(item.searchQuery)}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-teal-600 hover:text-teal-700 font-medium"
+                          className="text-xs text-warm-600 hover:text-warm-700 font-medium"
                         >
                           Search on Amazon →
                         </a>

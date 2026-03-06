@@ -100,7 +100,7 @@ export default function LibraryPage() {
     if (category.includes('Education') || category.includes('Curriculum')) return 'bg-blue-50 text-blue-600'
     if (category.includes('Book')) return 'bg-amber-50 text-amber-600'
     if (category.includes('Video') || category.includes('Webinar')) return 'bg-red-50 text-red-600'
-    if (category.includes('Tomorrow')) return 'bg-teal-50 text-teal-600'
+    if (category.includes('Tomorrow')) return 'bg-warm-50 text-warm-700'
     if (category.includes('Grandparent')) return 'bg-pink-50 text-pink-600'
     return 'bg-gray-50 text-gray-600'
   }
@@ -126,7 +126,7 @@ export default function LibraryPage() {
               placeholder="Search articles..."
               value={search}
               onChange={e => handleFilterChange(setSearch, e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
             />
           </div>
 
@@ -134,7 +134,7 @@ export default function LibraryPage() {
           <select
             value={selectedCategory}
             onChange={e => handleFilterChange(setSelectedCategory, e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
           >
             <option value="all">All Categories</option>
             {Object.keys(CATEGORY_GROUPS).map(group => (
@@ -146,7 +146,7 @@ export default function LibraryPage() {
           <select
             value={selectedTag}
             onChange={e => handleFilterChange(setSelectedTag, e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
           >
             <option value="all">All Tags</option>
             {TAGS.map(tag => (
@@ -158,7 +158,7 @@ export default function LibraryPage() {
           <select
             value={sort}
             onChange={e => handleFilterChange(setSort, e.target.value as SortOption)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
           >
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
@@ -193,7 +193,7 @@ export default function LibraryPage() {
               </div>
 
               {/* Title */}
-              <h3 className="text-sm font-semibold text-navy-600 leading-snug mb-2 group-hover:text-teal-600 transition line-clamp-2">
+              <h3 className="text-sm font-semibold text-navy-600 leading-snug mb-2 group-hover:text-warm-600 transition line-clamp-2">
                 {article.videoIds && article.videoIds.length > 0 && (
                   <span className="inline-block mr-1.5 text-red-500 align-middle">▶</span>
                 )}
@@ -249,7 +249,7 @@ export default function LibraryPage() {
                   onClick={() => setPage(pageNum)}
                   className={`w-8 h-8 text-sm rounded-lg transition ${
                     page === pageNum
-                      ? 'bg-teal-500 text-white font-medium'
+                      ? 'bg-warm-500 text-white font-medium'
                       : 'text-gray-500 hover:bg-gray-50'
                   }`}
                 >

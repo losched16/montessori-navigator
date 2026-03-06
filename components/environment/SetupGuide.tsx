@@ -4,7 +4,7 @@ import { useState } from 'react'
 import type { SetupTip } from '@/lib/environment-guide'
 
 const PRIORITY_STYLES = {
-  essential: { bg: 'bg-teal-50', border: 'border-l-teal-500', label: 'Essential', labelColor: 'text-teal-700' },
+  essential: { bg: 'bg-warm-50', border: 'border-l-warm-500', label: 'Essential', labelColor: 'text-warm-700' },
   recommended: { bg: 'bg-blue-50', border: 'border-l-blue-400', label: 'Recommended', labelColor: 'text-blue-600' },
   nice_to_have: { bg: 'bg-gray-50', border: 'border-l-gray-300', label: 'Nice to Have', labelColor: 'text-gray-500' },
 }
@@ -44,7 +44,7 @@ export default function SetupGuide({ tips }: { tips: SetupTip[] }) {
       {!showAll && hiddenCount > 0 && (
         <button
           onClick={() => setShowAll(true)}
-          className="mt-3 text-xs text-teal-600 hover:text-teal-700 font-medium"
+          className="mt-3 text-xs text-warm-600 hover:text-warm-700 font-medium"
         >
           Show {hiddenCount} more tip{hiddenCount > 1 ? 's' : ''} →
         </button>

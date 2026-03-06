@@ -157,7 +157,7 @@ export default function PlansPage() {
         )}
       </div>
       {activity.curriculum_area && (
-        <span className="inline-block text-xs bg-teal-50 text-teal-600 px-2 py-0.5 rounded-full mb-2">
+        <span className="inline-block text-xs bg-warm-50 text-warm-700 px-2 py-0.5 rounded-full mb-2">
           {getCurriculumAreaLabel(activity.curriculum_area)}
         </span>
       )}
@@ -185,7 +185,7 @@ export default function PlansPage() {
         </div>
       )}
       {activity.extensions && (
-        <div className="text-xs text-teal-600 mt-1">
+        <div className="text-xs text-warm-700 mt-1">
           <span className="font-medium">Extension:</span> {activity.extensions}
         </div>
       )}
@@ -201,7 +201,7 @@ export default function PlansPage() {
         <h1 className="text-xl font-bold text-navy-600">Learning Plans</h1>
         <button
           onClick={() => { setShowGenerator(true); setViewingPlan(null) }}
-          className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition"
+          className="px-4 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
         >
           + Generate Plan
         </button>
@@ -216,7 +216,7 @@ export default function PlansPage() {
               onClick={() => { setSelectedChildId(child.id); setViewingPlan(null) }}
               className={`px-3 py-1.5 text-sm rounded-lg transition ${
                 selectedChildId === child.id
-                  ? 'bg-teal-500 text-white'
+                  ? 'bg-warm-500 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
@@ -228,7 +228,7 @@ export default function PlansPage() {
 
       {/* Generator */}
       {showGenerator && (
-        <div className="bg-white border border-teal-200 rounded-xl p-5 mb-6">
+        <div className="bg-white border border-warm-300 rounded-xl p-5 mb-6">
           <h3 className="font-semibold text-navy-600 mb-1">Generate a Learning Plan</h3>
           <p className="text-sm text-gray-500 mb-4">
             for {selectedChild?.name} · {selectedChild ? formatAge(selectedChild.date_of_birth) : ''}
@@ -244,7 +244,7 @@ export default function PlansPage() {
                     onClick={() => setPlanType(pt.value)}
                     className={`text-left p-3 rounded-lg border text-sm transition ${
                       planType === pt.value
-                        ? 'border-teal-500 bg-teal-50'
+                        ? 'border-warm-500 bg-warm-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
@@ -264,7 +264,7 @@ export default function PlansPage() {
                     onClick={() => toggleFocus(area)}
                     className={`px-3 py-1.5 text-sm rounded-full border transition ${
                       focusAreas.includes(area)
-                        ? 'border-teal-500 bg-teal-50 text-teal-600'
+                        ? 'border-warm-500 bg-warm-50 text-warm-700'
                         : 'border-gray-200 text-gray-600 hover:border-gray-300'
                     }`}
                   >
@@ -280,7 +280,7 @@ export default function PlansPage() {
                 type="text"
                 value={constraints}
                 onChange={e => setConstraints(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                 placeholder='e.g., "only 30 minutes today", "no messy activities", "rainy day"'
               />
             </div>
@@ -295,7 +295,7 @@ export default function PlansPage() {
               <button
                 onClick={handleGenerate}
                 disabled={focusAreas.length === 0 || generating}
-                className="px-5 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition disabled:opacity-40"
+                className="px-5 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition disabled:opacity-40"
               >
                 {generating ? 'Generating...' : 'Generate Plan'}
               </button>
@@ -332,7 +332,7 @@ export default function PlansPage() {
             <button
               key={plan.id}
               onClick={() => setViewingPlan(plan)}
-              className="w-full text-left p-4 bg-white border border-gray-100 rounded-xl hover:border-teal-200 transition"
+              className="w-full text-left p-4 bg-white border border-gray-100 rounded-xl hover:border-warm-300 transition"
             >
               <div className="flex items-center justify-between">
                 <div>

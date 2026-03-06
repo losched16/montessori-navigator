@@ -84,7 +84,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
               <select
                 value={selectedChildId || ''}
                 onChange={e => setSelectedChildId(e.target.value)}
-                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-navy-600 focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-navy-600 focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
               >
                 {childrenList.map(child => (
                   <option key={child.id} value={child.id}>
@@ -120,9 +120,9 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                   href={item.href}
                   className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
                     isActive(item.href) && !item.children
-                      ? 'bg-teal-50 text-teal-600 font-medium'
+                      ? 'bg-warm-50 text-warm-700 font-medium'
                       : item.children && isJourneySection
-                        ? 'bg-teal-50 text-teal-600 font-medium'
+                        ? 'bg-warm-50 text-warm-700 font-medium'
                         : 'text-gray-600 hover:bg-gray-50'
                   }`}
                 >
@@ -138,7 +138,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                         href={sub.href}
                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition ${
                           isActive(sub.href)
-                            ? 'text-teal-600 font-medium'
+                            ? 'text-warm-700 font-medium'
                             : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                         }`}
                       >
@@ -155,7 +155,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                 href="/dashboard/settings"
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
                   isActive('/dashboard/settings')
-                    ? 'bg-teal-50 text-teal-600 font-medium'
+                    ? 'bg-warm-50 text-warm-700 font-medium'
                     : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
                 }`}
               >
@@ -196,7 +196,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm ${
                       isActive(item.href)
-                        ? 'bg-teal-50 text-teal-600 font-medium'
+                        ? 'bg-warm-50 text-warm-700 font-medium'
                         : 'text-gray-600'
                     }`}
                   >
@@ -212,7 +212,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${
                             isActive(sub.href)
-                              ? 'text-teal-600 font-medium'
+                              ? 'text-warm-700 font-medium'
                               : 'text-gray-500'
                           }`}
                         >
@@ -230,7 +230,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm ${
                     isActive('/dashboard/settings')
-                      ? 'bg-teal-50 text-teal-600 font-medium'
+                      ? 'bg-warm-50 text-warm-700 font-medium'
                       : 'text-gray-400'
                   }`}
                 >
@@ -262,7 +262,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
               key={item.href}
               href={item.href}
               className={`flex flex-col items-center gap-0.5 px-2 py-1 ${
-                isActive(item.href) ? 'text-teal-500' : 'text-gray-400'
+                isActive(item.href) ? 'text-warm-600' : 'text-gray-400'
               }`}
             >
               <span className="text-lg">{item.icon}</span>

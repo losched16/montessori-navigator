@@ -82,7 +82,7 @@ export default function NotesPage() {
         <h1 className="text-xl font-bold text-navy-600">Notes</h1>
         <button
           onClick={() => setShowForm(true)}
-          className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition"
+          className="px-4 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
         >
           + Add Note
         </button>
@@ -90,7 +90,7 @@ export default function NotesPage() {
 
       {/* Note form */}
       {showForm && (
-        <div className="bg-white border border-teal-200 rounded-xl p-4 mb-4">
+        <div className="bg-white border border-warm-300 rounded-xl p-4 mb-4">
           <div className="grid grid-cols-2 gap-3 mb-3">
             <div>
               <label className="block text-xs text-gray-500 mb-1">Title (optional)</label>
@@ -98,7 +98,7 @@ export default function NotesPage() {
                 type="text"
                 value={noteTitle}
                 onChange={e => setNoteTitle(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                 placeholder="Note title"
               />
             </div>
@@ -107,7 +107,7 @@ export default function NotesPage() {
               <select
                 value={noteChildId}
                 onChange={e => setNoteChildId(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
               >
                 <option value="">Family-level note</option>
                 {children.map(c => (
@@ -120,7 +120,7 @@ export default function NotesPage() {
             <textarea
               value={noteContent}
               onChange={e => setNoteContent(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
               rows={4}
               placeholder="Write your note..."
             />
@@ -132,7 +132,7 @@ export default function NotesPage() {
             <button
               onClick={saveNote}
               disabled={!noteContent.trim() || saving}
-              className="px-4 py-1.5 bg-teal-500 hover:bg-teal-600 text-white text-sm rounded-lg transition disabled:opacity-40"
+              className="px-4 py-1.5 bg-warm-500 hover:bg-warm-600 text-white text-sm rounded-lg transition disabled:opacity-40"
             >
               {saving ? 'Saving...' : 'Save'}
             </button>
@@ -150,7 +150,7 @@ export default function NotesPage() {
                   {note.pinned && <span className="text-xs text-warm-500">📌 Pinned</span>}
                   {note.title && <span className="font-medium text-sm text-navy-600">{note.title}</span>}
                   {note.child_name && (
-                    <span className="text-xs text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">{note.child_name}</span>
+                    <span className="text-xs text-warm-700 bg-warm-50 px-2 py-0.5 rounded-full">{note.child_name}</span>
                   )}
                 </div>
                 <p className="text-sm text-gray-700">{note.note}</p>

@@ -284,7 +284,7 @@ export default function SchoolsPage() {
             </button>
             <button
               onClick={startNewEvaluation}
-              className="px-4 py-1.5 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition"
+              className="px-4 py-1.5 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
             >
               + New Tour
             </button>
@@ -297,7 +297,7 @@ export default function SchoolsPage() {
       ============================================= */}
       {viewMode === 'credentials' && (
         <div>
-          <button onClick={() => setViewMode('list')} className="text-sm text-teal-500 hover:text-teal-600 mb-4 inline-block">
+          <button onClick={() => setViewMode('list')} className="text-sm text-warm-600 hover:text-warm-600 mb-4 inline-block">
             ← Back to evaluations
           </button>
 
@@ -317,7 +317,7 @@ export default function SchoolsPage() {
                       <span className="text-lg font-bold text-navy-600">{cred.abbrev}</span>
                       <div className="flex gap-0.5">
                         {[1, 2, 3, 4, 5].map(i => (
-                          <div key={i} className={`w-2 h-2 rounded-full ${i <= cred.rigor ? 'bg-teal-500' : 'bg-gray-200'}`} />
+                          <div key={i} className={`w-2 h-2 rounded-full ${i <= cred.rigor ? 'bg-warm-500' : 'bg-gray-200'}`} />
                         ))}
                       </div>
                     </div>
@@ -401,9 +401,9 @@ export default function SchoolsPage() {
               ))}
 
               {comparisonResult.recommendation && (
-                <div className="mt-4 p-3 bg-teal-50 rounded-lg">
-                  <div className="text-xs font-semibold text-teal-700 mb-1">Recommendation</div>
-                  <p className="text-sm text-teal-800">{comparisonResult.recommendation}</p>
+                <div className="mt-4 p-3 bg-warm-50 rounded-lg">
+                  <div className="text-xs font-semibold text-warm-700 mb-1">Recommendation</div>
+                  <p className="text-sm text-warm-800">{comparisonResult.recommendation}</p>
                 </div>
               )}
             </div>
@@ -464,7 +464,7 @@ export default function SchoolsPage() {
                 <h3 className="text-lg font-semibold text-navy-600 mb-1">No evaluations yet</h3>
                 <p className="text-sm text-gray-500 mb-4">Tour a school, then come here to record and analyze your observations</p>
                 <div className="flex justify-center gap-3">
-                  <button onClick={startNewEvaluation} className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition">
+                  <button onClick={startNewEvaluation} className="px-4 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition">
                     Record a Tour
                   </button>
                   <button onClick={() => setViewMode('credentials')} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-medium rounded-lg transition">
@@ -482,7 +482,7 @@ export default function SchoolsPage() {
       ============================================= */}
       {viewMode === 'new_evaluation' && (
         <div>
-          <button onClick={() => setViewMode('list')} className="text-sm text-teal-500 hover:text-teal-600 mb-4 inline-block">
+          <button onClick={() => setViewMode('list')} className="text-sm text-warm-600 hover:text-warm-600 mb-4 inline-block">
             ← Back
           </button>
 
@@ -497,7 +497,7 @@ export default function SchoolsPage() {
                     type="text"
                     value={schoolName}
                     onChange={e => setSchoolName(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                     placeholder="Name of the school you visited"
                   />
                 </div>
@@ -507,7 +507,7 @@ export default function SchoolsPage() {
                     <select
                       value={credentials}
                       onChange={e => setCredentials(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                     >
                       <option value="">Select or unsure</option>
                       <option value="AMI">AMI</option>
@@ -524,7 +524,7 @@ export default function SchoolsPage() {
                     <select
                       value={ageRange}
                       onChange={e => setAgeRange(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                     >
                       <option value="">Select</option>
                       <option value="0-3">Infant/Toddler (0-3)</option>
@@ -541,7 +541,7 @@ export default function SchoolsPage() {
               <button
                 onClick={() => { if (schoolName.trim()) setCurrentSection(1) }}
                 disabled={!schoolName.trim()}
-                className="mt-4 w-full bg-teal-500 hover:bg-teal-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-40"
+                className="mt-4 w-full bg-warm-500 hover:bg-warm-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-40"
               >
                 Start Tour Evaluation
               </button>
@@ -556,14 +556,14 @@ export default function SchoolsPage() {
                 {TOUR_SECTIONS.map((s, i) => (
                   <div key={i} className="flex items-center gap-1">
                     <div className={`w-6 h-6 rounded-full text-xs flex items-center justify-center font-medium ${
-                      i + 1 < currentSection ? 'bg-teal-100 text-teal-600' :
-                      i + 1 === currentSection ? 'bg-teal-500 text-white' :
+                      i + 1 < currentSection ? 'bg-warm-100 text-warm-700' :
+                      i + 1 === currentSection ? 'bg-warm-500 text-white' :
                       'bg-gray-100 text-gray-400'
                     }`}>
                       {i + 1 < currentSection ? '✓' : i + 1}
                     </div>
                     {i < TOUR_SECTIONS.length - 1 && (
-                      <div className={`w-4 h-0.5 ${i + 1 < currentSection ? 'bg-teal-300' : 'bg-gray-200'}`} />
+                      <div className={`w-4 h-0.5 ${i + 1 < currentSection ? 'bg-warm-300' : 'bg-gray-200'}`} />
                     )}
                   </div>
                 ))}
@@ -587,7 +587,7 @@ export default function SchoolsPage() {
                               onClick={() => setRating(section.key, q.key, r)}
                               className={`flex-1 py-2 text-xs rounded-lg border transition ${
                                 getRating(section.key, q.key) === r
-                                  ? 'bg-teal-500 border-teal-500 text-white'
+                                  ? 'bg-warm-500 border-warm-500 text-white'
                                   : 'border-gray-200 text-gray-500 hover:border-gray-300'
                               }`}
                             >
@@ -599,7 +599,7 @@ export default function SchoolsPage() {
                         <textarea
                           value={getText(section.key, q.key)}
                           onChange={e => setRating(section.key, q.key, e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                           rows={2}
                           placeholder="Your observations..."
                         />
@@ -618,14 +618,14 @@ export default function SchoolsPage() {
                   {currentSection < TOUR_SECTIONS.length ? (
                     <button
                       onClick={() => setCurrentSection(prev => prev + 1)}
-                      className="px-5 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition"
+                      className="px-5 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
                     >
                       Next Section
                     </button>
                   ) : (
                     <button
                       onClick={() => setCurrentSection(TOUR_SECTIONS.length + 1)}
-                      className="px-5 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-lg transition"
+                      className="px-5 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
                     >
                       Review & Submit
                     </button>
@@ -658,7 +658,7 @@ export default function SchoolsPage() {
                   <textarea
                     value={additionalNotes}
                     onChange={e => setAdditionalNotes(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                     rows={3}
                     placeholder="Any other thoughts, questions, or things you noticed..."
                   />
@@ -674,7 +674,7 @@ export default function SchoolsPage() {
                   <button
                     onClick={submitEvaluation}
                     disabled={submitting}
-                    className="px-6 py-2.5 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-lg transition disabled:opacity-50"
+                    className="px-6 py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-50"
                   >
                     {submitting ? 'Analyzing your tour...' : 'Get AI Debrief'}
                   </button>
@@ -696,7 +696,7 @@ export default function SchoolsPage() {
 
         return (
           <div>
-            <button onClick={() => { setViewMode('list'); setSelectedEvaluation(null) }} className="text-sm text-teal-500 hover:text-teal-600 mb-4 inline-block">
+            <button onClick={() => { setViewMode('list'); setSelectedEvaluation(null) }} className="text-sm text-warm-600 hover:text-warm-600 mb-4 inline-block">
               ← Back to evaluations
             </button>
 
@@ -825,9 +825,9 @@ export default function SchoolsPage() {
 
             {/* Recommendation */}
             {debrief.recommendation && (
-              <div className="bg-teal-50 border border-teal-100 rounded-xl p-5">
-                <h3 className="text-sm font-semibold text-teal-700 uppercase tracking-wide mb-2">Recommendation</h3>
-                <p className="text-sm text-teal-800 leading-relaxed">{debrief.recommendation}</p>
+              <div className="bg-warm-50 border border-warm-200 rounded-xl p-5">
+                <h3 className="text-sm font-semibold text-warm-700 uppercase tracking-wide mb-2">Recommendation</h3>
+                <p className="text-sm text-warm-800 leading-relaxed">{debrief.recommendation}</p>
               </div>
             )}
           </div>

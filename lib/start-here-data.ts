@@ -270,7 +270,7 @@ export const RHYTHM_CATEGORIES: RhythmCategory[] = [
     id: 'daily',
     label: 'Daily',
     icon: '☀️',
-    color: 'teal',
+    color: 'warm',
     items: [
       {
         action: 'Log one observation',

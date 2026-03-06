@@ -263,7 +263,7 @@ export default function JourneyPage() {
                 onClick={() => setSelectedChildId(child.id)}
                 className={`px-3 py-1.5 text-sm rounded-lg transition ${
                   selectedChildId === child.id
-                    ? 'bg-teal-500 text-white'
+                    ? 'bg-warm-500 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -279,7 +279,7 @@ export default function JourneyPage() {
       ) : stats && selectedChild ? (
         <>
           {/* Child journey header */}
-          <div className="bg-gradient-to-r from-navy-600 to-teal-600 rounded-2xl p-6 text-white mb-6">
+          <div className="bg-gradient-to-r from-navy-700 to-navy-500 rounded-2xl p-6 text-white mb-6">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-lg font-bold">{selectedChild.name}&apos;s Journey</h2>
@@ -364,8 +364,8 @@ export default function JourneyPage() {
               <div className="space-y-2">
                 {stats.growthMoments.map((moment, i) => (
                   <div key={i} className="flex items-start gap-3 p-3 bg-white border border-gray-100 rounded-xl">
-                    <div className="w-8 h-8 rounded-full bg-teal-50 flex items-center justify-center shrink-0">
-                      <span className="text-teal-500 text-sm">🌱</span>
+                    <div className="w-8 h-8 rounded-full bg-warm-50 flex items-center justify-center shrink-0">
+                      <span className="text-warm-600 text-sm">🌱</span>
                     </div>
                     <p className="text-sm text-gray-700 leading-relaxed pt-1">{moment}</p>
                   </div>
@@ -384,7 +384,7 @@ export default function JourneyPage() {
                     <div key={i} className="flex-1 flex flex-col items-center gap-1">
                       <div className="text-xs text-gray-500 font-medium">{m.count}</div>
                       <div
-                        className="w-full bg-teal-400 rounded-t-lg transition-all duration-500"
+                        className="w-full bg-warm-400 rounded-t-lg transition-all duration-500"
                         style={{ height: `${(m.count / maxBarHeight) * 100}%`, minHeight: m.count > 0 ? '4px' : '0' }}
                       />
                       <div className="text-[10px] text-gray-400">
@@ -395,7 +395,7 @@ export default function JourneyPage() {
                 </div>
                 {stats.longestStreak > 1 && (
                   <div className="mt-3 pt-3 border-t border-gray-50 text-xs text-gray-400">
-                    Longest observation streak: <span className="text-teal-600 font-medium">{stats.longestStreak} days</span>
+                    Longest observation streak: <span className="text-warm-700 font-medium">{stats.longestStreak} days</span>
                   </div>
                 )}
               </div>
@@ -420,7 +420,7 @@ export default function JourneyPage() {
                           </div>
                           <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-teal-400 rounded-full"
+                              className="h-full bg-warm-400 rounded-full"
                               style={{ width: `${(a.count / maxCount) * 100}%` }}
                             />
                           </div>
@@ -465,11 +465,11 @@ export default function JourneyPage() {
               <div className="bg-white border border-gray-100 rounded-xl p-5">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-gray-600">{stats.milestonesAchieved} of {stats.totalMilestones}</span>
-                  <span className="text-sm text-teal-600 font-medium">{Math.round((stats.milestonesAchieved / stats.totalMilestones) * 100)}%</span>
+                  <span className="text-sm text-warm-700 font-medium">{Math.round((stats.milestonesAchieved / stats.totalMilestones) * 100)}%</span>
                 </div>
                 <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-teal-400 to-teal-500 rounded-full transition-all duration-700"
+                    className="h-full bg-gradient-to-r from-warm-400 to-warm-500 rounded-full transition-all duration-700"
                     style={{ width: `${(stats.milestonesAchieved / stats.totalMilestones) * 100}%` }}
                   />
                 </div>
@@ -487,12 +487,12 @@ export default function JourneyPage() {
               <div className="bg-white border border-gray-100 rounded-xl p-5">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-gray-600">{stats.skillsMastered} mastered · {stats.skillsInProgress} in progress</span>
-                  <span className="text-sm text-teal-600 font-medium">{Math.round((stats.skillsMastered / 2566) * 100)}%</span>
+                  <span className="text-sm text-warm-700 font-medium">{Math.round((stats.skillsMastered / 2566) * 100)}%</span>
                 </div>
                 <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
                   <div className="h-full flex">
                     <div
-                      className="bg-gradient-to-r from-teal-400 to-teal-500 rounded-l-full transition-all duration-700"
+                      className="bg-gradient-to-r from-warm-400 to-warm-500 rounded-l-full transition-all duration-700"
                       style={{ width: `${(stats.skillsMastered / 2566) * 100}%` }}
                     />
                     <div
@@ -502,7 +502,7 @@ export default function JourneyPage() {
                   </div>
                 </div>
                 <p className="text-xs text-gray-400 mt-2">
-                  Out of 2,566 skills in the Montessori scope &amp; sequence. Track progress in the <a href="/dashboard/curriculum" className="text-teal-500 hover:underline">Curriculum Guide</a>.
+                  Out of 2,566 skills in the Montessori scope &amp; sequence. Track progress in the <a href="/dashboard/curriculum" className="text-warm-600 hover:underline">Curriculum Guide</a>.
                 </p>
               </div>
             </div>
@@ -512,7 +512,7 @@ export default function JourneyPage() {
           {seasonPrompt && (
             <div className="mb-6">
               <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Seasonal Reflection</h3>
-              <div className="bg-gradient-to-br from-white to-teal-50 border border-teal-100 rounded-xl p-5">
+              <div className="bg-gradient-to-br from-white to-warm-50 border border-warm-200 rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-lg">{currentQuarter === 1 ? '❄️' : currentQuarter === 2 ? '🌸' : currentQuarter === 3 ? '☀️' : '🍂'}</span>
                   <h4 className="font-semibold text-navy-600">{seasonPrompt.title}</h4>

@@ -104,8 +104,8 @@ export default function ReportsPage() {
 
   const levelBarWidth = (level: number) => `${(level / 5) * 100}%`
   const levelColor = (level: number) => {
-    if (level >= 4) return 'bg-teal-500'
-    if (level >= 3) return 'bg-teal-400'
+    if (level >= 4) return 'bg-warm-500'
+    if (level >= 3) return 'bg-warm-400'
     if (level >= 2) return 'bg-warm-400'
     return 'bg-gray-300'
   }
@@ -134,7 +134,7 @@ export default function ReportsPage() {
                       onClick={() => { setSelectedChildId(child.id); setReportData(null) }}
                       className={`px-3 py-1.5 text-sm rounded-lg transition ${
                         selectedChildId === child.id
-                          ? 'bg-teal-500 text-white'
+                          ? 'bg-warm-500 text-white'
                           : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                       }`}
                     >
@@ -155,7 +155,7 @@ export default function ReportsPage() {
                     onClick={() => setReportType(rt.value)}
                     className={`w-full text-left p-3 rounded-lg border transition ${
                       reportType === rt.value
-                        ? 'border-teal-500 bg-teal-50'
+                        ? 'border-warm-500 bg-warm-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
@@ -174,7 +174,7 @@ export default function ReportsPage() {
                   type="date"
                   value={dateStart}
                   onChange={e => setDateStart(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                 />
               </div>
               <div>
@@ -183,7 +183,7 @@ export default function ReportsPage() {
                   type="date"
                   value={dateEnd}
                   onChange={e => setDateEnd(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                 />
               </div>
             </div>
@@ -191,7 +191,7 @@ export default function ReportsPage() {
             <button
               onClick={handleGenerate}
               disabled={!selectedChildId || generating}
-              className="w-full py-2.5 bg-teal-500 hover:bg-teal-600 text-white font-medium rounded-lg transition disabled:opacity-40"
+              className="w-full py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-40"
             >
               {generating ? 'Generating report...' : 'Generate Report'}
             </button>
@@ -219,10 +219,10 @@ export default function ReportsPage() {
           <div ref={printRef} className="bg-white border border-gray-100 rounded-xl overflow-hidden print:border-none print:rounded-none print:shadow-none">
 
             {/* Report header */}
-            <div className="bg-gradient-to-r from-navy-600 to-teal-600 text-white p-6 print:p-8">
+            <div className="bg-gradient-to-r from-navy-700 to-navy-500 text-white p-6 print:p-8">
               <div className="flex items-start justify-between">
                 <div>
-                  <div className="text-xs font-medium text-teal-200 uppercase tracking-widest mb-1">Montessori Navigator</div>
+                  <div className="text-xs font-medium text-warm-100 uppercase tracking-widest mb-1">Montessori Navigator</div>
                   <h2 className="text-xl font-bold mb-1">{reportData.report.title}</h2>
                   <div className="text-sm text-white/70">
                     {reportData.childName} · {reportData.childAge} · {reportData.agePlane}
@@ -300,7 +300,7 @@ export default function ReportsPage() {
                   <div className="space-y-1.5">
                     {reportData.report.strengths.map((s, i) => (
                       <div key={i} className="flex gap-2 text-sm text-gray-700">
-                        <span className="text-teal-500 shrink-0">✦</span>
+                        <span className="text-warm-600 shrink-0">✦</span>
                         <span>{s}</span>
                       </div>
                     ))}

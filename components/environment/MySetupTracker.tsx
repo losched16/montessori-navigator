@@ -105,9 +105,9 @@ export default function MySetupTracker({ room, parentId }: Props) {
               <label className="block text-sm font-medium text-gray-700 mb-2">Materials on hand</label>
               <div className="flex flex-wrap gap-1.5 mb-2">
                 {materials.map(m => (
-                  <span key={m} className="inline-flex items-center gap-1 px-2 py-1 bg-teal-50 text-teal-700 text-xs rounded-full">
+                  <span key={m} className="inline-flex items-center gap-1 px-2 py-1 bg-warm-50 text-warm-700 text-xs rounded-full">
                     {m}
-                    <button onClick={() => removeMaterial(m)} className="text-teal-400 hover:text-teal-600">✕</button>
+                    <button onClick={() => removeMaterial(m)} className="text-warm-400 hover:text-warm-600">✕</button>
                   </span>
                 ))}
               </div>
@@ -117,7 +117,7 @@ export default function MySetupTracker({ room, parentId }: Props) {
                   value={newMaterial}
                   onChange={e => setNewMaterial(e.target.value)}
                   onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addMaterial(newMaterial) } }}
-                  className="flex-1 px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                  className="flex-1 px-3 py-1.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                   placeholder="Add a material..."
                 />
                 <button
@@ -138,7 +138,7 @@ export default function MySetupTracker({ room, parentId }: Props) {
                   <button
                     key={s}
                     onClick={() => addMaterial(s)}
-                    className="px-2 py-0.5 text-xs border border-gray-200 rounded-full text-gray-500 hover:border-teal-300 hover:text-teal-600 transition"
+                    className="px-2 py-0.5 text-xs border border-gray-200 rounded-full text-gray-500 hover:border-warm-300 hover:text-warm-600 transition"
                   >
                     + {s}
                   </button>
@@ -152,7 +152,7 @@ export default function MySetupTracker({ room, parentId }: Props) {
               <textarea
                 value={roomNotes}
                 onChange={e => setRoomNotes(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                 rows={2}
                 placeholder="Any notes about this space..."
               />
@@ -162,7 +162,7 @@ export default function MySetupTracker({ room, parentId }: Props) {
               <button
                 onClick={saveRoom}
                 disabled={saving}
-                className="px-4 py-1.5 bg-teal-500 hover:bg-teal-600 text-white text-sm rounded-lg transition disabled:opacity-40"
+                className="px-4 py-1.5 bg-warm-500 hover:bg-warm-600 text-white text-sm rounded-lg transition disabled:opacity-40"
               >
                 {saving ? 'Saving...' : 'Save'}
               </button>

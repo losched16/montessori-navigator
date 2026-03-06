@@ -268,8 +268,8 @@ export default function AssessmentPage() {
   }
 
   const alignmentColors: Record<string, string> = {
-    strong: 'from-teal-500 to-teal-600',
-    good: 'from-blue-500 to-teal-500',
+    strong: 'from-navy-600 to-navy-700',
+    good: 'from-blue-500 to-warm-500',
     moderate: 'from-violet-500 to-blue-500',
     exploring: 'from-purple-500 to-violet-500',
   }
@@ -281,7 +281,7 @@ export default function AssessmentPage() {
   }
 
   const statusColors: Record<string, string> = {
-    strength: 'text-teal-600 bg-teal-50',
+    strength: 'text-warm-700 bg-warm-50',
     developing: 'text-blue-600 bg-blue-50',
     opportunity: 'text-violet-600 bg-violet-50',
   }
@@ -331,7 +331,7 @@ export default function AssessmentPage() {
               <div className="space-y-2">
                 {result.top_strengths.map((s, i) => (
                   <div key={i} className="flex items-start gap-2.5">
-                    <span className="text-teal-500 mt-0.5">✦</span>
+                    <span className="text-warm-600 mt-0.5">✦</span>
                     <span className="text-sm text-gray-700 leading-relaxed">{s}</span>
                   </div>
                 ))}
@@ -395,7 +395,7 @@ export default function AssessmentPage() {
                 ].map((section, si) => (
                   <div key={si} className="bg-white border border-gray-100 rounded-xl p-6 mb-4">
                     <h3 className="text-sm font-semibold text-[#1a0e2e] uppercase tracking-wide mb-3">
-                      {section.title}: <span className="text-teal-600">{section.data.score_label}</span>
+                      {section.title}: <span className="text-warm-700">{section.data.score_label}</span>
                     </h3>
                     <div className="space-y-3">
                       {section.data.factors.map((f, fi) => (
