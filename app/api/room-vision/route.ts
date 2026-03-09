@@ -132,13 +132,22 @@ export async function POST(request: NextRequest) {
             prompt: generationPrompt,
             n: 1,
             size: '1024x1024',
-            quality: 'high',
-          })
+            quality: 'medium',
+          } as any)
 
-          // gpt-image-1 returns b64_json by default
-          const generatedB64 = imageResponse.data?.[0]?.b64_json
-          if (generatedB64) {
-            const genBuffer = Buffer.from(generatedB64, 'base64')
+          const responseData = imageResponse.data?.[0]
+          let genBuffer: Buffer | null = null
+
+          if (responseData?.b64_json) {
+            genBuffer = Buffer.from(responseData.b64_json, 'base64')
+          } else if (responseData?.url) {
+            // If returned as URL, fetch the image bytes
+            const imgFetch = await fetch(responseData.url)
+            const arrayBuf = await imgFetch.arrayBuffer()
+            genBuffer = Buffer.from(arrayBuf)
+          }
+
+          if (genBuffer) {
             generatedImagePath = `${parent.id}/${vision.id}/generated.png`
 
             const { error: genUploadError } = await supabase.storage
@@ -152,9 +161,11 @@ export async function POST(request: NextRequest) {
               console.error('Generated image upload error:', genUploadError)
               generatedImagePath = null
             }
+          } else {
+            console.error('No image data in OpenAI response:', JSON.stringify(imageResponse.data?.[0] || {}).substring(0, 200))
           }
-        } catch (genError) {
-          console.error('Image generation error:', genError)
+        } catch (genError: any) {
+          console.error('Image generation error:', genError?.message || genError)
           // Graceful degradation — still return analysis without generated image
         }
 
@@ -210,8 +221,10 @@ export async function POST(request: NextRequest) {
           })
           .eq('id', vision.id)
 
+        const errMsg = error.message || 'Unknown error'
+        console.error('Full error details:', errMsg)
         return NextResponse.json(
-          { error: 'Failed to generate room vision. Please try again.' },
+          { error: `Room vision failed: ${errMsg.substring(0, 200)}` },
           { status: 500 }
         )
       }
@@ -265,6 +278,49 @@ export async function POST(request: NextRequest) {
       )
 
       return NextResponse.json({ visions: visionsWithUrls })
+    }
+
+    // =============================================
+    // ACTION: Delete a vision
+    // =============================================
+    if (action === 'delete') {
+      const { visionId } = body
+
+      if (!visionId) {
+        return NextResponse.json({ error: 'Missing visionId' }, { status: 400 })
+      }
+
+      // Verify ownership
+      const { data: vision } = await supabase
+        .from('room_visions')
+        .select('id, parent_id, original_image_path, generated_image_path')
+        .eq('id', visionId)
+        .eq('parent_id', parent.id)
+        .single()
+
+      if (!vision) {
+        return NextResponse.json({ error: 'Vision not found' }, { status: 404 })
+      }
+
+      // Delete images from storage
+      const pathsToDelete: string[] = []
+      if (vision.original_image_path) pathsToDelete.push(vision.original_image_path)
+      if (vision.generated_image_path) pathsToDelete.push(vision.generated_image_path)
+
+      if (pathsToDelete.length > 0) {
+        await supabase.storage
+          .from('room-vision-images')
+          .remove(pathsToDelete)
+      }
+
+      // Delete DB record
+      await supabase
+        .from('room_visions')
+        .delete()
+        .eq('id', visionId)
+        .eq('parent_id', parent.id)
+
+      return NextResponse.json({ success: true })
     }
 
     return NextResponse.json({ error: 'Unknown action' }, { status: 400 })

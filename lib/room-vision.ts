@@ -228,7 +228,7 @@ Analyze the photo carefully and return a JSON response with this exact structure
       "estimated_cost": "free OR $ OR $$ OR $$$"
     }
   ],
-  "transformation_description": "Write a highly detailed, vivid description (200-300 words) of how this EXACT room would look after a full Montessori transformation. Keep the room's actual dimensions, architectural features (windows, doors, wall positions), and flooring. Describe every change: what furniture stays/goes, what's added, exact placement of Montessori elements, colors, materials (natural wood, cotton, linen), lighting, wall art positioning. This description will be used to generate a photorealistic image, so be extremely specific about spatial layout, perspectives, and visual details. Include Montessori-specific items appropriate for ${ageDesc}."
+  "transformation_description": "Write a highly detailed, vivid description (200-300 words) of how this EXACT room would look after a Montessori transformation. CRITICAL: The room's physical structure MUST remain EXACTLY the same — same walls, same windows in the same positions, same doors, same floor, same ceiling, same room shape and dimensions, same architectural features, same paint color or wall treatment. You are ONLY replacing or adding furniture, toys, and Montessori materials WITHIN the existing room structure. Describe precisely which existing furniture pieces are removed and what Montessori-appropriate items replace them in those same locations. Describe what new Montessori elements are added and where they are placed relative to the existing walls, windows, and doors. Be extremely specific about spatial layout using the room's actual features as reference points (e.g., 'against the left wall below the window', 'in the corner near the door'). Include natural materials (wood, cotton, linen), specific Montessori items appropriate for ${ageDesc}, and warm styling details. This description will be used to generate a photorealistic image of THIS SAME ROOM with Montessori furnishings — the room structure must be unmistakably the same room."
 }
 
 MONTESSORI ENVIRONMENT PRINCIPLES FOR ${roomLabel.toUpperCase()}:
@@ -285,23 +285,24 @@ export function buildImagePrompt(
   const roomLabel = ROOM_LABELS[room] || 'room'
   const ageDesc = agePlane ? AGE_DESCRIPTIONS[agePlane] || 'a child' : 'a child'
 
-  return `A professional interior design photograph of a beautiful Montessori-inspired ${roomLabel} designed for ${ageDesc}. The image should look like it belongs in an interior design magazine.
+  return `A professional interior design photograph showing THIS EXACT SAME ROOM transformed into a Montessori-inspired ${roomLabel} for ${ageDesc}.
 
-ROOM TRANSFORMATION:
+CRITICAL REQUIREMENT — PRESERVE THE ROOM STRUCTURE EXACTLY:
+The room's walls, windows, doors, floor, ceiling, room shape, and architectural features must remain EXACTLY as they are. Do NOT change the room layout, wall positions, window positions, door positions, or any structural element. The room must be unmistakably the SAME physical space — only the furniture, decor, toys, and materials inside it should change to Montessori-appropriate items.
+
+WHAT TO CHANGE (WITHIN THE SAME ROOM):
 ${analysis.transformation_description}
 
 STYLE REQUIREMENTS:
-- Photorealistic, high-quality interior design photography
-- Warm, inviting, and child-friendly atmosphere
-- Natural materials throughout: light wood furniture, cotton textiles, linen, wool rugs
-- Warm neutral color palette (soft whites, creams, natural wood tones) with gentle accent colors
-- Beautiful natural light streaming in
+- Photorealistic interior design photography of this same room
+- Same room structure, same viewing angle, same architectural features
+- Natural materials: light wood furniture, cotton textiles, linen, wool rugs
+- Warm neutral palette (soft whites, creams, natural wood) with gentle accents
+- Beautiful natural light from the existing windows
 - Scandinavian-Montessori aesthetic — clean, minimal, purposeful
-- Low furniture at child height — everything accessible and inviting
+- Low child-height furniture — accessible and inviting
 - Organized and uncluttered — everything has its place
 - A few green plants and natural elements
-- Wide-angle interior photography perspective
-- Soft, warm lighting
 
-IMPORTANT: This should look like a real, lived-in home — warm and welcoming, not a sterile showroom. Include subtle signs of life like a small plant, a folded blanket, or neatly arranged materials on a shelf.`
+IMPORTANT: Keep the room recognizable as the same physical space. Only the furniture and materials inside should be different — Montessori-appropriate items placed within the existing room structure. This should look like a real, lived-in home — warm and welcoming, not a sterile showroom.`
 }

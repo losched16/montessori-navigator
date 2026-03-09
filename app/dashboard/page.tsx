@@ -193,7 +193,7 @@ export default function DashboardHome() {
   const getNextAction = () => {
     if (children.length === 0) return { href: '/dashboard/settings', label: 'Add your first child', desc: 'Set up your family to get started', icon: '🌱' }
     if (totalObs === 0) return { href: '/dashboard/children', label: 'Log your first observation', desc: 'Start building your child\'s developmental picture', icon: '📓' }
-    if (planCount === 0) return { href: '/dashboard/plans', label: 'Generate a learning plan', desc: 'Get personalized activity recommendations', icon: '📋' }
+    if (planCount === 0) return { href: '/dashboard/plans', label: 'Create an at-home learning plan', desc: 'Get personalized activity recommendations', icon: '📋' }
     if (milestoneCount === 0) return { href: '/dashboard/milestones', label: 'Set up milestones', desc: 'Track developmental achievements', icon: '⭐' }
     if (daysSinceObs && daysSinceObs > 3) return { href: '/dashboard/children', label: 'Log an observation', desc: `It's been ${daysSinceObs} days — what did you notice?`, icon: '👀' }
     return { href: '/dashboard/chat', label: 'Ask the guide a question', desc: 'Get personalized Montessori guidance', icon: '💬' }
@@ -262,7 +262,7 @@ export default function DashboardHome() {
       <div className="grid grid-cols-3 gap-2 mb-6">
         {[
           { href: '/dashboard/chat', icon: '💬', label: 'Ask Guide' },
-          { href: '/dashboard/plans', icon: '📋', label: 'New Plan' },
+          { href: '/dashboard/plans', icon: '📋', label: 'At-Home Plan' },
           { href: '/dashboard/children', icon: '📓', label: 'Observe' },
         ].map(a => (
           <Link key={a.href} href={a.href} className="p-3 bg-white border border-gray-100 rounded-xl hover:border-warm-300 transition text-center group">
@@ -399,7 +399,7 @@ export default function DashboardHome() {
             { value: totalObs, label: 'Observations', href: '/dashboard/children' },
             { value: milestoneCount, label: 'Milestones', href: '/dashboard/milestones' },
             { value: skillCount, label: 'Skills', href: '/dashboard/curriculum' },
-            { value: planCount, label: 'Plans', href: '/dashboard/plans' },
+            { value: planCount, label: 'At-Home Plans', href: '/dashboard/plans' },
             { value: threadCount, label: 'Chats', href: '/dashboard/chat' },
           ].map(s => (
             <Link key={s.label} href={s.href} className="p-3 bg-white border border-gray-100 rounded-xl text-center hover:border-warm-300 transition">

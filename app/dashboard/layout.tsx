@@ -53,7 +53,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
       { href: '/dashboard/milestones', label: 'Milestones', icon: '⭐' },
       { href: '/dashboard/curriculum', label: 'Montessori Learning Journey', icon: '🎯' },
     ]},
-    { href: '/dashboard/plans', label: 'Plans', icon: '📋' },
+    { href: '/dashboard/plans', label: 'At-Home Learning', icon: '📋' },
     { href: '/dashboard/reports', label: 'Reports', icon: '📊' },
     { href: '/dashboard/schools', label: 'Schools', icon: '🏫' },
     { href: '/dashboard/memories', label: 'Memories', icon: '💭' },

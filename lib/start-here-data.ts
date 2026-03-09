@@ -118,9 +118,9 @@ export const START_HERE_FEATURES: StartHereFeature[] = [
   {
     id: 'plans',
     icon: '📋',
-    label: 'Plans',
+    label: 'At-Home Learning',
     href: '/dashboard/plans',
-    tagline: 'AI-generated learning plans tailored to your child.',
+    tagline: 'AI-generated learning plans for home — whether homeschooling or reinforcing school.',
     whatYouCanDo: [
       'Generate Daily, Weekly, Focus, or Catch-Up plans',
       'Get detailed activities with materials, presentation steps, and observation prompts',
@@ -296,7 +296,7 @@ export const RHYTHM_CATEGORIES: RhythmCategory[] = [
     items: [
       {
         action: 'Generate a new learning plan',
-        feature: 'Plans',
+        feature: 'At-Home Learning',
         href: '/dashboard/plans',
         icon: '📋',
         whyItMatters: 'Fresh plans keep activities aligned with your child\'s current interests and development.',

@@ -71,6 +71,7 @@ export default function RoomVision({
   const [error, setError] = useState<string | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [loadingTip, setLoadingTip] = useState(0)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const roomLabel = ROOM_LABELS[room] || 'Room'
@@ -218,6 +219,30 @@ export default function RoomVision({
       setError(msg)
       setState('error')
     }
+  }
+
+  const handleDelete = async (visionId: string) => {
+    if (!confirm('Delete this vision? This cannot be undone.')) return
+    setDeletingId(visionId)
+    try {
+      const res = await fetch('/api/room-vision', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete', visionId }),
+      })
+      if (res.ok) {
+        setPreviousVisions(prev => prev.filter(v => v.id !== visionId))
+        // If we were viewing the deleted one, clear the view
+        if (displayVision?.id === visionId) {
+          setCurrentVision(null)
+          setViewingVision(null)
+          setState('idle')
+        }
+      }
+    } catch (e) {
+      console.error('Failed to delete vision:', e)
+    }
+    setDeletingId(null)
   }
 
   const handleDrop = (e: React.DragEvent) => {
@@ -404,7 +429,16 @@ export default function RoomVision({
                     }}
                     className="flex-1 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
                   >
-                    📷 Upload Another Photo ({remaining} left)
+                    📷 Try New Photo
+                  </button>
+                )}
+                {displayVision && (
+                  <button
+                    onClick={() => handleDelete(displayVision.id)}
+                    disabled={deletingId === displayVision.id}
+                    className="px-4 py-2 bg-white border border-red-200 text-red-500 hover:bg-red-50 hover:border-red-300 text-sm font-medium rounded-lg transition disabled:opacity-50"
+                  >
+                    {deletingId === displayVision.id ? '...' : '🗑 Delete'}
                   </button>
                 )}
               </div>
@@ -419,42 +453,51 @@ export default function RoomVision({
               </h4>
               <div className="flex gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
                 {previousVisions.map((v) => (
-                  <button
-                    key={v.id}
-                    onClick={() => {
-                      setViewingVision(v)
-                      setCurrentVision(null)
-                      setState('complete')
-                    }}
-                    className={`shrink-0 rounded-lg overflow-hidden border-2 transition ${
-                      displayVision?.id === v.id
-                        ? 'border-warm-500 shadow-md'
-                        : 'border-gray-200 hover:border-warm-300'
-                    }`}
-                  >
-                    {v.generatedImageUrl ? (
-                      <img
-                        src={v.generatedImageUrl}
-                        alt="Previous vision"
-                        className="w-20 h-20 object-cover"
-                      />
-                    ) : v.originalImageUrl ? (
-                      <img
-                        src={v.originalImageUrl}
-                        alt="Previous upload"
-                        className="w-20 h-20 object-cover"
-                      />
-                    ) : (
-                      <div className="w-20 h-20 bg-gray-100 flex items-center justify-center text-xs text-gray-400">
-                        No image
+                  <div key={v.id} className="shrink-0 relative group">
+                    <button
+                      onClick={() => {
+                        setViewingVision(v)
+                        setCurrentVision(null)
+                        setState('complete')
+                      }}
+                      className={`rounded-lg overflow-hidden border-2 transition ${
+                        displayVision?.id === v.id
+                          ? 'border-warm-500 shadow-md'
+                          : 'border-gray-200 hover:border-warm-300'
+                      }`}
+                    >
+                      {v.generatedImageUrl ? (
+                        <img
+                          src={v.generatedImageUrl}
+                          alt="Previous vision"
+                          className="w-20 h-20 object-cover"
+                        />
+                      ) : v.originalImageUrl ? (
+                        <img
+                          src={v.originalImageUrl}
+                          alt="Previous upload"
+                          className="w-20 h-20 object-cover"
+                        />
+                      ) : (
+                        <div className="w-20 h-20 bg-gray-100 flex items-center justify-center text-xs text-gray-400">
+                          No image
+                        </div>
+                      )}
+                      <div className="px-1.5 py-1 text-center">
+                        <p className="text-[9px] text-gray-400">
+                          {new Date(v.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        </p>
                       </div>
-                    )}
-                    <div className="px-1.5 py-1 text-center">
-                      <p className="text-[9px] text-gray-400">
-                        {new Date(v.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                      </p>
-                    </div>
-                  </button>
+                    </button>
+                    {/* Delete button on hover */}
+                    <button
+                      onClick={(e) => { e.stopPropagation(); handleDelete(v.id) }}
+                      className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-red-600 shadow-sm"
+                      title="Delete vision"
+                    >
+                      ✕
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>
