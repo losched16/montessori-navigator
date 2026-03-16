@@ -11,7 +11,7 @@ interface PageBannerProps {
 export default function PageBanner({ image, title, subtitle, objectPosition = 'center' }: PageBannerProps) {
   return (
     <div className="relative -mx-4 sm:-mx-6 -mt-4 sm:-mt-6 mb-6 overflow-hidden rounded-b-2xl sm:rounded-b-3xl">
-      <div className="relative h-36 sm:h-44">
+      <div className="relative h-44 sm:h-56">
         <Image
           src={image}
           alt=""
@@ -20,13 +20,12 @@ export default function PageBanner({ image, title, subtitle, objectPosition = 'c
           style={{ objectPosition }}
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-800/40 via-navy-800/30 to-[#fafaf8]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-800/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-[#fafaf8]" />
       </div>
-      <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 pb-4">
-        <h1 className="text-2xl font-bold text-navy-700">{title}</h1>
+      <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 pb-4" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.15)' }}>
+        <h1 className="text-2xl font-bold text-white">{title}</h1>
         {subtitle && (
-          <p className="text-navy-600/60 mt-0.5 text-sm">{subtitle}</p>
+          <p className="text-white/70 mt-0.5 text-sm">{subtitle}</p>
         )}
       </div>
     </div>
