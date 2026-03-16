@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase'
 import type { Child, Observation } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel, getObservationTypeLabel, getCurriculumAreaLabel, getDevelopmentLevelLabel } from '@/lib/utils'
@@ -204,12 +205,27 @@ export default function DashboardHome() {
 
   return (
     <div className="max-w-3xl pb-20 sm:pb-0">
-      {/* Greeting */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy-600">{greeting()}, {parentName}</h1>
-        <p className="text-gray-500 mt-0.5 text-sm">
-          {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
-        </p>
+      {/* Hero Banner */}
+      <div className="relative -mx-4 sm:-mx-6 -mt-4 sm:-mt-6 mb-6 overflow-hidden rounded-b-2xl sm:rounded-b-3xl">
+        <div className="relative h-40 sm:h-48">
+          <Image
+            src="/images/environment/girl-reading.jpg"
+            alt=""
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Warm overlay that blends into page */}
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-800/40 via-navy-800/30 to-[#fafaf8]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-800/20 to-transparent" />
+        </div>
+        {/* Greeting overlaid at bottom of banner */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 pb-4">
+          <h1 className="text-2xl font-bold text-navy-700">{greeting()}, {parentName}</h1>
+          <p className="text-navy-600/60 mt-0.5 text-sm">
+            {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+          </p>
+        </div>
       </div>
 
       {/* ═══ New user welcome ═══ */}
