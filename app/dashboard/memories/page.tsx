@@ -60,7 +60,7 @@ export default function MemoriesPage() {
       <PageBanner
         image="/images/environment/reading-nook.jpg"
         title="Saved Memories"
-        subtitle="Guidance from your Montessori Guide, saved for reference"
+        subtitle="Guidance from Abigail, saved for reference"
       />
 
       {memories.length === 0 ? (
@@ -68,7 +68,7 @@ export default function MemoriesPage() {
           <div className="text-3xl mb-3">💭</div>
           <h3 className="font-medium text-navy-600 mb-1">No saved memories yet</h3>
           <p className="text-sm text-gray-500 max-w-sm mx-auto">
-            When your Montessori Guide gives you advice you want to keep, tap the star icon on the message to save it here.
+            When Abigail gives you advice you want to keep, tap the star icon on the message to save it here.
           </p>
         </div>
       ) : (

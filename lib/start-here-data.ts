@@ -47,7 +47,7 @@ export const DAY1_ACTIONS: Day1Action[] = [
     id: 'add-child',
     step: 1,
     title: 'Add your child\'s profile',
-    description: 'Set their name, birthday, and learning environment so the AI guide can personalize everything to your child\'s age and stage.',
+    description: 'Set their name, birthday, and learning environment so Abigail can personalize everything to your child\'s age and stage.',
     href: '/dashboard/children',
     icon: '🌱',
     estimatedMinutes: 3,

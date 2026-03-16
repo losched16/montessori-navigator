@@ -244,9 +244,9 @@ export default function ChatPage() {
           {messages.length === 0 && !loading && (
             <div className="flex flex-col items-center justify-center h-full text-center px-4">
               <div className="text-4xl mb-3">🌿</div>
-              <h2 className="text-lg font-semibold text-navy-600 mb-1">Montessori Guide</h2>
+              <h2 className="text-lg font-semibold text-navy-600 mb-1">Abigail</h2>
               <p className="text-sm text-gray-500 mb-6 max-w-md">
-                Ask me anything about Montessori parenting, curriculum, child development, or setting up your home environment.
+                Your AI-powered Montessori guide. Ask me anything about parenting, curriculum, child development, or setting up your home environment.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-lg">
                 {suggestedQuestions.map((q, i) => (

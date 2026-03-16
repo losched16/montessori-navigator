@@ -413,7 +413,7 @@ export default function SettingsPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">How should the AI guide talk to you?</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">How should Abigail talk to you?</label>
               <div className="space-y-1.5">
                 {STYLE_OPTIONS.map(opt => (
                   <button
@@ -622,7 +622,7 @@ export default function SettingsPage() {
           <div className="bg-white border border-gray-100 rounded-xl p-6">
             <h2 className="font-semibold text-navy-600 mb-2">Your Privacy</h2>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Your data is stored securely with Supabase (PostgreSQL with row-level security). No other family can see your data. Your conversations with the AI guide are private. If your school uses Navigator, they see engagement metrics only — never your conversations, observations, or family details.
+              Your data is stored securely with Supabase (PostgreSQL with row-level security). No other family can see your data. Your conversations with Abigail are private. If your school uses Navigator, they see engagement metrics only — never your conversations, observations, or family details.
             </p>
           </div>
         </div>

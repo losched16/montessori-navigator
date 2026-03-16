@@ -146,8 +146,8 @@ export default function MarketingPage() {
             <div className="reveal grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-20">
               <div>
                 <div className="serif text-sm font-semibold text-[#8b9cf7] mb-3 tracking-wider">01</div>
-                <h3 className="serif text-[clamp(1.6rem,3vw,2.2rem)] font-medium text-[#1a0e2e] leading-[1.2] mb-4">Your personal Montessori guide</h3>
-                <p className="text-[0.95rem] text-[#5c4a7e] leading-relaxed mb-3">An AI assistant grounded in Foundation-approved principles that knows your family, your children, and your journey. Ask anything — from discipline approaches to curriculum questions.</p>
+                <h3 className="serif text-[clamp(1.6rem,3vw,2.2rem)] font-medium text-[#1a0e2e] leading-[1.2] mb-4">Meet Abigail, your Montessori guide</h3>
+                <p className="text-[0.95rem] text-[#5c4a7e] leading-relaxed mb-3">Abigail is your AI-powered Montessori guide, grounded in Foundation-approved principles. She knows your family, your children, and your journey. Ask anything — from discipline approaches to curriculum questions.</p>
                 <p className="text-[0.95rem] text-[#5c4a7e] leading-relaxed mb-4">It remembers your child&apos;s developmental stage, recent observations, and your parenting style. Every conversation builds on the last.</p>
                 <div className="flex flex-wrap gap-2">
                   {['Personalized', 'Philosophy-grounded', 'Memory-aware'].map(tag => (
@@ -248,7 +248,7 @@ export default function MarketingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { icon: '🏡', title: 'Homeschooling Families', desc: 'Your primary curriculum partner. Scope and sequence planning, daily learning plans, developmental tracking, and an AI guide that knows Montessori pedagogy inside and out.' },
+              { icon: '🏡', title: 'Homeschooling Families', desc: 'Your primary curriculum partner. Scope and sequence planning, daily learning plans, developmental tracking, and Abigail, your AI-powered Montessori guide who knows pedagogy inside and out.' },
               { icon: '🌿', title: 'Montessori School Parents', desc: "Extend the classroom home. Understand what your child is learning, support it with aligned activities, and speak the same language as your child's teachers." },
               { icon: '🔭', title: 'Montessori-Curious Families', desc: 'Exploring Montessori for the first time? Navigator meets you where you are — with school evaluation tools, gentle guidance, and a foundation of understanding.' },
             ].map((card, i) => (

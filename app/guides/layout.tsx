@@ -27,7 +27,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
           Ready for personalized guidance?
         </h2>
         <p className="text-white/50 text-sm max-w-md mx-auto mb-6">
-          Montessori Navigator gives you an AI guide that knows your child, your journey, and the Montessori philosophy inside and out.
+          Meet Abigail — your AI-powered Montessori guide who knows your child, your journey, and the philosophy inside and out.
         </p>
         <div className="flex gap-3 justify-center">
           <Link href="/assessment" className="px-5 py-2.5 bg-white/10 border border-white/20 text-white text-sm font-medium rounded-full hover:bg-white/20 transition">

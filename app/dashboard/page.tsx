@@ -217,7 +217,7 @@ export default function DashboardHome() {
           <div className="text-3xl mb-3">🌱</div>
           <h2 className="text-lg font-bold mb-1">Welcome to Navigator</h2>
           <p className="text-white/70 text-sm leading-relaxed mb-4">
-            Your Montessori journey starts here. Let&apos;s set up your family so the guide can give you personalized recommendations.
+            Your Montessori journey starts here. Let&apos;s set up your family so Abigail can give you personalized recommendations.
           </p>
           <Link href="/dashboard/settings" className="inline-block px-5 py-2 bg-white/20 hover:bg-white/30 text-white font-medium text-sm rounded-lg transition">
             Add Your First Child →

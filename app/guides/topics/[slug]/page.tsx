@@ -108,7 +108,7 @@ export default function TopicPage({ params }: { params: { slug: string } }) {
 
       <div className="mt-8 bg-gradient-to-r from-[#4a2c82] to-[#1a2d6d] rounded-xl p-6 text-center">
         <h3 className="text-white font-bold mb-1">Get personalized {page.topic.toLowerCase()} guidance</h3>
-        <p className="text-white/50 text-sm mb-3">Navigator&apos;s AI guide knows your child and gives specific, Montessori-grounded advice.</p>
+        <p className="text-white/50 text-sm mb-3">Abigail, your AI-powered Montessori guide, knows your child and gives specific, grounded advice.</p>
         <Link href="/auth/signup" className="inline-block px-5 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-full transition">
           Start Using Navigator →
         </Link>
