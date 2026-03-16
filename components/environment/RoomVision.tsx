@@ -452,51 +452,59 @@ export default function RoomVision({
               <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                 Previous Visions
               </h4>
-              <div className="flex gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
+              <div className="space-y-2">
                 {previousVisions.map((v) => (
-                  <div key={v.id} className="shrink-0 relative group">
-                    <button
-                      onClick={() => {
-                        setViewingVision(v)
-                        setCurrentVision(null)
-                        setState('complete')
-                      }}
-                      className={`rounded-lg overflow-hidden border-2 transition ${
-                        displayVision?.id === v.id
-                          ? 'border-warm-500 shadow-md'
-                          : 'border-gray-200 hover:border-warm-300'
-                      }`}
-                    >
+                  <div
+                    key={v.id}
+                    className={`flex items-center gap-3 p-2 rounded-xl border-2 transition cursor-pointer ${
+                      displayVision?.id === v.id
+                        ? 'border-warm-500 bg-warm-50/50 shadow-sm'
+                        : 'border-gray-100 bg-white hover:border-warm-200'
+                    }`}
+                    onClick={() => {
+                      setViewingVision(v)
+                      setCurrentVision(null)
+                      setState('complete')
+                    }}
+                  >
+                    {/* Thumbnail */}
+                    <div className="shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-gray-100">
                       {v.generatedImageUrl ? (
-                        <img
-                          src={v.generatedImageUrl}
-                          alt="Previous vision"
-                          className="w-20 h-20 object-cover"
-                        />
+                        <img src={v.generatedImageUrl} alt="Vision" className="w-full h-full object-cover" />
                       ) : v.originalImageUrl ? (
-                        <img
-                          src={v.originalImageUrl}
-                          alt="Previous upload"
-                          className="w-20 h-20 object-cover"
-                        />
+                        <img src={v.originalImageUrl} alt="Upload" className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-20 h-20 bg-gray-100 flex items-center justify-center text-xs text-gray-400">
-                          No image
-                        </div>
+                        <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">—</div>
                       )}
-                      <div className="px-1.5 py-1 text-center">
-                        <p className="text-[9px] text-gray-400">
-                          {new Date(v.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                        </p>
-                      </div>
-                    </button>
-                    {/* Delete button on hover */}
+                    </div>
+
+                    {/* Info */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-navy-700 truncate">
+                        {v.analysis?.room_description
+                          ? v.analysis.room_description.substring(0, 60) + (v.analysis.room_description.length > 60 ? '…' : '')
+                          : `${roomLabel} Vision`}
+                      </p>
+                      <p className="text-xs text-gray-400">
+                        {new Date(v.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        {v.analysis?.recommendations && ` · ${v.analysis.recommendations.length} tips`}
+                      </p>
+                    </div>
+
+                    {/* Delete button */}
                     <button
                       onClick={(e) => { e.stopPropagation(); handleDelete(v.id) }}
-                      className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition hover:bg-red-600 shadow-sm"
+                      disabled={deletingId === v.id}
+                      className="shrink-0 p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition"
                       title="Delete vision"
                     >
-                      ✕
+                      {deletingId === v.id ? (
+                        <span className="text-xs">…</span>
+                      ) : (
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      )}
                     </button>
                   </div>
                 ))}
