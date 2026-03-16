@@ -182,7 +182,8 @@ export default function RoomVision({
       setPreviewUrl(dataUrl)
 
       const base64Data = dataUrl.split(',')[1]
-      const mediaType = file.type === 'image/heic' ? 'image/jpeg' : file.type
+      // resizeImage always outputs JPEG via canvas.toDataURL, so mediaType is always image/jpeg
+      const mediaType = 'image/jpeg'
 
       // 90-second timeout for the full pipeline (Claude Vision + OpenAI generation)
       const controller = new AbortController()
