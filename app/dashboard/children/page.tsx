@@ -1,10 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase'
 import type { ChildDevelopmentLevel, Observation } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel, getDevelopmentLevelLabel, getCurriculumAreaLabel, getObservationTypeLabel } from '@/lib/utils'
 import { useChild } from '@/lib/child-context'
+import PageBanner from '@/components/ui/PageBanner'
 
 const CURRICULUM_AREAS = [
   'practical_life', 'sensorial', 'language', 'mathematics',
@@ -36,6 +38,8 @@ export default function ChildrenPage() {
   const [obsWentWell, setObsWentWell] = useState('')
   const [obsNeedsSupport, setObsNeedsSupport] = useState('')
   const [saving, setSaving] = useState(false)
+  const [uploadingPhoto, setUploadingPhoto] = useState(false)
+  const photoInputRef = useRef<HTMLInputElement>(null)
 
   const supabase = createClient()
 
@@ -62,6 +66,25 @@ export default function ChildrenPage() {
     }
     loadChild()
   }, [selectedChildId])
+
+  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !selectedChildId) return
+    setUploadingPhoto(true)
+    try {
+      const ext = file.name.split('.').pop()
+      const path = `child-photos/${selectedChildId}.${ext}`
+      await supabase.storage.from('uploads').upload(path, file, { upsert: true })
+      const { data: { publicUrl } } = supabase.storage.from('uploads').getPublicUrl(path)
+      await supabase.from('children').update({ profile_photo_url: publicUrl }).eq('id', selectedChildId)
+      // Update local state through child context refresh
+      window.location.reload()
+    } catch (err) {
+      console.error('Photo upload failed:', err)
+    } finally {
+      setUploadingPhoto(false)
+    }
+  }
 
   const updateLevel = async (area: string, level: number) => {
     if (!selectedChildId) return
@@ -107,40 +130,76 @@ export default function ChildrenPage() {
 
   return (
     <div className="max-w-3xl pb-20 sm:pb-0">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold text-navy-600">Children</h1>
-        {children.length > 1 && (
-          <div className="flex gap-1">
-            {children.map(child => (
-              <button
-                key={child.id}
-                onClick={() => setSelectedChildId(child.id)}
-                className={`px-3 py-1.5 text-sm rounded-lg transition ${
-                  selectedChildId === child.id
-                    ? 'bg-warm-500 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                {child.name}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+      <PageBanner
+        image="/images/environment/girl-painting.jpg"
+        title={selectedChild?.name || 'Children'}
+        subtitle={selectedChild ? `${formatAge(selectedChild.date_of_birth)} · ${getAgePlaneLabel(getAgePlane(selectedChild.date_of_birth))}` : undefined}
+        objectPosition="center top"
+      />
+
+      {/* Child selector tabs */}
+      {children.length > 1 && (
+        <div className="flex gap-1 mb-6">
+          {children.map(child => (
+            <button
+              key={child.id}
+              onClick={() => setSelectedChildId(child.id)}
+              className={`px-3 py-1.5 text-sm rounded-lg transition ${
+                selectedChildId === child.id
+                  ? 'bg-warm-500 text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {child.name}
+            </button>
+          ))}
+        </div>
+      )}
 
       {selectedChild && (
         <>
-          {/* Child header */}
+          {/* Child header with profile photo */}
           <div className="bg-white border border-gray-100 rounded-xl p-4 mb-6">
             <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-semibold text-navy-600">{selectedChild.name}</h2>
-                <p className="text-sm text-gray-500">
-                  {formatAge(selectedChild.date_of_birth)} · {getAgePlaneLabel(getAgePlane(selectedChild.date_of_birth))}
-                  {selectedChild.current_environment && (
-                    <span> · {selectedChild.current_environment.replace(/_/g, ' ')}</span>
+              <div className="flex items-center gap-3">
+                {/* Profile photo */}
+                <button
+                  onClick={() => photoInputRef.current?.click()}
+                  className="relative w-12 h-12 rounded-full overflow-hidden bg-warm-100 border-2 border-warm-200 hover:border-warm-400 transition shrink-0 group"
+                  title="Upload photo"
+                >
+                  {selectedChild.profile_photo_url ? (
+                    <Image src={selectedChild.profile_photo_url} alt={selectedChild.name} fill className="object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-warm-500 text-lg font-bold">
+                      {selectedChild.name.charAt(0).toUpperCase()}
+                    </div>
                   )}
-                </p>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition flex items-center justify-center">
+                    <span className="text-white text-xs opacity-0 group-hover:opacity-100 transition">+</span>
+                  </div>
+                  {uploadingPhoto && (
+                    <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-warm-500 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  )}
+                </button>
+                <input
+                  ref={photoInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handlePhotoUpload}
+                />
+                <div>
+                  <h2 className="text-lg font-semibold text-navy-600">{selectedChild.name}</h2>
+                  <p className="text-sm text-gray-500">
+                    {formatAge(selectedChild.date_of_birth)} · {getAgePlaneLabel(getAgePlane(selectedChild.date_of_birth))}
+                    {selectedChild.current_environment && (
+                      <span> · {selectedChild.current_environment.replace(/_/g, ' ')}</span>
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
 import { useChild } from '@/lib/child-context'
 import { getAgePlane, getAgePlaneLabel } from '@/lib/utils'
+import PageBanner from '@/components/ui/PageBanner'
 import { ROOM_GUIDES, getRoomGuidesForAge, type RoomType, type RoomGuide } from '@/lib/environment-guide'
 
 import RoomHero from '@/components/environment/RoomHero'
@@ -47,13 +48,11 @@ export default function EnvironmentPage() {
 
   return (
     <div className="max-w-3xl mx-auto pb-20 sm:pb-0">
-      {/* Header */}
-      <div className="mb-4">
-        <h1 className="text-2xl font-bold text-navy-600">Home Environment</h1>
-        <p className="text-gray-500 text-sm mt-1">
-          Design Montessori-friendly spaces that inspire independence and curiosity.
-        </p>
-      </div>
+      <PageBanner
+        image="/images/environment/living-room-setup.jpg"
+        title="Home Environment"
+        subtitle="Design spaces that inspire independence and curiosity"
+      />
 
       {/* Age filter badge */}
       {selectedChild && agePlane && (

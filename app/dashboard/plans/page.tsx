@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
 import type { Child, LearningPlan } from '@/lib/supabase'
 import { getCurriculumAreaLabel, formatAge } from '@/lib/utils'
+import PageBanner from '@/components/ui/PageBanner'
 
 const CURRICULUM_AREAS = [
   'practical_life', 'sensorial', 'language', 'mathematics',
@@ -197,8 +198,14 @@ export default function PlansPage() {
 
   return (
     <div className="max-w-3xl pb-20 sm:pb-0">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-bold text-navy-600">At-Home Learning</h1>
+      <PageBanner
+        image="/images/environment/girls-art.jpg"
+        title="At-Home Learning"
+        subtitle="Personalized Montessori activities for your family"
+        objectPosition="center top"
+      />
+
+      <div className="flex justify-end mb-4 -mt-2">
         <button
           onClick={() => { setShowGenerator(true); setViewingPlan(null) }}
           className="px-4 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"

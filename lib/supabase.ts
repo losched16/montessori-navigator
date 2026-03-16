@@ -34,6 +34,7 @@ export interface Child {
   current_environment: string | null
   school_name: string | null
   notes: string | null
+  profile_photo_url: string | null
   created_at: string
 }
 

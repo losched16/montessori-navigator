@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
 import type { SavedMemory } from '@/lib/supabase'
+import PageBanner from '@/components/ui/PageBanner'
 
 export default function MemoriesPage() {
   const [memories, setMemories] = useState<SavedMemory[]>([])
@@ -55,13 +56,12 @@ export default function MemoriesPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy-600">Saved Memories</h1>
-        <p className="text-gray-500 text-sm mt-1">
-          Responses from your Montessori Guide that you've chosen to save. The AI can see these memories to give you more personalized guidance.
-        </p>
-      </div>
+    <div className="max-w-3xl mx-auto pb-20 sm:pb-0">
+      <PageBanner
+        image="/images/environment/reading-nook.jpg"
+        title="Saved Memories"
+        subtitle="Guidance from your Montessori Guide, saved for reference"
+      />
 
       {memories.length === 0 ? (
         <div className="bg-white border border-gray-100 rounded-xl p-12 text-center">

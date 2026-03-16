@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel } from '@/lib/utils'
 import { useChild } from '@/lib/child-context'
+import PageBanner from '@/components/ui/PageBanner'
 import { getAllMonthlyGuides, getGuideForChildAge } from '@/lib/monthly-development'
 import MonthlyDevelopment from '@/components/journey/MonthlyDevelopment'
 import MonthSelector from '@/components/journey/MonthSelector'
@@ -250,29 +251,29 @@ export default function JourneyPage() {
 
   return (
     <div className="max-w-3xl pb-20 sm:pb-0">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-xl font-bold text-navy-600">Journey</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Your family&apos;s Montessori path</p>
+      <PageBanner
+        image="/images/environment/boy-outdoor.jpg"
+        title="Journey"
+        subtitle="Your family's Montessori path"
+      />
+
+      {children.length > 1 && (
+        <div className="flex gap-1 mb-6">
+          {children.map(child => (
+            <button
+              key={child.id}
+              onClick={() => setSelectedChildId(child.id)}
+              className={`px-3 py-1.5 text-sm rounded-lg transition ${
+                selectedChildId === child.id
+                  ? 'bg-warm-500 text-white'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              {child.name}
+            </button>
+          ))}
         </div>
-        {children.length > 1 && (
-          <div className="flex gap-1">
-            {children.map(child => (
-              <button
-                key={child.id}
-                onClick={() => setSelectedChildId(child.id)}
-                className={`px-3 py-1.5 text-sm rounded-lg transition ${
-                  selectedChildId === child.id
-                    ? 'bg-warm-500 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                {child.name}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+      )}
 
       {loading ? (
         <div className="text-center py-16 text-gray-400">Loading your journey...</div>

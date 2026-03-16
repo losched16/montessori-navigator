@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
+import PageBanner from '@/components/ui/PageBanner'
 import { useChild } from '@/lib/child-context'
 import { DAY1_ACTIONS, START_HERE_FEATURES, RHYTHM_CATEGORIES, getFeaturesByPriority } from '@/lib/start-here-data'
 import {
@@ -147,69 +148,40 @@ export default function StartHerePage() {
   return (
     <div className="max-w-3xl mx-auto pb-20 sm:pb-0">
 
-      {/* ================================================================ */}
-      {/* HERO BANNER                                                      */}
-      {/* ================================================================ */}
+      <PageBanner
+        image="/images/environment/play-area.jpg"
+        title={isCompleted ? "You're all set!" : `Welcome${parentName ? ` ${parentName}` : ''}!`}
+        subtitle={isCompleted ? "You've explored Navigator. Come back any time." : 'Follow the steps below to get started.'}
+      />
+
+      {/* Progress + actions bar */}
       {isCompleted ? (
-        <div className="bg-gradient-to-br from-emerald-500 to-warm-500 rounded-2xl p-6 text-white mb-6">
-          <div className="flex items-center gap-4">
-            <div className="text-3xl">🎉</div>
-            <div>
-              <h1 className="text-lg font-bold">You&apos;re all set!</h1>
-              <p className="text-white/70 text-sm mt-0.5">You&apos;ve explored Navigator. Come back any time for rhythm reminders.</p>
-            </div>
-          </div>
-          <div className="flex gap-2 mt-4">
-            <button
-              onClick={handleShowNav}
-              className="px-3 py-1.5 text-xs font-medium bg-white/20 hover:bg-white/30 rounded-lg transition"
-            >
-              Show in sidebar again
-            </button>
-            <Link
-              href="/dashboard"
-              className="px-3 py-1.5 text-xs font-medium bg-white text-warm-700 rounded-lg hover:bg-white/90 transition"
-            >
-              Go to Dashboard →
-            </Link>
-          </div>
+        <div className="flex gap-2 mb-6">
+          <button
+            onClick={handleShowNav}
+            className="px-3 py-1.5 text-xs font-medium bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg transition"
+          >
+            Show in sidebar again
+          </button>
+          <Link
+            href="/dashboard"
+            className="px-3 py-1.5 text-xs font-medium bg-warm-500 text-white rounded-lg hover:bg-warm-600 transition"
+          >
+            Go to Dashboard →
+          </Link>
         </div>
       ) : (
-        <div className="bg-gradient-to-br from-navy-700 to-navy-500 rounded-2xl p-6 text-white mb-6">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-2xl">🚀</span>
-                <div className="text-xs uppercase tracking-wider text-white/50 font-medium">Start Here</div>
-              </div>
-              <h1 className="text-lg sm:text-xl font-bold">
-                Welcome{parentName ? ` ${parentName}` : ''}!
-              </h1>
-              <p className="text-white/60 text-sm mt-1 leading-relaxed max-w-lg">
-                This page walks you through every feature so you can get
-                the most out of Navigator from day one. Follow the steps
-                below and explore at your own pace.
-              </p>
-            </div>
-            <ProgressRing percent={completionPct} />
-          </div>
-
-          {/* Stat pills */}
-          <div className="flex gap-3 mt-4">
-            <div className="px-3 py-1.5 bg-white/10 rounded-lg text-xs">
+        <div className="flex items-center gap-3 mb-6">
+          <ProgressRing percent={completionPct} size={48} />
+          <div className="flex gap-2">
+            <div className="px-3 py-1.5 bg-gray-100 rounded-lg text-xs text-gray-600">
               <span className="font-bold">{progress.day1Completed.length}/4</span>
-              <span className="text-white/50 ml-1">Day 1</span>
+              <span className="ml-1">Day 1</span>
             </div>
-            <div className="px-3 py-1.5 bg-white/10 rounded-lg text-xs">
+            <div className="px-3 py-1.5 bg-gray-100 rounded-lg text-xs text-gray-600">
               <span className="font-bold">{progress.featuresExplored.length}/12</span>
-              <span className="text-white/50 ml-1">Features</span>
+              <span className="ml-1">Features</span>
             </div>
-            {children.length > 0 && (
-              <div className="px-3 py-1.5 bg-white/10 rounded-lg text-xs">
-                <span className="font-bold">{children.length}</span>
-                <span className="text-white/50 ml-1">{children.length === 1 ? 'Child' : 'Children'}</span>
-              </div>
-            )}
           </div>
         </div>
       )}
