@@ -194,13 +194,13 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                   <Link
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm ${
+                    className={`tap-scale flex items-center gap-3 px-3 py-3.5 rounded-[16px] text-sm min-h-[52px] ${
                       isActive(item.href)
                         ? 'bg-warm-50 text-warm-700 font-medium'
                         : 'text-gray-600'
                     }`}
                   >
-                    <span className="text-base">{item.icon}</span>
+                    <span className="text-xl">{item.icon}</span>
                     {item.label}
                   </Link>
                   {item.children && (
@@ -250,10 +250,10 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
 
       {/* Mobile bottom nav */}
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-30">
-        <div className="flex justify-around py-2">
+        <div className="flex justify-around py-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))]">
           {[
             { href: '/dashboard', label: 'Home', icon: '🏠' },
-            { href: '/dashboard/chat', label: 'Guide', icon: '💬' },
+            { href: '/dashboard/chat', label: 'Abigail', icon: '💬' },
             { href: '/dashboard/children', label: 'Children', icon: '🌱' },
             { href: '/dashboard/journey', label: 'Journey', icon: '✨' },
             { href: '/dashboard/library', label: 'Library', icon: '📚' },
@@ -261,12 +261,12 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center gap-0.5 px-2 py-1 ${
-                isActive(item.href) ? 'text-warm-600' : 'text-gray-400'
+              className={`tap-scale flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[52px] px-3 py-1.5 rounded-xl ${
+                isActive(item.href) ? 'text-warm-600 bg-warm-50' : 'text-gray-400'
               }`}
             >
-              <span className="text-lg">{item.icon}</span>
-              <span className="text-[10px]">{item.label}</span>
+              <span className="text-2xl">{item.icon}</span>
+              <span className="text-[11px] font-medium">{item.label}</span>
             </Link>
           ))}
         </div>

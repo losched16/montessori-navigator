@@ -65,18 +65,18 @@ export default function EnvironmentPage() {
       )}
 
       {/* Room tabs - horizontal scrollable */}
-      <div className="flex gap-2 overflow-x-auto pb-2 mb-6 -mx-4 px-4" style={{ scrollbarWidth: 'none' }}>
+      <div className="flex gap-2 overflow-x-auto pb-2 mb-6 -mx-4 px-4 scrollbar-hide snap-x snap-mandatory sm:snap-none">
         {ROOM_GUIDES.map(room => (
           <button
             key={room.room}
             onClick={() => setSelectedRoom(room.room)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition shrink-0 ${
+            className={`tap-scale flex items-center gap-2 px-5 py-3.5 sm:px-4 sm:py-2.5 rounded-[18px] sm:rounded-xl text-sm font-medium whitespace-nowrap min-h-[54px] sm:min-h-0 transition shrink-0 snap-start ${
               selectedRoom === room.room
                 ? 'bg-warm-500 text-white shadow-sm'
                 : 'bg-white border border-gray-200 text-gray-600 hover:border-warm-300 hover:text-warm-600'
             }`}
           >
-            <span className="text-lg">{room.icon}</span>
+            <span className="text-xl sm:text-lg">{room.icon}</span>
             {room.label}
           </button>
         ))}

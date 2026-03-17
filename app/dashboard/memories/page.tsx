@@ -64,7 +64,7 @@ export default function MemoriesPage() {
       />
 
       {memories.length === 0 ? (
-        <div className="bg-white border border-gray-100 rounded-xl p-12 text-center">
+        <div className="bg-white border border-gray-100 rounded-[22px] sm:rounded-xl p-12 text-center">
           <div className="text-3xl mb-3">💭</div>
           <h3 className="font-medium text-navy-600 mb-1">No saved memories yet</h3>
           <p className="text-sm text-gray-500 max-w-sm mx-auto">
@@ -74,7 +74,7 @@ export default function MemoriesPage() {
       ) : (
         <div className="space-y-3">
           {memories.map(memory => (
-            <div key={memory.id} className="bg-white border border-gray-100 rounded-xl p-4 group">
+            <div key={memory.id} className="bg-white border border-gray-100 rounded-[22px] sm:rounded-xl p-5 sm:p-4 group">
               {/* Header */}
               <div className="flex items-start justify-between gap-3 mb-2">
                 <div className="flex items-center gap-2 flex-1 min-w-0">

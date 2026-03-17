@@ -248,7 +248,23 @@ export default function ChatPage() {
               <p className="text-sm text-gray-500 mb-6 max-w-md">
                 Your AI-powered Montessori guide. Ask me anything about parenting, curriculum, child development, or setting up your home environment.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-lg">
+              {/* Mobile: 3×2 grid of big colored tiles */}
+              <div className="grid grid-cols-2 gap-3 w-full max-w-lg sm:hidden">
+                {suggestedQuestions.slice(0, 6).map((q, i) => {
+                  const bgColors = ['bg-warm-50', 'bg-teal-50', 'bg-amber-50', 'bg-violet-50', 'bg-emerald-50', 'bg-sky-50']
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => { setInput(q); inputRef.current?.focus() }}
+                      className={`tap-scale text-left p-4 text-sm text-gray-600 ${bgColors[i % bgColors.length]} border border-gray-100 rounded-[22px] min-h-[100px] flex items-center hover:border-warm-300 hover:text-warm-600 transition`}
+                    >
+                      {q}
+                    </button>
+                  )
+                })}
+              </div>
+              {/* Desktop: 2-col compact grid */}
+              <div className="hidden sm:grid grid-cols-2 gap-2 w-full max-w-lg">
                 {suggestedQuestions.map((q, i) => (
                   <button
                     key={i}
@@ -340,7 +356,7 @@ export default function ChatPage() {
             <button
               onClick={handleSend}
               disabled={!input.trim() || loading}
-              className="px-4 py-2.5 bg-warm-500 hover:bg-warm-600 text-white rounded-xl transition disabled:opacity-40 disabled:hover:bg-warm-500"
+              className="tap-scale px-5 py-3.5 sm:px-4 sm:py-2.5 bg-warm-500 hover:bg-warm-600 text-white rounded-[18px] sm:rounded-xl transition disabled:opacity-40 disabled:hover:bg-warm-500 min-h-[54px] sm:min-h-0"
             >
               <span className="text-sm font-medium">Send</span>
             </button>

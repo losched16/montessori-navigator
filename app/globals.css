@@ -78,6 +78,26 @@ h1, h2, h3, h4 {
   font-weight: 600;
 }
 
+/* Mobile app-feel: tap feedback */
+@media (max-width: 639px) {
+  .tap-scale {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease;
+  }
+  .tap-scale:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Hide scrollbar for horizontal carousels */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Print styles */
 @media print {
   body { background: white; }

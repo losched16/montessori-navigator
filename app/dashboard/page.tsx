@@ -213,13 +213,13 @@ export default function DashboardHome() {
 
       {/* ═══ New user welcome ═══ */}
       {children.length === 0 && (
-        <div className="bg-gradient-to-br from-navy-700 to-navy-500 rounded-2xl p-6 text-white mb-6">
+        <div className="bg-gradient-to-br from-navy-700 to-navy-500 rounded-[22px] sm:rounded-2xl p-6 sm:p-6 text-white mb-6">
           <div className="text-3xl mb-3">🌱</div>
           <h2 className="text-lg font-bold mb-1">Welcome to Navigator</h2>
           <p className="text-white/70 text-sm leading-relaxed mb-4">
             Your Montessori journey starts here. Let&apos;s set up your family so Abigail can give you personalized recommendations.
           </p>
-          <Link href="/dashboard/settings" className="inline-block px-5 py-2 bg-white/20 hover:bg-white/30 text-white font-medium text-sm rounded-lg transition">
+          <Link href="/dashboard/settings" className="tap-scale inline-block px-5 py-3.5 sm:py-2 bg-white/20 hover:bg-white/30 text-white font-medium text-sm rounded-[16px] sm:rounded-lg transition min-h-[54px] sm:min-h-0 flex items-center">
             Add Your First Child →
           </Link>
         </div>
@@ -227,29 +227,29 @@ export default function DashboardHome() {
 
       {/* ═══ Suggested next action ═══ */}
       {children.length > 0 && (
-        <Link href={nextAction.href} className="block bg-gradient-to-r from-navy-700 to-navy-500 rounded-xl p-4 text-white mb-6 hover:shadow-lg transition group">
-          <div className="flex items-center gap-3">
-            <div className="text-2xl">{nextAction.icon}</div>
+        <Link href={nextAction.href} className="tap-scale block bg-gradient-to-r from-navy-700 to-navy-500 rounded-[22px] sm:rounded-xl p-5 sm:p-4 text-white mb-6 hover:shadow-lg transition group">
+          <div className="flex items-center gap-4 sm:gap-3">
+            <div className="text-3xl sm:text-2xl">{nextAction.icon}</div>
             <div>
-              <div className="font-semibold text-sm group-hover:underline">{nextAction.label}</div>
-              <div className="text-white/60 text-xs">{nextAction.desc}</div>
+              <div className="font-bold sm:font-semibold text-base sm:text-sm group-hover:underline">{nextAction.label}</div>
+              <div className="text-white/60 text-sm sm:text-xs">{nextAction.desc}</div>
             </div>
-            <div className="ml-auto text-white/40 group-hover:text-white/70 transition">→</div>
+            <div className="ml-auto text-white/40 text-lg group-hover:text-white/70 transition">→</div>
           </div>
         </Link>
       )}
 
       {/* ═══ Observation prompt of the day ═══ */}
       {todayPrompt && (
-        <div className="bg-white border border-gray-100 rounded-xl p-4 mb-4">
+        <div className="bg-gradient-to-r from-warm-50 to-white sm:bg-white sm:from-white border border-gray-100 rounded-[22px] sm:rounded-xl p-5 sm:p-4 mb-4">
           <div className="flex items-start gap-3">
-            <div className="w-9 h-9 bg-warm-100 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-              <span className="text-lg">👀</span>
+            <div className="w-11 h-11 sm:w-9 sm:h-9 bg-warm-100 rounded-[14px] sm:rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+              <span className="text-xl sm:text-lg">👀</span>
             </div>
             <div>
               <div className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-1">Today&apos;s Observation Prompt</div>
               <p className="text-sm text-navy-600 leading-relaxed">{todayPrompt.prompt}</p>
-              <Link href="/dashboard/children" className="text-xs text-warm-600 font-medium mt-2 inline-block hover:underline">
+              <Link href="/dashboard/children" className="tap-scale text-xs text-warm-600 font-medium mt-2 inline-block hover:underline">
                 Log observation for {todayPrompt.childName} →
               </Link>
             </div>
@@ -258,9 +258,26 @@ export default function DashboardHome() {
       )}
 
       {/* ═══ Quick Actions ═══ */}
-      <div className="grid grid-cols-3 gap-2 mb-6">
+      {/* Mobile: horizontal scroll carousel */}
+      <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide sm:hidden mb-6">
         {[
-          { href: '/dashboard/chat', icon: '💬', label: 'Ask Guide' },
+          { href: '/dashboard/chat', icon: '💬', label: 'Ask Abigail' },
+          { href: '/dashboard/plans', icon: '📋', label: 'At-Home Plan' },
+          { href: '/dashboard/children', icon: '📓', label: 'Observe' },
+          { href: '/dashboard/journey', icon: '✨', label: 'Journey' },
+          { href: '/dashboard/environment', icon: '🏡', label: 'Environment' },
+          { href: '/dashboard/milestones', icon: '⭐', label: 'Milestones' },
+        ].map(a => (
+          <Link key={a.href} href={a.href} className="tap-scale w-[110px] h-[110px] shrink-0 snap-start bg-white border border-gray-100 rounded-[22px] flex flex-col items-center justify-center gap-2 hover:border-warm-300 transition">
+            <div className="text-3xl">{a.icon}</div>
+            <div className="text-sm font-medium text-gray-600">{a.label}</div>
+          </Link>
+        ))}
+      </div>
+      {/* Desktop: compact grid */}
+      <div className="hidden sm:grid grid-cols-3 gap-2 mb-6">
+        {[
+          { href: '/dashboard/chat', icon: '💬', label: 'Ask Abigail' },
           { href: '/dashboard/plans', icon: '📋', label: 'At-Home Plan' },
           { href: '/dashboard/children', icon: '📓', label: 'Observe' },
         ].map(a => (
@@ -284,9 +301,9 @@ export default function DashboardHome() {
             </div>
             <div className="space-y-2">
               {peakPeriods.slice(0, 3).map(sp => (
-                <div key={sp.name} className="bg-white border border-amber-100 rounded-xl p-3">
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-lg mt-0.5">{sp.icon}</span>
+                <div key={sp.name} className="bg-white border border-amber-100 border-l-4 border-l-amber-400 sm:border-l sm:border-l-amber-100 rounded-[22px] sm:rounded-xl p-4 sm:p-3">
+                  <div className="flex items-start gap-3 sm:gap-2.5">
+                    <span className="text-xl sm:text-lg mt-0.5">{sp.icon}</span>
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-semibold text-navy-600">{sp.name}</span>
@@ -311,17 +328,42 @@ export default function DashboardHome() {
       {children.length > 0 && (
         <div className="mb-6">
           <div className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-2">Your Children</div>
-          <div className="space-y-2">
+          {/* Mobile: horizontal carousel */}
+          <div className="flex gap-3 overflow-x-auto -mx-4 px-4 pb-2 snap-x snap-mandatory scrollbar-hide sm:hidden">
             {children.map(child => {
               const levels = devLevels[child.id] || []
-              const topAreas = levels
-                .filter(l => l.level && l.level >= 3)
-                .sort((a, b) => (b.level || 0) - (a.level || 0))
-                .slice(0, 3)
-              const growthAreas = levels
-                .filter(l => l.level && l.level <= 2)
-                .slice(0, 2)
-
+              const topAreas = levels.filter(l => l.level && l.level >= 3).sort((a, b) => (b.level || 0) - (a.level || 0)).slice(0, 3)
+              const growthAreas = levels.filter(l => l.level && l.level <= 2).slice(0, 2)
+              return (
+                <Link key={child.id} href="/dashboard/children" className="tap-scale w-[280px] shrink-0 snap-start bg-white border border-gray-100 border-l-4 border-l-teal-400 rounded-[22px] p-5 transition">
+                  <div className="flex items-center justify-between mb-2">
+                    <div>
+                      <span className="font-semibold text-navy-600">{child.name}</span>
+                      <span className="text-xs text-gray-400 ml-2">{formatAge(child.date_of_birth)}</span>
+                    </div>
+                    <span className="text-gray-300">→</span>
+                  </div>
+                  <div className="text-xs text-gray-500 mb-2">{getAgePlaneLabel(getAgePlane(child.date_of_birth))}</div>
+                  {topAreas.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {topAreas.map(a => (
+                        <span key={a.area} className="text-[10px] px-2 py-0.5 bg-warm-50 text-warm-700 rounded-full">{getCurriculumAreaLabel(a.area)}: {getDevelopmentLevelLabel(a.level!)}</span>
+                      ))}
+                      {growthAreas.map(a => (
+                        <span key={a.area} className="text-[10px] px-2 py-0.5 bg-violet-50 text-violet-600 rounded-full">{getCurriculumAreaLabel(a.area)}: {getDevelopmentLevelLabel(a.level!)}</span>
+                      ))}
+                    </div>
+                  )}
+                </Link>
+              )
+            })}
+          </div>
+          {/* Desktop: vertical list */}
+          <div className="hidden sm:block space-y-2">
+            {children.map(child => {
+              const levels = devLevels[child.id] || []
+              const topAreas = levels.filter(l => l.level && l.level >= 3).sort((a, b) => (b.level || 0) - (a.level || 0)).slice(0, 3)
+              const growthAreas = levels.filter(l => l.level && l.level <= 2).slice(0, 2)
               return (
                 <Link key={child.id} href="/dashboard/children" className="block bg-white border border-gray-100 rounded-xl p-4 hover:border-warm-300 transition">
                   <div className="flex items-center justify-between mb-2">
@@ -334,14 +376,10 @@ export default function DashboardHome() {
                   {topAreas.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
                       {topAreas.map(a => (
-                        <span key={a.area} className="text-[10px] px-2 py-0.5 bg-warm-50 text-warm-700 rounded-full">
-                          {getCurriculumAreaLabel(a.area)}: {getDevelopmentLevelLabel(a.level!)}
-                        </span>
+                        <span key={a.area} className="text-[10px] px-2 py-0.5 bg-warm-50 text-warm-700 rounded-full">{getCurriculumAreaLabel(a.area)}: {getDevelopmentLevelLabel(a.level!)}</span>
                       ))}
                       {growthAreas.map(a => (
-                        <span key={a.area} className="text-[10px] px-2 py-0.5 bg-violet-50 text-violet-600 rounded-full">
-                          {getCurriculumAreaLabel(a.area)}: {getDevelopmentLevelLabel(a.level!)}
-                        </span>
+                        <span key={a.area} className="text-[10px] px-2 py-0.5 bg-violet-50 text-violet-600 rounded-full">{getCurriculumAreaLabel(a.area)}: {getDevelopmentLevelLabel(a.level!)}</span>
                       ))}
                     </div>
                   )}
@@ -359,16 +397,16 @@ export default function DashboardHome() {
             <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Recent Observations</div>
             <Link href="/dashboard/children" className="text-xs text-warm-600 hover:underline">View all</Link>
           </div>
-          <div className="space-y-1.5">
+          <div className="space-y-2 sm:space-y-1.5">
             {recentObs.map(obs => (
-              <div key={obs.id} className="bg-white border border-gray-100 rounded-xl p-3">
+              <div key={obs.id} className="bg-white border border-gray-100 border-l-4 border-l-warm-400 sm:border-l sm:border-l-gray-100 rounded-[22px] sm:rounded-xl p-4 sm:p-3">
                 <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="text-xs font-medium text-warm-700">{obs.child_name}</span>
                       <span className="text-[10px] text-gray-400">{getObservationTypeLabel(obs.type)}</span>
                     </div>
-                    <p className="text-sm text-gray-700 line-clamp-1">{obs.description}</p>
+                    <p className="text-sm text-gray-700 line-clamp-2 sm:line-clamp-1">{obs.description}</p>
                   </div>
                   <span className="text-[10px] text-gray-400 whitespace-nowrap mt-1">
                     {new Date(obs.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
@@ -393,35 +431,64 @@ export default function DashboardHome() {
 
       {/* ═══ Stats Row ═══ */}
       {children.length > 0 && (
-        <div className="grid grid-cols-5 gap-2">
-          {[
-            { value: totalObs, label: 'Observations', href: '/dashboard/children' },
-            { value: milestoneCount, label: 'Milestones', href: '/dashboard/milestones' },
-            { value: skillCount, label: 'Skills', href: '/dashboard/curriculum' },
-            { value: planCount, label: 'At-Home Plans', href: '/dashboard/plans' },
-            { value: threadCount, label: 'Chats', href: '/dashboard/chat' },
-          ].map(s => (
-            <Link key={s.label} href={s.href} className="p-3 bg-white border border-gray-100 rounded-xl text-center hover:border-warm-300 transition">
-              <div className="text-lg font-bold text-navy-600">{s.value}</div>
-              <div className="text-[10px] text-gray-400">{s.label}</div>
-            </Link>
-          ))}
-        </div>
+        <>
+          {/* Mobile: hero stats + horizontal scroll */}
+          <div className="sm:hidden">
+            <div className="bg-gradient-to-r from-warm-500 to-warm-400 rounded-[22px] p-5 mb-3 flex justify-around text-white">
+              {[
+                { value: totalObs, label: 'Observations' },
+                { value: milestoneCount, label: 'Milestones' },
+                { value: skillCount, label: 'Skills' },
+              ].map(s => (
+                <div key={s.label} className="text-center">
+                  <div className="text-3xl font-bold">{s.value}</div>
+                  <div className="text-xs text-white/70">{s.label}</div>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2">
+              {[
+                { value: planCount, label: 'At-Home Plans', href: '/dashboard/plans' },
+                { value: threadCount, label: 'Chats', href: '/dashboard/chat' },
+              ].map(s => (
+                <Link key={s.label} href={s.href} className="tap-scale shrink-0 min-w-[100px] p-4 bg-white border border-gray-100 rounded-[22px] text-center">
+                  <div className="text-lg font-bold text-navy-600">{s.value}</div>
+                  <div className="text-[11px] text-gray-400">{s.label}</div>
+                </Link>
+              ))}
+            </div>
+          </div>
+          {/* Desktop: compact grid */}
+          <div className="hidden sm:grid grid-cols-5 gap-2">
+            {[
+              { value: totalObs, label: 'Observations', href: '/dashboard/children' },
+              { value: milestoneCount, label: 'Milestones', href: '/dashboard/milestones' },
+              { value: skillCount, label: 'Skills', href: '/dashboard/curriculum' },
+              { value: planCount, label: 'At-Home Plans', href: '/dashboard/plans' },
+              { value: threadCount, label: 'Chats', href: '/dashboard/chat' },
+            ].map(s => (
+              <Link key={s.label} href={s.href} className="p-3 bg-white border border-gray-100 rounded-xl text-center hover:border-warm-300 transition">
+                <div className="text-lg font-bold text-navy-600">{s.value}</div>
+                <div className="text-[10px] text-gray-400">{s.label}</div>
+              </Link>
+            ))}
+          </div>
+        </>
       )}
 
       {/* ═══ Explore more ═══ */}
       {children.length > 0 && totalObs > 2 && (
-        <div className="mt-6 grid grid-cols-2 gap-2">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-2">
           {[
             { href: '/dashboard/reports', icon: '📊', label: 'Generate Report', desc: 'Create a progress summary' },
             { href: '/dashboard/schools', icon: '🏫', label: 'Evaluate Schools', desc: 'Tour debrief & comparison' },
             { href: '/dashboard/journey', icon: '✨', label: 'View Journey', desc: 'Your family\'s growth story' },
             { href: '/dashboard/environment', icon: '🏡', label: 'Home Setup', desc: 'Track your prepared environment' },
           ].map(a => (
-            <Link key={a.href} href={a.href} className="p-3 bg-white border border-gray-100 rounded-xl hover:border-warm-300 transition group">
-              <div className="text-lg mb-1">{a.icon}</div>
-              <div className="text-xs font-medium text-navy-600 group-hover:text-warm-600">{a.label}</div>
-              <div className="text-[10px] text-gray-400">{a.desc}</div>
+            <Link key={a.href} href={a.href} className="tap-scale p-5 sm:p-3 bg-white border border-gray-100 rounded-[22px] sm:rounded-xl hover:border-warm-300 transition group">
+              <div className="text-2xl sm:text-lg mb-1">{a.icon}</div>
+              <div className="text-sm sm:text-xs font-medium text-navy-600 group-hover:text-warm-600">{a.label}</div>
+              <div className="text-xs sm:text-[10px] text-gray-400">{a.desc}</div>
             </Link>
           ))}
         </div>

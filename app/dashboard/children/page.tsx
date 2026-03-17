@@ -139,12 +139,12 @@ export default function ChildrenPage() {
 
       {/* Child selector tabs */}
       {children.length > 1 && (
-        <div className="flex gap-1 mb-6">
+        <div className="flex gap-2 sm:gap-1 mb-6">
           {children.map(child => (
             <button
               key={child.id}
               onClick={() => setSelectedChildId(child.id)}
-              className={`px-3 py-1.5 text-sm rounded-lg transition ${
+              className={`tap-scale px-4 py-3 sm:px-3 sm:py-1.5 text-sm rounded-[16px] sm:rounded-lg min-h-[48px] sm:min-h-0 transition ${
                 selectedChildId === child.id
                   ? 'bg-warm-500 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -159,7 +159,7 @@ export default function ChildrenPage() {
       {selectedChild && (
         <>
           {/* Child header with profile photo */}
-          <div className="bg-white border border-gray-100 rounded-xl p-4 mb-6">
+          <div className="bg-white border border-gray-100 rounded-[22px] sm:rounded-xl p-5 sm:p-4 mb-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 {/* Profile photo */}

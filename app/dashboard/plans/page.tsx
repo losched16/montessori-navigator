@@ -150,7 +150,7 @@ export default function PlansPage() {
   }
 
   const renderActivity = (activity: any, index: number) => (
-    <div key={index} className="bg-gray-50 rounded-lg p-4">
+    <div key={index} className="bg-gray-50 rounded-[18px] sm:rounded-lg p-5 sm:p-4">
       <div className="flex items-start justify-between gap-2 mb-2">
         <h5 className="font-medium text-navy-600 text-sm">{activity.name}</h5>
         {activity.estimated_minutes && (
@@ -208,7 +208,7 @@ export default function PlansPage() {
       <div className="flex justify-end mb-4 -mt-2">
         <button
           onClick={() => { setShowGenerator(true); setViewingPlan(null) }}
-          className="px-4 py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
+          className="tap-scale px-5 py-3.5 sm:px-4 sm:py-2 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-[16px] sm:rounded-lg min-h-[54px] sm:min-h-0 transition"
         >
           + Generate Plan
         </button>
@@ -216,12 +216,12 @@ export default function PlansPage() {
 
       {/* Child selector */}
       {children.length > 1 && (
-        <div className="flex gap-1 mb-6">
+        <div className="flex gap-2 sm:gap-1 mb-6">
           {children.map(child => (
             <button
               key={child.id}
               onClick={() => { setSelectedChildId(child.id); setViewingPlan(null) }}
-              className={`px-3 py-1.5 text-sm rounded-lg transition ${
+              className={`tap-scale px-4 py-3 sm:px-3 sm:py-1.5 text-sm rounded-[16px] sm:rounded-lg min-h-[48px] sm:min-h-0 transition ${
                 selectedChildId === child.id
                   ? 'bg-warm-500 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -235,7 +235,7 @@ export default function PlansPage() {
 
       {/* Generator */}
       {showGenerator && (
-        <div className="bg-white border border-warm-300 rounded-xl p-5 mb-6">
+        <div className="bg-white border border-warm-300 rounded-[22px] sm:rounded-xl p-5 mb-6">
           <h3 className="font-semibold text-navy-600 mb-1">Generate an At-Home Learning Plan</h3>
           <p className="text-sm text-gray-500 mb-4">
             Activities to do at home — whether homeschooling or reinforcing what's learned in school.
@@ -250,7 +250,7 @@ export default function PlansPage() {
                   <button
                     key={pt.value}
                     onClick={() => setPlanType(pt.value)}
-                    className={`text-left p-3 rounded-lg border text-sm transition ${
+                    className={`tap-scale text-left p-4 sm:p-3 rounded-[18px] sm:rounded-lg border text-sm min-h-[54px] sm:min-h-0 transition ${
                       planType === pt.value
                         ? 'border-warm-500 bg-warm-50'
                         : 'border-gray-200 hover:border-gray-300'
@@ -270,7 +270,7 @@ export default function PlansPage() {
                   <button
                     key={area}
                     onClick={() => toggleFocus(area)}
-                    className={`px-3 py-1.5 text-sm rounded-full border transition ${
+                    className={`tap-scale px-4 py-2.5 sm:px-3 sm:py-1.5 text-sm rounded-full border min-h-[44px] sm:min-h-0 transition ${
                       focusAreas.includes(area)
                         ? 'border-warm-500 bg-warm-50 text-warm-700'
                         : 'border-gray-200 text-gray-600 hover:border-gray-300'

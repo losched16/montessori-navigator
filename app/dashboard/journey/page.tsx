@@ -258,12 +258,12 @@ export default function JourneyPage() {
       />
 
       {children.length > 1 && (
-        <div className="flex gap-1 mb-6">
+        <div className="flex gap-2 sm:gap-1 mb-6">
           {children.map(child => (
             <button
               key={child.id}
               onClick={() => setSelectedChildId(child.id)}
-              className={`px-3 py-1.5 text-sm rounded-lg transition ${
+              className={`tap-scale px-4 py-3 sm:px-3 sm:py-1.5 text-sm rounded-[16px] sm:rounded-lg min-h-[48px] sm:min-h-0 transition ${
                 selectedChildId === child.id
                   ? 'bg-warm-500 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -280,7 +280,7 @@ export default function JourneyPage() {
       ) : stats && selectedChild ? (
         <>
           {/* Child journey header */}
-          <div className="bg-gradient-to-r from-navy-700 to-navy-500 rounded-2xl p-6 text-white mb-6">
+          <div className="bg-gradient-to-r from-navy-700 to-navy-500 rounded-[22px] sm:rounded-2xl p-6 text-white mb-6">
             <div className="flex items-start justify-between">
               <div>
                 <h2 className="text-lg font-bold">{selectedChild.name}&apos;s Journey</h2>
@@ -315,10 +315,10 @@ export default function JourneyPage() {
 
           {/* Tab switcher — only show if child is under 3 */}
           {showDevGuide && (
-            <div className="flex gap-1 mb-6 bg-gray-100 p-1 rounded-xl">
+            <div className="flex gap-1 mb-6 bg-gray-100 p-1.5 sm:p-1 rounded-[18px] sm:rounded-xl">
               <button
                 onClick={() => setActiveTab('development')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`tap-scale flex-1 flex items-center justify-center gap-1.5 px-4 py-3.5 sm:py-2.5 rounded-[14px] sm:rounded-lg text-sm font-medium min-h-[52px] sm:min-h-0 transition ${
                   (activeTab ?? 'development') === 'development'
                     ? 'bg-white text-navy-600 shadow-sm'
                     : 'text-gray-500 hover:text-gray-700'
@@ -328,7 +328,7 @@ export default function JourneyPage() {
               </button>
               <button
                 onClick={() => setActiveTab('progress')}
-                className={`flex-1 flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium transition ${
+                className={`tap-scale flex-1 flex items-center justify-center gap-1.5 px-4 py-3.5 sm:py-2.5 rounded-[14px] sm:rounded-lg text-sm font-medium min-h-[52px] sm:min-h-0 transition ${
                   (activeTab ?? 'development') === 'progress'
                     ? 'bg-white text-navy-600 shadow-sm'
                     : 'text-gray-500 hover:text-gray-700'
@@ -364,11 +364,11 @@ export default function JourneyPage() {
               <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Growth Moments</h3>
               <div className="space-y-2">
                 {stats.growthMoments.map((moment, i) => (
-                  <div key={i} className="flex items-start gap-3 p-3 bg-white border border-gray-100 rounded-xl">
-                    <div className="w-8 h-8 rounded-full bg-warm-50 flex items-center justify-center shrink-0">
-                      <span className="text-warm-600 text-sm">🌱</span>
+                  <div key={i} className="flex items-start gap-3 p-4 sm:p-3 bg-white border border-gray-100 border-l-4 border-l-emerald-400 sm:border-l sm:border-l-gray-100 rounded-[22px] sm:rounded-xl">
+                    <div className="w-10 h-10 sm:w-8 sm:h-8 rounded-full bg-warm-50 flex items-center justify-center shrink-0">
+                      <span className="text-warm-600 text-base sm:text-sm">🌱</span>
                     </div>
-                    <p className="text-sm text-gray-700 leading-relaxed pt-1">{moment}</p>
+                    <p className="text-sm text-gray-700 leading-relaxed pt-1.5 sm:pt-1">{moment}</p>
                   </div>
                 ))}
               </div>
