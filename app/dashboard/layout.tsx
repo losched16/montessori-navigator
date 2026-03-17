@@ -97,7 +97,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
 
           <div className="flex items-center gap-3">
             <span className="text-sm text-white/60 hidden sm:inline">{parent?.display_name}</span>
-            <button onClick={handleSignOut} className="text-xs text-white/40 hover:text-white/70">
+            <button onClick={handleSignOut} className="hidden sm:inline text-xs text-white/40 hover:text-white/70">
               Sign out
             </button>
             <button
@@ -237,6 +237,15 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                   <span className="text-base">⚙️</span>
                   Settings
                 </Link>
+              </div>
+              <div className="border-t border-gray-100 mt-3 pt-3">
+                <button
+                  onClick={() => { setMobileMenuOpen(false); handleSignOut() }}
+                  className="tap-scale flex items-center gap-3 px-3 py-3.5 rounded-[16px] text-sm min-h-[52px] text-gray-400 w-full text-left"
+                >
+                  <span className="text-xl">👋</span>
+                  Sign out
+                </button>
               </div>
             </div>
           </div>
