@@ -72,10 +72,10 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#fafaf8]">
       {/* Top bar */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-30">
+      <header className="bg-navy-700 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-lg font-bold text-navy-600">
+            <Link href="/dashboard" className="text-lg font-bold text-white">
               Navigator
             </Link>
 
@@ -84,7 +84,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
               <select
                 value={selectedChildId || ''}
                 onChange={e => setSelectedChildId(e.target.value)}
-                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-navy-600 focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+                className="text-sm border border-white/20 rounded-lg px-3 py-1.5 bg-white/10 text-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none [&>option]:text-navy-700 [&>option]:bg-white"
               >
                 {childrenList.map(child => (
                   <option key={child.id} value={child.id}>
@@ -96,13 +96,13 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-500 hidden sm:inline">{parent?.display_name}</span>
-            <button onClick={handleSignOut} className="text-xs text-gray-400 hover:text-gray-600">
+            <span className="text-sm text-white/60 hidden sm:inline">{parent?.display_name}</span>
+            <button onClick={handleSignOut} className="text-xs text-white/40 hover:text-white/70">
               Sign out
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="sm:hidden p-1 text-gray-500"
+              className="sm:hidden p-1 text-white/70"
             >
               ☰
             </button>
@@ -112,18 +112,18 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
 
       <div className="max-w-7xl mx-auto flex">
         {/* Desktop sidebar */}
-        <nav className="hidden sm:block w-52 shrink-0 self-stretch bg-navy-700 -ml-0 rounded-tr-2xl">
-          <div className="sticky top-14 py-5 px-3 space-y-0.5">
+        <nav className="hidden sm:block w-48 shrink-0 py-4 pl-4">
+          <div className="sticky top-20 space-y-1">
             {navItems.map(item => (
               <div key={item.href}>
                 <Link
                   href={item.href}
                   className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
                     isActive(item.href) && !item.children
-                      ? 'bg-white/15 text-white font-medium'
+                      ? 'bg-warm-50 text-warm-700 font-medium'
                       : item.children && isJourneySection
-                        ? 'bg-white/15 text-white font-medium'
-                        : 'text-white/60 hover:bg-white/10 hover:text-white/90'
+                        ? 'bg-warm-50 text-warm-700 font-medium'
+                        : 'text-gray-600 hover:bg-gray-50'
                   }`}
                 >
                   <span className="text-base">{item.icon}</span>
@@ -138,8 +138,8 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                         href={sub.href}
                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition ${
                           isActive(sub.href)
-                            ? 'text-white font-medium'
-                            : 'text-white/40 hover:text-white/70 hover:bg-white/10'
+                            ? 'text-warm-700 font-medium'
+                            : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
                         }`}
                       >
                         <span className="text-sm">{sub.icon}</span>
@@ -150,13 +150,13 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                 )}
               </div>
             ))}
-            <div className="border-t border-white/10 mt-3 pt-3">
+            <div className="border-t border-gray-100 mt-3 pt-3">
               <Link
                 href="/dashboard/settings"
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
                   isActive('/dashboard/settings')
-                    ? 'bg-white/15 text-white font-medium'
-                    : 'text-white/40 hover:bg-white/10 hover:text-white/70'
+                    ? 'bg-warm-50 text-warm-700 font-medium'
+                    : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
                 }`}
               >
                 <span className="text-base">⚙️</span>
@@ -166,10 +166,10 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
 
             {/* Selected child context card */}
             {selectedChild && (
-              <div className="mt-4 p-3 bg-white/10 border border-white/10 rounded-lg">
-                <div className="text-xs text-white/40 uppercase tracking-wide mb-1">Active Child</div>
-                <div className="font-medium text-white text-sm">{selectedChild.name}</div>
-                <div className="text-xs text-white/50">
+              <div className="mt-4 p-3 bg-white border border-gray-100 rounded-lg">
+                <div className="text-xs text-gray-400 uppercase tracking-wide mb-1">Active Child</div>
+                <div className="font-medium text-navy-600 text-sm">{selectedChild.name}</div>
+                <div className="text-xs text-gray-500">
                   {formatAge(selectedChild.date_of_birth)} · {getAgePlaneLabel(getAgePlane(selectedChild.date_of_birth))}
                 </div>
               </div>
