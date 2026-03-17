@@ -112,18 +112,18 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
 
       <div className="max-w-7xl mx-auto flex">
         {/* Desktop sidebar */}
-        <nav className="hidden sm:block w-48 shrink-0 py-4 pl-4">
-          <div className="sticky top-20 space-y-1">
+        <nav className="hidden sm:block w-52 shrink-0 self-stretch bg-navy-700 -ml-0 rounded-tr-2xl">
+          <div className="sticky top-14 py-5 px-3 space-y-0.5">
             {navItems.map(item => (
               <div key={item.href}>
                 <Link
                   href={item.href}
                   className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
                     isActive(item.href) && !item.children
-                      ? 'bg-warm-50 text-warm-700 font-medium'
+                      ? 'bg-white/15 text-white font-medium'
                       : item.children && isJourneySection
-                        ? 'bg-warm-50 text-warm-700 font-medium'
-                        : 'text-gray-600 hover:bg-gray-50'
+                        ? 'bg-white/15 text-white font-medium'
+                        : 'text-white/60 hover:bg-white/10 hover:text-white/90'
                   }`}
                 >
                   <span className="text-base">{item.icon}</span>
@@ -138,8 +138,8 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                         href={sub.href}
                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition ${
                           isActive(sub.href)
-                            ? 'text-warm-700 font-medium'
-                            : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                            ? 'text-white font-medium'
+                            : 'text-white/40 hover:text-white/70 hover:bg-white/10'
                         }`}
                       >
                         <span className="text-sm">{sub.icon}</span>
@@ -150,13 +150,13 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
                 )}
               </div>
             ))}
-            <div className="border-t border-gray-100 mt-3 pt-3">
+            <div className="border-t border-white/10 mt-3 pt-3">
               <Link
                 href="/dashboard/settings"
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
                   isActive('/dashboard/settings')
-                    ? 'bg-warm-50 text-warm-700 font-medium'
-                    : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
+                    ? 'bg-white/15 text-white font-medium'
+                    : 'text-white/40 hover:bg-white/10 hover:text-white/70'
                 }`}
               >
                 <span className="text-base">⚙️</span>
@@ -166,10 +166,10 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
 
             {/* Selected child context card */}
             {selectedChild && (
-              <div className="mt-4 p-3 bg-white border border-gray-100 rounded-lg">
-                <div className="text-xs text-gray-400 uppercase tracking-wide mb-1">Active Child</div>
-                <div className="font-medium text-navy-600 text-sm">{selectedChild.name}</div>
-                <div className="text-xs text-gray-500">
+              <div className="mt-4 p-3 bg-white/10 border border-white/10 rounded-lg">
+                <div className="text-xs text-white/40 uppercase tracking-wide mb-1">Active Child</div>
+                <div className="font-medium text-white text-sm">{selectedChild.name}</div>
+                <div className="text-xs text-white/50">
                   {formatAge(selectedChild.date_of_birth)} · {getAgePlaneLabel(getAgePlane(selectedChild.date_of_birth))}
                 </div>
               </div>
