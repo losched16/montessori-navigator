@@ -197,6 +197,53 @@ export default function MonthlyDevelopment({ guide, childName }: Props) {
         </ul>
       </Section>
 
+      {/* Sensory Development */}
+      {guide.sensoryDevelopment?.length > 0 && (
+        <Section id="sensory" icon="👁️" title="Sensory Development">
+          <ul className="space-y-1.5">
+            {guide.sensoryDevelopment.map((item, i) => (
+              <li key={i} className="text-sm text-gray-700 leading-relaxed flex items-start gap-2">
+                <span className="text-purple-400 mt-1 shrink-0">•</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+      {/* Reflexes */}
+      {guide.reflexes?.length > 0 && (
+        <Section id="reflexes" icon="⚡" title="Reflexes">
+          <p className="text-xs text-gray-500 italic mb-3">
+            Reflexive movement is an automatic response to nerve stimulation. Reflexes appear and disappear in a predictable order, signifying healthy nervous system development.
+          </p>
+          <ul className="space-y-1.5">
+            {guide.reflexes.map((item, i) => (
+              <li key={i} className="text-sm text-gray-700 leading-relaxed flex items-start gap-2">
+                <span className="text-sky-400 mt-1 shrink-0">•</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+      {/* Touch & Bonding */}
+      {guide.touchAndBonding?.length > 0 && (
+        <Section id="bonding" icon="🤱" title="Touch & Bonding">
+          <div className="space-y-2">
+            {guide.touchAndBonding.map((tip, i) => (
+              <div key={i} className="bg-rose-50 border border-rose-200 rounded-lg p-3">
+                <div className="flex items-start gap-2">
+                  <span className="text-rose-400 font-bold text-sm shrink-0">♡</span>
+                  <p className="text-sm text-rose-800 leading-relaxed">{tip}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
       {/* Activities */}
       <Section id="activities" icon="🎯" title="Activities to Try">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

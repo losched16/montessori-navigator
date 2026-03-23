@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase'
 import PageBanner from '@/components/ui/PageBanner'
 import type { Child, Observation } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel, getObservationTypeLabel, getCurriculumAreaLabel, getDevelopmentLevelLabel } from '@/lib/utils'
+import { getGuideForChildAge } from '@/lib/monthly-development'
 
 // ── Sensitive period data keyed by age in months ──
 const SENSITIVE_PERIODS: Array<{
@@ -323,6 +324,51 @@ export default function DashboardHome() {
           </div>
         )
       })}
+
+      {/* ═══ Baby Development Card (only for children ≤ 36 months) ═══ */}
+      {(() => {
+        const babyChild = children.find(c => {
+          if (!c.date_of_birth) return false
+          const ageMs = Date.now() - new Date(c.date_of_birth).getTime()
+          return ageMs / (1000 * 60 * 60 * 24 * 30.44) <= 36
+        })
+        if (!babyChild || !babyChild.date_of_birth) return null
+        const guide = getGuideForChildAge(babyChild.date_of_birth)
+        if (!guide) return null
+        const highlights = [
+          guide.grossMotor.shouldBeAbleTo[0],
+          guide.handDevelopment[0],
+          guide.communication[0],
+          guide.socialEmotional[0],
+        ].filter(Boolean).map(h => h.length > 80 ? h.slice(0, 77) + '...' : h)
+        return (
+          <div className="mb-6">
+            <Link
+              href="/dashboard/development"
+              className="tap-scale block bg-white border border-gray-100 rounded-[22px] sm:rounded-xl overflow-hidden hover:shadow-md transition"
+            >
+              <div className="border-l-4 border-l-indigo-400 p-5 sm:p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">👶</span>
+                    <h3 className="text-sm font-bold text-navy-600">{babyChild.name} at {guide.monthLabel}</h3>
+                  </div>
+                  <span className="text-xs text-indigo-500 font-medium">View Guide →</span>
+                </div>
+                <p className="text-xs text-gray-500 italic mb-3">{guide.tagline}</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {highlights.map((h, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="text-xs mt-0.5 shrink-0">{['💪', '✋', '💬', '💛'][i]}</span>
+                      <span className="text-xs text-gray-600 leading-relaxed">{h}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Link>
+          </div>
+        )
+      })()}
 
       {/* ═══ Children Overview with Dev Snapshot ═══ */}
       {children.length > 0 && (

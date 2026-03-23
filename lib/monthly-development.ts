@@ -31,6 +31,9 @@ export interface MonthlyGuide {
   communication: string[] // Communication and vocalization milestones
   socialEmotional: string[] // Social-emotional development points
   activities: Activity[] // Recommended activities
+  sensoryDevelopment: string[] // Vision, hearing, touch, vestibular development
+  reflexes: string[] // Which reflexes are present/disappearing
+  touchAndBonding: string[] // Practical touch, bonding, and caregiving tips
   communicationTips: string[] // Practical tips for encouraging communication
   independenceGains: string[] // What independence looks like at this stage
   environmentTips: string[] // Home environment preparation tips
@@ -123,6 +126,32 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F3B5}',
         category: 'sensory',
       },
+    ],
+    sensoryDevelopment: [
+      'Vision limited to 20-35 cm — just the right distance for feeding and face-to-face bonding',
+      'Baby relies on peripheral vision more than direct focusing; attracted to bold contrast patterns, especially black and white',
+      'Hearing is well developed but tuned to lower-pitched sounds from in-utero experience',
+      'Touch receptors concentrated around the mouth, making it the primary tool for sensory exploration',
+      'Smell is acutely developed from birth to support bonding through skin-to-skin contact and feeding',
+      'The vestibular system is functioning from birth, having developed in utero through movement and gravity changes',
+      'Eye movements are jerky or staggered; baby can track very slowly moving objects',
+      'Baby can recognize mother\'s face within hours after birth and prefers faces over objects',
+    ],
+    reflexes: [
+      'All primitive reflexes present: rooting, head turning, sucking, swallowing, grasp (palmar), and Moro (startle)',
+      'Primitive reflexes assist survival, protection, and the development of caregiver-baby relationships',
+      'Each primitive reflex is linked to specific brain lobes where sensory processing occurs',
+      'Permanent reflexes also present: eye blink, gag, yawn, cough, sneeze, and lip quiver — these never disappear',
+      'Hand closing over an object is entirely reflexive at this stage, not voluntary',
+    ],
+    touchAndBonding: [
+      'Skin-to-skin contact builds invaluable neural connections for security, emotional wellbeing, and immune health',
+      'Use a Topponcino (comfort pillow) made from natural fibers — it holds your scent and helps baby feel safe',
+      'Baby cannot regulate body temperature until about 6 months; keep them snug using natural fiber clothing and bedding',
+      'Gentle, even pressure when drying after bathing helps develop body schema (awareness of all body parts)',
+      'Allow baby to touch their own body freely without restrictive clothing — this builds early proprioception',
+      'Bathing with dimmed lights offers a peaceful bonding experience as baby remembers their watery in-utero life',
+      'Go slowly in the first weeks; it is easy to overstimulate a newborn — open the world to them little by little',
     ],
     communicationTips: [
       'Speak slowly and clearly to your newborn during quiet alert states — they are absorbing the melody and rhythm of your language even though they cannot yet respond',
@@ -230,6 +259,26 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F4AC}',
         category: 'language',
       },
+    ],
+    sensoryDevelopment: [
+      'Baby can now discern distinct primary colors (red, yellow, blue) and more detail than at birth',
+      'Visual focusing and tracking are improving; baby can follow a moving object with more precision',
+      'Obligatory Looking phase may begin — baby may fixate on an object and need help moving it from their visual field',
+      'Peripheral vision starts being inhibited as the occipital lobe wires up the ability to focus directly',
+      'Baby can now voluntarily turn their head toward something of interest, a major sensory milestone',
+      'Hearing continues to develop; baby enjoys gentle tones from rattles and music boxes',
+    ],
+    reflexes: [
+      'All primitive reflexes remain present: rooting, sucking, swallowing, grasp, Moro (startle), Galant, Swimming, Babinski',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+      'Reflexive grasping still dominant — baby may hold a rattle briefly through reflex, not intention',
+    ],
+    touchAndBonding: [
+      'Focus on building a healthy bond through skin-to-skin, holding, and feeding during these early weeks',
+      'Introduce the Communication Dance: echo baby\'s cooing sounds back and forth in reciprocal conversation',
+      'Bath time helps develop body schema — name body parts as you gently towel baby dry with consistent pressure',
+      'Consider introducing very gentle baby massage to strengthen bonding and support body awareness',
+      'A framed family photograph provides a beautiful conversation focus and helps baby feel a sense of belonging',
     ],
     communicationTips: [
       'When your baby coos, respond enthusiastically but calmly — then wait. Give your baby time to respond back. This turn-taking is the earliest form of conversation',
@@ -339,6 +388,26 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         category: 'sensory',
       },
     ],
+    sensoryDevelopment: [
+      'Baby can now discern color on a chromatic scale — for example, five tones of a single color',
+      'Vision acuity (ability to see detail) continues to develop rapidly',
+      'Between 3-6 months, eyes can focus slightly ahead of a moving object, anticipating its path',
+      'Hearing becomes fully developed around month 3; baby can now perceive higher-pitched sounds',
+      'Touch supported through mouthing (oral exploration), being gently held, and developing hand grasping',
+    ],
+    reflexes: [
+      'Many primitive reflexes still present: Galant, Swimming, Moro (startle), Babinski',
+      'Rooting reflex is diminishing by 3-4 months',
+      'Sucking and swallowing transition from reflexive to voluntary around 3-4 months',
+      'Palmar grasp reflex disappears, replaced by intentional (voluntary) grasping',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Mouthing is an important form of touch exploration — allow safe oral exploration of toys',
+      'Make good use of everyday care moments (feeding, bathing, playing) to integrate gentle touch',
+      'Baby massage supports bonding, body schema development, and has physical and emotional benefits',
+      'Encourage tummy time by lying on your stomach beside baby on the movement mat — your closeness helps them feel safe',
+    ],
     communicationTips: [
       'When your baby coos or vocalizes, mirror their sounds back and then add a word or short phrase — "Ooooh! Yes, you see the mobile!" This validates their communication and models language',
       'Read short board books with simple, realistic images, pointing to each picture and naming it clearly. Even at this age, your baby absorbs the rhythm and melody of language',
@@ -447,6 +516,29 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         category: 'language',
       },
     ],
+    sensoryDevelopment: [
+      'Baby develops binocular vision this month, enabling 3D depth perception and dramatically improved detail',
+      'Baby can now focus slightly ahead of a moving object, anticipating its movement path',
+      'Hearing is fully developed; offer a variety of rattles with different sounds for auditory stimulation',
+      'Baby desires to explore every aspect of objects through sight, touch, taste, and hearing simultaneously',
+      'Baby realizes sounds come from your mouth and will focus intently on your face while you speak',
+    ],
+    reflexes: [
+      'Rooting reflex has diminished',
+      'Sucking and swallowing have become voluntary (no longer reflexive)',
+      'Palmar grasp has disappeared, replaced by voluntary grasping',
+      'Swimming reflex disappears between 4-6 months',
+      'Asymmetrical Tonic Neck (fencing) reflex disappears between 4-6 months',
+      'Moro (startle), Galant, and Babinski reflexes still present',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Baby finds greatest comfort from being fed, cradled, cuddled, held on your lap, carried, bathed, and massaged',
+      'Gentle touch continues to strengthen early bonding — it reaffirms that you and baby need each other',
+      'Spontaneous playful interactions build mutual delight and emotional connection',
+      'Use gentle touch during diaper changes, bath time, and playful interactions',
+      'Balance social outings with quiet home time; rushing or interrupting routines causes baby distress',
+    ],
     communicationTips: [
       'Celebrate your baby\'s new sounds by imitating them back — when they squeal, squeal gently in return. When they babble "baaa," say "baaa" and then expand: "baaa — ball! You see the ball"',
       'Use your baby\'s name frequently and naturally throughout the day so they begin to recognize it as belonging to them',
@@ -553,6 +645,25 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F37D}\uFE0F',
         category: 'practical_life',
       },
+    ],
+    sensoryDevelopment: [
+      'Third wave of brain myelination begins around month 5-6, igniting the Temporal lobe for hearing, language, and memory',
+      'Neurological pathways around the Wernicke\'s area (speech comprehension) become intensely active',
+      'Baby\'s ability to recognize foreign speech sounds begins to wane; increased sensitivity to native language',
+      'Vision and hand coordination are combining — baby desires to reach and grasp everything visible',
+      'All senses are working together to build concepts of objects through exploration',
+    ],
+    reflexes: [
+      'Swimming reflex disappears between 4-6 months',
+      'Asymmetrical Tonic Neck (fencing) reflex disappears between 4-6 months',
+      'Moro (startle) and Babinski reflexes still present',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Baby shows keen interest and responsiveness to your emotions and expressions from about 5 months onward',
+      'Support weaning preparation — baby may show signs indicating readiness for solid food introduction',
+      'Provide a variety of toys with different textures, temperatures, and materials for rich tactile exploration',
+      'Baby may need a gently delivered "no" for safety — pair the word with a head shake and redirect to appropriate activity',
     ],
     communicationTips: [
       'The third myelination wave makes this a critical period for language exposure — immerse your baby in rich, varied language throughout the day. Narrate, sing, read, and name everything',
@@ -662,6 +773,27 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         category: 'practical_life',
       },
     ],
+    sensoryDevelopment: [
+      'All senses are now active and continue to be refined through exploration of toys with varied properties',
+      'Hand-eye coordination developing as grasping becomes intentional — baby can transfer objects between hands',
+      'Baby can cross the body midline when reaching for objects, an important coordination milestone',
+      'Color vision, depth perception, detail acuity, and visual tracking all continue developing',
+      'By month 6, sensitivity to native language speech sounds increases while foreign sound recognition diminishes',
+    ],
+    reflexes: [
+      'Galant, Swimming, and Moro (startle) reflexes disappear by 6 months',
+      'Symmetrical Tonic Neck (crawling) reflex reappears around 6-9 months to support crawling development',
+      'Parachute reflex will appear before the onset of walking',
+      'Babinski reflex still present',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Weaning and introduction of solid foods begins — represents a second separation (first was birth) that builds independence',
+      'Prepare yourself emotionally for weaning; baby creates a new relationship with food and seated mealtimes',
+      'Separation anxiety or stranger fear is a normal emotional milestone around 6 months — provide comfort when needed',
+      'Avoid giving baby access to screens — prioritize real-life sensory exploration and human interaction',
+      'Baby\'s strong bond with you enables confident exploration; respond warmly when they return seeking security',
+    ],
     communicationTips: [
       'Repeat your baby\'s canonical babbling back to them and then pair it with meaning: "Mamama — yes, Mama is here! Mama loves you." This begins to bridge babbling sounds with real words',
       'Name objects as your baby reaches for and grasps them. The combination of touch, sight, and hearing a word creates powerful multi-sensory learning connections',
@@ -769,6 +901,25 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F4AC}',
         category: 'language',
       },
+    ],
+    sensoryDevelopment: [
+      'Temporal lobe myelination continues — supporting hearing, language production, memory, and sensory input organization',
+      'Toys with varied shapes, colors, textures, and temperatures provide rich sensory experiences',
+      'Hand-eye coordination needs active support through toys that offer slight challenges',
+      'Equilibrium and spatial sense are developing through diverse movement patterns',
+      'Baby builds understanding of objects by linking sensory exploration with language you provide',
+    ],
+    reflexes: [
+      'Symmetrical Tonic Neck (crawling) reflex reappears around 6-9 months',
+      'Parachute reflex appears before onset of walking',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Baby may start to use gestures like pointing to communicate — respond with naming and conversation',
+      'Stranger Anxiety may emerge; a secure relationship with you helps baby trust their world',
+      'Object Permanence begins developing — baby feels real loss when you disappear from sight',
+      'Provide physical comfort or closeness when needed, and maintain order and routines to build security',
+      'Be an available adult, especially when baby signals a need for help or closeness',
     ],
     communicationTips: [
       'When your baby gestures — reaching up, pushing away, pointing — put words to the gesture: "You want up! You are reaching your arms up because you want me to pick you up." This bridges gesture and language',
@@ -878,6 +1029,25 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         category: 'cognitive',
       },
     ],
+    sensoryDevelopment: [
+      'All senses are active and fully functioning; continue providing toys with broad sensorial variety',
+      'Mealtime finger foods offer valuable observation of how baby picks up small items',
+      'Toys with finer properties and smaller circumferences support thumb involvement in grasping',
+      'Sound encourages engagement — musical instruments and toys build hand and wrist strength',
+      'Visual tracking and spatial awareness develop through movement and toy interaction',
+    ],
+    reflexes: [
+      'Symmetrical Tonic Neck (crawling) reflex is present (reappeared at 6-9 months)',
+      'Parachute reflex appears before onset of walking',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Object Permanence is establishing — baby experiences genuine anxiety when you or a toy disappears',
+      'Play Peek-a-Boo around corners and furniture to help baby understand you still exist when out of sight',
+      'Sing familiar songs as you move around the home so baby hears you and feels secure',
+      'When baby lifts arms asking to be picked up, honor this request for closeness and security',
+      'Snuggle and read a quality book together at calm, alert moments — this builds security and language',
+    ],
     communicationTips: [
       'Name objects your baby points at immediately and enthusiastically — "Ball! You see the ball! It is a red ball." Responding to pointing reinforces this critical communicative gesture',
       'Use simple, consistent phrases during daily routines: "Time to eat," "Let us change your diaper," "All done!" Predictable language paired with predictable routines builds comprehension',
@@ -985,6 +1155,24 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F3B6}',
         category: 'motor',
       },
+    ],
+    sensoryDevelopment: [
+      'Pincer Grasp development begins — baby starts picking up small objects between thumb and index finger',
+      'Dropping Game emerges: baby explores cause and effect, distance, and spatial awareness by releasing objects',
+      'Hand-eye coordination, sequencing, and repetition are all developing through toy exploration',
+      'Books that fit baby\'s hand help practice developing hand abilities through page turning',
+      'Visual tracking continues to develop through toys that roll, spin, and move across floors',
+    ],
+    reflexes: [
+      'Symmetrical Tonic Neck (crawling) reflex present (reappeared at 6-9 months)',
+      'Parachute reflex appears before onset of walking',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'When baby can stand and grasp, transition to changing and dressing them upright to avoid power struggles',
+      'Finger games, simple songs, and rhymes with hand actions provide fun language experiences and physical bonding',
+      'Outdoor spaces with varied surfaces and safe levels provide wonderful exploration for building strength and balance',
+      'Object Permanence continues developing — use reassuring voice and games like Hide and Seek',
     ],
     communicationTips: [
       'Follow your baby\'s pointing — when they point at something, name it clearly and add a simple detail: "Tree! That is a big green tree." Honoring their pointing teaches them that communication works and their interests matter',
@@ -1094,6 +1282,26 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         category: 'motor',
       },
     ],
+    sensoryDevelopment: [
+      'Fourth wave of brain myelination begins, igniting the Frontal lobe and Broca\'s area for grammar and syntax',
+      'Pincer Grasp is developing or being practiced — baby uses tips of index finger and thumb for small objects',
+      'Baby can voluntarily release objects and may practice clapping with more open hands',
+      'All senses are well-established but need continued support through appropriately matched toys',
+      'Hand-eye coordination continues requiring stimulation through varied activities',
+    ],
+    reflexes: [
+      'By 11 months, Symmetrical Tonic Neck (crawling) reflex has disappeared',
+      'Babinski reflex may still be present',
+      'Parachute reflex appears before onset of walking',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Baby may offer cuddles and kisses to familiar, trusted people — a sign of deepening emotional bonds',
+      'Baby looks to others for cues on how to react in social situations — model calm, positive responses',
+      'Play clapping games, hand rhymes, and songs like Peek-a-Boo and Round and Round the Garden together',
+      'Resist the urge to compare development with others; provide a supportive, safe, stimulating environment',
+      'Avoid offering hands for walking — baby\'s arms need to be free for natural balance adjustments',
+    ],
     communicationTips: [
       'Expand on your baby\'s single-word attempts and jargon: if they point and say "dah!" at a dog, respond with "Yes! Dog! That is a big brown dog." Expansion models richer language without correcting',
       'Read together every day, pointing to pictures and naming them. Ask simple questions: "Where is the cat?" and give your baby time to point. Celebrate their correct responses with genuine enthusiasm',
@@ -1201,6 +1409,26 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F5E3}\uFE0F',
         category: 'language',
       },
+    ],
+    sensoryDevelopment: [
+      'Baby can use a neat Pincer Grasp and is intent on practicing it with small objects',
+      'Can point with index finger, wave, and clap with a more open hand',
+      'Continues building knowledge through holding and manipulating toys and objects',
+      'Hand-eye coordination requires ongoing support through toys with finer properties',
+      'Equilibrium requires stimulation as baby cruises, stands, and possibly takes first steps',
+    ],
+    reflexes: [
+      'Symmetrical Tonic Neck (crawling) reflex has disappeared',
+      'Babinski reflex may still be present',
+      'Parachute reflex is present before onset of walking',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Introduce self-care collaboration: show baby how to use a toothbrush, hairbrush, or face cloth together',
+      'Stranger and Separation Anxiety typically diminishes for most babies around this time',
+      'Baby may begin asserting themselves — invite them to help with everyday activities',
+      'Use silence to your advantage — baby needs up to 30 seconds to process a simple request',
+      'Avoid rushing development; trust that milestones will be reached within the normal timeframe',
     ],
     communicationTips: [
       'When your baby says their first word, respond with genuine excitement and expand: if they say "ba" for ball, say "Ball! Yes, that is your ball! You want the ball." This confirms their word was understood and models the full form',
@@ -1310,6 +1538,26 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         category: 'practical_life',
       },
     ],
+    sensoryDevelopment: [
+      'All visual abilities are almost complete — baby enjoys a full 3D world of detail and color',
+      'Oral exploration gradually decreases as other senses take over for gathering information',
+      'Established equilibrium and upright balance allow engagement in self-care and home activities',
+      'Pincer Grasp is being refined; first art activities like scribbling with crayons can be introduced',
+      'Hands no longer needed for locomotion — they are free for independence activities and fine motor refinement',
+    ],
+    reflexes: [
+      'By 12 months, most primitive reflexes have integrated',
+      'Babinski reflex typically disappears, though it may persist up to 18 months',
+      'Parachute reflex is present',
+      'Permanent reflexes continue: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Show interest in baby\'s desire to care for self (dressing, brushing hair, teeth); ignoring these signs causes developmental delays',
+      'Use encouragement over praise: focus on effort and process rather than results',
+      'Baby\'s world expands with walking; they will return to you for security reinforcement through cuddles',
+      'Introduce simple classifying when out and about — point out groups of flowers, dogs, birds, or cars',
+      'Consider introducing a chalkboard easel for self-expression and crossing the midline',
+    ],
     communicationTips: [
       'Celebrate first words enthusiastically but without overcorrecting pronunciation. If your baby says "wa" for water, respond warmly: "Water! You want water. Here is your water." Modeling the correct form without criticism encourages continued effort',
       'Read together daily, encouraging your baby to point to pictures and name them. Ask open-ended questions: "What do you see?" and accept any response — a point, a sound, or a word',
@@ -1418,6 +1666,25 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         category: 'practical_life',
       },
     ],
+    sensoryDevelopment: [
+      'Body myelination completes between 12-14 months, allowing full gross and fine motor potential',
+      'Hands progress from one-hand use to two hands working together (one holds, one works)',
+      'Refinement of the Pincer Grasp drives interest in small things: buttons, zippers, tiny models',
+      'Strong interest in real-life small objects like shells, stones, seedpods, and model animals',
+      'Sensorial information continues to be acquired through movement and manipulation',
+    ],
+    reflexes: [
+      'All primitive reflexes have integrated by 12-14 months',
+      'Babinski reflex typically gone, but may persist up to 18 months',
+      'Only permanent reflexes remain: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Invite your toddler to collaborate in daily activities: collecting shoes, bringing items to the bath, helping in the kitchen',
+      'Use minimal words when showing "how" — keep talking and movement separate so your child can process each',
+      'Provide toddler-sized real items (small brooms, cutting boards, brushes) to support the drive to do it themselves',
+      'When toddler says "no," recognize it as emerging autonomy, not defiance',
+      'Walking together at toddler\'s pace through nature builds strength, sensory exploration, and deep bonding',
+    ],
     communicationTips: [
       'When your toddler points and vocalizes, name the object immediately and clearly. Then add one descriptor: "Dog! Big dog." This "point and name" exchange is the engine of vocabulary growth during this period',
       'Resist the urge to anticipate every need. If your toddler reaches for water, wait a moment for them to attempt to communicate. A brief pause gives them the opportunity to use words or gestures before you respond',
@@ -1525,6 +1792,23 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F33F}',
         category: 'language',
       },
+    ],
+    sensoryDevelopment: [
+      'Body myelination is complete — all gross and fine motor potential is now neurologically supported',
+      'Two-handed coordination becomes more refined through purposeful activities',
+      'Toddler shows strong interest in matching, sorting, and classifying objects by sensory properties',
+      'Vestibular and proprioception systems strengthen through walking, climbing, and carrying objects',
+    ],
+    reflexes: [
+      'All primitive reflexes have fully integrated',
+      'Babinski reflex may still be present in some children up to 18 months',
+      'Only permanent reflexes remain: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Offer limited choices of two options to build decision-making while maintaining security',
+      'Use encouragement that reflects effort and process rather than praise that judges the result',
+      'Provide toddler-sized tools and utensils for real household participation',
+      'Walking together outdoors at toddler\'s pace builds bonding while supporting physical development',
     ],
     communicationTips: [
       'When your toddler says a single word, expand it into a short sentence: if they say "ball," respond "You want the ball! Here is the red ball." This models grammar naturally',
@@ -1637,6 +1921,25 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F5BC}\uFE0F',
         category: 'language',
       },
+    ],
+    sensoryDevelopment: [
+      'Sensory development focuses on refining hand capacities, gross motor movement, and the senses through purposeful activity',
+      'Toddler understands approximately 70-200 nouns by 18 months and is in a sensitive period for spoken language',
+      'Hand-eye coordination precision and two-handed coordination become more refined',
+      'Vestibular and proprioception systems strengthen through walking, climbing, stair use, and carrying objects',
+      'Toddler can point to 3-6 body parts and find familiar objects on request — showing sensory memory integration',
+    ],
+    reflexes: [
+      'All primitive reflexes have fully integrated',
+      'Babinski reflex may still be present in some children up to 18 months, then disappears',
+      'Only permanent reflexes remain: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Support independence through dressing, self-care, and household tasks that build secure attachment',
+      'Provide a full-length mirror so your toddler can develop self-awareness during this stage of growing identity',
+      'Add independence furniture: learning towers, step stools, accessible cupboards with toddler-sized utensils',
+      'Show your toddler "how" to do tasks using slow, clear movements with minimal words — then let them try',
+      'Maintain order, routines, and a predictable, responsive relationship — your voice continues to be a primary source of security',
     ],
     communicationTips: [
       'Feed the naming passion: when your toddler points and asks "What that?" (or their version of it), always answer promptly and clearly. This question-and-answer cycle is how vocabulary grows at its fastest rate',
@@ -1752,6 +2055,24 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         category: 'motor',
       },
     ],
+    sensoryDevelopment: [
+      'Around 18-20 months, an Explosion of Words and Grammar occurs — toddler begins forming two-word phrases',
+      'Fine motor precision and two-handed coordination are approaching completion through purposeful activities',
+      'Toddler can respond to simple verbal tasks requiring action, showing deep sensory-language integration',
+      'Understanding extends to common verbs, pronouns, and descriptive words',
+      'By 24 months, expressive vocabulary reaches 250-300 words',
+    ],
+    reflexes: [
+      'All primitive reflexes have fully integrated',
+      'Only permanent reflexes remain: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Daily activities of home life (Practical Life) provide the richest opportunities for self-construction',
+      'Your toddler needs freedom within limits — offer limited choices to support autonomy while providing security',
+      'Protect your toddler\'s concentration during activities; interruption disrupts self-construction',
+      'Maximum effort activities (long walks, carrying heavy objects) support both physical and psychological development',
+      'Toddler may experience tantrums due to immature Prefrontal Cortex — respond with calm presence and empathy',
+    ],
     communicationTips: [
       'Answer every "what that?" and "why?" with patience and clarity. These questions are the engine of intellectual growth. If you do not know the answer, say so honestly: "I do not know — let us find out together"',
       'Model correct grammar without correcting your toddler directly. If they say "me go park," respond warmly: "Yes, we are going to the park! You want to go to the park." They will self-correct naturally over time',
@@ -1866,6 +2187,25 @@ export const MONTHLY_GUIDES: MonthlyGuide[] = [
         icon: '\u{1F4DA}',
         category: 'language',
       },
+    ],
+    sensoryDevelopment: [
+      'Precision and refinement of hand-eye coordination are essentially complete',
+      'Two hands work together in a fully coordinated way — toddler can make vertical, horizontal, and circular strokes',
+      'The Explosive Epoch around 24 months drives a sudden increase in words, grammar, and phrase formation',
+      'By 30-36 months, language development is considered complete; interest shifts to the written word',
+      'Stereognostic sense develops — toddler can identify concealed objects using only touch memory',
+    ],
+    reflexes: [
+      'All primitive reflexes have long been integrated',
+      'Only permanent reflexes remain: eye blink, gag, yawn, cough, sneeze, lip quiver',
+    ],
+    touchAndBonding: [
+      'Self-Affirmation stage begins around 2.5-3 years — toddler says "NO!" with real meaning; offer choices within limits',
+      'Sensitive Period for manners operates during this stage — model graces and courtesies consistently in daily life',
+      'Wonder and spirituality emerge: share the beauty of nature to connect your toddler with something greater than self',
+      'Participation in family life builds social responsibility — your toddler can now do many daily tasks with confidence',
+      'When tantrums occur, remain calm and predictably loving; request permission to hold your toddler, and stay available',
+      'Art activities like clay work build hand strength, two-hand coordination, and offer rich new sensory experiences',
     ],
     communicationTips: [
       'Answer "why?" questions with genuine, simple explanations rather than dismissing them. If the questions become repetitive, turn it around: "Why do you think?" This encourages reasoning and shows that their curiosity is valued',
