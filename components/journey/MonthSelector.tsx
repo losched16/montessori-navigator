@@ -16,7 +16,7 @@ export default function MonthSelector({ guides, selectedId, onSelect, highlighte
         <span className="text-lg">📅</span>
         <h3 className="text-sm font-bold text-navy-600 uppercase tracking-wide">Month by Month</h3>
       </div>
-      <div className="flex gap-1.5 overflow-x-auto pb-2 -mx-4 px-4" style={{ scrollbarWidth: 'none' }}>
+      <div className="flex gap-1.5 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide sm:flex-wrap sm:mx-0 sm:px-0">
         {guides.map(guide => {
           const isSelected = guide.id === selectedId
           const isHighlighted = guide.id === highlightedId
