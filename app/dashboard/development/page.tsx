@@ -32,10 +32,9 @@ export default function DevelopmentPage() {
   return (
     <div className="max-w-3xl mx-auto pb-20 sm:pb-0">
       <PageBanner
-        image="/images/environment/play-area.jpg"
+        image="/images/environment/baby-playing.jpg"
         title="Baby Development Guide"
         subtitle="Month-by-month milestones and Montessori activities"
-        objectPosition="center 30%"
       />
 
       {/* Month Selector */}
