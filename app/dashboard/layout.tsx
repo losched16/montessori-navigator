@@ -49,7 +49,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
     ...(showStartHere ? [{ href: '/dashboard/start-here', label: 'Start Here', icon: '🚀' }] : []),
     { href: '/dashboard/chat', label: 'Guide', icon: '💬' },
     { href: '/dashboard/children', label: 'Children', icon: '🌱' },
-    { href: '/dashboard/development', label: 'Development', icon: '👶' },
+    { href: '/dashboard/development', label: 'Baby Milestones', icon: '👶' },
     { href: '/dashboard/journey', label: 'Journey', icon: '✨', children: [
       { href: '/dashboard/milestones', label: 'Milestones', icon: '⭐' },
       { href: '/dashboard/curriculum', label: 'Montessori Learning Journey', icon: '🎯' },
