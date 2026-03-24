@@ -6582,6 +6582,7 @@ This series is very helpful for young children as they learn how to self-regulat
     excerpt: `Based on Maria Montessori's writings, The Importance of Being Little by Erica Christakis, and Washington Post article "What the Modern World has Forgotten About Children and Learning," Lorna will explore what we really know about best practice with children in the early childhood and elementary years. After more than 100 years of observing and researching, the majority of young children are still being manipulated by test scores, assessments of all kinds, and adults who simply aren't paying attention to the children in their care. She will pose the important questions that you see in the title of this session.
 
 `,
+    content: ``,
   },
   {
     slug: "webinar-preparing-food-with-toddlers",
@@ -8212,6 +8213,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["5tUlUuvrM3M"],
     excerpt: `"Adjusting to Life 2020-2021: One Voice - Healthy Practices During Covid 19." The importance of the adults in children's lives being on the same page about health issues, family practices, and education is too great to gloss over. It's not always easy for adults to openly discuss their true feelings and beliefs with their partners much less their friends, neighbors, and children's teachers. Adults in children's lives who must take a risk by speaking honestly with each other include two parents living together, two parents that live in separate homes (divorce), parents and grandparents who help with childcare, parents and nannies, parents and teachers, friends and others outside of immediate family. In this session, panelists will offer ideas for sharing openly and ways of coming to agreement on issues that deeply affect children's lives.`,
+    content: ``,
   },
   {
     slug: "adjusting-to-life-in-2020-2021-observing-your-children-at-home",
@@ -8222,6 +8224,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["v4QPSISMEis"],
     excerpt: `Dr. Paul is an expert in observing children the Montessori way. Some of you are spending hours at home with your children as they learn through virtual platforms while others of you are seeing your children at home after school, in the evenings, and on the weekends. Many of you may be wondering, "What should I be looking for? What can I learn about my child? Who, if anyone, should I share my observations with?"`,
+    content: ``,
   },
   {
     slug: "adjusting-to-life-in-2020-2021-cultivating-a-growth-mindset",
@@ -8234,6 +8237,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     excerpt: `Kathryn Kvols, author of "Redirecting Children's Behavior" and parenting coach, will join us to give insights and strategies for cultivating growth mindsets for your children and you. How we perceive our families, our work, and our world influences how we interact with each other and what we do in life. When children are introduced to and supported in practicing growth mindset concepts, it becomes easier to overcome life's challenges.
 
 `,
+    content: ``,
   },
   {
     slug: "adjusting-to-life-2020-2021-what-s-in-the-silver-lining",
@@ -8244,6 +8248,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["WG4nvWuzfYQ"],
     excerpt: `Many of you may be thinking, "So what's the silver lining in this COVID situation?" Our panel, led by Tammy Willen, Head of Bay Montessori, MD will take a look with us at what could possibly be in the COVID silver lining! `,
+    content: ``,
   },
   {
     slug: "the-wonder-of-woodwork",
@@ -8254,6 +8259,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Woodworking"],
     videoIds: ["yrUm8vTAE4k"],
     excerpt: `In this broadcast, Pete Moorhouse explains just how valuable the experience of woodwork can be for young children. Across the world, we are seeing a renewed interest in woodwork. He will be discussing how to introduce woodwork and encourage children's creativity and will share information about the most suitable tools for young hands and address any safety concerns. `,
+    content: ``,
   },
   {
     slug: "boundaries-making-them-work-at-home-for-your-child-s-learning-and-development",
@@ -8264,6 +8270,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["1xOIkSxQzKg"],
     excerpt: `Discussion on balancing work and home, for you and your child while you are all at home. Ideas for helping your child work and play with independence. `,
+    content: ``,
   },
   {
     slug: "monitoring-and-maximizing-your-child-s-online-life-and-learning",
@@ -8275,6 +8282,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     videoIds: ["7qBKyeH4yiw"],
     excerpt: `Jonathan Wolff and Michael Crump - Helping Them Engage in e-Learning, and Use Their Free-Time Screen Time Responsibly - What is the role of today’s parent/caregiver in supporting children’s online learning and free-time screen time? It’s neither that of “missing-in-action” or “micro-manager.” How we help our children experience deep engagement and enjoyment in their Montessori e-lessons, without hovering over them, badgering or bribing them, will be the topic of our webcast. Additionally, we will discuss how to create a set of “pre-nuptial” agreements with children about responsible use of the internet in their free time. Join Montessori educators and parents, Michael Crump and Jonathan Wolff, for a lively discussion about online learning and parenting.  
 `,
+    content: ``,
   },
   {
     slug: "supporting-the-development-of-concentration-organization-and-task-completion-the",
@@ -8286,6 +8294,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     videoIds: ["sFyVdN5NSgk"],
     excerpt: `In the field of education, the buzz phrase has been 'Executive Functioning Skills.' In this session, Tammy Willen and others on the Montessori Family Support Team will parse out what executive functioning skills means and further discuss how Montessori classrooms and homes work to develop these important life skills. Montessori said that educators/parents should not be so focussed on preparing children for school (meaning high school and beyond) but on preparing children for life.
 `,
+    content: ``,
   },
   {
     slug: "exploring-our-core-values-keeping-the-holidays-joyful-and-meaningful",
@@ -8296,6 +8305,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Holidays"],
     videoIds: ["whAmvrehmng"],
     excerpt: `Many of us feel annoyed and pressured by the commercialism around the winter holiday season. This year even more so because of health concerns, job losses, and social unrest. During this session we will ponder questions like these, What does Thanksgiving mean in our family? How can we best express that meaning? Why do we make so much of Christmas, Hanukkah, and other winter holidays? What is gift-giving all about? What message do we want to express to our families and friends? What are the inner meanings of the holiday season this year? Join our panel on the Montessori Family Support Team to explore our core values with regard to the holidays.`,
+    content: ``,
   },
   {
     slug: "part-1-from-life-s-moments-to-resolutions-starting-the-new-year-with-positivity-",
@@ -8306,6 +8316,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["JAXIqJwHQos"],
     excerpt: `Do you ever wonder how people decide what goals/resolutions to set for themselves and their families? What's the process? Why do we set goals or resolutions and how do we keep them? How do we help our children set goals for themselves? This two-part series will answer some of these questions. Then our team will offer practical, fun ways to help families stay aware of their goals and motivated to keep moving forward with them.`,
+    content: ``,
   },
   {
     slug: "part-2-from-life-s-moments-to-resolutions-putting-resolutions-into-practice",
@@ -8316,6 +8327,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["1Q3Uz4Oj31Y"],
     excerpt: `Once you have decided on your resolutions, how do you and your family put them into practice? How do you make them stick? This 2nd part of the series will be loaded with practical, fun ideas and examples of how to get going and keep going. Join the Montessori Family Support Team as they offer suggestions for helping your family stay aware of your goals and motivated to keep moving forward with them.`,
+    content: ``,
   },
   {
     slug: "adjusting-to-life-in-2021-observations-from-a-head-of-school-with-dr-larry-schan",
@@ -8326,6 +8338,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["oqnl3dZ_OOs"],
     excerpt: `Dr. Larry Schanker is the Head of Brookview Montessori School in Benton Harbor, MI. As school leaders go into the New Year, we observe Montessori parents experiencing a broad range of emotions. It is important to know you are not alone in feeling the way you do. Join us for a discussion of parental stress, fear, and frustration, and an exploration of how to find strength and hope moving forward.  `,
+    content: ``,
   },
   {
     slug: "part-3-from-life-s-moments-to-resolutions-building-character-along-the-way",
@@ -8336,6 +8349,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["LHf1RF5Z508"],
     excerpt: `This session is designed to look at the progress that families are making, lessons they have learned, and stories they want to share. Whether you have attended Parts 1 & 2 or not, there will ideas to share and questions to be answered for all who attend.`,
+    content: ``,
   },
   {
     slug: "optimism-a-cornerstone-to-resilience",
@@ -8346,6 +8360,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Resilience"],
     videoIds: ["pZnM9bb4Ppc"],
     excerpt: `Why is realistic optimism so important in strengthening and maintaining your ability to spring back from life's tough times? Can we choose an optimistic thinking style? Join Lorna and the team for tips to achieving a positive mindset in 2021.`,
+    content: ``,
   },
   {
     slug: "the-healing-power-of-music",
@@ -8356,6 +8371,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Music"],
     videoIds: ["QWKZ2q9Ttao"],
     excerpt: `Join the Frank and the Montessori Family Alliance panel for a discussion of how important music is to our children's souls and ours!`,
+    content: ``,
   },
   {
     slug: "part-1-all-we-need-is-love-giving-and-receiving-love",
@@ -8366,6 +8382,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["qNybiznIF5M"],
     excerpt: `This session is an invitation for us to look at the many love relationships in our lives. Here are a few:  Parent to Child; Child to Child; Grandparent to Child; Parent to self; Child to self; Sibling to sibling; Parent to Parent; Child to Natural Environment, Child to Human Made Environment.`,
+    content: ``,
   },
   {
     slug: "forgive-for-good-a-prescription-for-family-health-and-life-success",
@@ -8376,6 +8393,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["Mi004pLWwJI"],
     excerpt: `Description: In his groundbreaking book, Forgive for Good, Dr. Luskin reminds us that, “Forgiveness is the feeling of peace that emerges as you take your hurt less personally, take responsibility for how you feel, and become a hero instead of a victim in the story you tell.” Join Dr. Luskin and the Montessori Family Alliance panel for a discussion about how forgiveness, when modeled by parents and teachers, exemplified in storytelling, and expressed routinely in family interactions can help children learn this healing quality of character.`,
+    content: ``,
   },
   {
     slug: "part-1-navigating-the-deep-sea-of-social-media-with-our-children-the-montessori-",
@@ -8386,6 +8404,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["AgFFf1sGu80"],
     excerpt: `Join Caitlin Roper, Middle and High School instructor at NewGate School, and our panel for this enlightening session. We will share practical and positive tips for parents as they "push through the waters of uncharted seas."`,
+    content: ``,
   },
   {
     slug: "part-2-all-we-need-is-love-balancing-accountability-with-empathy-respect-and-lov",
@@ -8396,6 +8415,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["EcAbxR2OkkY"],
     excerpt: `Join Michael Crump and Jonathan Wolff as they guide parents in creating that fine balance of the scales in their relationships with their children.`,
+    content: ``,
   },
   {
     slug: "welcoming-spring-and-getting-outdoors-reconnecting-with-nature-after-a-covid-win",
@@ -8406,6 +8426,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["OiMbEYedAQA"],
     excerpt: `Tammy Willen, Head of Bay Montessori School in southern Maryland, will lead us back to our source of centering in the natural world as we look forward to spring and summer.`,
+    content: ``,
   },
   {
     slug: "the-seasons-of-childhood-understanding-your-child-s-growth-and-learning",
@@ -8416,6 +8437,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["LNAqxWRuhRs"],
     excerpt: `Our panel will take participants on a bird' eye view of the opportunities for positive change that we can experience as we move forward in 2021 and beyond.`,
+    content: ``,
   },
   {
     slug: "bless-them-change-me-impact-of-attitudes-on-relationships-with-dorothy-harman",
@@ -8426,6 +8448,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["NIP3Dtt8_Ug"],
     excerpt: `Relationships occur naturally, after all, we are social creatures. The very composition of our brain leads us to join others. While many relationships occur effortlessly, others require more intentionality. Join Dorothy Harman, M.Ed, in a discussion about getting the most out of our relationships.`,
+    content: ``,
   },
   {
     slug: "growing-neural-pathways-with-infants-and-toddlers",
@@ -8436,6 +8459,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["WecVjJm9p1M"],
     excerpt: `Join Kathy Leitch and Terri Sherrill as they discuss the importance of the first three years as your child's brain grows more and more neural networks.`,
+    content: ``,
   },
   {
     slug: "a-montessori-inspired-home-life-based-on-montessori-principles-1",
@@ -8446,6 +8470,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Montessori at Home"],
     videoIds: ["25JxoAhJxoU"],
     excerpt: `What are the most important elements of a "Montessori-inspired Home?" Are they the specific didactic materials, expensive furnishings, huge amounts of space, relationships among family members, types of activities that the family does together, or lots of outdoor space? In this session Alicia Diaz-David, parent and Montessori credentialed teacher, will address important elements based on Montessori principles that make a Montessori-inspired home.`,
+    content: ``,
   },
   {
     slug: "montessori-or-montessori-ish-how-to-choose-an-authentic-montessori-school",
@@ -8456,6 +8481,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["zd602KtTf0U"],
     excerpt: `How Do You Know What’s the Real Deal? You thought you did your homework before enrolling your child but somehow it just doesn't feel right. Maybe your expectations haven't been met with regard to progress in learning or with your child's comfort level. What do you do to better understand if the school is the right match for your child and your family? Our panel will share what parents can do to resolve their questions about their choice of schools.`,
+    content: ``,
   },
   {
     slug: "the-path-to-reading-for-3-6-year-olds-montessori-style",
@@ -8466,6 +8492,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["LcuJrB9MrzY"],
     excerpt: `Join Amanda Riccetti, a certified 3-6 Montessori teacher and author of "Reading with Miss Amanda," for tips on supporting children as they learn to write and read. She will share her journey and what inspired her to create a set of supplementary books to use with children who may be struggling along the path of learning to read even in a Montessori environment.`,
+    content: ``,
   },
   {
     slug: "life-choices-that-support-childrens-success",
@@ -8476,6 +8503,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["_AXWP9m7LU0"],
     excerpt: `"Life is your health and your wealth, therefore, health is your lifestyle," is Nicole Allsop's mantra. Nicole is a Registered Dietitian Nutritionist and Exercise Specialist and works at NewGate School. With a keen interest in building habits for a lifetime of wellness, Nicole will look at nurturing healthy habits in children from their early years. "It hurts and I feel tearful as those that die or suffer from health diseases did not have to. I recall a Montessori virtual class session, where the focal topic was on disorders in the classroom. As I recollected, I remembered thinking of how some of these disorders were a result of lifestyle activities. She will start by simply laying a strong foundation for the body through nutrition and its effects on children's ability to be successful.`,
+    content: ``,
   },
   {
     slug: "summer-slides-to-summer-strides-looking-through-a-montessori-lens-at-summer",
@@ -8486,6 +8514,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Summer"],
     videoIds: ["wb7fj_RZF58"],
     excerpt: `So many parents worry that their children will forget everything they have learned during the school year with so much time off during the summer. Some may be even more concerned than ever because of the accommodations we have had to make in our schools because of the pandemic. Cheryl Allen, Jon Wolff, and Lorna McGrath will share ways to view summer activities through a Montessori lens, spotlighting how children continue to develop physically, socially, emotionally, and intellectually while using what they have learned in the classroom in all aspects of their lives during the summer break.`,
+    content: ``,
   },
   {
     slug: "how-parents-can-help-children-become-culturally-aware-respectful-and-responsive",
@@ -8496,6 +8525,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["NtOLIPhx1XQ"],
     excerpt: `Michael Crump and Jon Wolff will focus on the important role that parents play in supporting their children in becoming aware and appreciative of the many cultures that exist in their neighborhoods, country, and the world.`,
+    content: ``,
   },
   {
     slug: "creating-infant-toddler-environments-at-home",
@@ -8506,6 +8536,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["Pde4Ok4bN6U"],
     excerpt: `Infants and toddlers are new to the world and experiencing rapid brain development. In this session, Alanea Williams will share some simple ways to support freedom, exploration, and curiosity within our loving home environments while embracing the young child in our family community.  Let's explore some home ideas the Montessori way!`,
+    content: ``,
   },
   {
     slug: "summer-fun-with-the-grandchildren",
@@ -8516,6 +8547,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Summer"],
     videoIds: ["oLOXQuPKzAg"],
     excerpt: `Join Margot Anderson and Lorna McGrath as they share some of the many ways that grandparents can enjoy summer experiences with their grandchildren.`,
+    content: ``,
   },
   {
     slug: "as-your-child-begins-a-new-school-year-transitioning-from-one-level-to-another",
@@ -8526,6 +8558,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Moving Up","Transitioning"],
     videoIds: ["i1JOK1M1Y5E"],
     excerpt: `Is your child stepping into a new stage of development as they transition from one level of school to another? Are you feeling excited, a little anxious, maybe even kind of sad as you watch your child move forward, grow, and become more and more independent? In this session our team will offer information about how your child is changing, a glimpse at differences in classroom expectations, and some general tips for preparing yourself and your child for the new classroom experience.`,
+    content: ``,
   },
   {
     slug: "global-classrooms-the-future-of-montessori-e-learning-programs",
@@ -8536,6 +8569,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["eLearning"],
     videoIds: ["maaoHp_PAGM"],
     excerpt: `Join Tim Seldin and Tanya Ryskind as they discuss the potential of Montessori e-learning programs as an alternative to our in-person, at-school options. What models are being created and offered? How does this option meet student/family needs? What is the best practice in e-learning and how does that correlate with essential Montessori pedagogical principles? Bring your questions and ideas as this will be an interactive session.`,
+    content: ``,
   },
   {
     slug: "an-open-door-to-creativity-how-science-connects-kids-to-nature-arts-literature-a",
@@ -8546,6 +8580,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["MFvx-_99yIQ"],
     excerpt: `Do you often separate scientific topics from artistic or creative ones? Do you think of the study of science as different from the study of literature and art? Cynthia will guide us through a discussion of how scientific topics can relate to and inspire artistic and creative pursuits. She will include ideas for outdoor and indoor activities that bridge these connections, touching on observation, nature journaling, classification, and more. Cynthia will suggest creative writing activities and also recommend several exciting resource books.`,
+    content: ``,
   },
   {
     slug: "your-child-s-first-experience-from-home-to-school-infants-toddlers-and-three-yea",
@@ -8556,6 +8591,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Transitioning"],
     videoIds: ["VdXJ6_izYEg"],
     excerpt: `Tanya Rotter and Kathy Leitch, both Montessori credentialed Infant-Toddler teachers, will guide you through some of the feelings that parents experience when their child goes off to school for the first time. They will include ways that Montessori schools support parents and their little ones and answer some common questions that parents ask about the transition from home to school.`,
+    content: ``,
   },
   {
     slug: "being-in-the-outdoors-with-infants-and-toddlers-with-alanea-williams",
@@ -8566,6 +8602,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: [],
     videoIds: ["2essZr1L7xs"],
     excerpt: `Nature is calling! Time outdoors with our infants and toddlers is more important than ever today as busy family schedules, modern conveniences, and the distractions of technology keep us indoors. We will explore simple ideas for time in nature with our young children and discuss how the natural world supports healthy development.`,
+    content: ``,
   },
   {
     slug: "journey-into-the-montessori-learning-experiencei-what-to-expect-in-early-childho",
@@ -8577,6 +8614,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     videoIds: ["DnqlM1FgYRg"],
     excerpt: `"A New Level of Independence: Looking at Early Childhood Classroom Communities" with the MFFN Team
 `,
+    content: ``,
   },
   {
     slug: "journey-into-the-montessori-learning-experience",
@@ -8587,6 +8625,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
     tags: ["Transitioning"],
     videoIds: ["SkCie4G4WPk"],
     excerpt: `What to Expect in Elementary Classrooms`,
+    content: ``,
   },
   {
     slug: "what-should-be-included-in-a-montessori-classroom",
@@ -8601,6 +8640,7 @@ These webinars are designed for parents and teachers. Guests are invited to join
 This week we continued our discussion about what should be included in an early childhood Montessori classroom, and went beyond to discuss the issues of whether non-Montessori activities can, and should, be added as well.
 
 `,
+    content: ``,
   },
   {
     slug: "the-power-of-storytelling-part-2",
@@ -8627,6 +8667,7 @@ http://www.montessoriservices.com/parent-child-pre...
 The recordings of the webinars are archived in the IMC member's resource center.
 
 `,
+    content: ``,
   },
   {
     slug: "the-power-of-storytelling-part-1",
@@ -8656,6 +8697,7 @@ The recordings of the webinars are archived in the IMC member's resource center.
 
 
 `,
+    content: ``,
   },
   {
     slug: "a-conversation-about-montessori-secondary-programs",
@@ -8695,6 +8737,7 @@ Discussion topics include:
 
 
 `,
+    content: ``,
   },
   {
     slug: "help-your-teachers-teach-with-spirit",
@@ -8707,6 +8750,7 @@ Discussion topics include:
     excerpt: `Help your Teachers teach with Spirit is a webinar designed to support teachers to embrace their true calling, understand the divine importance of their role and transform their teaching experience from mundane to meaningful to magical. Brain research and the left/right brain are used to define the six-step process of how an Aha! moment happens, how to replicate and sustain these learning moments of epiphanies for the the teachers and their students.
 
 `,
+    content: ``,
   },
   {
     slug: "is-there-homework-in-montessori",
@@ -8721,6 +8765,7 @@ Discussion topics include:
 Download Handout
 
 `,
+    content: ``,
   },
   {
     slug: "inquiry-based-learning-in-montessori",
@@ -8735,6 +8780,7 @@ Download Handout
 
 
 `,
+    content: ``,
   },
   {
     slug: "attentional-and-behavioral-disorders-in-the-montessori",
@@ -8751,6 +8797,7 @@ Our guest was Dr. Andrew Cutler and the topic was Attentional and Behavioral Dis
 
 
 `,
+    content: ``,
   },
   {
     slug: "observation-with-paul-epstein-part-1",
@@ -8767,6 +8814,7 @@ Dr. Paul Epstein is the well known author of a Montessori Observer's Handbook. W
 
 
 `,
+    content: ``,
   },
   {
     slug: "organizing-a-summer-program-for-your-montessori-school",
@@ -8779,6 +8827,7 @@ Dr. Paul Epstein is the well known author of a Montessori Observer's Handbook. W
     excerpt: `On January 15th, Tim Seldin gave this presentation about how Montessori schools can respond to their own unique opportunities to develop programs to bring in tuition during the summer and extended school holiday breaks. He discussed strategies used by small schools and large.
 
 `,
+    content: ``,
   },
   {
     slug: "my-child-s-learning-experiences-in-their-school-and-classroom-parent-involvement",
@@ -8789,6 +8838,7 @@ Dr. Paul Epstein is the well known author of a Montessori Observer's Handbook. W
     tags: [],
     videoIds: ["LNCohtxlO6c"],
     excerpt: `Many parents ask, "What opportunities are there for me at my child's school and in the classroom that would allow me to be involved and supportive?" Our Montessori experts will give you many ideas and suggestions for parents to think about and to ask their child's teacher or school administrator about. Join us for this very informative session.`,
+    content: ``,
   },
   {
     slug: "building-a-school-culture-of-peace-and-transformation",
@@ -8807,6 +8857,7 @@ Dr. Paul Epstein is the well known author of a Montessori Observer's Handbook. W
 
 
 `,
+    content: ``,
   },
   {
     slug: "bridgemont-international-school-an-innovative-approach-to-montessori-secondary-s",
@@ -8817,6 +8868,7 @@ Dr. Paul Epstein is the well known author of a Montessori Observer's Handbook. W
     tags: ["Bridgemont"],
     videoIds: ["UOrZa0kb9kE"],
     excerpt: `Bridgemont has been designed from the ground up to blend authentic Montessori practice with a modern understanding of teenagers’ developmental needs. This is a program like no other, with a heavy focus on collaboration and entrepreneurship, online learning blended with real world experiences. Join us to find out more about this unique program from Dr. Robin Howe, Head of School.`,
+    content: ``,
   },
   {
     slug: "how-montessori-schools-introduce-children-at-age-5-and-older",
@@ -8831,6 +8883,7 @@ Dr. Paul Epstein is the well known author of a Montessori Observer's Handbook. W
 
 
 `,
+    content: ``,
   },
   {
     slug: "three-period-lesson-vocabulary",
@@ -8847,6 +8900,7 @@ Join Lorna McGrath for a look at a powerful teaching for the introduction of new
 Download File
 
 `,
+    content: ``,
   },
   {
     slug: "avoiding-sibling-rivalry",
@@ -8863,6 +8917,7 @@ Download File
 
 
 `,
+    content: ``,
   },
   {
     slug: "children-and-money",
@@ -8876,6 +8931,7 @@ Download File
 Creative ways to Learn, Earn, and Manage Money within the Context of Each Families Values
 
 Download File`,
+    content: ``,
   },
   {
     slug: "introducing-montessori-for-every-family-a-practical-parenting-guide-for-living-l",
@@ -8886,6 +8942,7 @@ Download File`,
     tags: [],
     videoIds: ["Ve-lHAE3UnI"],
     excerpt: `We think we've found one of the most clear and, at the same time, forgiving guides for parents to cultivate cooperation, order, consistency, and harmony in their homes. Join us to learn more about how this book offers suggestions and ideas for family activities and traditions, for setting up homes that are comfortable and made for success for all family members, and for building solid relationships the Montessori way.`,
+    content: ``,
   },
   {
     slug: "encouraging-kindness-and-empathy",
@@ -8902,6 +8959,7 @@ Download File
  
 
 `,
+    content: ``,
   },
   {
     slug: "encouraging-your-child-s-independence",
@@ -8914,6 +8972,7 @@ Download File
     excerpt: `Lorna McGrath explores how we can encourage our children's independence from 18 months to age 3.
 
 `,
+    content: ``,
   },
   {
     slug: "celebrating-winter-holidays-global-traditions",
@@ -8924,6 +8983,7 @@ Download File
     tags: ["celebrations","Holidays"],
     videoIds: ["-C7Ju1MGqQM"],
     excerpt: `Global Winter Traditions: Looking at the Variety and Diversity of Winter Holiday Traditions with Your Family - Join us for insights into how to share and appreciate other families' experiences with your children during this special time of year. `,
+    content: ``,
   },
   {
     slug: "webinar-what-do-you-read-inspiring-the-literary-artist-in-your-child",
@@ -8938,6 +8998,7 @@ Download File
 Join Nora Faris and Cheryl Allen to get tips on what to look for in books for children that will inspire, delight, and touch their creative spirits. From rhyming and repetition for the youngest ones, to tales of adventure and mystery for the elementary years, to classics and modern drama for the adolescents, our guests will peak your excitement about an in person trip to your local bookstore or online to pick out books for holiday giving.
 
 `,
+    content: ``,
   },
   {
     slug: "a-cup-of-calm-recipe-to-relaxation",
@@ -8948,6 +9009,7 @@ Join Nora Faris and Cheryl Allen to get tips on what to look for in books for ch
     tags: ["Appreciation","calm"],
     videoIds: ["euybx5O9T-I"],
     excerpt: ` A Cup of Calm...Whether you and your family have just finished celebrating or are about to be immersed in a celebration we thought that you would all appreciate some time to take a deep breath. Cassi Mackey will lead this session of relaxation ideas and experiences for you and your family.`,
+    content: ``,
   },
   {
     slug: "setting-the-tone-for-2022-family-fun-is-more-than-fluff",
@@ -8962,6 +9024,7 @@ Join Nora Faris and Cheryl Allen to get tips on what to look for in books for ch
 Life always has up's and down's. Helping our children feel joyful, confident, brave, capable, and loved goes a long way in creating a healthy outlook no matter what life brings. Being intentional and having fun connecting with each other helps to train our brains to be resilient. Join our team as we explore ways to laugh and find joy in being together in our families.
 
 `,
+    content: ``,
   },
   {
     slug: "out-of-balance-cultivating-equilibrium",
@@ -8973,6 +9036,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     videoIds: ["KDHVlDei1vE"],
     excerpt: `Modeling healthy balance in our adult lives is a good start for families in creating equilibrium. In this session our team will share practical ideas and strategies for parents to use as they help their children discover and identify their passion. This process often leads to creating balance in their children's choice of activities and schedules, ultimately cultivating equilibrium in family life.   
 `,
+    content: ``,
   },
   {
     slug: "environmental-science-and-montessori",
@@ -8983,6 +9047,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     tags: [],
     videoIds: ["JoW6xodvZ_8"],
     excerpt: `What do two young men who are separated by 13 years in age have in common that may have influenced their choice of university studies, careers, and lifestyles? Could it be their Montessori educational experience during childhood and adolescence? How about their family’s values and life choices? Join us to hear what they have to say. `,
+    content: ``,
   },
   {
     slug: "groundbreaking-advocate-for-children-dr-maria-montessori",
@@ -8993,6 +9058,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     tags: [],
     videoIds: ["-6J8qOgh-1Y"],
     excerpt: `Join Tim and our team of panelists as we explore how Maria Montessori's insights about children and educational innovations have enhanced the health, happiness, and learning capacities of young people. We will highlight the scientific discoveries of Dr. Montessori that parents can apply at home with their children, including observation, redirecting behavior, optimizing learning, concentration, and study habits, personal self-care, and care of the home environment.`,
+    content: ``,
   },
   {
     slug: "culturally-responsive-parenting",
@@ -9003,6 +9069,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     tags: [],
     videoIds: ["o04YZrBX2AI"],
     excerpt: `We will explore diversity through high-quality children's literature. Join us to discuss important topics including race, socio-economic status, religion, sexual orientation, and ethnicity in developmentally appropriate ways with your children.`,
+    content: ``,
   },
   {
     slug: "the-how-to-s-of-family-meetings-watch-our-panelists-role-play-a-family-meeting",
@@ -9013,6 +9080,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     tags: [],
     videoIds: ["zL4rXZbzkIU"],
     excerpt: `We often mention Family Meetings during our webinars but it has been awhile since we actually went through the process step by step with our participants. Please join us as our team members role play a family meeting in action on this broadcast.`,
+    content: ``,
   },
   {
     slug: "what-is-typical-development-in-montessori-family-life",
@@ -9023,6 +9091,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     tags: ["Development"],
     videoIds: ["Ro10bxYZEKs"],
     excerpt: `So many parents have asked our team over the years, "How do we prepare for Parent/Teacher/Student conferences? What should we ask about?" Our team will share their suggestions based on what typical benchmarks are at different levels in a Montessori school. Join us as you prepare for spring conferences.`,
+    content: ``,
   },
   {
     slug: "strategies-for-successful-conferences-so-much-to-say-so-little-time",
@@ -9033,6 +9102,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     tags: [],
     videoIds: ["bh7Uyr8mvJk"],
     excerpt: `Join Dorothy Harman, author of Intentional Connections, for tips on how to get the information that you need and want from your child's teacher about their progress in their Montessori classroom. From her many years as a classroom teacher Dorothy will guide you and your expectations for the conference.`,
+    content: ``,
   },
   {
     slug: "getting-curious-about-curiosity",
@@ -9045,6 +9115,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     excerpt: `Have you wondered what it takes to get your kids to have a meaningful conversation with you? How might we approach children with questions that get them talking? Join Jody Malterre to practice questioning strategies for toddlers through teens that create connection and critical thinking.
 
 `,
+    content: ``,
   },
   {
     slug: "a-montessori-adult-is-with-cassi-mackey",
@@ -9057,6 +9128,7 @@ Life always has up's and down's. Helping our children feel joyful, confident, br
     excerpt: `The art of following the child is at the heart of the Montessori pedagogy. Adults help guide the child through their life, leaving the child free to develop their own will, independence and ability to make their own choices and decisions. Imagine if children are being guided the same way both at home and at school. Come explore the role of the Montessori adult and how it provides the child with a sense of identity, security, confidence, and love.
 
 `,
+    content: ``,
   },
   {
     slug: "stewards-of-the-earth-preparing-for-earth-day-with-our-families",
@@ -9073,6 +9145,7 @@ Dr. Maria Montessori was a person who was not only a brilliant visionary for wor
 SHOW LESS
 
 `,
+    content: ``,
   },
   {
     slug: "a-montessori-view-the-people-in-the-room",
@@ -9085,6 +9158,7 @@ SHOW LESS
     excerpt: `In a Montessori learning environment, the child makes most of the choices for their learning. The teacher is a guide and a resource for the child rather than the giver of knowledge. A Montessori teacher, or guide, is more like a coach than a traditional teacher.
 
 `,
+    content: ``,
   },
   {
     slug: "turn-i-can-t-wait-for-school-to-start-again-to-i-don-t-want-summer-to-end",
@@ -9101,6 +9175,7 @@ Join our team as they offer suggestions for creating a summer routine that will 
  
 
 `,
+    content: ``,
   },
   {
     slug: "interview-with-the-2022-newgate-school-graduates",
@@ -9115,6 +9190,7 @@ Join our team as they offer suggestions for creating a summer routine that will 
 Hear from students who are about to graduate from a Montessori High School as they reflect on the benefits of a Montessori education.
 
 `,
+    content: ``,
   },
   {
     slug: "navigating-current-events-with-your-family-in-a-healthy-and-meaningful-way",
@@ -9129,6 +9205,7 @@ Hear from students who are about to graduate from a Montessori High School as th
 Our team will share practices for discussing emotional and often uncomfortable happenings in our world with your children. We will share ideas relative to children's developmental stage and maturity.
 
 `,
+    content: ``,
   },
   {
     slug: "social-justice-parenting-the-child-is-both-the-hope-and-the-promise-for-the-futu",
@@ -9143,6 +9220,7 @@ Our team will share practices for discussing emotional and often uncomfortable h
 Join Dr. Traci Baxley, author of Social Justice Parenting, as she offers suggestions for parents to consciously address racial, social, and economic inequities of our times with our children. Forty minutes won't be nearly enough time to cover all that Dr. Baxley has written in her powerful book, so in this webinar she will focus on "radical love" and "modeling advocacy."
 
 `,
+    content: ``,
   },
   {
     slug: "children-and-animals-large-and-small",
@@ -9156,6 +9234,7 @@ Join Dr. Traci Baxley, author of Social Justice Parenting, as she offers suggest
 
 Jenni discusses the ways you can help your child better understand domestic, wild, and farmed animals. With your gentle guidance, your child can learn to be respectful and safe when interacting with all living creatures.
 `,
+    content: ``,
   },
   {
     slug: "traveling-with-your-child-making-it-a-positive-experience",
@@ -9168,6 +9247,7 @@ Jenni discusses the ways you can help your child better understand domestic, wil
     excerpt: `Join our team for an informative session covering steps to help create family travel experiences that will form happy memories for years to come. Our team will offer suggestions and ideas for preparing and carrying out summer plans with your children. So, whether your travels will be near or far, on foot or in a car or on a plane, don't miss this fun and practical guidance from our team.
 
 `,
+    content: ``,
   },
   {
     slug: "meeting-the-needs-of-teenagers-on-the-road-or-at-home",
@@ -9182,6 +9262,7 @@ Jenni discusses the ways you can help your child better understand domestic, wil
 Our team will share practices for discussing emotional and often uncomfortable happenings in our world with your children. We will share ideas relative to children's developmental stage and maturity.
 
 `,
+    content: ``,
   },
   {
     slug: "neuromyths-misconceptions-about-your-child-s-brain",
@@ -9194,6 +9275,7 @@ Our team will share practices for discussing emotional and often uncomfortable h
     excerpt: `"Neuromyths are false ideas about the brain that do harm. Believing that people are either more "right-brained" or "left-brained" does harm in the same way as believing that girls are better at language and boys are better at math: these neuromyths keep people from reaching their own potential. In this talk we will look at some of the most common myths, what the current evidence says about them, and talk about ways to avoid mythical beliefs in the future."
 
 `,
+    content: ``,
   },
   {
     slug: "preparing-for-the-new-school-year-planning-for-success",
@@ -9206,6 +9288,7 @@ Our team will share practices for discussing emotional and often uncomfortable h
     excerpt: `As we head into a new school year, we can begin to prepare our homes, to reach consensus about family agreements, and to develop family schedules that work. Join our team for insights into how to "set the stage" for back-to-school success.
 
 `,
+    content: ``,
   },
   {
     slug: "things-you-should-know-about-raising-tween-boys",
@@ -9220,6 +9303,7 @@ Our team will share practices for discussing emotional and often uncomfortable h
 There are some nuances to raising a tween boy that are different from raising girls. If you know about them, it is easier to navigate these challenges. If you don’t know them, you are more likely to take some of the behavior personally or feel worried about them. Join Kathryn Kvols for more info about raising tween boys.
 
 `,
+    content: ``,
   },
   {
     slug: "foods-for-thought-navigating-your-family-s-dietary-needs-or-preferences",
@@ -9234,6 +9318,7 @@ There are some nuances to raising a tween boy that are different from raising gi
 When it comes to eating, what's the big deal? In group settings like school lunches, birthday parties, or even eating dinner with the neighbors there can be challenges for your family. Children who have food allergies, childhood diabetes, certain religious beliefs, or specific food preferences related to family values may have difficulty "fitting in" with their peers. What can parents do to help their child and others understand and accept these kinds of differences? here are some ideas from Ann Marie Paradis, an acupuncture doctor, herbalist, and Montessori mom.
 
 `,
+    content: ``,
   },
   {
     slug: "homeschooling-through-a-montessori-lens-cultivating-a-curious-self-directed-lear",
@@ -9248,6 +9333,7 @@ When it comes to eating, what's the big deal? In group settings like school lunc
 Alicia Diaz-David, a certified Montessori educator with many years of teaching experience in public and private schools as well as a national reading consultant, shows us that Montessori homeschooling is more about truly following the child than following a curriculum with many expensive materials. Join us as Ms. Diaz-David guides us on how to use Montessori principles to maximize children’s social emotional development and academic learning.
 
 `,
+    content: ``,
   },
   {
     slug: "part-i-your-rookie-year-as-a-montessori-family-0-6-years-old",
@@ -9262,6 +9348,7 @@ Alicia Diaz-David, a certified Montessori educator with many years of teaching e
 During the next three webinars our team will guide you through important considerations and steps in preparing to become part of a Montessori learning community. Each webinar will concentrate on one stage of child development. This session will focus on the Early Childhood Years. Our team will share insights for you and your child as you begin this Montessori journey along with your child. Come with us as we travel together through this new and exciting educational adventure for your whole family.
 
 `,
+    content: ``,
   },
   {
     slug: "part-2-your-rookie-year-as-a-montessori-family-6-12-years-old",
@@ -9280,6 +9367,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "part-3-your-rookie-year-as-a-montessori-parent-middle-and-high-school-years",
@@ -9304,6 +9392,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "keeping-your-family-culture-and-language-and-alive-with-karen-simon",
@@ -9328,6 +9417,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "what-do-you-want-me-to-do-telling-your-child-what-to-do-rather-than-what-not-to-",
@@ -9351,6 +9441,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "how-much-is-too-much-giving-children-what-they-need-may-not-always-be-what-they-",
@@ -9374,6 +9465,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "what-we-believe-our-children-receive-living-out-our-family-values",
@@ -9392,6 +9484,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "are-you-kidding-me-employing-humor-to-guide-children-toward-better-learning-and-",
@@ -9410,6 +9503,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "is-teaching-children-civil-awareness-and-responsibility-still-relevant-getting-i",
@@ -9428,6 +9522,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "books-we-love",
@@ -9445,6 +9540,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "what-s-on-your-mind",
@@ -9462,6 +9558,7 @@ SHOW LESS
  
 
 `,
+    content: ``,
   },
   {
     slug: "how-to-disagree-with-your-teen-in-an-empowering-way",
@@ -9478,6 +9575,7 @@ Kathryn Kvols always knows the right actions to take and words to say to empower
  
 
 `,
+    content: ``,
   },
   {
     slug: "the-montessori-potential-a-conversation-with-the-author",
@@ -9492,6 +9590,7 @@ Kathryn Kvols always knows the right actions to take and words to say to empower
 Paula will share how Montessori uniquely helps children develop key traits for success in life from her forthcoming book, The Montessori Potential. The book covers a description of Montessori education and its benefits, how Montessori schools function, issues for public Montessori programs, the question of authentic practices, and how parents can foster their children’s independence at home.
 
 `,
+    content: ``,
   },
   {
     slug: "racing-to-nowhere-the-gift-of-an-extra-year",
@@ -9506,6 +9605,7 @@ Paula will share how Montessori uniquely helps children develop key traits for s
 Why do we arbitrarily put time limits on our children's learning and development? What could be the benefits for young children in spending a little more time in early childhood or elementary school? What benefit might a high school graduate gain from taking a year or two off from school before going on to higher education? How might a college graduate benefit from taking some time to travel or to volunteer in the Peace Corps or teach English in a foreign country? Join us as we talk together about "the gift of an extra year."
 
 `,
+    content: ``,
   },
   {
     slug: "all-they-need-is-love-love-language-with-our-children-in-mind",
@@ -9520,6 +9620,7 @@ Why do we arbitrarily put time limits on our children's learning and development
 It's Valentine's Day! We know that we love our children. How can we be sure that they know we love them?
 
 `,
+    content: ``,
   },
   {
     slug: "resources-parents-can-rely-on-books-websites-organizations-etc",
@@ -9534,6 +9635,7 @@ It's Valentine's Day! We know that we love our children. How can we be sure that
  Our Montessori Family Life team will offer suggestions and ideas for sources of information on subjects that are important for families and children. Participants will leave this webinar with a list of resources to reference when questions about health, education, relationships, and more arise.
 
 `,
+    content: ``,
   },
   {
     slug: "getting-friendly-with-failure-responding-to-your-child-when-things-don-t-work-ou",
@@ -9548,6 +9650,7 @@ It's Valentine's Day! We know that we love our children. How can we be sure that
 When inventing the light bulb Thomas Edison once said, "I have not failed. I’ve just found 10,000 ways that won’t work." How do we help our children recognize that failure is how we learn? How do we nurture an attitude of curiosity, enjoyment, and positivity about life with all its ups and downs? Join us to hear about some of the ways Montessori guides work with students in the classroom on the issue of failure that can also work at home.
 
 `,
+    content: ``,
   },
   {
     slug: "shared-celebrations-large-and-small-embracing-traditions-and-cultures",
@@ -9562,6 +9665,7 @@ When inventing the light bulb Thomas Edison once said, "I have not failed. I’v
 Participating in celebrations outside of our own culture, from those that are well known like the Lunar New Year to eating traditional foods at home, is an enriching way to learn about people around the world. This often takes place in Montessori classrooms as part of the children’s everyday experience. Join Cheryl Allen and our team to find out how you can explore other cultures at home.
 
 `,
+    content: ``,
   },
   {
     slug: "whatever-it-takes-keeping-your-children-in-montessori-through-high-school-gradua",
@@ -9576,6 +9680,7 @@ Participating in celebrations outside of our own culture, from those that are we
 When you really believe in something, you'll do whatever it takes to make it happen - especially for your kids. Larry Schanker & Laru Chapman will share with you why and how they chose Montessori for their children's educational experience. Join us for this story of commitment and love!
 
 `,
+    content: ``,
   },
   {
     slug: "practical-life-for-older-students-at-home-and-at-school",
@@ -9590,6 +9695,7 @@ When you really believe in something, you'll do whatever it takes to make it hap
 For many people when they hear the words practical life and Montessori, they immediately picture little children bustling around a classroom or their home with an apron on, a broom or dustpan in their hands, and a joyful concentration sweeping up a mess. And that image is absolutely correct. Yet, there is more to it than that. Practical Life doesn’t end when children move into elementary and beyond. Join Tammy Willen and our team to find out how to guide older children in practical life routines.
 
 `,
+    content: ``,
   },
   {
     slug: "benefits-of-having-a-book-study-group-for-parents-at-your-school-fun-easy-and-a-",
@@ -9606,6 +9712,7 @@ Sometimes parenting, especially parenting the Montessori way, can seem very lone
  
 
 `,
+    content: ``,
   },
   {
     slug: "physical-wellness-part-1-the-food-we-eat-what-s-in-your-pantry",
@@ -9620,6 +9727,7 @@ Sometimes parenting, especially parenting the Montessori way, can seem very lone
 What's in your pantry? Margot will help us take a closer look at our eating choices for ourselves and our children. As we jump into Spring, Margot will offer ideas for adding new life to our diets.
 
 `,
+    content: ``,
   },
   {
     slug: "physical-wellness-part-2-the-sleep-we-need",
@@ -9634,6 +9742,7 @@ What's in your pantry? Margot will help us take a closer look at our eating choi
 “Wynken, Blynken, and Nod” is an American poem and children's song dating back to the late 19th century. It's a lovely bedtime story. How many of us would like a beautiful bedtime story or lullaby to send us off to sleep? No doubt sleep is an important aspect of physical wellness. Join our team to find out how much sleep is needed at different stages of development and some tips for helping children prepare themselves for the rest that their bodies need. 
 
 `,
+    content: ``,
   },
   {
     slug: "physical-wellness-part-3-physical-wellness-the-activities-we-do-with-nicolas-lep",
@@ -9648,6 +9757,7 @@ What's in your pantry? Margot will help us take a closer look at our eating choi
 Parents, caregivers, and guardians who are interested in how physical activity at home and at school affects children's overall health and ability to learn won't want to miss this webinar with Nicolas Lepine. Everyone agrees physical activity is one of the cornerstones of health, but it can be difficult to implement within a family dynamic. In this webinar, we will discuss how we can follow the child to promote lifelong physical activity and wellness. Join us for this informative broadcast.
 
 `,
+    content: ``,
   },
   {
     slug: "the-magic-of-reading-together",
@@ -9662,6 +9772,7 @@ Parents, caregivers, and guardians who are interested in how physical activity a
 Summertime is a great time for children and families to get out a good book and enjoy reading. Whether you read under the shade of a tree in the yard or in a cozy chair at home or during travel time by car, train, or plane, or maybe at your local library or bookstore, you can lose your mind and find your soul and your children can, too. Come with us as we prepare ourselves and our children for story time, reading together, or starting a neighborhood book club.
 
 `,
+    content: ``,
   },
   {
     slug: "downtime-is-essential-time-how-to-be-a-cool-cat",
@@ -9676,6 +9787,7 @@ Summertime is a great time for children and families to get out a good book and 
 What is downtime? What does it look like? Why is it important? How do we create it? Join us to get some great ideas for the fast approaching summer.
 
 `,
+    content: ``,
   },
   {
     slug: "summer-survival-guide-balancing-fun-and-learning-with-engaging-science-activitie",
@@ -9690,6 +9802,7 @@ What is downtime? What does it look like? Why is it important? How do we create 
 Looking for ways to balance your children's academic progress during the summer months while also having fun? From outdoor exploration to creative projects, we'll discuss educational and effective ways of using science to incorporate learning while having fun. Join us for practical strategies to keep your child engaged, learning, and motivated.
 
 `,
+    content: ``,
   },
   {
     slug: "collaborative-inclusive-art-projects-with-margot-garfield-anderson",
@@ -9704,6 +9817,7 @@ Looking for ways to balance your children's academic progress during the summer 
 Engaging, enticing, and storytelling are all-around-fun and important ways to connect with children. Margot has done each of the projects in this webinar with her grandchildren and knows they will always remember "Grammie" as the one who enjoyed doing fun projects and sharing her love of art. Join her as she shares ideas for designing art projects that involve collaboration, multiple ages, and grandmotherly guidance.
 
 `,
+    content: ``,
   },
   {
     slug: "affordable-summer-activities",
@@ -9718,6 +9832,7 @@ Engaging, enticing, and storytelling are all-around-fun and important ways to co
 Engaging, enticing, and storytelling are all-around-fun and important ways to connect with children. Margot has done each of the projects in this webinar with her grandchildren and knows they will always remember "Grammie" as the one who enjoyed doing fun projects and sharing her love of art. Join her as she shares ideas for designing art projects that involve collaboration, multiple ages, and grandmotherly guidance.
 
 `,
+    content: ``,
   },
   {
     slug: "leave-time-for-being-out-of-doors",
@@ -9732,6 +9847,7 @@ Engaging, enticing, and storytelling are all-around-fun and important ways to co
 Join Montessori parent and educator Tammy Oesting as she shares the wisdom of creating meaningful time in nature with children, the benefits for your child and family, and some practical tips for how to do so. She’ll share how Dr. Montessori delivered a path for earth’s children to actualize their potentiality and discover how our role as their guides in this journey includes providing them with tools of resilience and the capacity to find joy and awe in the magnificence of the natural world. 
 
 `,
+    content: ``,
   },
   {
     slug: "part-1-home-strategies-for-reducing-childhood-anxiety",
@@ -9746,6 +9862,7 @@ Join Montessori parent and educator Tammy Oesting as she shares the wisdom of cr
 Anxiety is a significant and increasing mental health challenge for children, adolescents and adults. The research tells us that we can lower children's anxiety by helping them develop a sense of self-control and self-competence. Montessori environments excel in providing opportunities for children to develop these mindsets. Let's explore how these opportunities can be carried into the home setting. We can help children build the self - confidence and sense of control that will help them navigate anxiety now and into the future.
 
 `,
+    content: ``,
   },
   {
     slug: "part-2-home-strategies-for-reducing-childhood-anxiety",
@@ -9760,6 +9877,7 @@ Anxiety is a significant and increasing mental health challenge for children, ad
 Anxiety is a significant and increasing mental health challenge for children, adolescents and adults. The research tells us that we can lower children's anxiety by helping them develop a sense of self-control and self-competence. Montessori environments excel in providing opportunities for children to develop these mindsets. Let's explore how these opportunities can be carried into the home setting. We can help children build the self - confidence and sense of control that will help them navigate anxiety now and into the future.
 
 `,
+    content: ``,
   },
   {
     slug: "how-much-is-too-much-planning-their-after-school-activities",
@@ -9774,6 +9892,7 @@ Anxiety is a significant and increasing mental health challenge for children, ad
 Do you struggle to create a balance for your family between home life, school obligations, and extracurricular activities? You are not alone. Our Montessori experts will share their thoughts and ideas on ways to create balance. Join us to plan and implement strategies with your family for the upcoming school year.  
 
 `,
+    content: ``,
   },
   {
     slug: "one-family-s-way-to-help-children-who-are-anxious",
@@ -9788,6 +9907,7 @@ Do you struggle to create a balance for your family between home life, school ob
 Ellie and Talia Campbell are a mother-daughter team who have written and published a book together called "Monster Tea Party." They will join us to share their real life experience with childhood anxiety, how they are managing it in their own family, and how they hope to help other families with theirs.
 
 `,
+    content: ``,
   },
   {
     slug: "helping-your-toddler-adjust-to-school",
@@ -9802,6 +9922,7 @@ Ellie and Talia Campbell are a mother-daughter team who have written and publish
 Is this your child's first school experience - their first time away from home or from a primary caregiver? Or is it the transition from being at home with parents, grandparents, or a special aunt or uncle? Transitions are not easy for any of us and they can be especially difficult when you are somewhere between birth and two years old. Join us and one of our Montessori Toddler guides to learn ways to help ease separation anxiety for both you and your child with special guests Kathy Leitch and Kristi Antczak.
 
 `,
+    content: ``,
   },
   {
     slug: "screen-time-and-learning-setting-kind-but-firm-family-guidelines",
@@ -9816,6 +9937,7 @@ Is this your child's first school experience - their first time away from home o
 Join us as we talk with Julia Volkman, long-time Montessori teacher, faculty member of the Brain Health Initiative, and guest lecturer for Harvard University's Neuroscience of Learning/Mind, Brain, Health, and Education course. She will discuss how screen time affects brain development and learning. Julia will share ideas on why and how families can clearly set boundaries for screen time in their homes. MONTESSORI FAMILY LIFE WEBINARS
 
 `,
+    content: ``,
   },
   {
     slug: "supporting-your-children-s-natural-growth-in-language-and-literacy",
@@ -9830,6 +9952,7 @@ Join us as we talk with Julia Volkman, long-time Montessori teacher, faculty mem
 Christine Lowry, a Montessori special educator with expertise in language and literacy development, will share ideas based on current research that advocates using a natural, relaxed approach to learn and love reading. She will explain how to use a "serve and return" approach to speaking with your child from birth on, along with ideas on how to increase their vocabulary, structure sentences with ease, and ask "open-ended questions." Over the last half century or more educators have tried so many ways to teach children earlier and faster to read. Almost all were unsuccessful with far too many children. Now neuroscience has found that repetition, reading, and talking together actually works best. Join us for this interesting and informative discussion.
 
 `,
+    content: ``,
   },
   {
     slug: "transforming-your-parent-caregiver-teacher-relationship-courageous-conversations",
@@ -9845,6 +9968,7 @@ Christine Lowry, a Montessori special educator with expertise in language and li
 Creating a safe space for meaningful dialogue and discussion about issues regarding your child leads to the desired end - understanding each others’ perspectives and working together to best serve your child. This is not always a one-step, quick fix but, rather, a thoughtful, ever-evolving process requiring vulnerability, humility, and commitment.
 
 `,
+    content: ``,
   },
   {
     slug: "how-to-help-when-your-child-comes-home-from-school-upset",
@@ -9860,6 +9984,7 @@ Creating a safe space for meaningful dialogue and discussion about issues regard
 Have you ever heard anything like; Nobody wants to play with me, So and so keeps bothering me when I'm working, or I don't get how to do the Stamp Game? Join us as our team walks you through ideas for supporting your child navigate difficult situations at school.
 
 `,
+    content: ``,
   },
   {
     slug: "supporting-your-child-in-understanding-and-developing-friendships",
@@ -9875,6 +10000,7 @@ Have you ever heard anything like; Nobody wants to play with me, So and so keeps
 Friendships are so important throughout our lives because most humans want to have connections with others. A huge part of what children are learning throughout their years at home and in school is how to build strong, healthy relationships. Join our team as we discuss how parents can assist children in this important aspect of the learning process.
 
 `,
+    content: ``,
   },
   {
     slug: "books-books-books-for-reading-together-or-for-giving",
@@ -9890,6 +10016,7 @@ Friendships are so important throughout our lives because most humans want to h
 This is one of our favorite webinars. We love to read with and to children. Our motto is "Drop everything and grab a book!" We will review some of our favorites for children and adults. We will also include a PDF of great reads for you to refer to later. Join us for terrific book ideas as the holidays approach.
 
 `,
+    content: ``,
   },
   {
     slug: "partnering-with-your-school-for-productive-outcomes",
@@ -9907,6 +10034,7 @@ Would you like to build a stronger partnership with the administration and board
  
 
 `,
+    content: ``,
   },
   {
     slug: "an-attitude-of-gratitude",
@@ -9921,6 +10049,7 @@ Would you like to build a stronger partnership with the administration and board
 As the winter holiday season officially begins here in the USA with Thanksgiving we want to take some time to consider how we can instill an attitude of gratitude in ourselves and our children. Please join us for this inspiring time together.
 
 `,
+    content: ``,
   },
   {
     slug: "family-communication-what-that-looks-sounds-and-feels-like",
@@ -9935,6 +10064,7 @@ As the winter holiday season officially begins here in the USA with Thanksgiving
 Kim, along with her husband Dave, have been Montessori advocates and parents for the better part of 15 years now. Their oldest son went off to college this fall and they still have three sons at home. Communication is a key element in their family life for making things work. Join us as Kim shares some of the things she has learned over her years as the parent of four growing boys.
 
 `,
+    content: ``,
   },
   {
     slug: "finding-ways-for-families-to-center-themselves-during-the-holidays",
@@ -9949,6 +10079,7 @@ Kim, along with her husband Dave, have been Montessori advocates and parents for
 Holidays are often a time filled with emotion and that makes sense!  The emotional experience of holidays is part of what gives them meaning and importance in our lives. But how can we plan ahead to center our families' unique needs, values, and traditions so that these special times include more moments of joy, presence, and connection. In this session, we'll talk together about mindful ways to identify and connect with what matters most during the holidays.
 
 `,
+    content: ``,
   },
   {
     slug: "how-to-engage-productively-in-your-child-s-education",
@@ -9963,6 +10094,7 @@ Holidays are often a time filled with emotion and that makes sense!  The emotio
 Candid conversations between educators and parents or caregivers can be occurrences impacted by demands on time of both. In Dorothy's work as a teacher educator and author she has heard from, literally, hundreds of teachers concerning helpful and productive ways for parents and caregivers to be involved in the children's education. In this discussion we'll explore some of the many possibilities for families to become a part of children's education.
 
 `,
+    content: ``,
   },
   {
     slug: "wit-and-wisdom-a-family-chat-what-happens-when-how-parenting-styles-affect-child",
@@ -9978,6 +10110,7 @@ Chip has spent almost 30 years teaching in and leading Montessori schools. He is
 During our time together he will share stories of adult interactions with children. The stories will include examples of how children react in different ways to adult behavior. Join us for a lively conversation about parenting styles.
 
 `,
+    content: ``,
   },
   {
     slug: "wit-and-wisdom-a-family-chat-raising-your-child-the-montessori-way-with-lorna-mc",
@@ -9992,6 +10125,7 @@ During our time together he will share stories of adult interactions with childr
 At a recent graduation celebration, the conversation focused on creating a peaceful home environment. This month we will talk about the essential qualities or characteristics that must be present for peace in our homes as well as in the classrooms. Join us and invite your friends. 
 
 `,
+    content: ``,
   },
   {
     slug: "webcast-building-a-harmonious-school-community-pt-1",
@@ -10765,6 +10899,7 @@ Enjoy your meal at the Cosmic Café`,
     excerpt: `Join us this week as Michael Dorer shares his newest project "Hatching the Cosmic Egg". Learn about his inspirational children's book, songs, and supporting materials.
 
 `,
+    content: ``,
   },
   {
     slug: "webcast-giving-the-house-back-to-the-children-part-1",
@@ -10781,6 +10916,7 @@ Giving the House to the Children is a workshop that encourages teachers to offer
 It is then that they begin to stretch themselves further, to take on more challenging work, to grow into the independent and caring children that Dr. Montessori marveled at when first applying her method.
 
 `,
+    content: ``,
   },
   {
     slug: "webcast-what-does-montessori-middle-school-look-like",
@@ -10795,6 +10931,7 @@ It is then that they begin to stretch themselves further, to take on more challe
 For more information, visit: http://cgms.edu
 
 `,
+    content: ``,
   },
   {
     slug: "five-criteria-for-effective-discipline",
@@ -10807,6 +10944,7 @@ For more information, visit: http://cgms.edu
     excerpt: `Montessori educator and school leader, Chip DeLorenzo will introduce us to a respectful and time-tested classroom management approach that builds responsibility, independence, motivation, and empathy within your classroom community. This will be an interactive session; we encourage questions, comments, and sharing of stories and resources.
 
 `,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-september-25-2020",
@@ -10817,6 +10955,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["cH2FXjd5AGU"],
     excerpt: `Our Role in Ending Systemic and Internal Racism...Guided study and Dialogue Led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-october-9th-2020",
@@ -10827,6 +10966,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["v93PywIsyr4"],
     excerpt: ` Our Role in Ending Systemic and Internal Racism... Guided study and Dialogue Led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-october-16-2020",
@@ -10837,6 +10977,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["epjMdIYDq0c"],
     excerpt: `Our Role In Ending Systemic Racism, led by  Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-oct-23",
@@ -10847,6 +10988,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["5qmLJUyLJXc"],
     excerpt: `Our Role in Ending Systemic and Internal Racism... Guided study and Dialogue Led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "gender-equity-in-the-classroom-what-it-looks-like-and-what-you-can-do",
@@ -10857,6 +10999,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["qpjs0x977zM"],
     excerpt: ``,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-december-4th-2020",
@@ -10867,6 +11010,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["dnjuZqXI1Xw"],
     excerpt: `Our Role in Ending Systemic and Internal Racism`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-friday-december-11th",
@@ -10877,6 +11021,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["zcOuaNDGlio"],
     excerpt: `Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-january-13th-2021",
@@ -10887,6 +11032,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["knKY9xl3Xm4"],
     excerpt: `Our Role in Ending Systemic and Internal Racism... Guided study and Dialogue, Led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-wednesday-january-20th-2021",
@@ -10897,6 +11043,7 @@ For more information, visit: http://cgms.edu
     tags: [],
     videoIds: ["-sdR-MzI9Fg"],
     excerpt: `Our Role in Ending Systemic and Internal Racism...Guided study and Dialogue, Led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-january-27th-2021",
@@ -10908,6 +11055,7 @@ For more information, visit: http://cgms.edu
     videoIds: ["nNEpwRlC0s0"],
     excerpt: `Calling Up and Calling Out: How to Respond to Microaggressions
 Our Role in Ending Systemic and Internal Racism... Guided study and Dialogue, Led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-february-3rd-2021",
@@ -10920,6 +11068,7 @@ Our Role in Ending Systemic and Internal Racism... Guided study and Dialogue, Le
     excerpt: `Calling Up and Calling Out: How to Respond to Microaggressions
 Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led by Dr. Cindy Acker
 `,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-february-10th-2021",
@@ -10930,6 +11079,7 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     tags: [],
     videoIds: ["jVLggokxrjk"],
     excerpt: `Should Parents Be Allowed to “Opt-out” of Black History Education for their Children? A discussion of recent news events and how they may affect schools.`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-april-14th-2021",
@@ -10941,6 +11091,7 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     videoIds: ["s-jhdl-x8Ns"],
     excerpt: `Our Role in Ending Systemic and Internal Racism... Guided study and Dialogue, Led by Dr. Cindy Acker
   `,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-april-21st-2021",
@@ -10951,6 +11102,7 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     tags: [],
     videoIds: ["3EKYr82fU6I"],
     excerpt: `Our Role in Ending Systemic and Internal Racism`,
+    content: ``,
   },
   {
     slug: "gender-equality-in-the-classroom-session-ii-the-new-boyhood",
@@ -10961,6 +11113,7 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     tags: [],
     videoIds: ["ZOFzvp8119w"],
     excerpt: `The relationship of the head of school with the board of trustees is a bit schizophrenic! On the one hand, the head of school is the sole employee of the board. They are hired, evaluated, and sometimes terminated by the trustees. On the other hand, as the head of school knows more about their organization's needs than anyone else, the most effective heads learn how to guide their board's focus and energies at every turn. In this webinar, Kathy Leitch, Tim Seldin, and Jonathan Wolff will guide a discussion on how to best create a solid senior leadership team with your board.`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-may-19th-2021",
@@ -10971,6 +11124,7 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     tags: [],
     videoIds: ["vaXXBuUwyO0"],
     excerpt: `Our Role in Ending Systemic and Internal Racism, Led by Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-june-9th-2021",
@@ -10981,6 +11135,7 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     tags: [],
     videoIds: ["2b6pof_PqZA"],
     excerpt: `Our Role in Ending Systemic and Internal Racism`,
+    content: ``,
   },
   {
     slug: "global-classrooms-the-future-of-montessori-e-learning-programs-2",
@@ -10991,6 +11146,7 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     tags: ["eLearning"],
     videoIds: ["maaoHp_PAGM"],
     excerpt: `Join Tim Seldin and Tanya Ryskind as they discuss the potential of Montessori e-learning programs as an alternative to our in-person, at-school options. What models are being created and offered? How does this option meet student/family needs? What is the best practice in e-learning and how does that correlate with essential Montessori pedagogical principles? Bring your questions and ideas as this will be an interactive session.`,
+    content: ``,
   },
   {
     slug: "managing-the-elementary-montessori-curriculum-part-3",
@@ -11010,6 +11166,7 @@ This is the beginning of a new direction in your school. In this and the next we
 
 
 `,
+    content: ``,
   },
   {
     slug: "lasting-learning",
@@ -11028,6 +11185,7 @@ Download notes from Michael Dorer
 
 
 `,
+    content: ``,
   },
   {
     slug: "fully-implemented-public-early-childhood-montessori-programs",
@@ -11044,6 +11202,7 @@ Download notes from Michael Dorer
 
 
 `,
+    content: ``,
   },
   {
     slug: "montessori-leadership-forum-children-with-challenges-in-montessori-classrooms",
@@ -11054,6 +11213,7 @@ Download notes from Michael Dorer
     tags: [],
     videoIds: ["BE9KYEqEgAs"],
     excerpt: `Join us for a sharing of conversation, wonderings, and your questions with guest panelist, Christine Lowry. Christine is a Montessori credentialed special educator with many years of experience working with children with diverse learning and behavior in Montessori classrooms. We’d love to hear from you as you work with children with challenges in your classrooms at every level.`,
+    content: ``,
   },
   {
     slug: "montessori-leadership-forum-children-with-challenges-in-montessori-classrooms-pa",
@@ -11064,6 +11224,7 @@ Download notes from Michael Dorer
     tags: [],
     videoIds: ["Aliar_zeuJQ"],
     excerpt: `Join us for a sharing of conversation, wonderings, and your questions with guest panelist, Christine Lowry. Christine is a Montessori credentialed special educator with many years of experience working with children with diverse learning and behavior in Montessori classrooms. We’d love to hear from you as you work with children with challenges in your classrooms at every level.`,
+    content: ``,
   },
   {
     slug: "storytelling-and-emotional-intelligence",
@@ -11074,6 +11235,7 @@ Download notes from Michael Dorer
     tags: ["stories","story telling"],
     videoIds: ["Tep8f7hv4KY"],
     excerpt: `What is executive functioning and why is it important? What is meant by working memory, cognitive flexibility, and inhibition control? Do they matter? How can storytelling support and improve these abilities? Join Michael to answer these questions and then see how storytelling enhances and develops executive functioning, aiming at all three of these key abilities. This may be an essential approach to enhance executive functioning in young people. Please join us!!`,
+    content: ``,
   },
   {
     slug: "rediscover-the-power-of-grace-and-courtesy",
@@ -11084,6 +11246,7 @@ Download notes from Michael Dorer
     tags: [],
     videoIds: ["EiPTtGZqFlw"],
     excerpt: `Join master teacher and adult educator, Cheryl Allen and Jonathan Wolff, international consultant, and leadership coach, for an overview of the ideas behind their course, Rediscover the Power of Grace and Courtesy: Six Essentials That Enhance Learning and Social Intelligence. This “next-generation” look at the Exercises of Grace and Courtesy focusing on these six essential components of Grace and Courtesy will benefit all schools and classrooms by empowering all members of the community.`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting-december-1st-2021",
@@ -11095,6 +11258,7 @@ Download notes from Michael Dorer
     videoIds: ["WJLX4XBuMXg"],
     excerpt: `Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led by Dr. Cindy Acker
 `,
+    content: ``,
   },
   {
     slug: "montessori-for-every-family-with-tim-seldin-and-lorna-mcgrath",
@@ -11119,6 +11283,7 @@ Montessori is a unique educational philosophy created by Maria Montessori that f
 Even if your child won’t go to a Montessori school, a Montessori home can still be an invaluable bridge to reinforcing your child’s natural curiosity and setting the foundation for lifelong learning. This is the only Montessori book that recognizes that most parents don’t have the time and resources to overhaul their lives to fully embrace a parenting philosophy, but instead need practical, immediate guidance that is effective.
 
 `,
+    content: ``,
   },
   {
     slug: "macte-we-re-all-about-accreditation",
@@ -11129,6 +11294,7 @@ Even if your child won’t go to a Montessori school, a Montessori home can stil
     tags: ["MACTE"],
     videoIds: ["xHasmC2Ohis"],
     excerpt: `Join Rebecca Pelton and Carolyn Pinkerton for this unique opportunity to understand MACTE's role in teacher education, accreditation, and teacher licensure. You will learn about MACTE's contribution to professionalism and qualitiy assurance. Do you have questions about what credentials and qualifications you can look for to assist with hiring decisions? Have you sponsored a candidate for teacher education and wondered how to choose a program? What is MACTE's relationship with other Montessori organizations? This is your chance to ask questions and join our lively discussion.`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-meeting",
@@ -11139,6 +11305,7 @@ Even if your child won’t go to a Montessori school, a Montessori home can stil
     tags: [],
     videoIds: ["yRDiDXBS-mk"],
     excerpt: `Our Role in Ending Systemic and Internal Racism Guided study and Dialogue Led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-march-2nd-2022",
@@ -11149,6 +11316,7 @@ Even if your child won’t go to a Montessori school, a Montessori home can stil
     tags: [],
     videoIds: ["_ziDq6n9DT0"],
     excerpt: `Our Role in Ending Systemic and Internal Racism Guided study and Dialogue, led by Dr. Cindy Acker`,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-april-6th-2022",
@@ -11163,6 +11331,7 @@ Even if your child won’t go to a Montessori school, a Montessori home can stil
 How do Florida schools and educators/guides respond to changing legislation that restricts developmental curriculum and cultural understanding?
 
 `,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-june-1st-2022",
@@ -11175,6 +11344,7 @@ How do Florida schools and educators/guides respond to changing legislation that
     excerpt: `The Intersectionality of Juneteenth and Pride Month (What Do They Have in Common?) Our Role in Ending Systemic and Internal Racism Guided study and Dialogue, led by Dr. Cindy Acker.
 
 `,
+    content: ``,
   },
   {
     slug: "the-child-is-the-teacher-a-life-of-maria-montessori-2",
@@ -11187,6 +11357,7 @@ How do Florida schools and educators/guides respond to changing legislation that
     excerpt: `An in-depth discussion with the author, Cristina De Stefano
 
 `,
+    content: ``,
   },
   {
     slug: "all-they-need-is-love-what-makes-people-work-better-and-harder",
@@ -11199,6 +11370,7 @@ How do Florida schools and educators/guides respond to changing legislation that
     excerpt: `In a recent article in Harvard Business Review, entitled, “Designing Work That People Love,” author Marcus Buckingham proposes that, “Creating a place where all people can find love in their work means incorporating three principles: People are the point. Employees are the most important stakeholders in your organization. One size fits one. Each of your employees is a unique person with distinct loves, interests, and skills. In trust we grow. For employees to discover and contribute their loves at work, leaders must explicitly make trust the foundation of all practices and policies.” In this period of a critical Montessori teacher shortage, unprecedented turnover, and challenges with retention (especially among Assistants) there are ways to make the everyday work life of your faculty and staff more meaningful, more energizing, and more engaging. Join Jonathan Wolff for a discussion on what makes people love their work, work better and harder, and stay with you longer.
 
 `,
+    content: ``,
   },
   {
     slug: "part-2-all-they-need-is-love-what-makes-people-work-better-and-harder",
@@ -11211,6 +11383,7 @@ How do Florida schools and educators/guides respond to changing legislation that
     excerpt: `What Makes People Work Better and Harder and Stay Onboard Longer . . . In a recent article in Harvard Business Review, entitled, “Designing Work That People Love,” author Marcus Buckingham proposes that, “Creating a place where all people can find love in their work means incorporating three principles: People are the point. Employees are the most important stakeholders in your organization. One size fits one. Each of your employees is a unique person with distinct loves, interests, and skills. In trust we grow. For employees to discover and contribute their loves at work, leaders must explicitly make trust the foundation of all practices and policies.” In this period of a critical Montessori teacher shortage, unprecedented turnover, and challenges with retention (especially among Assistants) there are ways to make the everyday work life of your faculty and staff more meaningful, more energizing, and more engaging. Join Jonathan Wolff for a discussion on what makes people love their work, work better and harder, and stay with you longer.
 
 `,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-november-16th-2022",
@@ -11223,6 +11396,7 @@ How do Florida schools and educators/guides respond to changing legislation that
     excerpt: `Preparing our Schools and Classrooms for Social Justice a Guided study and Dialogue Led by Dr. Cindy Acker, led by Dr. Cindy Acker.
 
 `,
+    content: ``,
   },
   {
     slug: "116-anniversary-celebration",
@@ -11237,6 +11411,7 @@ How do Florida schools and educators/guides respond to changing legislation that
  
 
 `,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-april-19th-2023-preparing-our-schools-and-communities-for-j",
@@ -11249,6 +11424,7 @@ How do Florida schools and educators/guides respond to changing legislation that
     excerpt: `This year marks the anniversary of the recognition of Juneteenth as a national day of commemoration. Let’s not lose the significance of Juneteenth in the ending of the school year and beginning of summer, but make our final day of social justice remembrance for the school year. Come, learn, and discuss the history, and appropriate ways to commemorate Juneteenth in advance. 
 
 `,
+    content: ``,
   },
   {
     slug: "montessori-town-hall-april-19th-2023-the-state-of-the-gag-on-teaching-what-do-sc",
@@ -11261,6 +11437,7 @@ How do Florida schools and educators/guides respond to changing legislation that
     excerpt: `Join us as we discuss the current/pending laws impacting how and what we teach. As other states begin to learn about pending restrictions, legislation, or concerns regarding curriculum taught in schools, teachers, and administrators must determine how they navigate the curriculum taught in the classroom. Recognizing that schools must prepare for the changing legislative landscape, this is a webinar for everyone.
 
 `,
+    content: ``,
   },
 ]
 
