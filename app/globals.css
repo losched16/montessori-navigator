@@ -70,10 +70,10 @@ h1, h2, h3, h4 {
   font-size: 1.0625rem !important;
   line-height: 1.6 !important;
 }
-/* Darken faint/muted text colors for readability */
-.text-gray-400 { color: #6b7280 !important; }
-.text-gray-500 { color: #4b5563 !important; }
-.text-gray-600 { color: #374151 !important; }
+/* Make gray text black for readability */
+.text-gray-400 { color: #1B3A4B !important; }
+.text-gray-500 { color: #1B3A4B !important; }
+.text-gray-600 { color: #1B3A4B !important; }
 .text-white\/60 { color: rgba(255,255,255,0.75) !important; }
 .text-white\/40 { color: rgba(255,255,255,0.6) !important; }
 
