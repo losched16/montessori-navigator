@@ -16,6 +16,8 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -50,9 +52,27 @@ button, a, input, textarea, select {
   transition: all 0.2s ease;
 }
 
-/* Typography adjustments */
+/* Typography adjustments — bigger, bolder, more readable */
 h1, h2, h3, h4 {
   letter-spacing: -0.01em;
+}
+
+/* Bump up small text sizes for readability */
+@layer base {
+  /* text-xs: 12px → 13px */
+  .text-xs {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+  /* text-sm: 14px → 15px */
+  .text-sm {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  /* Darken faint gray text so it's more readable */
+  .text-gray-400 { color: #9ca3af; }
+  .text-gray-500 { color: #4b5563; }
+  .text-gray-600 { color: #374151; }
 }
 
 /* Chat message styling */
