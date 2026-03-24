@@ -58,22 +58,24 @@ h1, h2, h3, h4 {
 }
 
 /* Bump up small text sizes for readability */
-@layer base {
-  /* text-xs: 12px → 13px */
-  .text-xs {
-    font-size: 0.8125rem;
-    line-height: 1.4;
-  }
-  /* text-sm: 14px → 15px */
-  .text-sm {
-    font-size: 0.9375rem;
-    line-height: 1.5;
-  }
-  /* Darken faint gray text so it's more readable */
-  .text-gray-400 { color: #9ca3af; }
-  .text-gray-500 { color: #4b5563; }
-  .text-gray-600 { color: #374151; }
+.text-xs {
+  font-size: 0.8125rem !important;
+  line-height: 1.4 !important;
 }
+.text-sm {
+  font-size: 0.9375rem !important;
+  line-height: 1.5 !important;
+}
+.text-base {
+  font-size: 1.0625rem !important;
+  line-height: 1.6 !important;
+}
+/* Darken faint/muted text colors for readability */
+.text-gray-400 { color: #6b7280 !important; }
+.text-gray-500 { color: #4b5563 !important; }
+.text-gray-600 { color: #374151 !important; }
+.text-white\/60 { color: rgba(255,255,255,0.75) !important; }
+.text-white\/40 { color: rgba(255,255,255,0.6) !important; }
 
 /* Chat message styling */
 .prose-navigator {
