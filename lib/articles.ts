@@ -6014,34 +6014,6 @@ His administrative experiences include working as a head of Montessori schools, 
 Paul holds Montessori teacher certification in early childhood and secondary levels one and two from the American Montessori Society and his doctorate is in Cultural Anthropology.`,
   },
   {
-    slug: "communicating-with-your-young-child",
-    title: "Communicating with Your Young Child",
-    author: "Sarah_Moudry",
-    date: "2024-02-14",
-    categories: ["Communication","MFA","TC February 2024"],
-    tags: [],
-    excerpt: "A young child’s receptive language develops sooner than their expressive language. This means they are capable of understanding much more than they can express. Honoring this intellectual development…",
-    content: `A young child’s receptive language develops sooner than their expressive language. This means they are capable of understanding much more than they can express. Honoring this intellectual development can be difficult when you feel you are constantly met with the one-word answer (“no!”) or a temper tantrum. You may feel like you just asked a simple question, or you just suggested a meal of their favorite food and you look down to find your child flailing on the floor. How did this happen?
-
-Communicating with your young child with respect is what lays the foundation for how they will relate and communicate with others as they get older. Using a calm and clear voice helps them feel your sincerity and honest nature. They look to you for guidance as they build their personality.
-
-Staying calm and clear can be difficult to remember when your young child has dropped to the floor and is crying and neither of you know why. Although this situation may not always be avoidable, often it is. You can prepare for this moment by using clear, honest, and positive communication from the start. That’s right, from the moment they are born, you can start communicating your trust in their development. And it is never too late to start! Children of all ages respond well to positive and honest communication.
-
-Using consistent positive phrasing as your communication style helps your child understand when they have the opportunity for choice and input. Young children often feel everything is decided for them and out of their control. They are newly aware that they have choice, can contribute to family life, and they are seeking autonomy. They express it by saying, “no!” even when they may really want to say yes. We can support them as they learn that their contribution matters and that they truly have an important voice by not putting them in a situation where they can say no. We can invite them to participate in community life whenever possible and set them up for seeing their role as a contributor not a bystander.
-
-Whenever possible, give your child a choice of two options: “Would you like to walk around the block or play in the backyard?” “Would you like to wear brown pants or blue pants?” These are moments where they feel a sense of control and that build their trust in your relationship. This foundation of trust allows you to make the bigger decisions with their cooperation (and without tantrums). “I will give you one more push on the swing and then we are leaving the park,” rather than, “Are you ready to leave?”
-
-Below is a chart of seven common situations with young children. By changing just a few words you may find that your young child is much more cooperative and engaged in family life. And you may even see fewer tantrums!
-
-Sarah Moudry (@sarahmoudry) is an education innovator whose work is focused on creating education environments and experiences that inspire growth and joy. Her work is rooted in Montessori philosophy and paired with her extensive experience as a designer.
-
-Recently, her projects included the founding of StudioJune (@thestudiojune), a Montessori parent and child education center, and Family Friendly Home (@ familyfriendlyhome), an interior design company that creates inspirational home and school interiors.
-
-Sarah is the author of books and online courses that help parents, childcare professionals, and grandparents to incorporate Montessori practice into their lives. She has an M.Ed in Montessori education, a B.S. in environment and design, AMI Montessori certification for birth to six years, and is an Associate Member of ASID. Visit
-
-Visit www.studiojune.com to learn more!`,
-  },
-  {
     slug: "a-note-from-the-program-director-2",
     title: "A Note from The Program Director",
     author: "lornamcgrath@montessori.org",
@@ -6598,22 +6570,6 @@ This series is very helpful for young children as they learn how to self-regulat
     videoIds: ["UszfzGQTXCs"],
     excerpt: `Author, Tim Seldin, talks about the 2nd edition of his practical guide to parenting the Montessori Way called How to Raise an Amazing Child. In this new edition Tim introduces some new topics of inter...`,
     content: `Author, Tim Seldin, talks about the 2nd edition of his practical guide to parenting the Montessori Way called How to Raise an Amazing Child. In this new edition Tim introduces some new topics of interest to parents.`,
-  },
-  {
-    slug: "webinar-occi-order-concentration-coordination-and-independence-in-the-elementary",
-    title: `Webinar:  OCCI (Order, Concentration, Coordination, and Independence) in the Elementary Years`,
-    author: `Cheryl McCabe-Allen`,
-    date: "2017-05-19",
-    categories: ["Brain Development","Child's Work","Emotionally Healthy Children","Empowerment","Lower Elementary (6-9)","Montessori Education","Montessori students","Montessori Teachers","Practical Life","Prepared Environment","School Leadership","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: ["Elementary Students","Montessori Curriculum","Montessori vs Traditional Education"],
-    videoIds: ["CqN7YPs9zw0"],
-    excerpt: `&amp;lt;br&amp;gt;      Some may say, "What is OCCI?" Some may say, "I thought OCCI was just during the Primary years." Cheryl says, "Let's see how we can continue to support the development of or...`,
-    content: `&amp;lt;br&amp;gt;
-
-
- 
-
-Some may say, "What is OCCI?" Some may say, "I thought OCCI was just during the Primary years." Cheryl says, "Let's see how we can continue to support the development of order, concentration, coordination, and independence during the elementary years." Join us for some interesting insights.`,
   },
   {
     slug: "what-do-we-know-about-children-and-learning",
@@ -7340,22 +7296,6 @@ Quarrelsome behavior drains everyone's energy and can try the patience of the mo
     content: `If you struggle to fit everything into your life - work, family, faith, leisure time - then this session will give you some ideas to create balance in your life.`,
   },
   {
-    slug: "webinar-strategies-for-parent-education-and-connection-with-martha-carver",
-    title: `Webinar: Strategies for Parent Education and Connection with Martha Carver`,
-    author: `M. Carver`,
-    date: "2017-05-23",
-    categories: ["Family Resources","Montessori Parenting","Parent Education","School Leadership","Video","Webinars / MFA"],
-    tags: ["martha carver","parent ed","Parent Education","webcast","webinar"],
-    videoIds: ["z1VUnYhOLp4"],
-    excerpt: `On May 3rd, 2017, we were joined by Martha Carver of Rock Prairie Montessori in Wisconsin. Our topic was be organizing parent education programs with high parent participation and support.     Do...`,
-    content: `On May 3rd, 2017, we were joined by Martha Carver of Rock Prairie Montessori in Wisconsin. Our topic was be organizing parent education programs with high parent participation and support.
-
-
-
-
-Download PDF of Slides`,
-  },
-  {
     slug: "webinar-montessori-secondary-education-pt-1",
     title: `Webinar:  Montessori Secondary Education / Pt 1`,
     author: `Paul Epstein`,
@@ -7636,17 +7576,6 @@ Download PDF of PowerPoint`,
     content: `Join Dr. Robin Howe and Kathy Leitch for suggestions on how to support your elementary child as she moves into the Secondary level of Montessori school.`,
   },
   {
-    slug: "webinar-understanding-your-child-sensitivities-during-adolescence",
-    title: `Webinar: Understanding Your Child: Sensitivities During Adolescence`,
-    author: `Jeff Allen`,
-    date: "2017-12-13",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Later Adolescence (15-18)","Montessori Middle School","Montessori Parenting","Montessori Secondary / High School","Planes of Development","Sensitive Periods","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["a-cAt2wF3Z4"],
-    excerpt: `Jeff Allen shares insights for parents about adolescents and their behavior. Whether your child has the opportunity to attend a Montessori Secondary Program or not this information will be very benefi...`,
-    content: `Jeff Allen shares insights for parents about adolescents and their behavior. Whether your child has the opportunity to attend a Montessori Secondary Program or not this information will be very beneficial to you and your teenager. In fact it may be even more important for parents of children who cannot continue in Montessori. They will need more support from home during those critical years especially if their school environment is providing it.`,
-  },
-  {
     slug: "webinar-understanding-your-child-sensitivities-during-the-elementary-years",
     title: `Webinar: Understanding Your Child: Sensitivities During the Elementary Years`,
     author: `Christine Lowry`,
@@ -7689,28 +7618,6 @@ Download PDF of PowerPoint`,
     videoIds: ["bZ10ai96bQI"],
     excerpt: `Join Lorna McGrath and Tanya Ryskind who are both parents of young people who spent much of their time, from toddlers to teens, in Montessori schools. They're putting their Montessori hats slightly to...`,
     content: `Join Lorna McGrath and Tanya Ryskind who are both parents of young people who spent much of their time, from toddlers to teens, in Montessori schools. They're putting their Montessori hats slightly to the side and bringing their parent hats to the forefront to share their experiences, concerns, and reasons for staying with Montessori for their children over the years. Tune in for "Why Stay in Montessori? - A Parent to Parent Chat."`,
-  },
-  {
-    slug: "webinar-adolescents-and-social-media",
-    title: `Webinar: Adolescents and Social Media`,
-    author: `Patricia De Leon`,
-    date: "2018-01-25",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Later Adolescence (15-18)","Montessori Parenting","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["2OUvexUDArI"],
-    excerpt: `Join adolescent expert Patty DeLeon for insights and ideas about adolescents and social media.`,
-    content: `Join adolescent expert Patty DeLeon for insights and ideas about adolescents and social media.`,
-  },
-  {
-    slug: "webinar-empowering-choices",
-    title: `Webinar: Empowering Choices`,
-    author: `Tanya L. Ryskind J.D`,
-    date: "2018-02-12",
-    categories: ["Brain Development","Communication","Discipline","Empowerment","Infant-Toddler (0 to 3)","Kindergarten","Lower Elementary (6-9)","Montessori Family Life","Montessori Parenting","Primary (3-6)","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["f2__YEGI4j0"],
-    excerpt: `Making choices is part of our everyday existence, what to eat, what to wear, what to do? Making good choices is learned. How do we help our children make good choices? This webinar will explore method...`,
-    content: `Making choices is part of our everyday existence, what to eat, what to wear, what to do? Making good choices is learned. How do we help our children make good choices? This webinar will explore methods and language used to help our children make good choices consistently.`,
   },
   {
     slug: "webinar-linking-home-and-classroom-through-nature-during-the-elementary-years",
@@ -7825,17 +7732,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     content: `Lorna McGrath interviews one of NewGate School's 2018 graduates. NewGate is an International Montessori school that serves children from 18 months old to 18 years old. Three fifths of the NewGate graduates this year are from countries other than the United States. Our interviewee, Alex, is from Spain and will be returning to Spain before graduation day. He graciously agreed to do this interview without the other seniors. Alex has a lot to share about his Montessori experience.`,
   },
   {
-    slug: "2018-an-interview-with-four-montessori-seniors",
-    title: `2018 An Interview with Four Montessori Seniors`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2018-05-11",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Empowerment","Later Adolescence (15-18)","Montessori Education","Montessori Family Life","Montessori Graduates","Montessori Secondary / High School","Montessori students","Practical Life","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["lnD6evQXjzw"],
-    excerpt: `Lorna McGrath has the opportunity to talk with four NewGate School's seniors before they graduate and go off into a new stage of their lives. Each of them has a unique story to share. It is such a ple...`,
-    content: `Lorna McGrath has the opportunity to talk with four NewGate School's seniors before they graduate and go off into a new stage of their lives. Each of them has a unique story to share. It is such a pleasure to listen to their experiences in Montessori and how that has shaped and will continue to shape their lives. You will enjoy these articulate, personable, and fun individuals!`,
-  },
-  {
     slug: "summer-ideas",
     title: `Summer Ideas`,
     author: `Cheryl Allen`,
@@ -7946,28 +7842,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     content: `Life Skills - Executive Functioning Skills - Part 2 - Children are not born with these skills. They are born with the potential to develop them! From 7 to 12 years old to the adolescent years, what activities can we offer at home? In this session Maria Chaffin continues to offer parents and teachers ideas and insights for supporting children through the elementary and high school years in the development of concentration, follow through, and organization.`,
   },
   {
-    slug: "practical-life-in-elementary-and-beyond",
-    title: `Practical Life in Elementary and Beyond!`,
-    author: `Cheryl Allen`,
-    date: "2018-08-28",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Empowerment","Later Adolescence (15-18)","Lower Elementary (6-9)","Mindfulness","Montessori Family Life","Montessori Parenting","Montessori Teachers","Practical Life","Upper Elementary (9-12)","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["fNaeV1ulQ-w"],
-    excerpt: `Montessori said, "Only practical work and experience lead a child to maturity." Cheryl Allen will share ideas that will help children at home and in the classroom to prepare for life during the elemen...`,
-    content: `Montessori said, "Only practical work and experience lead a child to maturity." Cheryl Allen will share ideas that will help children at home and in the classroom to prepare for life during the elementary years and beyond. She will show how Practical Life activities change as children grow from pouring and scooping lessons during Early Childhood to money management, planning a vacation, performing in a play or opera, and more.`,
-  },
-  {
-    slug: "dads-important-role-as-daughters-grow",
-    title: `Dads Important Role as Daughters Grow`,
-    author: `Kathryn Kvols`,
-    date: "2018-08-29",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Later Adolescence (15-18)","Montessori Family Life","Video","Webinars / MFA","Young Adolescent"],
-    tags: [],
-    videoIds: ["OdaIe7DanRw"],
-    excerpt: `Sometimes Dad's feel like a "duck out of water" when it comes to relating to their tween/teen daughter. The little girl's body that used to rough and tumble now has begun to develop making roughing an...`,
-    content: `Sometimes Dad's feel like a "duck out of water" when it comes to relating to their tween/teen daughter. The little girl's body that used to rough and tumble now has begun to develop making roughing and tumbling awkward. Also, this stage in a girl's life is fraught with emotional upheavals which often make Dads shy away. A father's influence in his daughter's life shapes her self-esteem, self-image, confidence and opinions of men. The type of men that women date are directly related to the kind of relationship a girl has with her father. It's imperative that, no matter what, Dads avoid the temptation to pull away or withdraw during this challenging stage of growing up. Explore ways that dads can stay connected during this session with Kathryn Kvols.`,
-  },
-  {
     slug: "hard-conversations-with-your-children-part-1",
     title: `Hard Conversations with Your Children Part 1`,
     author: `Christine Lowry`,
@@ -7979,39 +7853,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     content: `From helping your child understand bedtime, to the importance of family chores, to those "big" questions about the world or current events, having a Hard Conversation with your son or daughter can be really challenging for all of us. Having some knowledge of developmental stages, some clues for understanding what your child really needs to hear, and how to engage your child in the conversation will be questions we will explore together. Join us for this two part series on September 11 and 18 as we discuss having hard conversations with your children.`,
   },
   {
-    slug: "hard-conversations-with-your-child-part-2",
-    title: `Hard Conversations with Your Child Part 2`,
-    author: `Christine Lowry`,
-    date: "2018-09-20",
-    categories: ["Birthdays","Communication","Kindergarten","Lower Elementary (6-9)","Montessori Family Life","Montessori Parenting","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["g3s0XncOq9w"],
-    excerpt: `From helping your child understand friendships, to the importance of family values and beliefs, to those "big" questions about the world or current events, having a Hard Conversation with your son or...`,
-    content: `From helping your child understand friendships, to the importance of family values and beliefs, to those "big" questions about the world or current events, having a Hard Conversation with your son or daughter can be really challenging for all of us. Having some knowledge of developmental stages, some clues for understanding what your child really needs to hear, and how to engage your child in the conversation are questions we explore together in this session.`,
-  },
-  {
-    slug: "courageous-conversations-between-parents-and-teachers",
-    title: `Courageous Conversations Between Parents and Teachers`,
-    author: `cassimackey11@gmail.com`,
-    date: "2018-09-25",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Infant-Toddler (0 to 3)","Kindergarten","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Parenting","Montessori Teachers","Parent-Teacher Communication","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["kDP2hz7xk1U"],
-    excerpt: `The purpose of Courageous Conversation between parents and teachers is to create a safe space for meaningful dialogue about issues regarding children. The desired end is to understand each other's per...`,
-    content: `The purpose of Courageous Conversation between parents and teachers is to create a safe space for meaningful dialogue about issues regarding children. The desired end is to understand each other's perspective and work together to best serve the child. We know that this is not always a one step, quick-fix, but rather a complicated process requiring vulnerability, humility and commitment.Cassi Mackey shares so much about the how and why of Courageous Conversations in our schools during this session.`,
-  },
-  {
-    slug: "self-calming-and-learning-styles-part-1",
-    title: `Self-Calming and Learning Styles - Part 1`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2018-10-02",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Emotional Intelligence (EQ)","Later Adolescence (15-18)","Lower Elementary (6-9)","Mindfulness","Montessori Family Life","Montessori Parenting","Peace Education","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["2ACQdjXrcFU"],
-    excerpt: `How many times have you heard an adult say to an upset child, "Calm down," "Just relax," or "Pull yourself together. It's not so bad"? Children are not born knowing how to calm themselves when they ge...`,
-    content: `How many times have you heard an adult say to an upset child, "Calm down," "Just relax," or "Pull yourself together. It's not so bad"? Children are not born knowing how to calm themselves when they get emotional. Self-regulating our emotions is a skill to be learned. In part 1, Lorna will define learning styles and help make the connection between the way that we learn with the way that we self-calm. In part 2, she will share how to create a place for each family member when they need get calm, what activities to put in, when  a family member should go there, and how to get them there.`,
-  },
-  {
     slug: "webinar-addressing-challenging-behaviors-part-2",
     title: `Webinar: Addressing Challenging Behaviors - Part 2`,
     author: `MSChaffin`,
@@ -8021,17 +7862,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     videoIds: ["9dJqnJSqeQA"],
     excerpt: `Join Maria Eva Chaffin and Brynn Rangel for part 2 of this series on Addressing Challenging Behavior. In this session, they give a summary for each of the three levels - Early Childhood, Elementary, a...`,
     content: `Join Maria Eva Chaffin and Brynn Rangel for part 2 of this series on Addressing Challenging Behavior. In this session, they give a summary for each of the three levels - Early Childhood, Elementary, and Adolescence including strategies, preparation, and observation.`,
-  },
-  {
-    slug: "my-childs-teacher-has-concerns",
-    title: `My Childs Teacher Has Concerns`,
-    author: `Ann Epstein Ph.D`,
-    date: "2018-10-11",
-    categories: ["Autism","Brain Development","Children with Exceptionalities","Communication","Family Resources","Infant","Infant-Toddler (0 to 3)","Kindergarten","Lower Elementary (6-9)","Montessori Parenting","Parent-Teacher Communication","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["GLETzSttJ3A"],
-    excerpt: `Join Ann Epstein, PhD, as she talks about what can be a difficult, even heart wrenching topic. "My child's teacher has concerns. Oh no!" How can parents and other family members partner with teachers...`,
-    content: `Join Ann Epstein, PhD, as she talks about what can be a difficult, even heart wrenching topic. "My child's teacher has concerns. Oh no!" How can parents and other family members partner with teachers when there is a concern about your child? Dr. Epstein has personal experience as the parent of a deaf child and professional experience working with parents and teachers about these conversations and how adults can work as a team to effectively support the child.`,
   },
   {
     slug: "grandparenting-in-the-elementary-years-planting-seeds-for-learning",
@@ -8056,17 +7886,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     content: `Recently Margot Garfield-Anderson focused on how grandparents of elementary children can plant seeds of learning through projects and excursions. In this session Duna Strachan will focus on the the physical, social, and emotional development of children in this second plane. She will relate how these changes and sensitivities effect the activities and adventures that they love and how we can best interact and connect with our grandchildren during the elementary years.`,
   },
   {
-    slug: "worried-about-your-teens-when-they-re-out-and-about",
-    title: `Worried about Your Teens When They're Out and About?`,
-    author: `Kathryn Kvols`,
-    date: "2018-11-07",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Empowerment","Later Adolescence (15-18)","Montessori Family Life","Montessori Parenting","Webinars / MFA","Young Adolescent","Video"],
-    tags: [],
-    videoIds: ["b1LLNrFTYuU"],
-    excerpt: `When my kids were teenagers, I could make it through the day. But at night, when my head hit the pillow, in the dark is when it would begin. I would toss and turn, worried about my kid…. Who was she w...`,
-    content: `When my kids were teenagers, I could make it through the day. But at night, when my head hit the pillow, in the dark is when it would begin. I would toss and turn, worried about my kid…. Who was she with? What was she doing? Would she finish school? Would she be able to get into college? Am I doing the right thing? What was I thinking when I let her…. This litany of fears would spin out of control and take me to some very dark places. Why is it important to stop worrying and what can we do instead? Join us to find out.`,
-  },
-  {
     slug: "here-s-to-a-peaceful-winter-break",
     title: `Here's to a Peaceful Winter Break!`,
     author: `Christine Lowry`,
@@ -8076,28 +7895,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     videoIds: ["KWI3pYNBHz4"],
     excerpt: `Wondering what kinds of activities to do with your children during the school break? This session is loaded with good ideas for families whether during the day, in the evenings, or on the weekends. Jo...`,
     content: `Wondering what kinds of activities to do with your children during the school break? This session is loaded with good ideas for families whether during the day, in the evenings, or on the weekends. Join Christine Lowry as she shares her experience and suggestions for creating a peaceful school break.`,
-  },
-  {
-    slug: "parenting-in-the-digital-age",
-    title: `Parenting in the Digital Age`,
-    author: `Cheryl Allen`,
-    date: "2019-01-13",
-    categories: ["Adolescence","Brain Development","Communication","Discipline","Early Adolescence (12-15)","Health / Nutrition","Infant-Toddler (0 to 3)","Kindergarten","Lower Elementary (6-9)","Montessori Parenting","Primary (3-6)","Research","Social Media","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["bfaIRaysE0c"],
-    excerpt: `One of our greatest challenges in the 21st century is how to help children navigate technology responsibly. In this session Cheryl Allen and Dr. Nora Faris discuss the potentials and the pitfalls of p...`,
-    content: `One of our greatest challenges in the 21st century is how to help children navigate technology responsibly. In this session Cheryl Allen and Dr. Nora Faris discuss the potentials and the pitfalls of parenting during the digital age. Join us to learn about strategies for guiding our children through today's digital world.`,
-  },
-  {
-    slug: "self-calming-and-learning-styles-part-2",
-    title: `Self-Calming and Learning Styles  Part 2`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2019-01-13",
-    categories: ["Communication","Emotionally Healthy Children","Kindergarten","Lower Elementary (6-9)","Mindfulness","Montessori Family Life","Montessori Parenting","Primary (3-6)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["UwdAleTHwbo"],
-    excerpt: `In Part 1 Lorna McGrath discussed learning styles and how they are related to self-calming. In Part 2 she will expand on what listeners already know about learning styles by sharing how to create indi...`,
-    content: `In Part 1 Lorna McGrath discussed learning styles and how they are related to self-calming. In Part 2 she will expand on what listeners already know about learning styles by sharing how to create individual self-calming spaces which include activities that are in alignment with each person's dominant learning style. When individual self-calming spaces are designed in this way family members are more easily able to center themselves, to express their feelings and needs, and return to family life.`,
   },
   {
     slug: "stem-and-montessori",
@@ -8111,17 +7908,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     content: `Do you ever question or are asked, “How do STEM and Montessori overlap?” or “Should I choose a STEM or Montessori school for my child?” We’ll take a look at how Montessori incorporates STEM philosophy, and what you can do next.`,
   },
   {
-    slug: "the-emotionally-healthy-child",
-    title: `The Emotionally Healthy Child`,
-    author: `Maureen Healy`,
-    date: "2019-01-25",
-    categories: ["Brain Development","Communication","Discipline","Emotionally Healthy Children","Empowerment","Kindergarten","Lower Elementary (6-9)","Mindfulness","Montessori Family Life","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["5AYdqUWO36Q"],
-    excerpt: `While growing up has never been easy, today’s world undeniably presents kids and their parents with unprecedented challenges. In this session, award-winning author Maureen Healy will share highlights...`,
-    content: `While growing up has never been easy, today’s world undeniably presents kids and their parents with unprecedented challenges. In this session, award-winning author Maureen Healy will share highlights from her new book, "The Emotionally Healthy Child," and answer real-life questions from anyone wanting to raise emotionally healthy children. Come and learn some new strategies to help your children stop, calm and make smarter choices even when emotionally charged.`,
-  },
-  {
     slug: "montessori-re-enrollment",
     title: `Montessori Re-Enrollment`,
     author: `Christine Lowry`,
@@ -8131,17 +7917,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     videoIds: ["fftWrDTDTh4"],
     excerpt: `Christine Lowry shares some of the most up-to-date research on educational settings and their effect on student success. The research includes flexible classroom arrangement, multi-age classes, person...`,
     content: `Christine Lowry shares some of the most up-to-date research on educational settings and their effect on student success. The research includes flexible classroom arrangement, multi-age classes, personalized learning, project-based learning, social-emotional learning, multiple years with the same teacher, and assessments in a variety of formats. See how the Montessori approach stacks up according to research as you consider re-enrolling your child.`,
-  },
-  {
-    slug: "do-s-and-don-ts-to-get-your-adolescent-talking",
-    title: `Do's and Don'ts to Get Your Adolescent Talking`,
-    author: `Kathryn Kvols`,
-    date: "2019-02-06",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Later Adolescence (15-18)","Montessori Family Life","Montessori Parenting","Upper Elementary (9-12)","Video","Webinars / MFA","Young Adolescent"],
-    tags: [],
-    videoIds: ["MYpMcYuwzNE"],
-    excerpt: `"I haven't talked to my mom, I mean really talked, in six months," a twelve year-old confided in me. "Oh, why is that," I asked gingerly. "My mom laughed at me when I told her I had a boyfriend." Some...`,
-    content: `"I haven't talked to my mom, I mean really talked, in six months," a twelve year-old confided in me. "Oh, why is that," I asked gingerly. "My mom laughed at me when I told her I had a boyfriend." Sometimes we forget how sensitive children at this stage of development can be. Yet now, more than ever is the time to be available to your child. Despite all of their attempts to push you away, they still need you. Kathryn will share tips for getting and keeping your adolescents talking.`,
   },
   {
     slug: "work-or-play-what-s-the-difference",
@@ -8199,34 +7974,6 @@ These webinars are designed for parents and teachers. Guests are invited to join
     content: `In this session Sue Fitzpatrick discusses each of the six interconnected components of STEM that in 2016 the US Department of Education described as key to putting the program into classrooms. She gives actual photos and examples of Montessori students in action for each of the components. Participants will go away with lots more information about STEAM and a better understanding of its goals and how it fits with Montessori.`,
   },
   {
-    slug: "setting-limits-and-making-them-stick",
-    title: `Setting Limits and Making Them Stick!`,
-    author: `Kathryn Kvols`,
-    date: "2019-03-26",
-    categories: ["Adolescence","Communication","Discipline","Early Adolescence (12-15)","Infant-Toddler (0 to 3)","Kindergarten","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Family Life","Montessori Parenting","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["zx2RCS8Ow-0"],
-    excerpt: `Do you set limits and then give in? Are you not sure how to set limits? In this session you will learn: • An easy 6 step process to set limits. • How to not crumble after you set the limit. • How...`,
-    content: `Do you set limits and then give in? Are you not sure how to set limits?
-In this session you will learn:
-• An easy 6 step process to set limits.
-• How to not crumble after you set the limit.
-• How to follow through in a way that your child feels understood
-and loved.
-Most importantly, become the parent YOU want to be!`,
-  },
-  {
-    slug: "wonder-filled-year-of-change-2-to-3-years-old",
-    title: `Wonder-filled Year of Change: 2 to 3 Years Old`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2019-04-03",
-    categories: ["Child's Work","Communication","Discipline","Empowerment","Infant-Toddler (0 to 3)","Language","Montessori Parenting","Sensitive Periods","Toddler (18 months-3 years)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["-e4YaO-zEUY"],
-    excerpt: `What? Wonder-filled? Did you think, "What could be wonder-filled about the TERRIBLE TWO'S?" If you are struggling with your two-year old or you are about to celebrate your child's second birthday, thi...`,
-    content: `What? Wonder-filled? Did you think, "What could be wonder-filled about the TERRIBLE TWO'S?" If you are struggling with your two-year old or you are about to celebrate your child's second birthday, this session with Lorna will give you insights about two-year old behavior, how they are changing during the year from 2 to 3, success strategies, and how your parenting role is changing as well.`,
-  },
-  {
     slug: "woodworking-101-for-children-3-6-yrs-old",
     title: `Woodworking 101 for Children 3-6 Yrs. Old`,
     author: `Regina Abraham`,
@@ -8249,17 +7996,6 @@ Most importantly, become the parent YOU want to be!`,
     content: `Mary Helen Abel will share her experiences and inspiration for this artistic children's peace project. She will explain how she went about putting the project together and the materials needed including a small item for the children to take home.  She collaborated  with a family in the school who owned a business in the local community to display children's art.`,
   },
   {
-    slug: "supporting-your-child-with-co-regulation",
-    title: `Supporting Your Child with Co-Regulation`,
-    author: `Christine Lowry`,
-    date: "2019-04-24",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Emotionally Healthy Children","Infant","Infant-Toddler (0 to 3)","Kindergarten","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Family Life","Montessori Parenting","Primary (3-6)","Toddler (18 months-3 years)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["LZTeDJgC5hg"],
-    excerpt: `In this webinar Christine Lowry will guide us in how to help not only our children to be able to self-regulate their emotions but also, how we can develop better skills in this area along with our chi...`,
-    content: `In this webinar Christine Lowry will guide us in how to help not only our children to be able to self-regulate their emotions but also, how we can develop better skills in this area along with our children. She will provide important information about how adults influence the level of emotion that our children experience. Whether adults up-regulate or down-regulate their own emotions impacts how children respond to stresses. She will also share six steps to help children down-regulate when they are experiencing a meltdown. The ideas and strategies that she shares apply from infancy through adolescence.`,
-  },
-  {
     slug: "transitioning-to-secondary",
     title: `Transitioning to Secondary`,
     author: `Kristi Antczak`,
@@ -8269,17 +8005,6 @@ Most importantly, become the parent YOU want to be!`,
     videoIds: ["fRfIEqhQ5NU"],
     excerpt: `Kristi Antczak and Lorna McGrath each have two children who have moved to Secondary programs. In this session they will each talk to you about their experiences with this important transition for thei...`,
     content: `Kristi Antczak and Lorna McGrath each have two children who have moved to Secondary programs. In this session they will each talk to you about their experiences with this important transition for their children. They will give you tips for smooth transitions, pitfalls that may happen, and choices to be made. You'll want to attend this session whether your child is moving into a Montessori Secondary program or a more conventional education program.`,
-  },
-  {
-    slug: "purposeful-work-for-toddlers",
-    title: `Purposeful Work for Toddlers`,
-    author: `Kristi Antczak`,
-    date: "2019-05-15",
-    categories: ["Child's Work","Communication","Language","Sensitive Periods","Toddler (18 months-3 years)","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["ozjAFrSQ8vQ"],
-    excerpt: `In this session Kristi Antczak will share ways to understand and observe the underlying factors that motivate toddlers to do what they do. She will focus on the Sensitive Period for Toddlers (18 month...`,
-    content: `In this session Kristi Antczak will share ways to understand and observe the underlying factors that motivate toddlers to do what they do. She will focus on the Sensitive Period for Toddlers (18 months-3 years old). This knowledge will assist parents at home in creating activities for their children or in simply recognizing the reasons for their toddlers behaviors and choices of things to do. As toddlers become more and more capable of caring for themselves and communicating with others, their confidence will build and blossom.`,
   },
   {
     slug: "math-without-workbooks",
@@ -8293,17 +8018,6 @@ Most importantly, become the parent YOU want to be!`,
     content: `In this session, "Math Without Workbooks," Cheryl Allen shares many opportunities for practicing math which are right there in front of us in our everyday lives if we just take advantage of them. Hands-on experiences help children internalize concepts that might otherwise seem difficult to understand or unimportant to them. In addition to great ideas for learning math in fun ways, Cheryl also includes a wonderful list of books for the elementary years that are not only about math but also many of them are quite humorous which children of this age love.`,
   },
   {
-    slug: "how-do-you-handle-anger",
-    title: `How Do You Handle Anger?`,
-    author: `Kathryn Kvols`,
-    date: "2019-06-18",
-    categories: ["Adolescence","Communication","Discipline","Early Adolescence (12-15)","Kindergarten","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Family Life","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["itPbxuTLsww"],
-    excerpt: `Anger is a natural reaction to being wronged. But society tells us anger is dangerous and we should hide it or "positive think" it away. Yet, if anger is harnessed correctly, it can create positive ch...`,
-    content: `Anger is a natural reaction to being wronged. But society tells us anger is dangerous and we should hide it or "positive think" it away. Yet, if anger is harnessed correctly, it can create positive change. Kath will share ideas for good. Parents can use her ideas when they are feeling the need to control or push back instead of making matters worse by reacting, engaging in power struggles, and causing damage to their most precious relationships with their children.`,
-  },
-  {
     slug: "summer-ideas-for-families",
     title: `Summer Ideas for Families`,
     author: `Kristi Antczak`,
@@ -8313,30 +8027,6 @@ Most importantly, become the parent YOU want to be!`,
     videoIds: ["ZbW_btZnCQQ"],
     excerpt: `Summertime is perfect for continued learning opportunities with your child. Bring Montessori home with you this summer and keep the learning fun. Kristi shares suggestions for preparing a Montessori-f...`,
     content: `Summertime is perfect for continued learning opportunities with your child. Bring Montessori home with you this summer and keep the learning fun. Kristi shares suggestions for preparing a Montessori-friendly indoor as well as outdoor environment, reinforcing language and phonetic skills, and observing your child to better understand what they are interested in and how they think. This summer you can have the joy of watching your child’s development continue with these Montessori inspired activities and ideas.`,
-  },
-  {
-    slug: "turning-down-the-heat-on-power-struggles",
-    title: `Turning Down the Heat on Power Struggles`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2019-07-09",
-    categories: ["Adolescence","Communication","Discipline","Early Adolescence (12-15)","Empowerment","Kindergarten","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Family Life","Primary (3-6)","Toddler (18 months-3 years)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["-Sw1Rt0LH3c"],
-    excerpt: `Do you feel like there are persons in your family that you are constantly being challenged by, you are battling with about every little thing, or you are just plain angry with? In this session Lorna w...`,
-    content: `Do you feel like there are persons in your family that you are constantly being challenged by, you are battling with about every little thing, or you are just plain angry with? In this session Lorna will take participants through an awareness of feelings associated with power struggles, an understanding of the effects of power struggles on relationships and strategies for minimizing power struggles in families.`,
-  },
-  {
-    slug: "signing-fun-with-your-little-one",
-    title: `Signing Fun with Your Little One!`,
-    author: `Ann Epstein Ph.D`,
-    date: "2019-07-23",
-    categories: ["Communication","Infant","Language","Montessori Parenting","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["4Gl-juhQNCg"],
-    excerpt: `In this webinar Dr. Ann Epstein shares basic language milestones first and then goes over the pros and cons of using sign language with little ones. Sign language can be fun for both babies and parent...`,
-    content: `In this webinar Dr. Ann Epstein shares basic language milestones first and then goes over the pros and cons of using sign language with little ones. Sign language can be fun for both babies and parents. AND it promotes developmentally appropriate interactions between parents and babies which is super important. Unfortunately, we had some technical difficulties with this broadcast. Because we didn't want you to miss out we added a pdf of the first slides in the presentation. Click on this link -  Sign Language with Little Ones - AEpstein
-
-The last short section is recorded and Dr. Epstein includes demonstrations of common signs used in communications with babies as well as some great resources for you to use as you learn more about sign language with babies.`,
   },
   {
     slug: "mom-i-made-my-own-lunch",
@@ -8361,17 +8051,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `Have you ever been in any of these situations with your children: trying to get out of the house on time without a tantrum, grocery shopping and getting into a battle with your child about buying something she wants but it's not on the list, putting toys away before going to bed without a 30 minute negotiation? If any of these scenarios sound familiar, please join us for this session on boundaries and limits.`,
   },
   {
-    slug: "how-do-you-get-your-child-to-read-books",
-    title: `How Do You Get Your Child to Read Books?`,
-    author: `Christine Lowry`,
-    date: "2019-10-03",
-    categories: ["Communication","Infant","Infant-Toddler (0 to 3)","Kindergarten","Language &amp; Reading","Lower Elementary (6-9)","Primary (3-6)","Reading","Toddler (18 months-3 years)","Upper Elementary (9-12)","Video","Webinars / MFA","Young Adolescent"],
-    tags: [],
-    videoIds: ["SDB1pdgBSzM"],
-    excerpt: `You've probably seen the cartoon with two parents and their two children sitting on a park bench together. One parent and her child have phones in their hands and the other parent and his child have b...`,
-    content: `You've probably seen the cartoon with two parents and their two children sitting on a park bench together. One parent and her child have phones in their hands and the other parent and his child have books in their hands. The question from the parent with the phone is, How do you get your child to read books?" Join Christine Lowry and Kathy Leitch for ideas about children and reading in this powerful session.`,
-  },
-  {
     slug: "linking-science-at-home-and-science-at-school",
     title: `Linking Science at Home and Science at School`,
     author: `Kelly Johnson`,
@@ -8381,28 +8060,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     videoIds: ["u2GMDbHueAI"],
     excerpt: `Kelly Johnson is a talented writer, artist, and naturalist who also happens to be a Montessori certified elementary teacher. She has written two outstanding books, "Wings,Worms and Wonder" and "Wonder...`,
     content: `Kelly Johnson is a talented writer, artist, and naturalist who also happens to be a Montessori certified elementary teacher. She has written two outstanding books, "Wings,Worms and Wonder" and "Wonder and Wander" that link home and school activities for discovering the awesomeness of our natural world. In this session she will share some activities from each book and show you how what you do at home can be aligned with Montessori classroom lessons and materials.`,
-  },
-  {
-    slug: "less-talk-more-respect",
-    title: `Less Talk - More Respect`,
-    author: `JoeNewman`,
-    date: "2022-03-17",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Infant-Toddler (0 to 3)","Kindergarten","Lower Elementary (6-9)","Montessori Family Life","Primary (3-6)","Toddler (18 months-3 years)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["dab_w8tgvgk"],
-    excerpt: `Do you feel like you talk too much about your child’s behavior? Are you constantly repeating your requests and explaining things your children already understand? Joe Newman, the author of "Raising Li...`,
-    content: `Do you feel like you talk too much about your child’s behavior? Are you constantly repeating your requests and explaining things your children already understand? Joe Newman, the author of "Raising Lions" will talk about how replacing our explanations and lectures with action boundaries, will get better behavior from our kids and will raise those kids into adults who are both confident about themselves and connected to other's feelings and needs.`,
-  },
-  {
-    slug: "what-did-you-do-at-school-today",
-    title: `What Did You Do at School Today?`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2019-10-17",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Kindergarten","Lower Elementary (6-9)","Primary (3-6)","Sensitive Periods","Start of School Year","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["TpLk9c-N5Xw"],
-    excerpt: `So,your three year old is off to school for the first time and you're very excited. You want to know what she did and who she met and what the teachers were like. So you ask. Your child either looks a...`,
-    content: `So,your three year old is off to school for the first time and you're very excited. You want to know what she did and who she met and what the teachers were like. So you ask. Your child either looks at you like you have two heads and says nothing or maybe responds with, "I don't know." Or you have an 8 year old who was always happy to share about school and friends and now suddenly stops. Or you have a budding adolescent who is reticent when asked about his day. Lorna has some hints for parents who struggle with getting answers to, "What did you do at school today?"`,
   },
   {
     slug: "backpack-scientists-and-their-journals",
@@ -8416,39 +8073,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `Have you ever wondered what is the difference between a nature journal, field notes,or a scientific journal? Jackie Grundberg helps sort that out and offers guidance on how they are used in the classroom and at home.`,
   },
   {
-    slug: "talking-to-smart-speakers",
-    title: `Talking to Smart Speakers`,
-    author: `Tanya L. Ryskind J.D`,
-    date: "2019-11-20",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Infant-Toddler (0 to 3)","Kindergarten","Language","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Family Life","Primary (3-6)","Toddler (18 months-3 years)","Upper Elementary (9-12)","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["VgYOr1YVN7E"],
-    excerpt: `In this session we discuss our changing world, how humans adapt, and opportunities for thoughtful communication, specifically related to "Smart Speakers." Maria Montessori developed a part of the curr...`,
-    content: `In this session we discuss our changing world, how humans adapt, and opportunities for thoughtful communication, specifically related to "Smart Speakers." Maria Montessori developed a part of the curriculum called Grace and Courtesy. Many schools do not emphasize this aspect of learning as we do in Montessori schools. As Montessori said, "...education should be preparation for life." Is there such a thing as Grace and Courtesy for Alexa or Siri? As humans evolve and adapt to rapid changes in technology and communication, we wanted to take a moment to reflect on how we can continue to help our children to become respectful, patient, and problem-solvers in this new world of easy to access information on demand.`,
-  },
-  {
-    slug: "story-time-the-last-20-minutes-of-the-day",
-    title: `Story Time: the Last 20 Minutes of the Day`,
-    author: `Andrew Newman`,
-    date: "2019-12-04",
-    categories: ["Book Reviews","Brain Development","Communication","Emotionally Healthy Children","Kindergarten","Lower Elementary (6-9)","Mindfulness","Montessori Family Life","Montessori Parenting","Primary (3-6)","Toddler (18 months-3 years)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["yrnHVvWDMmQ"],
-    excerpt: `Bedtime is far more than 'just story time'. It is a time when our kids are integrating the experiences of their day and transitioning between brain states and brain functions. How we engage with them...`,
-    content: `Bedtime is far more than 'just story time'. It is a time when our kids are integrating the experiences of their day and transitioning between brain states and brain functions. How we engage with them during the last 20 minutes impacts their esteem, self-worth, and confidence in the morning. Listen in on this conversation around the role of meaningful connection, and top tips on how to create connected moments at bedtime.`,
-  },
-  {
-    slug: "reading-alive",
-    title: `Reading Alive!`,
-    author: `Caitlin Roper`,
-    date: "2019-12-11",
-    categories: ["Communication","Imagination","Infant-Toddler (0 to 3)","Kindergarten","Language","Lower Elementary (6-9)","Montessori Family Life","Primary (3-6)","Reading","Toddler (18 months-3 years)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["mUWTDvrKuc0"],
-    excerpt: `When you embody the story, when you can feel excited and curious and delighted, the child cannot help but be brought in, too! All you need is a little bravery and a good helping of enthusiasm. Join Ca...`,
-    content: `When you embody the story, when you can feel excited and curious and delighted, the child cannot help but be brought in, too! All you need is a little bravery and a good helping of enthusiasm. Join Caitlin Roper for some wonderful,important tips for great story telling.`,
-  },
-  {
     slug: "january-calm-the-comfort-of-routine-and-consistency",
     title: `January Calm: The Comfort of Routine and Consistency`,
     author: `Christine Lowry`,
@@ -8458,17 +8082,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     videoIds: ["c1-hw4nnMWA"],
     excerpt: `There is a wonderful phenomenon that happens when children come back to school after the winter break. It is the great pleasure of being back in the routine of everyday living which allows children to...`,
     content: `There is a wonderful phenomenon that happens when children come back to school after the winter break. It is the great pleasure of being back in the routine of everyday living which allows children to focus and move forward in their growth. Christine will share some of her observations of the classroom at the Primary and Elementary levels. Join us and see if you observe a similar phenomenon at home.`,
-  },
-  {
-    slug: "grace-and-courtesy-building-new-skills",
-    title: `Grace and Courtesy: Building New Skills`,
-    author: `Terri Sherrill`,
-    date: "2020-01-07",
-    categories: ["Communication","Empowerment","Infant-Toddler (0 to 3)","Kindergarten","Language","Lower Elementary (6-9)","Primary (3-6)","Toddler (18 months-3 years)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["yFUbOKhj-pQ"],
-    excerpt: `We have heard many people say that they have noticed declining civility in public discourse in recent years. Yet, learning how to meet our needs in ways that are constructive, and developing the abili...`,
-    content: `We have heard many people say that they have noticed declining civility in public discourse in recent years. Yet, learning how to meet our needs in ways that are constructive, and developing the ability to listen and respond well to others, takes practice (as well as patient instruction). These valuable skills can help our children to successfully navigate the world around them, to collaborate effectively with others, and to build important friendships. They are foundational to living in community with others. This week, we will talk about how to support our children's character development in ways that are age-appropriate and fun.`,
   },
   {
     slug: "clutter-and-anxiety-go-hand-in-hand",
@@ -8515,17 +8128,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `So many adults are always telling children to, "Be careful." What message are children getting about the world? Lorna has some ideas about the message and how to change that message into more empowering thoughts and build problem-solving skills.`,
   },
   {
-    slug: "feeling-pushed-into-a-corner-by-your-child",
-    title: `Feeling Pushed into a Corner by Your Child?`,
-    author: `Tanya L. Ryskind J.D`,
-    date: "2020-03-03",
-    categories: ["Communication","Discipline","Empowerment","Infant-Toddler (0 to 3)","Kindergarten","Language","Lower Elementary (6-9)","Montessori Family Life","Montessori Parenting","Primary (3-6)","Toddler (18 months-3 years)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["Y2sjz05ImWY"],
-    excerpt: `Can you read me one more story, please? Can I have another cookie? I don’t want to get dressed! Feeling pushed into a corner by your child can bring about language and actions of good intentions that...`,
-    content: `Can you read me one more story, please? Can I have another cookie? I don’t want to get dressed! Feeling pushed into a corner by your child can bring about language and actions of good intentions that result in poor outcomes. In this session we'll discuss the challenges of setting boundaries with our children as they move from stage to stage in their development using words and ways to keep ourselves out of the corner and meet the needs of our children.`,
-  },
-  {
     slug: "thoughts-on-your-child-s-living-space",
     title: `Thoughts on Your Child's Living Space`,
     author: `lornamcgrath@montessori.org`,
@@ -8548,39 +8150,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `Toileting for Toddlers is a topic that anyone who has gone through it, is going through, or will be going through it has some basic questions and probably needs some support as they work with their children through this natural process. Anni Bryner is a toddler guide extraordinaire and she will answer many parents' questions (spoken or unspoken) with humor and positivity!`,
   },
   {
-    slug: "help-during-pandemic-gems-family-meetings",
-    title: `Help During Pandemic: GEMS & Family Meetings`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2020-04-16",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Emotionally Healthy Children","Empowerment","Infant-Toddler (0 to 3)","Kindergarten","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Family Life","Primary (3-6)","Toddler (18 months-3 years)","Upper Elementary (9-12)","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["lRNpSJtc7Lo"],
-    excerpt: `Working at home. reduced or no income, children 24/7, pressure to keep children "learning,"and not enough sleep! How do we get our children to settle down and be independent? Lorna McGrath will share...`,
-    content: `Working at home. reduced or no income, children 24/7, pressure to keep children "learning,"and not enough sleep! How do we get our children to settle down and be independent? Lorna McGrath will share two very important strategies to get families back on track with each other and the new circumstances that we find ourselves in. GEMS - first and foremost children need to feel loved and important. GEMS will go a long way in fulfilling those needs. Then Family Meetings - Families need a place and a time for positive, friendly communication. Family meeting time is the setting. Using just these two strategies will be key to starting the process of getting back on track in our family relationships.`,
-  },
-  {
-    slug: "how-to-help-my-upset-child",
-    title: `How to Help My Upset Child`,
-    author: `Christine Lowry`,
-    date: "2020-04-22",
-    categories: ["Communication","Early Adolescence (12-15)","Emotionally Healthy Children","Empowerment","Infant-Toddler (0 to 3)","Kindergarten","Language","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Family Life","Montessori Parenting","Primary (3-6)","Toddler (18 months-3 years)","Upper Elementary (9-12)","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["YMmTSMwfHpU"],
-    excerpt: `Knowing how best to comfort an upset child is some times frustrating and confusing. What do I do, what do I say, how do I manage my own feelings of upset? Join us as we share tools and tips for suppor...`,
-    content: `Knowing how best to comfort an upset child is some times frustrating and confusing. What do I do, what do I say, how do I manage my own feelings of upset? Join us as we share tools and tips for supporting an upset child. We'll share ideas for toddlers through adolescents as we explore this valuable skill of parenting.`,
-  },
-  {
-    slug: "the-language-of-empathy-helping-children-through-uncertain-times",
-    title: `The Language of Empathy: Helping Children Through Uncertain Times`,
-    author: `Tanya L. Ryskind J.D`,
-    date: "2020-05-06",
-    categories: ["Communication","Emotionally Healthy Children","Montessori Family Life","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["LSrMDZKKvwg"],
-    excerpt: `Join Jonathan Wolff and Tanya Ryskind for a discussion about how "The Language of Empathy" can help your child come out of these uncertain times with greater self-awareness and self-discipline. As par...`,
-    content: `Join Jonathan Wolff and Tanya Ryskind for a discussion about how "The Language of Empathy" can help your child come out of these uncertain times with greater self-awareness and self-discipline. As parents, when we truly understand our children’s needs and feelings, fears and frustrations, we can safely guide them toward health, happiness, and success. In talking with our kids about their experience and behavior during this period of social isolation, our words can make them feel judged, criticized or ashamed. Or, we can use language that makes them feel heard, valued, and respected.`,
-  },
-  {
     slug: "marching-on-montessori-at-home",
     title: `Marching On...Montessori at Home`,
     author: `cassimackey11@gmail.com`,
@@ -8592,32 +8161,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `It is important that children’s activity during this time at home be joyful, thoughtful, challenging, and supportive of the love of learning. You were your child’s first teacher, providing these facets of education from the beginning, and, as a parent, you are highly capable of being an interim partner in your child’s learning. Effectively replicating exactly what happens in the classroom is not something you can or necessarily must achieve during this period. The goal is to work in collaboration with teachers to keep alive the culture of learning that is unique to Montessori. We are here with you today to provide support and inspiration to parents to help you to keep Marching On.`,
   },
   {
-    slug: "2020-newgate-school-seniors-interview",
-    title: `2020 NewGate School Seniors Interview`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2022-03-17",
-    categories: ["Adolescence","Communication","Early Adolescence (12-15)","Emotionally Healthy Children","Empowerment","Kindergarten","Later Adolescence (15-18)","Lower Elementary (6-9)","Mixed Ages","Montessori Graduates","Montessori Secondary / High School","Peace Education","Toddler (18 months-3 years)","Upper Elementary (9-12)","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["phoY5hMKkD0"],
-    excerpt: `[et_pb_section admin_label="section"] 			[et_pb_row admin_label="row"] 				[et_pb_column type="4_4"][et_pb_text admin_label="Text"][/et_pb_text][/et_pb_column] 			[/et_pb_row] 		[/et_pb_section]`,
-    content: `[et_pb_section admin_label="section"]
-			[et_pb_row admin_label="row"]
-				[et_pb_column type="4_4"][et_pb_text admin_label="Text"][/et_pb_text][/et_pb_column]
-			[/et_pb_row]
-		[/et_pb_section]`,
-  },
-  {
-    slug: "turn-challenging-behaviors-into-positive-partnerships-with-your-child",
-    title: `Turn Challenging Behaviors into Positive Partnerships with Your Child`,
-    author: `Christine Lowry`,
-    date: "2020-05-27",
-    categories: ["Challenging Behaviors","Communication","Emotionally Healthy Children","Montessori Family Life","Montessori Parenting","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["eJXXmuL6M08"],
-    excerpt: `Behavior challenges to our parenting can be stressful in the best of times, but now that we are with our children almost all the time, even smaller challenges can sometimes feel overwhelming. Here's a...`,
-    content: `Behavior challenges to our parenting can be stressful in the best of times, but now that we are with our children almost all the time, even smaller challenges can sometimes feel overwhelming. Here's a conversation with Lorna and Christine as they talk about ways you can find solutions with your child as you partner for positive behaviors.`,
-  },
-  {
     slug: "families-that-play-together-weather-tough-times-together",
     title: `Families that Play Together...Weather Tough Times Together`,
     author: `lornamcgrath@montessori.org`,
@@ -8627,78 +8170,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     videoIds: ["XHCj0nBXZqc"],
     excerpt: `Join the Montessori Family Support Team to take a look at and share ideas about how families can play together! Sometimes when life is uncertain and there is daily stress about what is coming next, we...`,
     content: `Join the Montessori Family Support Team to take a look at and share ideas about how families can play together! Sometimes when life is uncertain and there is daily stress about what is coming next, we begin to have questions that weigh us down. We forget to take time to simply enjoy our families and play. In this session our team will offer you several playful, family-oriented activities.`,
-  },
-  {
-    slug: "parenting-in-summer-2020-the-unique-joys-and-challenges",
-    title: `Parenting in Summer 2020: the Unique Joys and Challenges`,
-    author: `Tara Motzenbecker`,
-    date: "2020-06-17",
-    categories: ["Communication","Early Adolescence (12-15)","Emotionally Healthy Children","Language","Lower Elementary (6-9)","Montessori Family Life","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["UXkP39d-g1c"],
-    excerpt: `The Summer of 2020 is unprecedented in our lifetimes. What does that mean for parents? How do we ensure a healthy level of safety in our children as they reintegrate without causing undue stress and a...`,
-    content: `The Summer of 2020 is unprecedented in our lifetimes. What does that mean for parents? How do we ensure a healthy level of safety in our children as they reintegrate without causing undue stress and anxiety? How do we stay calm when there is so much unknown? Join us to learn some of the answers to these questions.`,
-  },
-  {
-    slug: "parenting-toward-anti-racism",
-    title: `Parenting Toward Anti-Racism`,
-    author: `Val Wise`,
-    date: "2020-06-23",
-    categories: ["Adolescence","Brain Development","Communication","Early Adolescence (12-15)","Infant-Toddler (0 to 3)","Kindergarten","Language","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Curriculum","Montessori Family Life","Peace Education","Primary (3-6)","Social Justice","Toddler (18 months-3 years)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["nj29jGNmC2I"],
-    excerpt: `So many of you have asked, "How do we talk to our children about the social unrest in America? How do we support them as we navigate our way through so many feelings and questions? How and when do we...`,
-    content: `So many of you have asked, "How do we talk to our children about the social unrest in America? How do we support them as we navigate our way through so many feelings and questions? How and when do we talk to our children about race? Dr.Val Wise along with our other panelists begin to answer those questions and more. Research shows that infants as young as 3 months old have biases. In the beginning these inbred biases were there to protect the tiny human from harm. As children grow they are exposed to other peoples ideas and values which add to the list of biases that children have. Dr. Wise shares her knowledge, expertise, and resources on this topic with participants.`,
-  },
-  {
-    slug: "parenting-toward-emotionally-healthy-families",
-    title: `Parenting Toward Emotionally Healthy Families`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2020-06-30",
-    categories: ["Adolescence","Communication","Emotionally Healthy Children","Empowerment","Infant-Toddler (0 to 3)","Kindergarten","Language","Lower Elementary (6-9)","Montessori Family Life","Primary (3-6)","Reading","Toddler (18 months-3 years)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["PTW4TJXsRHs"],
-    excerpt: `[et_pb_section admin_label="section"] 			[et_pb_row admin_label="row"] 				[et_pb_column type="4_4"][et_pb_text admin_label="Text"]Lorna McGrath and Margot Garfield-Anderson share ideas for cultivatin...`,
-    content: `[et_pb_section admin_label="section"]
-			[et_pb_row admin_label="row"]
-				[et_pb_column type="4_4"][et_pb_text admin_label="Text"]Lorna McGrath and Margot Garfield-Anderson share ideas for cultivating and/or maintaining emotionally healthy families. Together we will weave our way through Covid-19, the summer of 2020, social unrest, and political campaigns, all of which provoke strong emotions. Whether you and your family have gotten a bit off course or whether you are holding on for dear life, Lorna and Margot will bring you back to your charts and keep you sailing toward home port.
-
-[/et_pb_text][/et_pb_column]
-			[/et_pb_row]
-		[/et_pb_section]`,
-  },
-  {
-    slug: "making-2020-21-schooling-decisions",
-    title: `Making 2020-21 Schooling Decisions`,
-    author: `Christine Lowry`,
-    date: "2020-07-08",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Health / Nutrition","Parent-Teacher Communication","Re-enrollment","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["yKdUaT1IeqA"],
-    excerpt: `There are so many factors that go into finding the right match for your child and your family when it comes to schooling - home school, Montessori, public, private, finances, safety, and more. Add to...`,
-    content: `There are so many factors that go into finding the right match for your child and your family when it comes to schooling - home school, Montessori, public, private, finances, safety, and more. Add to that Covid and your head starts to spin. Join Christine Lowry, Tammy Willen, and Lorna McGrath as we help sort it out so you can make the best schooling decision for your family.`,
-  },
-  {
-    slug: "parenting-toward-gender-equality",
-    title: `Parenting Toward Gender Equality`,
-    author: `E Scott Osborne`,
-    date: "2020-07-14",
-    categories: ["Communication","Empowerment","Gender","Montessori Parenting","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["ncr7S0XsOZ4"],
-    excerpt: `During this session Scott Osborne and our Montessori Family Support Team will explore our roles as parents and teachers in creating gender equality or gender inequality, albeit consciously or unconsci...`,
-    content: `During this session Scott Osborne and our Montessori Family Support Team will explore our roles as parents and teachers in creating gender equality or gender inequality, albeit consciously or unconsciously. We will begin to answer the question, "What can I do as a parent to help my children see people as individuals?"`,
-  },
-  {
-    slug: "the-inner-work-of-parenting-what-we-can-learn-from-children-to-help-us-be-happie",
-    title: `The Inner Work of Parenting: What We Can Learn from Children...To Help Us Be Happier, Healthier, and Better Caregivers`,
-    author: `Jonathan Wolff`,
-    date: "2020-07-21",
-    categories: ["Communication","Discipline","Language","Montessori Family Life","Montessori Parenting","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["rRP599X0K7g"],
-    excerpt: `During this session, lead by Jonathan Wolff, we will explore what Maria Montessori and Kahlil Ghibran said about the work of the adult and parent. Concepts like "letting go of our positions," "opennes...`,
-    content: `During this session, lead by Jonathan Wolff, we will explore what Maria Montessori and Kahlil Ghibran said about the work of the adult and parent. Concepts like "letting go of our positions," "openness to the child's view," "being responsible for our adult emotions," "no double standards," and more will be discussed. Jon and the others will share stories to illustrate what children have taught them over the years.`,
   },
   {
     slug: "an-overview-of-adjusting-to-life-in-2020-2021",
@@ -8721,28 +8192,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     videoIds: ["yXZE9ESjZmc"],
     excerpt: `In the initial session - "Parenting Toward Anti-Racism" - we explored how parents can support their children in being anti-racist. During this session Dr. Wise is here again to continue our conversati...`,
     content: `In the initial session - "Parenting Toward Anti-Racism" - we explored how parents can support their children in being anti-racist. During this session Dr. Wise is here again to continue our conversation and focus on the inner work that adults must do. Find out how knowledge of US history since the 16 hundreds, understanding of the language used when talking about race , and becoming an ally to those who are working for change and justice are keys to the inner work adults must do for themselves and their children. Recognizing our own implicit or explicit biases is a large step in supporting our children. Dr. Wise shares her knowledge, expertise, and resources on this topic with participants.`,
-  },
-  {
-    slug: "adjusting-to-life-in-2020-2021-empowering-and-encouraging-healthy-practices-at-h-2",
-    title: `Adjusting to Life in 2020-2021: Empowering and Encouraging Healthy Practices at Home and at School`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2022-03-17",
-    categories: ["Communication","Covid","Emotionally Healthy Children","Empowerment","Montessori Family Life","Montessori Parenting","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["-wwmSDJbLwM"],
-    excerpt: `So much of what we are all hearing on the media about Covid 19 is scary and not particularly helpful in empowering children from about 11 years old through adolescents about ways to take care of thems...`,
-    content: `So much of what we are all hearing on the media about Covid 19 is scary and not particularly helpful in empowering children from about 11 years old through adolescents about ways to take care of themselves. We are very good about giving our children ways to keep themselves safe from strangers or ways to prevent home fires and stay safe if caught in one. How are we empowering our young people to stay safe during the pandemic? Tammy Willen and our team explore ways to empower young people to stay healthy themselves and to encourage their peers, their extended families and even the larger community to do the same.`,
-  },
-  {
-    slug: "montessori-town-hall-our-role-in-ending-systemic-and-internal-racism-friday-augu",
-    title: `Montessori Town Hall: Our Role in Ending Systemic and Internal Racism  Friday August 21st, 2020`,
-    author: `caker`,
-    date: "2020-08-21",
-    categories: ["Montessori Teachers","School Leadership","Social Justice","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["x5lBdvyhANA"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.5.6" hover_enabled="0"][/et_p...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.5.6" hover_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.5.6" hover_enabled="0"]"Focus on Schools"[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "adjusting-to-life-2020-2021-social-connections-outside-the-home",
@@ -8824,28 +8273,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.5" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.6.5" hover_enabled="0" sticky_enabled="0"]Discussion on balancing work and home, for you and your child while you are all at home. Ideas for helping your child work and play with independence. [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "teaming-up-for-children-with-conversations-between-parents-and-teachers",
-    title: `Teaming Up for Children with Conversations Between Parents and Teachers`,
-    author: `cassimackey11@gmail.com`,
-    date: "2020-10-20",
-    categories: ["Communication","Family Resources","Montessori Parenting","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["WIs4uzoR-aE"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky_enabled="0"]Parents and teachers are communicating with each other more than during this stressful and uncertain time of health and education concerns due to Covid 19. In order for open and honest conversations to occur there are certain guidelines from, what some call, courageous conversations. When we think of the sensitivity of parents talking with teachers regarding the best interests of the child, we know that it takes great courage, to be honest, respectful team players. Cassi Mackey is principal at Montessori Education Centre-Charter School in Mesa, Arizona, and has successfully guided her school, as well as others, through this transformational work. Join us, as Cassi shares insights and guidelines for parents as well as teachers.  [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "children-and-trauma",
-    title: `Children and Trauma`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2020-10-27",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Webinars / MFA","Video"],
-    tags: ["Trauma"],
-    videoIds: ["V1l4gM8DsqI"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky_enabled="0"]Lorna McGrath and panel - Seeing the need behind the behavior is not the easiest thing to do when our children are behaving in ways that we either don't or do understand as symptoms of trauma. For example: Our children suddenly become uncaring and hurtful as in the latter or they show signs of depression as in the former. Recognizing behavior as communication is the first step toward understanding. Join us for strategies to help us know when and how to respond to our children during these uncertain times.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "monitoring-and-maximizing-your-child-s-online-life-and-learning",
     title: `"Monitoring and Maximizing Your Child’s Online Life and Learning"`,
     author: `Jonathan Wolff`,
@@ -8879,19 +8306,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     videoIds: ["whAmvrehmng"],
     excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky...`,
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.6.6" hover_enabled="0" sticky_enabled="0"]Many of us feel annoyed and pressured by the commercialism around the winter holiday season. This year even more so because of health concerns, job losses, and social unrest. During this session we will ponder questions like these, What does Thanksgiving mean in our family? How can we best express that meaning? Why do we make so much of Christmas, Hanukkah, and other winter holidays? What is gift-giving all about? What message do we want to express to our families and friends? What are the inner meanings of the holiday season this year? Join our panel on the Montessori Family Support Team to explore our core values with regard to the holidays.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "the-family-that-laughs-together-lasts-together",
-    title: `"The Family That Laughs together...Lasts Together"`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2020-12-08",
-    categories: ["Communication","Family Resources","Montessori Parenting","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["0AGrn9G7v-A"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.7.4" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.7.4" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.7.4" hover_enabled="0" sticky_enabled="0"]Join Arlette and Michael Crump and Jon Wolff for a fun session just before the holidays.
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "part-1-from-life-s-moments-to-resolutions-starting-the-new-year-with-positivity-",
@@ -8982,17 +8396,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.0" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.0" hover_enabled="0" sticky_enabled="0"]Description: In his groundbreaking book, Forgive for Good, Dr. Luskin reminds us that, “Forgiveness is the feeling of peace that emerges as you take your hurt less personally, take responsibility for how you feel, and become a hero instead of a victim in the story you tell.” Join Dr. Luskin and the Montessori Family Alliance panel for a discussion about how forgiveness, when modeled by parents and teachers, exemplified in storytelling, and expressed routinely in family interactions can help children learn this healing quality of character.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "optimizing-your-parent-teacher-conference-experience",
-    title: `Optimizing Your Parent Teacher Conference Experience!`,
-    author: `cassimackey11@gmail.com`,
-    date: "2021-02-23",
-    categories: ["Communication","Family Resources","Montessori Parenting","Parent-Teacher Communication","Webinars / MFA","Video"],
-    tags: ["Conferences"],
-    videoIds: ["wA4JThAj0_o"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.0" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.0" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.0" hover_enabled="0" sticky_enabled="0"]Today more than ever parents and teachers are coming together to share honestly, listen openly, and work together in the best interests of the children they love. Cassi and our panel will share ideas to more fully take part in conversations that create a partnership in the interest of the child and their education.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "part-1-navigating-the-deep-sea-of-social-media-with-our-children-the-montessori-",
     title: `Part 1: Navigating the Deep Sea of Social Media with Our Children, The Montessori Way`,
     author: `Caitlin Roper`,
@@ -9070,17 +8473,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.3" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.3" hover_enabled="0" sticky_enabled="0"]What are the most important elements of a "Montessori-inspired Home?" Are they the specific didactic materials, expensive furnishings, huge amounts of space, relationships among family members, types of activities that the family does together, or lots of outdoor space? In this session Alicia Diaz-David, parent and Montessori credentialed teacher, will address important elements based on Montessori principles that make a Montessori-inspired home.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "part-2-navigating-the-deep-sea-of-social-media-with-our-children-the-montessori-",
-    title: `Part 2 - Navigating the Deep Sea of Social Media with Our Children: The Montessori Way`,
-    author: `Caitlin Roper`,
-    date: "2021-04-20",
-    categories: ["Adolescence","Communication","Family Resources","Montessori Parenting","Parenting on the Same Page","Social Media","Webinars / MFA","Young Adolescent","Young Adults","Video"],
-    tags: [],
-    videoIds: ["H7GwUQqr4x8"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.3" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.3" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.3" hover_enabled="0" sticky_enabled="0"]Join Caitlin Roper, Middle and High School instructor at NewGate School, and our panel for this 2nd session which will focus more on safety and cyberbullying. We will share practical and positive tips for parents as they "push through the waters of uncharted seas."[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "montessori-or-montessori-ish-how-to-choose-an-authentic-montessori-school",
     title: `Montessori or Montessori-ish, How to Choose an Authentic Montessori School`,
     author: `lornamcgrath@montessori.org`,
@@ -9101,17 +8493,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     videoIds: ["LcuJrB9MrzY"],
     excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky...`,
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"]Join Amanda Riccetti, a certified 3-6 Montessori teacher and author of "Reading with Miss Amanda," for tips on supporting children as they learn to write and read. She will share her journey and what inspired her to create a set of supplementary books to use with children who may be struggling along the path of learning to read even in a Montessori environment.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "tips-for-handling-your-child-s-no-s-gracefully",
-    title: `Tips for Handling Your Child's 'No's' Gracefully`,
-    author: `Kathryn Kvols`,
-    date: "2021-05-11",
-    categories: ["Communication","Discipline","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Toddler (18 months-3 years)","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["Sk1kQXn1NH8"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"]There are few words more irksome than hearing your child say “no." Rest assured, it is typical for your young child to try on their newfound independence and to assert themselves with a “no.” You can pat yourself on the back. You have not raised a submissive child! Kathryn Kvols, author of "Redirecting Children's Behavior," will share some great ideas for ways to avoid power struggles while still allowing your child to remain confident and respectful when expressing their ideas and feelings.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "life-choices-that-support-childrens-success",
@@ -9224,17 +8605,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"]Nature is calling! Time outdoors with our infants and toddlers is more important than ever today as busy family schedules, modern conveniences, and the distractions of technology keep us indoors. We will explore simple ideas for time in nature with our young children and discuss how the natural world supports healthy development.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "reading-together-even-when-your-child-becomes-an-independent-reader",
-    title: `Reading Together  Even When Your Child Becomes an Independent Reader`,
-    author: `Nora Shuart-Faris`,
-    date: "2021-08-03",
-    categories: ["Brain Development","Communication","Family Resources","Montessori Grandparenting","Montessori Parenting","Video","Webinars / MFA"],
-    tags: ["reading"],
-    videoIds: ["rUq7uON1d-k"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"]We often focus on the importance of reading to our children, but what about reading together when they become independent readers? Join Dr. Nora Shuart-Faris and Cheryl Allen to discuss family reading through reading the same books, creating family or friend book clubs, and even get some book suggestions.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "journey-into-the-montessori-learning-experiencei-what-to-expect-in-early-childho",
     title: `Journey Into the Montessori Learning ExperienceI  What to Expect in Early Childhood Classrooms`,
     author: `lornamcgrath@montessori.org`,
@@ -9256,38 +8626,6 @@ The last short section is recorded and Dr. Epstein includes demonstrations of co
     videoIds: ["SkCie4G4WPk"],
     excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky...`,
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"]What to Expect in Elementary Classrooms[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "part-2-parents-as-partners-starting-fresh-in-a-similar-world",
-    title: `Part 2 - Parents as Partners: Starting Fresh in a Similar World.`,
-    author: `Renee DuChainey Farkes`,
-    date: "2021-08-25",
-    categories: ["Communication","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["0nO8Te3kr7w"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"]We know that students learn best when Parents learn with them. Let’s ready ourselves for Parents to be our Partners as they too prepare to “come back to school.” Building Partnerships with Parents is our key to a success. Join us to review the value of Parents in Partnership, how to engage our parents as we prepare our school communities for success so we may lead during these continued unprecedented times.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "managing-the-elementary-montessori-curriculum-part-2",
-    title: `Managing The Elementary Montessori Curriculum Part 2`,
-    author: `Michael Dorer`,
-    date: "2021-08-30",
-    categories: ["Communication","Lower Elementary (6-9)","Montessori Curriculum","Montessori Education","Montessori Teachers","School Leadership","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["-1ErZtG_Vk0"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="3.22" global_colors_info="{}"][et_pb_row _builder_version="3.25" background_size="initial" background_position="top_left" background_repeat="repeat" globa...`,
-    content: `[et_pb_section fb_built="1" _builder_version="3.22" global_colors_info="{}"][et_pb_row _builder_version="3.25" background_size="initial" background_position="top_left" background_repeat="repeat" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="3.25" custom_padding="|||" global_colors_info="{}" custom_padding__hover="|||"][et_pb_text _builder_version="4.11.2" background_size="initial" background_position="top_left" background_repeat="repeat" custom_padding="2px||||false|false" global_colors_info="{}"]July 13th, 2016 This week Dr. Michael Dorer continued to explore an important topic for elementary teachers, How Can You Teach it All?
-
-Many Montessorians struggle with the immensity of the whole curriculum, especially at the elementary level. There just seems to be so much. At the same time, they may grapple with how lessons should be planned, presented, completed, and followed up. These issues can actually be approached with a careful planning procedure, along with a healthy serving of gumption.
-
-Join Michael as we explore lesson planning, curriculum and managing follow-up work. This is the beginning of a new direction in your school.
-
-In this and the next webinar, we will explore the basics of lesson and curriculum management. This will serve as an introduction.
-
-[/et_pb_text][et_pb_text admin_label="Video" _builder_version="4.11.2" _module_preset="default" global_colors_info="{}"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "what-should-be-included-in-a-montessori-classroom",
@@ -9462,55 +8800,6 @@ Our guest was Dr. Andrew Cutler and the topic was Attentional and Behavioral Dis
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "increasing-parent-engagement-with-your-school",
-    title: `Increasing parent engagement with your school`,
-    author: `The Montessori Staff`,
-    date: "2021-09-10",
-    categories: ["Communication","Montessori Parenting","Montessori Teachers","Parent-Teacher Communication","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["iYYEpyAlWCA"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" _module_preset="default" custom_padding="2px||||false|false" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]On April 16th, 2015 Lisl Liang, Montessori mom and a specialist in communications and customer engagement, returned to explore the flow of communication within our schools and how to write c, and other content in ways that entertain and engage parents' interest.
-
- 
-
-[/et_pb_text][et_pb_text _builder_version="4.11.2" _module_preset="default" admin_label="Video" hover_enabled="0" sticky_enabled="0"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "after-school-studio-programs",
-    title: `After School Studio Programs`,
-    author: `Tim Seldin`,
-    date: "2021-09-10",
-    categories: ["Adolescence","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Education","Montessori Secondary / High School","Montessori Teachers","School Leadership","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["YICgIivJL9g"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" _module_preset="default" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]On Thursday, September 4th, 2014, Tim Seldin was once again joined by colleagues Kathy Leitch and Lorna McGrath to discuss After School Studios that can enhance your Montessori Elementary and Secondary Programs.
-
-Download File
-
-[/et_pb_text][et_pb_text _builder_version="4.11.2" _module_preset="default" admin_label="Video" hover_enabled="0" sticky_enabled="0"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "montessori-all-day",
-    title: `Montessori All Day`,
-    author: `Tim Seldin`,
-    date: "2021-09-11",
-    categories: ["Mixed Ages","Montessori Curriculum","Montessori Education","Montessori Teachers","School Leadership","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["eFTsRxHPAKI"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" _module_preset="default" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]On Thursday, August 28th, 2014 we explored all day Montessori programs. We considered the philosophy, staffing, hours, types of activities, and pricing. We distinguished between Montessori All Day Programs, Extended Day Programs, and Studio Programs for older children.
-
-[/et_pb_text][et_pb_text _builder_version="4.11.2" _module_preset="default" admin_label="Video" hover_enabled="0" sticky_enabled="0"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "observation-with-paul-epstein-part-1",
     title: `Observation with Paul Epstein Part 1`,
     author: `Tim Seldin Paul Epstein`,
@@ -9524,53 +8813,6 @@ Download File
 Dr. Paul Epstein is the well known author of a Montessori Observer's Handbook. We will discuss best practices in ongoing reflective observation.
 
 [/et_pb_text][et_pb_text _builder_version="4.11.2" _module_preset="default" hover_enabled="0" sticky_enabled="0" admin_label="Video"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "the-challenge-and-promise-of-montessori-in-the-public-sector",
-    title: `The Challenge and Promise of Montessori in the Public Sector`,
-    author: `Tim Seldin`,
-    date: "2021-09-12",
-    categories: ["Lower Elementary (6-9)","Montessori Charter Schools","Montessori Education","Montessori Teachers","School Leadership","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: ["Charter School","Elementary"],
-    videoIds: ["tFZbhSiY1Eo"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="3.22" global_colors_info="{}"][et_pb_row _builder_version="3.25" background_size="initial" background_position="top_left" background_repeat="repeat" globa...`,
-    content: `[et_pb_section fb_built="1" _builder_version="3.22" global_colors_info="{}"][et_pb_row _builder_version="3.25" background_size="initial" background_position="top_left" background_repeat="repeat" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="3.25" custom_padding="|||" global_colors_info="{}" custom_padding__hover="|||"][et_pb_text _builder_version="4.11.2" _module_preset="default" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]On October 23rd, 2014, we explored the challenges of organizing and maintainig fully implemented elementary Montessori programs for ages 6 to 12 in public and charter schools. Among the topics that we considered were how to maintain authenticity in a culture that tends to be focused on state standards, the common core, and weekly lesson plans.[/et_pb_text][et_pb_text admin_label="Video" _builder_version="4.11.2" _module_preset="default" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "how-successful-montessori-schools-introduce-students-at-5",
-    title: `How Successful Montessori Schools Introduce Students At 5+`,
-    author: `Tim Seldin`,
-    date: "2014-11-06",
-    categories: ["Communication","Early Adolescence (12-15)","Lower Elementary (6-9)","Montessori Charter Schools","Montessori Education","Montessori Teachers","Primary (3-6)","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["TxzKkGofyaM"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.14.2" _module_preset="default" custom_padding="4px||||false|false" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]How Successful Montessori Schools Introduce and Work With Students at Age 5 and Older
-
-On November 6th, 2014, Jackie Cosentino and Elizabeth Slade from The National Center for Montessori in the Public Sectors; Josie Zinninger, Founder and Director of Lakeland Montessori Charter Schools; and Robin Howe and Tim Seldin of The Montessori Foundation met to discuss How Successful Montessori Schools Introduce and Work With Students Age 5 and Older. There is no question that best practice in Montessori is for most, if not all children, to enter our program at age 3 or younger. At the same time, most Montessori schools either choose, or feel compelled, to allow children to enter the program later. We will focus on the admission of children age five and older, and consider the somewhat different challenges faced by independent, public, and charter Montessori schools. Among the topics that we considered were working with parents to help them consider if our school(s) would be a good fit for their children, pre-admission parent and student orientation/education, and support during crucial first year. We also considered the questions of how children who enter at five or older affect Montessori classes and how the seem to do in the long run.
-
-[/et_pb_text][et_pb_text admin_label="Video" _builder_version="4.11.2" _module_preset="default" global_colors_info="{}"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "better-support-students-preparing-to-teach-public-montessori",
-    title: `Better Support Students Preparing to Teach Public Montessori`,
-    author: `Tim Seldin`,
-    date: "2021-09-12",
-    categories: ["Montessori Charter Schools","Montessori Education","Montessori Teachers","School Leadership","Webinars / MFA","Video"],
-    tags: ["Charter School","National Center for Montessori in the Public Center","students"],
-    videoIds: ["sw0ZLWJb_-Y"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" _module_preset="default" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]How Can Montessori Teacher Education Programs Better Support Students Preparing to Teach in the Public Sector.
-
-On November 13th, 2014, Sara Suchman from The National Center for Montessori in the Public Sector; Josie Zinninger, Founder and Director of Lakeland Montessori Charter Schools; and Tim Seldin, President of The Montessori Foundation continued the series of webinars on the Promise and Challenge of Montessori In The Public Sector: How Can Montessori Teacher Education Programs Better Support Students Preparing to Teach in the Public Sector. Most Montessori teacher education programs have a few student teachers who are preparing to teach in the public sector. This week we will explore how we can help them, and their fellow students, to understand the unique challenges and rewards of creating fully-implemented Montessori in the public or charter school sector.
-
-[/et_pb_text][et_pb_text _builder_version="4.11.2" _module_preset="default" admin_label="Video" hover_enabled="0" sticky_enabled="0"]
 
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
@@ -9614,19 +8856,6 @@ On November 13th, 2014, Sara Suchman from The National Center for Montessori in 
  
 
 [/et_pb_text][et_pb_text admin_label="Video" _builder_version="4.11.2" _module_preset="default" global_colors_info="{}"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "my-child-s-learning-experiences-beyond-their-school-and-classroom-parent-involve",
-    title: `My Child’s Learning Experiences Beyond Their School and Classroom, Parent Involvement and Support`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2021-09-21",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["pYQnv2X7G6Q"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"]In this broadcast our Montessori experts will share ways that parents can be both involved and supportive in their child's learning experience not only during school hours, but also after school and on weekends. Join us for part II of this series.
 
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
@@ -9705,17 +8934,6 @@ Creative ways to Learn, Earn, and Manage Money within the Context of Each Famili
 Download File[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "my-child-s-learning-experience-in-the-community-part-3-how-parents-can-be-involv",
-    title: `My Child’s Learning Experience in the Community, Part 3: How Parents Can Be Involved and Supportive`,
-    author: `cassimackey11@gmail.com`,
-    date: "2021-10-05",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["BaIQdH-qxDo"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]Join us for Part III of "My Child's Learning Experience in the Community" as we focus on all the many opportunities in your local communities and beyond for your child to learn and grow. What is your role as a parent in supporting your child in their choices and becoming involved in the community?[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "introducing-montessori-for-every-family-a-practical-parenting-guide-for-living-l",
     title: `Introducing 'Montessori For Every Family: A practical parenting guide for living, loving, and learning`,
     author: `Tim Seldin`,
@@ -9744,18 +8962,6 @@ Download File
 [/et_pb_text][et_pb_text admin_label="Video" _builder_version="4.11.2" _module_preset="default" global_colors_info="{}"][/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "communicating-with-your-child-part-1-how-to-get-more-than-a-one-word-answer",
-    title: `Communicating with Your Child Part 1: How to Get More Than a One Word Answer`,
-    author: `The Montessori Staff`,
-    date: "2021-10-19",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["NlT6bCqXDJw"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]How to Get More Than A One Word Answer: Engaging in Meaningful Conversations with Your Child with the Montessori Family Life Team
-Our team will offer ideas for open, two-way communication with your child at each developmental stage. They will explore how technology may interfere with communication, how inquiry-based language can help open up conversations, and what are our motivations for wanting information from our children.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "encouraging-your-child-s-independence",
     title: `Encouraging Your Child's Independence`,
     author: `lornamcgrath@montessori.org`,
@@ -9767,50 +8973,6 @@ Our team will offer ideas for open, two-way communication with your child at eac
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" _module_preset="default" global_colors_info="{}"]Lorna McGrath explores how we can encourage our children's independence from 18 months to age 3.
 
 [/et_pb_text][et_pb_text admin_label="video" _builder_version="4.11.2" _module_preset="default" global_colors_info="{}"][/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "communicating-with-your-child-part-2-helping-your-child-navigate-conflict-respec",
-    title: `Communicating with Your Child Part 2: Helping Your Child Navigate Conflict Respectfully and Kindly`,
-    author: `The Montessori Staff`,
-    date: "2021-10-26",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: ["Respect"],
-    videoIds: ["NuKHE9s8yfM"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.14.6" background_color="#FFFFFF" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_v...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.14.6" background_color="#FFFFFF" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" global_colors_info="{}"][/et_pb_text][et_pb_text _builder_version="4.11.2" global_colors_info="{}"]Conflict is an inevitable part of life. So knowing how to recognize, respond, and resolve conflicts respectfully and kindly is an essential practical life skill that every child needs to learn. In this broadcast our team will guide parents through the steps.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "family-meetings-planning-for-the-holidays",
-    title: `Family Meetings: Planning for the Holidays`,
-    author: `The Montessori Staff`,
-    date: "2021-11-02",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: ["Family Meetings","Holidays","Respect"],
-    videoIds: ["NuKHE9s8yfM"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" global_colors_info="{}"][/et_pb_text][et_pb_text _builder_version="4.11.2" global_colors_info="{}"]Our team will discuss topics, strategies, and ways to include your children in preparing themselves, your home, giving and receiving and more during your family meetings.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "affirming-the-spirit-of-thanksgiving-focusing-on-gratitude-and-abundance",
-    title: `Affirming the Spirit of Thanksgiving: Focusing on Gratitude and Abundance`,
-    author: `The Montessori Staff`,
-    date: "2021-11-09",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: ["Gratitude","Holidays","Respect"],
-    videoIds: ["nlYXndTUnG0"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" global_colors_info="{}"][/et_pb_text][et_pb_text _builder_version="4.11.2" global_colors_info="{}"]So has Thanksgiving become just a day to eat a lot, watch football, and have a couple of days off from school or work? Our team will dig deeper and help affirm the spirit of the holiday.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "cultivating-a-meaningful-holiday-experience-with-your-family",
-    title: `Cultivating a Meaningful Holiday Experience with Your Family`,
-    author: `cassimackey11@gmail.com`,
-    date: "2021-11-16",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: ["Gratitude","Holidays","Respect"],
-    videoIds: ["KIOXZJDgcOw"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]Cassi Mackey will lead our team in exploring family values concerning different aspects of the holiday season as well as offering suggestions for creating a memorable and enjoyable time for all.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "celebrating-winter-holidays-global-traditions",
@@ -9848,17 +9010,6 @@ Our team will offer ideas for open, two-way communication with your child at eac
     videoIds: ["euybx5O9T-I"],
     excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_cont...`,
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.14.4" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.4" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"] A Cup of Calm...Whether you and your family have just finished celebrating or are about to be immersed in a celebration we thought that you would all appreciate some time to take a deep breath. Cassi Mackey will lead this session of relaxation ideas and experiences for you and your family.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "reflections-on-2021-charting-your-family-s-course-for-2022",
-    title: `Reflections on 2021: Charting Your Family's Course for 2022`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2022-01-11",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: ["Reflection"],
-    videoIds: ["b-FyGMvOUV0"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.14.6" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4"...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.14.6" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.14.4" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.4" global_colors_info="{}"]Reflection is a way for us to appreciate the past, evaluate where we are now, and make plans as well as set goals for the future. Join the Montessori Family Alliance team for ideas to include all family members in this important exercise as we begin a new year.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "setting-the-tone-for-2022-family-fun-is-more-than-fluff",
@@ -9943,17 +9094,6 @@ Our team will offer ideas for open, two-way communication with your child at eac
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"]So many parents have asked our team over the years, "How do we prepare for Parent/Teacher/Student conferences? What should we ask about?" Our team will share their suggestions based on what typical benchmarks are at different levels in a Montessori school. Join us as you prepare for spring conferences.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "observation-vs-interaction-what-s-the-difference",
-    title: `Observation vs Interaction: What’s the Difference?`,
-    author: `lornamcgrath@montessori.org`,
-    date: "2022-03-08",
-    categories: ["Communication","Family Resources","Montessori Family Life","Montessori Parenting","Parenting on the Same Page","Student Conferences","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["V0G8Ztmx6K4"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_cont...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"]Many schools invite and some even require that parents "visit" their child's classroom in preparation for conferences. Many parents are not exactly sure what is expected of them and of what to expect to see when they are there. Our team will help parents better understand what to look for, how to look and listen, and the intention of the teachers' invitations.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "strategies-for-successful-conferences-so-much-to-say-so-little-time",
     title: `Strategies for Successful Conferences: So Much to Say, So Little Time`,
     author: `dorothyharman444`,
@@ -10004,127 +9144,6 @@ Our team will offer ideas for open, two-way communication with your child at eac
 Dr. Maria Montessori was a person who was not only a brilliant visionary for world peace and harmony but also was actively involved in making changes to accomplish her visions. In this session as we prepare for Earth Day on Friday, April 22, our team will discuss how we can become actively involved in working to make changes in the condition of our planet for a brighter future both individually and with our families.
 
 SHOW LESS
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "part-1-supporting-our-parenting-partners-stages-of-parenting",
-    title: `Part 1: Supporting Our Parenting Partners, Stages of Parenting`,
-    author: `dorothyharman444`,
-    date: "2022-04-19",
-    categories: ["Communication","Family Resources","Montessori Education","Montessori Family Life","Montessori Grandparenting","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["Si2VIuxLEPg"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]
-
-Becoming a parent is one of the most significant changes in the life of an adult. Child development receives tremendous attention, but less attention is paid to the tremendous growth of the parents. Yet, we are forever changed by becoming parents and we are consequently shaped by having been parented. Researcher, Ellen Galinsky, created a framework of 6 levels of parent development that will be shared. You may recognize your stage of development!
-
- 
-
-SHOW LESS
-
- 
-
- 
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "part-2-supporting-our-parenting-partners-differences-in-parenting-approaches",
-    title: `Part 2: Supporting Our Parenting Partners Differences in Parenting Approaches`,
-    author: `Cheryl Allen`,
-    date: "2022-04-26",
-    categories: ["Communication","Family Resources","Montessori Education","Montessori Family Life","Montessori Grandparenting","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["_5nl7yK4kX4"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.16.0" global_colors_info="{}"]
-
-How do two or more people with different childhood experiences support each other's parenting practices? How do we communicate with each other to create partnerships that serve our children with consistency and respect? Our team will discuss ways to forge a strong alliance between parenting partners with your child's best interests at heart.
-
-SHOW LESS
-
- 
-
- 
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "part-3-supporting-our-parenting-partners-differences-in-parenting-approaches",
-    title: `Part 3: Supporting Our Parenting Partners Differences in Parenting Approaches`,
-    author: `cassimackey11@gmail.com`,
-    date: "2022-05-04",
-    categories: ["Communication","Family Resources","Montessori Education","Montessori Family Life","Montessori Grandparenting","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["2oj6pZSopSk"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]
-
-Why are Montessorians consistently talking about consistency? Our team members will help participants think through why consistency matters in their children's lives. They will also help participants think about on what basis do parents have to determine what they need to be consistent about with their children.
-
-SHOW LESS
-
- 
-
- 
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "end-of-school-year-transitions",
-    title: `End of School Year Transitions`,
-    author: `Cheryl Allen`,
-    date: "2022-05-10",
-    categories: ["Communication","Family Resources","Mixed Ages","Montessori Education","Montessori Family Life","Montessori Parenting","Video","Webinars / MFA"],
-    tags: ["transitions"],
-    videoIds: ["yHYP11UpzNo"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.20.2" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.20.2" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.20.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][embed]https://youtu.be/yHYP11UpzNo[/embed]
-
- 
-
-[/et_pb_text][et_pb_text _builder_version="4.16.0" global_colors_info="{}"]
-
-The end of the year can bring about many changes, join us for a conversation around supporting your child through these end-of-year transitions.
-
-SHOW LESS
-
- 
-
- 
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "recognize-and-help-manage-your-child-s-anxiety",
-    title: `Recognize and Help Manage Your Child's Anxiety`,
-    author: `Marilyn Pearlman`,
-    date: "2022-05-17",
-    categories: ["Communication","Family Resources","Montessori Family Life","Montessori Parenting","Montessori Teachers","Parent-Teacher Communication","Research","School Resources","Video","Webinars / MFA"],
-    tags: ["Anxiety"],
-    videoIds: ["wY9Y-lTn3sc"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]
-
-Recently NPR News recognized a national panel of health experts recommending that all children 8 years and older should be screened for anxiety. They also recommend that children 12 years and older continue to be screened for depression. This U.S. Preventative Task Force is in acknowledgment of a widespread concern that children’s mental health problems continue to steadily proliferate, since before the pandemic. The Family Alliance believes that it is a priority to be responsive in educating our community on how to recognize anxiety and when to intervene beyond the “normal” developmental signs. Marilyn Pearlman, LCSW, will join us as we define and distinguish the indications, as well as give practical suggestions for parents, teachers, and administrators as early intervention is always the best medicine.
-
-SHOW LESS
-
- 
-
- 
-
- 
 
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
@@ -10506,60 +9525,6 @@ SHOW LESS
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "teaching-children-to-navigate-conversations-with-opposing-viewpoints",
-    title: `Teaching Children to Navigate Conversations with Opposing Viewpoints`,
-    author: `Montessori Family Alliance`,
-    date: "2022-11-08",
-    categories: ["Communication","Family Resources","Grace and Courtesy","Montessori Family Life","Montessori Grandparenting","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["iNw8owdvjO8"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.17.6" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]
-
-Join our team on this webinar to explore the why's and how's of living peacefully with each other even when we don't agree. 
-SHOW LESS
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "what-every-montessori-teacher-would-like-parents-to-know-with-dorothy-harman",
-    title: `What Every Montessori Teacher Would Like Parents to Know with Dorothy Harman`,
-    author: `dorothyharman444`,
-    date: "2022-11-15",
-    categories: ["Communication","Family Resources","Montessori Family Life","Montessori Grandparenting","Montessori Parenting","Parent Education","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["82VofhFLsww"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.17.6" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]
-
-In preparing for and writing her latest book, a parent's companion to Intentional Connections for teachers, Dorothy Harman interviewed Montessori teachers and asked, "What would you like parents to know?" In this webinar she will share some of what teachers told her and why.
-SHOW LESS
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "honoring-boundaries-helping-children-set-them-and-respect-them",
-    title: `Honoring Boundaries: Helping Children Set Them and Respect Them`,
-    author: `Cheryl Allen`,
-    date: "2022-11-29",
-    categories: ["Communication","Family Resources","Montessori Family Life","Montessori Grandparenting","Montessori Parenting","Parent Education","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: ["boundaries"],
-    videoIds: ["u9zFgl54v6g"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.17.6" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]
-
-In preparing for and writing her latest book, a parent's companion to Intentional Connections for teachers, Dorothy Harman interviewed Montessori teachers and asked, "What would you like parents to know?" In this webinar she will share some of what teachers told her and why.
-SHOW LESS
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "books-we-love",
     title: `Books We Love!`,
     author: `Montessori Family Alliance`,
@@ -10609,38 +9574,6 @@ SHOW LESS
 Kathryn Kvols always knows the right actions to take and words to say to empower children of every age. In this broadcast she will speak directly to parents of teens.
 
  
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "grammar-tells-a-story",
-    title: `Grammar Tells a Story`,
-    author: `Michael Dorer`,
-    date: "2023-01-17",
-    categories: ["Brain Development","Communication","Family Resources","Language","Language &amp; Reading","Montessori Family Life","Montessori Grandparenting","Montessori Parenting","Montessori Teachers","Story-telling","Video","Webinars / MFA","Writing"],
-    tags: [],
-    videoIds: ["s1_DhTgCw2w"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.19.4" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]
-
-Kathryn Kvols always knows the right actions to take and words to say to empower children of every age. In this broadcast she will speak directly to parents of teens.
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "where-will-my-child-go-to-school-next-year",
-    title: `Where Will My Child Go to School Next Year`,
-    author: `Montessori Family Alliance`,
-    date: "2023-01-24",
-    categories: ["Communication","Family Resources","Montessori Education","Montessori Family Life","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["nDytSDuKt7c"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.19.4" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]
-
-For many parents answering the question "Where will our child go to school next year?" is a yearly process when the new calendar year begins. Join our team to find out how to sort through the pros and cons of school choices.
 
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
@@ -11070,38 +10003,6 @@ Friendships are so important throughout our lives because most humans want to h
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "what-your-child-s-teacher-needs-to-know-about-your-child-to-optimize-their-learn",
-    title: `What Your Child’s Teacher Needs to Know about Your Child…to Optimize their Learning Experience`,
-    author: `Montessori Family Alliance`,
-    date: "2023-10-03",
-    categories: ["Communication","Family Resources","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["-81d2_yhx9k"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.21.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]
-[/et_pb_text][et_pb_text _builder_version="4.19.4" global_colors_info="{}"]
-
-Have you ever wondered what and how much information about your family and your child's home life would be very helpful for their teachers to know? What type of information is too personal? What kinds of situations might change your child's behavior at school? This webinar has been designed to answer those questions and more from experienced Montessori teachers. 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "good-byes-good-hellos",
-    title: `Good-Byes & Good-Hellos`,
-    author: `Montessori Family Alliance`,
-    date: "2023-10-13",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Grace and Courtesy","Language","Montessori Family Life","Montessori Grandparenting","Montessori Parenting","Parenting on the Same Page","Video","Webinars / MFA"],
-    tags: [],
-    videoIds: ["IfUbGugGWUA"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.21.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]
-[/et_pb_text][et_pb_text _builder_version="4.19.4" global_colors_info="{}"]
-
-Good-byes and good-hellos are such an important part of your child's day whether they show it or not. How you feel about leaving them, how you prepare them for separation, how you greet them, and what you do at the end of the day can make a huge difference in how their day goes and how they feel about themselves and their relationship with you. Our Montessori experts will share ideas for making these important times of the day a positive experience for you and your child. 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "books-books-books-for-reading-together-or-for-giving",
     title: `Books, Books, Books: for Reading Together or for Giving`,
     author: `Montessori Family Alliance`,
@@ -11253,39 +10154,6 @@ We explore means of giving children a much more meaningful peace education curri
 • creating a much more partnership-oriented and harmonious approach to problem-solving and decision-making through the use of the Montessori Way and developing a school culture that encourages deep engagement with the school and celebrates our differences`,
   },
   {
-    slug: "webcast-building-a-harmonious-school-community-pt-2",
-    title: `Webcast:  Building a Harmonious School Community / Pt 2`,
-    author: `Tim Seldin`,
-    date: "2017-05-23",
-    categories: ["Montessori Teachers","School Leadership","Video"],
-    tags: ["Building School Community","Montessori","Montessori Home Environment","Parenting"],
-    videoIds: ["qsVoFx9jSvQ"],
-    excerpt: `Tim Seldin and Kathy Leitch present Part 2 of Building Healthy and Harmonious School              We discussed strategies that we find help Montessori schools to build school communities that...`,
-    content: `Tim Seldin and Kathy Leitch present Part 2 of Building Healthy and Harmonious School
-
-
-
-
-
-
-
-
-
-
-
-
-
-We discussed strategies that we find help Montessori schools to build school communities that are healthy, harmonious and stable. It stems from the idea of clarity about your school's unique identity and builds on our traditions of peace education.
-
-We explored our traditions, which go back to the 1930s, of programs and practices that bring our dream of the Montessori ideal into reality.
-
-We explore means of giving children a much more meaningful peace education curriculum and a much greater sense of personal power
-
-• encouraging a true sense of community among the adults within our schools
-• improving lines of communication
-• creating a much more partnership-oriented and harmonious approach to problem-solving and decision-making through the use of the Montessori Way and developing a school culture that encourages deep engagement with the school and celebrates our differences`,
-  },
-  {
     slug: "webcast-montessori-secondary-education-pt-3",
     title: `Webcast:  Montessori Secondary Education / Pt 3`,
     author: `Paul Epstein`,
@@ -11307,38 +10175,6 @@ We propose applying Montessori principles to a more comprehensive and modern ori
 Join our conversation as we describe our framework for program design, curriculum, and more. We also look forward to sharing with you the new IMC Secondary Teacher Education Program from the Center for Guided Montessori Studies that opens this summer.
 
 Download PDF PowerPoint`,
-  },
-  {
-    slug: "webcast-special-events-and-auctions",
-    title: `Webcast:  Special Events and Auctions`,
-    author: `Tim Seldin`,
-    date: "2017-05-27",
-    categories: ["School Leadership","Video"],
-    tags: ["charity","fundraising","giving","nonprofit","special events"],
-    videoIds: ["fdQaqE-LL7Y"],
-    excerpt: `Some schools have been running very successful special events for years, some are just in the early stages, and some would like to begin.  In this webcast, we will discuss:  Types of special event...`,
-    content: `Some schools have been running very successful special events for years, some are just in the early stages, and some would like to begin.
-
-In this webcast, we will discuss:
-
-Types of special events
-Picking the right time of the year
-Finding the right venue
-Deciding on food and drink
-Establishing fundraising goals for the event
-Designating a wishlist of projects you hope to see funded
-On campus or elsewhere?
-Children or no children?
-Where do successful schools make their money?
-organizing a special event committee
-Silent and live auctions
-Recruiting volunteers
-Themes
-Creating excitement and engagement
-Liability insurance
-How not to alienate your community
-Thanking attendees and volunteers
-Cultivate ongoing support from a broader audience than your current families`,
   },
   {
     slug: "webcast-you-can-do-it-all-managing-the-elementary-curriculum",
@@ -11412,51 +10248,6 @@ This is a big topic. We are discussing:
 Download PDF of PowerPoint`,
   },
   {
-    slug: "webcast-managing-the-enrollment-and-re-enrollment-process-pt-2",
-    title: `Webcast:  Managing the Enrollment and Re-enrollment Process / Pt 2`,
-    author: `Tim Seldin`,
-    date: "2017-05-28",
-    categories: ["School Leadership","Video"],
-    tags: ["administration","advertising","enrollment process","marketing","office","public relations"],
-    videoIds: ["jYlrAFNvShs"],
-    excerpt: `This week we will continue our discussing of Managing the Enrollment and Reenrollment Process.  This is the time of the year when tuitions are being set, open houses scheduled, re-enrollment begins,...`,
-    content: `This week we will continue our discussing of Managing the Enrollment and Reenrollment Process.
-
-This is the time of the year when tuitions are being set, open houses scheduled, re-enrollment begins, and phones hopefully ring off the hook with inquiries.
-For the last two weeks, the discussion was so lively that we realized this is a topic that needs a third session.
-
-This week we will continue where we left off, respond to questions, and discuss in great detail how to begin the conversation with parents during your weekly open houses.
-
-This is a big topic. We are discussing:
-
-- Steps in the admissions process
-- Parent Ambassadors
-- Managing re-enrollment
-- Helping more parent make the decision to stay the course`,
-  },
-  {
-    slug: "webcast-managing-the-enrollment-and-re-enrollment-process-pt-3",
-    title: `Webcast: Managing the Enrollment and Re-enrollment Process / Pt 3`,
-    author: `Tim Seldin`,
-    date: "2017-05-28",
-    categories: ["School Leadership","Video"],
-    tags: ["administration","enrollment process","marketing","recruitment"],
-    videoIds: ["wwzp21ob-4g"],
-    excerpt: `This week we will continue our discussing of Managing the Enrollment and Reenrollment Process.  This is the time of the year when tuitions are being set, open houses scheduled, re-enrollment begins,...`,
-    content: `This week we will continue our discussing of Managing the Enrollment and Reenrollment Process.
-
-This is the time of the year when tuitions are being set, open houses scheduled, re-enrollment begins, and phones hopefully ring off the hook with inquiries.
-For the last two weeks, the discussion was so lively that we realized this is a topic that needs a third session.
-
-This week we will continue where we left off, respond to questions, and discuss in great detail how to begin the conversation with parents during your weekly open houses.
-
-This is a big topic. We are discussing:
-- Steps in the admissions process
-- Parent Ambassadors
-- Managing re-enrollment
-- Helping more parent make the decision to stay the course`,
-  },
-  {
     slug: "webcast-montessori-ground-rules-what-are-they-how-should-we-use-them",
     title: `Webcast: Montessori Ground Rules /  What are they? / How should we use them?`,
     author: `Michael Dorer`,
@@ -11468,18 +10259,6 @@ This is a big topic. We are discussing:
     content: `In this webcast, Dr. Michael Dorer discussed Ground Rules - What Are they? How should we use them?
 
 Establishing and maintaining sensible and fair ground rules is a necessity in any Montessori classroom. Many classes and schools, often in the elementary levels and above struggle with this important foundation. Michael will discuss what ground rules are and why they are important. Then we will look at how to establish the ground rules, how to re-establish them if needed, and dealing with conflict if it arises. Join us in this Montessori Foundation Webinar to explore this essential component of successful Montessori classroom leadership.`,
-  },
-  {
-    slug: "webcast-what-should-be-in-a-montessori-primary-classroom",
-    title: `Webcast:  What should be in a Montessori Primary classroom?`,
-    author: `Tim Seldin`,
-    date: "2017-05-30",
-    categories: ["Montessori Curriculum","Montessori Materials","Prepared Environment","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["6As6nG-ppZg"],
-    excerpt: `> This week we discussed the topic of what belongs in an early childhood Montessori classroom. We share a suggested list of materials and furnishings with you. Our goal was not to cover each material...`,
-    content: `>
-This week we discussed the topic of what belongs in an early childhood Montessori classroom. We share a suggested list of materials and furnishings with you. Our goal was not to cover each material, but to discuss the issue in broader terms and to explore the issue of materials from outside of Montessori.`,
   },
   {
     slug: "webcast-lesson-planning",
@@ -11608,25 +10387,6 @@ If you'd like to know more about having any of us from the Montessori Foundation
     content: `Upper Elementary students will be taking that big step into a new plane of development and you can help bridge the gap. Robin will share insights for students, parents, and teachers from his experience as an upper elementary teacher, an adolescent teacher, and as an associate head of school.`,
   },
   {
-    slug: "webcast-great-lessons-pt-1",
-    title: `Webcast: Great Lessons / Pt 1`,
-    author: `Michael Dorer`,
-    date: "2017-08-26",
-    categories: ["Lower Elementary (6-9)","Maria Montessori","Montessori Curriculum","Montessori Education","School Leadership","Upper Elementary (9-12)","Video"],
-    tags: ["cosmic","dorer","great lessons"],
-    videoIds: ["CRU-3oHKpmw"],
-    excerpt: `Download PDF of slides   v  The Great Lessons provide the framework upon which all of the elementary Montessori curriculum depends. They are the source for all further studies in history, geograph...`,
-    content: `Download PDF of slides 
-
-v
-
-The Great Lessons provide the framework upon which all of the elementary Montessori curriculum depends. They are the source for all further studies in history, geography, science, language, mathematics, geometry, art, biology, music, and more. Literally, every single elementary lesson can be linked to these five Great Lessons.
-
-The Great Lessons are also universal to all humanity. They aim to ignite the children’s imaginations and start them thinking about the big questions that humans have asked throughout time. How was the Earth formed? What was the first life on Earth? How did humans come to our planet? Why do we speak the way that we do? How the world get the way it is?
-
-Listen and join with Michael in an overview of this unique Montessori gift to children. Then prepare to share them in your own school.`,
-  },
-  {
     slug: "webcast-the-great-lessons-pt-2",
     title: `Webcast:  The Great Lessons  / Pt 2`,
     author: `Michael Dorer`,
@@ -11691,48 +10451,6 @@ Michael presents and discusses Impressionistic Geography, a set of 60 charts or 
 This massive curriculum forms the heart of the dynamic physical sciences plan for the upper elementary school. You will enjoy this three-session overview of a wonderful and complex material.`,
   },
   {
-    slug: "webcast-impressionistic-geography-part-2",
-    title: `Webcast: Impressionistic Geography Part 2`,
-    author: `Michael Dorer`,
-    date: "2017-08-26",
-    categories: ["Imagination","Lower Elementary (6-9)","Montessori Curriculum","School Leadership","Upper Elementary (9-12)","Video"],
-    tags: [],
-    videoIds: ["kHoqWe7ePFU"],
-    excerpt: `Download PDF of slides     This is the recording of the second in the series of 3 webinars about Impressionist Geography by Dr. Michael Dorer.  Imagination is the most powerful force for learnin...`,
-    content: `Download PDF of slides 
-
-
-
-This is the recording of the second in the series of 3 webinars about Impressionist Geography by Dr. Michael Dorer.
-
-Imagination is the most powerful force for learning for elementary school children.
-
-Michael presents and discusses Impressionistic Geography, a set of 60 charts or posters covering 97 topics, including 42 experiments and 92 research suggestions; heavily employing and stimulating the imagination.
-
-This massive curriculum forms the heart of the dynamic physical sciences plan for the upper elementary school. You will enjoy this three-session overview of a wonderful and complex material.`,
-  },
-  {
-    slug: "webcast-impressionistic-geography-part-1",
-    title: `Webcast: Impressionistic Geography Part 1`,
-    author: `Michael Dorer`,
-    date: "2017-08-26",
-    categories: ["Emotional Intelligence (EQ)","Lower Elementary (6-9)","Montessori Curriculum","Montessori Education","Montessori Teachers","School Leadership","Upper Elementary (9-12)","Video"],
-    tags: [],
-    videoIds: ["Q5hr5N2E2KU"],
-    excerpt: `Download PDF of slides     This is the recording of the second in the series of 3 webinars about Impressionist Geography by Dr. Michael Dorer.  Imagination is the most powerful force for learnin...`,
-    content: `Download PDF of slides 
-
-
-
-This is the recording of the second in the series of 3 webinars about Impressionist Geography by Dr. Michael Dorer.
-
-Imagination is the most powerful force for learning for elementary school children.
-
-Michael presents and discusses Impressionistic Geography, a set of 60 charts or posters covering 97 topics, including 42 experiments and 92 research suggestions; heavily employing and stimulating the imagination.
-
-This massive curriculum forms the heart of the dynamic physical sciences plan for the upper elementary school. You will enjoy this three-session overview of a wonderful and complex material.`,
-  },
-  {
     slug: "webcast-an-informal-conversation-with-dr-steve-hughes",
     title: `Webcast: An Informal Conversation With Dr. Steve Hughes`,
     author: `Tim Seldin`,
@@ -11758,27 +10476,6 @@ v`,
     content: `On October 14, 2015, we were joined by Dr. Steve Hughes. As a board-certified pediatric neuropsychologist, Dr. Hughes also specializes in assessment and treatment planning for persons who have problems with attention, concentration, organization, planning, and related executive functions.
 
 His topic was The value of concentration in developing agency.`,
-  },
-  {
-    slug: "webcast-nurturing-inspiration-within-montessori-classes",
-    title: `Webcast:  Nurturing Inspiration within Montessori Classes`,
-    author: `Michael Dorer`,
-    date: "2017-09-03",
-    categories: ["Emotional Intelligence (EQ)","Imagination","Kindergarten","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Curriculum","Montessori Education","Montessori Middle School","Montessori Secondary / High School","Montessori Teachers","Primary (3-6)","School Leadership","Science","Upper Elementary (9-12)","Video"],
-    tags: [],
-    videoIds: ["DrJa_Sqx5a0"],
-    excerpt: `Take a Deep Breath! Get Inspired!  Having an atmosphere of inspiration can perk up and deeply enhance any Montessori program. But, how to be inspiring?  Be part of this webinar with Michael Dorer...`,
-    content: `Take a Deep Breath! Get Inspired!
-
-Having an atmosphere of inspiration can perk up and deeply enhance any Montessori program. But, how to be inspiring?
-
-Be part of this webinar with Michael Dorer to consider ten Strategies for Inspiration.
-
-Your classroom and your school can be an inspiring place, brimming with enthusiasm.
-
-Breathe deeply!
-
-Now get started with Michael, Tim, and Kathy to focus on motivating inspiration.`,
   },
   {
     slug: "webcast-infant-toddlers-montessori-education",
@@ -11877,20 +10574,6 @@ The IMC offers great benefits, especially to schools, and is very affordable bec
 If you'd like to know more about having any of us from the Montessori Foundation come to your school or present a live online class by video broadcast to your entire staff, contact timseldin@montessori.org`,
   },
   {
-    slug: "webcast-what-is-montessori-curriculum-is-there-such-a-thing-part-3",
-    title: `Webcast: What is Montessori Curriculum: Is There Such a Thing? Part 3`,
-    author: `Michael Dorer`,
-    date: "2017-09-26",
-    categories: ["Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Charter Schools","Montessori Curriculum","Montessori Education","Montessori Middle School","Montessori Secondary / High School","Montessori Teachers","Primary (3-6)","School Leadership","Upper Elementary (9-12)","Video"],
-    tags: [],
-    videoIds: ["u09OZXZbbvQ"],
-    excerpt: `What is curriculum? Does Montessori even have one? How does it work? Dr. Michael Dorer wraps up this three-part series on Curriculum by looking at these seminal questions.   Together, we will then u...`,
-    content: `What is curriculum? Does Montessori even have one? How does it work? Dr. Michael Dorer wraps up this three-part series on Curriculum by looking at these seminal questions.
-
-
-Together, we will then unpack curriculum jargon, and clarify what it does. While focusing on the Children's House and Elementary, Michael will also touch on curriculum from Infancy through Adolescence. An important part of this discussion will be to assist Montessori leaders in assessing the curriculum in their schools.`,
-  },
-  {
     slug: "video-interview-with-newgate-school-montessori-high-school-seniors-may-2017-lorn-2",
     title: `Video Interview with NewGate School Montessori high school seniors May 2017 Lorna McGrath`,
     author: `Tim Seldin`,
@@ -11900,19 +10583,6 @@ Together, we will then unpack curriculum jargon, and clarify what it does. While
     videoIds: ["rJ7IWY_rQTE"],
     excerpt: `In May of 2016, Lorna McGrath interviewed six graduating seniors from the NewGate School (the Montessori Foundation's Lab School in Sarasota, Florida). In this candid and unscripted interview, Lorna l...`,
     content: `In May of 2016, Lorna McGrath interviewed six graduating seniors from the NewGate School (the Montessori Foundation's Lab School in Sarasota, Florida). In this candid and unscripted interview, Lorna leads an interesting conversation with students who grew up in Montessori and some who entered along the way.`,
-  },
-  {
-    slug: "webcast-setting-tuition-and-fees",
-    title: `Webcast: Setting Tuition and Fees`,
-    author: `Tim Seldin`,
-    date: "2018-01-16",
-    categories: ["School Leadership","Video"],
-    tags: [],
-    videoIds: ["AHGnJbwazcI"],
-    excerpt: `It’s that time of year again! We are all actively preparing for the annual re-enrollment cycle. Have you reviewed your tuition strategy? Will you be adjusting your school’s tuition for next school yea...`,
-    content: `It’s that time of year again! We are all actively preparing for the annual re-enrollment cycle. Have you reviewed your tuition strategy? Will you be adjusting your school’s tuition for next school year? Should you offer early enrollment incentives and/or penalties for late enrollment? This week’s webcast will focus on the many questions and concerns surrounding setting tuition to cover the full cost of implementing high-quality Montessori programs. Join us as Tim Seldin and Kathy Leitch facilitate a discussion that will help you determine a strategy that meets the current and future needs of your school.
-
-Remember, we store videos of all of our webcasts and much more in The International Montessori Council member's resource center. If you or your school are not members yet, you should look into it. https://www.montessori.org/the-international-montessori-council-imc/`,
   },
   {
     slug: "webcast-seminarios-montessori-en-l-nea-en-espa-ol-perfil-del-gu-a-parte-1",
@@ -12030,19 +10700,6 @@ Panelistas: Dina Paulik, Cristina Armisen, Valeria Fernández y Patty de León`,
 "Identify strategies that will decrease challenging behavior and improve the quality of life for all children in the Montessori environment.`,
   },
   {
-    slug: "why-montessori-kindergarteners-outsmart-and-outshine-kids-in-traditional-program",
-    title: `Why Montessori Kindergarteners Outsmart and Outshine Kids in Traditional Programs`,
-    author: `Jonathan Wolff`,
-    date: "2018-05-17",
-    categories: ["Kindergarten","Mixed Ages","Montessori Education","Montessori students","Parent Education","Primary (3-6)","Re-enrollment","School Leadership","Video"],
-    tags: [],
-    videoIds: ["k94aNoWOc5U"],
-    excerpt: `Why Montessori Kindergarteners Outsmart and Outshine Kids in Traditional Public and Private School Programs ~ Persuading Parents to Stay for the 3rd Year"  Join Jonathan Wolff and Kathy Leitch as we...`,
-    content: `Why Montessori Kindergarteners Outsmart and Outshine Kids in Traditional Public and Private School Programs ~ Persuading Parents to Stay for the 3rd Year"
-
-Join Jonathan Wolff and Kathy Leitch as we discuss the importance of the completion of the 3-year cycle. We all know how important retention is to each student, the classroom, and our schools. How do we effectively convey the benefits to our parents as they make this critical decision?`,
-  },
-  {
     slug: "retrospective-of-fifty-years-of-montessori",
     title: `Retrospective of Fifty Years of Montessori`,
     author: `Tim Seldin`,
@@ -12052,211 +10709,6 @@ Join Jonathan Wolff and Kathy Leitch as we discuss the importance of the complet
     videoIds: ["FjkOBb3RGvQ"],
     excerpt: `Tim Seldin shares his fifty year journey in Montessori.`,
     content: `Tim Seldin shares his fifty year journey in Montessori.`,
-  },
-  {
-    slug: "webcast-supporting-our-students-with-challenges-in-behavior-and-learning-part-1",
-    title: `Webcast: Supporting our Students with Challenges in Behavior and Learning Part 1`,
-    author: `Christine Lowry`,
-    date: "2018-06-20",
-    categories: ["Children with Exceptionalities","Lower Elementary (6-9)","Montessori Education","Montessori students","Montessori Teachers","Primary (3-6)","School Leadership","Upper Elementary (9-12)","Video"],
-    tags: ["children with exceptionalities","Special education"],
-    videoIds: ["cr0q5FdThE0"],
-    excerpt: `This webinar, presented by Christine Lowry will discuss A Montessori Model: Prepare, Provide, Guide for working with ALL learners in the Montessori Classroom - at all levels. This model is based on co...`,
-    content: `This webinar, presented by Christine Lowry will discuss A Montessori Model: Prepare, Provide, Guide for working with ALL learners in the Montessori Classroom - at all levels. This model is based on considerable research on best practices in education and trends and insights in special education. As always, listener participation is welcomed as we share questions, concerns, comments, and ideas. Christine Lowry earned her masters in special education at UNC-CH. She combined her passion for serving diverse learners with her love of Montessori education by founding 2 schools to serve an inclusive group of students from toddlers through upper elementary. She shares her 30 years of experience in special education with us as we explore best ways to serve this growing group of students.`,
-  },
-  {
-    slug: "webcast-how-to-emancipate-yourself-from-the-drudgery-of-school-management-busy-w",
-    title: `Webcast: How to Emancipate Yourself From the Drudgery of School Management Busy-work`,
-    author: `jonolandon`,
-    date: "2018-08-29",
-    categories: ["School Leadership","Video"],
-    tags: [],
-    videoIds: ["F4Z8Mpq7564"],
-    excerpt: `In this webinar, Jono Landon from Hubbli, focused on strategic ways of using school management technology to substantially reduce office paperwork and free up hours from the drudgery of the daily, rem...`,
-    content: `In this webinar, Jono Landon from Hubbli, focused on strategic ways of using school management technology to substantially reduce office paperwork and free up hours from the drudgery of the daily, remedial, school office busy-work.
-
-We also talked about a manageable, and incremental approach for transitioning a school from old-school management processes to the most current best-practices that are being employed by efficiently run organizations around the world. This information is based on data, and we will also show case-studies from real-life success stories.`,
-  },
-  {
-    slug: "the-easiest-way-to-increase-private-school-profit",
-    title: `The Easiest Way To Increase Private School Profit`,
-    author: `jonolandon`,
-    date: "2018-08-29",
-    categories: ["School Leadership","Video"],
-    tags: [],
-    videoIds: ["30L-J1hF5fA"],
-    excerpt: `by   by Jono Landon of Hubbli     Our thanks to Jono Landon, CEO of Hubbli (www.hubbli.com) for permission to share this blog post.      After five years of consulting private schools on how t...`,
-    content: `by 
-
-by Jono Landon of Hubbli
-
-
-
-
-Our thanks to Jono Landon, CEO of Hubbli (www.hubbli.com) for permission to share this blog post.
-
-
-
-
-
-After five years of consulting private schools on how to use communication tools to grow enrollment, and keep enrolled parents engaged, one thing has become painfully obvious to me:
-
-Almost without exception, I find that people who are in school leadership positions have little to no business education or training before they take the position.
-
-The only real expertise that exists within the school staff is education. So, generally speaking, schools are businesses that are run by teachers.
-
-Don’t get me wrong; I prefer this for my children. I would rather place them in a school that has a thinner profit margin but is being run by someone who is an exceptional educator, than someone who has an MBA just focused on the bottom line.
-
-But this creates challenges, and in today’s private school market, which is growing and likely to explode, schools are not equipped to face the challenges of competition for enrollment. In fact, the numbers clearly show this.
-
-In the diagram below, you can see how the market is growing, but the enrollment rates are decreasing. This trend means competition is making it harder to keep schools full, and unfortunately, school leaders are not equipped to compete on a business level.
-
-
-
-I’ve developed a framework for schools, to help them understand what their key business performance indicators are. This information is nothing new; it’s just business basics. However, I’ve translated it into a jargon of which a school director can relate.
-
-
-
-A framework for private schools, to help them understand their key business performance indicators
-
-
-
-
-
-
-You can watch a recording of a recent webinar I co-hosted on this topic along with Jonathan Wolf where we dig much deeper.
-
-
-
-
-Below is a simple spreadsheet that identifies eight key business metrics. Schools should focus on improving these metrics year over year.
-
-It also shows how an incremental growth of only 10% in each of these metrics, year over year, will more than double the net profits for a school starting with 100 students.
-
-In the “Year 1” column, we input some industry benchmarks. In the “Year 2” column, we increased each metric by only 10%, and then, in “Year 3,” we increased the previous year’s results by another 10%.
-
-
-Now let’s break each one of these down.
-
-
-Retention Rate
-
-
-Retention is pretty obvious, but essential. It’s always WAY easier to keep families than it is to find and enroll new ones. Now, you will always have kids graduating, so you will never hit that 100% mark, but the goal is to increase the retention of non-graduating students.
-
-The easiest way to retain children is to improve your parent communication system. You might have the best teachers in the world, but if the parents don’t know what is going on, or if they dislike the communication experience, they leave. And when families leave, they usually take one or two more families with them.
-
-
-
-The easiest way to retain children is to improve your parent communication system.
-
-CLICK TO TWEET
-
-
-
-
-Alternatively, if they love the communication experiences with your school, not only will they stay, but they will also promote you to other parents. Word-of-mouth referrals make marketing for new families substantially easier and cheaper.
-New Families Finding Your School A.K.A “Traffic.”
-
-
-So, if you were running a shoe store, the traffic would be the number of people walking by your store in the mall; however, in the school enrollment marketing world, this would mean the number of parents who saw an ad or got a referral from another parent.
-
-So how do you improve this?
-
-Well, I already mentioned that your best way to promote ‘word-of-mouth’ marketing is with happy parents. But, as far as advertising goes, I would say that hands down, Facebook ads are the easiest and most productive way to promote your school to families that match your school’s culture.
-Inquiries About Enrollment A.K.A. “Opt-ins.”
-
-
-Again, if you were a shoe store, opt-ins would be people walking into the store and trying on a pair of shoes. Whereas in a school, this would be parents going to your website and filling out an inquiry form, or just calling or walking into the school to get some info.
-
-The design of your marketing website has the biggest impact here. Too often, I see schools handing off the management of their website to a parent volunteer. Now, if you want to know why that is a horrible idea, you should read this blog post.
-
-Suffice it to say, your website does not need to win a design award, but the content and layout should be designed to push prospective parents toward the first step in the enrollment process, which is inquiring.
-
-Here is the rule of thumb that all schools need to follow: You should have, at least, four times the amount of inquiries coming into the enrollment process, as you have spots to fill. If you don’t, you can quickly end up with your back up against the wall accepting whoever will apply, just so that you can meet your payroll.
-
-This is how you end up with problem parents and people that need a different type of school. These are the folks that tax your staff, leave after one year, take families with them, and in extreme scenarios, bring you to court or shut your school down entirely.
-
-IT HAPPENS EVERY DAY, trust me.
-New Enrollments
-
-
-This one needs no analogies, but just in case you didn’t realize it, yes, this is a school’s version of someone buying a pair of shoes.
-Children Per Family
-
-
-Now, you might be thinking “Hold on, how are we supposed to convince our families to have more children?” Well, let’s go back to the ratio of inquiries to openings you should have.
-
-If you have enough inquiries coming in, you could prioritize families with more kids, and ideally, families where the oldest child is going to start in your earliest program.
-
-How much easier is it to run your school when you have families that are a perfect fit AND have two or three children enrolling in your earliest programming options.
-Average Program Tuition
-
-
-Tuition increases are where school leaders wimp out. Your rates need to increase. Your average tuition across all of your programs should be growing, at the very LEAST, with inflation, and there is no reason why rates can’t move up faster.
-
-If you are achieving the right number of inquiries, you can be more selective with your enrollment. So, every year you should not only the be accepting families that fit the culture and have multiple children that can all start in your youngest programming, BUT also, families that have the means to pay a slightly higher tuition.
-Programs Per Child
-
-
-If you don’t have multiple types of programming, you should. Selection is another basic strategy that ALL businesses need to implement. I mean, just imagine a shoe store with only one type of shoe — aside from that being my dream shoe-shopping experience — it would not be great for business.
-
-Every year, you should be testing and developing new programming, while also marketing these programs to your current parents.
-
-There is no easier sale to make than to an existing customer.
-
-Some ideas that I see all the time are:
-
- 	• Sports programs
-
- 	• Arts programs
-
- 	• Camps
-
- 	• Early drop-off
-
-
-Profit Margin
-
-
-If you don’t know your profit margin per child, you should. What we usually see in schools is something around 10%. Now, if you were going to try to sell that to the average business man, you would probably get a pretty cold response.
-
-
-
-If you don’t know your profit margin per child, you should.
-
-CLICK TO TWEET
-
-
-
-
-Unfortunately, that is often the result only after doing major fundraising campaigns.
-
-The reality is, schools can and should be doing much better than a 10% profit margin, and they can do it by focusing their time and resources on better business management, rather than capital campaigns that are usually poorly executed.
-
-That’s a whole blog post in and of itself, so let me know if you want me to write that one and send it to you.`,
-  },
-  {
-    slug: "building-a-culture-of-peace",
-    title: `Building a Culture of Peace`,
-    author: `Michael Dorer`,
-    date: "2018-07-18",
-    categories: ["Early Adolescence (12-15)","Empowerment","Later Adolescence (15-18)","Lower Elementary (6-9)","Montessori Curriculum","Montessori Education","Montessori Middle School","Montessori Secondary / High School","Montessori students","Montessori Teachers","Peace Education","Primary (3-6)","School Leadership","Upper Elementary (9-12)","Video"],
-    tags: [],
-    videoIds: ["qgYoupo00rg"],
-    excerpt: `Join Dr. Michael Dorer as he shares his unique insights on peace in education. Education for peace is essential for building a culture of peace. How can peace become an essential part of your Montesso...`,
-    content: `Join Dr. Michael Dorer as he shares his unique insights on peace in education. Education for peace is essential for building a culture of peace. How can peace become an essential part of your Montessori experience? Everyday practices and regular attention on activities of peace can establish a community of peace in every Montessori classroom, Join Michael to think about and discuss seven simple but essential peaceful strategies that can transform your classroom into a model of peace.`,
-  },
-  {
-    slug: "webcast-the-opitimal-choice",
-    title: `Webcast: The Opitimal Choice`,
-    author: `Tim Seldin`,
-    date: "2018-11-01",
-    categories: ["Communication","Montessori Charter Schools","Montessori Education","Montessori students","Montessori Teachers","Parent-Teacher Communication","Research","Video"],
-    tags: [],
-    videoIds: ["9Q6OBIOWEg8"],
-    excerpt: `In this talk Angeline Lillard will review some studies on the outcomes of Montessori education and also discuss issues of implementation quality.`,
-    content: `In this talk Angeline Lillard will review some studies on the outcomes of Montessori education and also discuss issues of implementation quality.`,
   },
   {
     slug: "webcast-imc-moving-forward",
@@ -12271,116 +10723,6 @@ That’s a whole blog post in and of itself, so let me know if you want me to wr
 
 
 With Kathy Leitch, Margot Garfield-Anderson & Michael Dorer`,
-  },
-  {
-    slug: "webcast-the-teacher-is-worried-about-my-child-what-now",
-    title: `Webcast: The Teacher Is Worried About My Child! What Now?`,
-    author: `Kathy Leitch`,
-    date: "2018-10-26",
-    categories: ["Communication","Montessori Education","Montessori Parenting","Montessori Teachers","Parent Education","Parent-Teacher Communication","Sensitive Periods","Video"],
-    tags: [],
-    videoIds: ["Qo3IZRRRe5k"],
-    excerpt: `Montessori Family Life A Series of Weekly Talks For Parents   With Ann Epstein Ph.D. & Kathy Leitch`,
-    content: `Montessori Family Life A Series of Weekly Talks For Parents
-
-
-With Ann Epstein Ph.D. & Kathy Leitch`,
-  },
-  {
-    slug: "webcast-how-montessori-builds-brains-and-why-it-matters",
-    title: `Webcast: How Montessori Builds Brains And Why It Matters`,
-    author: `Michael Dorer`,
-    date: "2018-11-19",
-    categories: ["Brain Development","Communication","Early Adolescence (12-15)","Empowerment","Infant-Toddler (0 to 3)","Kindergarten","Language","Language &amp; Reading","Later Adolescence (15-18)","Lower Elementary (6-9)","Mindfulness","Mixed Ages","Montessori Education","Montessori Family Life","Planes of Development","Primary (3-6)","Psychology","Reading","Science","Sensorial","Upper Elementary (9-12)","Young Adolescent","Young Adults","Video"],
-    tags: [],
-    videoIds: ["Apdz9BAT2f8"],
-    excerpt: `Webcast: Building Brains With Kathy Leitch and Michael Dorer`,
-    content: `Webcast: Building Brains With Kathy Leitch and Michael Dorer`,
-  },
-  {
-    slug: "webcast-montessori-leadership-webcast-a-montessori-retrospective",
-    title: `Webcast: Montessori Leadership Webcast A Montessori Retrospective`,
-    author: `Michael Dorer`,
-    date: "2018-11-19",
-    categories: ["Communication","Mixed Ages","Montessori Charter Schools","Montessori Education","Montessori Parenting","Montessori Teachers","Planes of Development","Prepared Environment","Video"],
-    tags: [],
-    videoIds: ["BzzrEjIkZY0"],
-    excerpt: `A Montessori Retrospective With Kathy Leitch, Margaret Whitley, Michael Dorer Lorna Mcgrath`,
-    content: `A Montessori Retrospective With Kathy Leitch, Margaret Whitley, Michael Dorer Lorna Mcgrath`,
-  },
-  {
-    slug: "webcast-measuring-what-matters-focusing-on-classroom-quality",
-    title: `Webcast: Measuring What Matters Focusing On Classroom Quality`,
-    author: `Tim Seldin`,
-    date: "2018-11-27",
-    categories: ["Communication","Mixed Ages","Montessori Education","Montessori Teachers","Prepared Environment","School Leadership","Video"],
-    tags: [],
-    videoIds: ["3YTyyxkUJH0"],
-    excerpt: `Measuring What Matters Focusing on Classroom Quality  Kathy Leitch, Tim Seldin, Dr. Michael Dorer, Dr. Jacqueline Cossentino`,
-    content: `Measuring What Matters Focusing on Classroom Quality
-
-Kathy Leitch, Tim Seldin, Dr. Michael Dorer, Dr. Jacqueline Cossentino`,
-  },
-  {
-    slug: "webcast-the-power-of-individualized-leadership-practicing-personalized-acts",
-    title: `Webcast: The Power Of Individualized Leadership Practicing Personalized Acts`,
-    author: `Jonathan Wolff`,
-    date: "2018-11-27",
-    categories: ["Communication","Empowerment","Mindfulness","Mixed Ages","Montessori Teachers","Peace Education","Sensitive Periods","Video"],
-    tags: [],
-    videoIds: ["KYMxtNPJOhE"],
-    excerpt: `Webcast The Power of Individualized Leadership Practicing Personalized Acts with Kathy Leitch and Jonathan Wolff`,
-    content: `Webcast The Power of Individualized Leadership Practicing Personalized Acts with Kathy Leitch and Jonathan Wolff`,
-  },
-  {
-    slug: "webcast-gun-violence-in-our-schools-pt-1",
-    title: `Webcast: Gun Violence in our Schools PT 1`,
-    author: `Michael Dorer`,
-    date: "2018-11-27",
-    categories: ["Communication","Mixed Ages","Sensitive Periods","Video"],
-    tags: [],
-    videoIds: ["MvEMkKvF8iU"],
-    excerpt: `Webcast with Kathy Leitch, Lorna Mcgrath, Michael Dorer, and Christine Lowry`,
-    content: `Webcast with Kathy Leitch, Lorna Mcgrath, Michael Dorer, and Christine Lowry`,
-  },
-  {
-    slug: "webcast-gun-violence-in-our-schools-pt-2",
-    title: `Webcast: Gun Violence in our Schools PT 2`,
-    author: `Jonathan Wolff`,
-    date: "2018-11-27",
-    categories: ["Communication","Mixed Ages","Montessori Education","Montessori Parenting","Montessori Teachers","Sensitive Periods","Video"],
-    tags: [],
-    videoIds: ["9YMAZA66x5g"],
-    excerpt: `Wednesday's Montessori Leadership Webcast Gun Violence in our Schools  With Kathy Leitch, Jonathan Wolff, Patricia De Leon`,
-    content: `Wednesday's Montessori Leadership Webcast Gun Violence in our Schools
-
-With Kathy Leitch, Jonathan Wolff, Patricia De Leon`,
-  },
-  {
-    slug: "webcast-creating-a-holistic-approach-to-staff-evaluation-development",
-    title: `Webcast : Creating A Holistic Approach To Staff Evaluation & Development`,
-    author: `Michael Dorer`,
-    date: "2018-11-30",
-    categories: ["Communication","Empowerment","Montessori Education","Montessori Teachers","School Leadership","Video"],
-    tags: [],
-    videoIds: ["OE4TUDnuBFU"],
-    excerpt: `Webcast Creating a Holistic Approach to Staff Evaluation & Development  With  Kathy Leitch, Michael Dorer, Patricia De Leon`,
-    content: `Webcast Creating a Holistic Approach to Staff Evaluation & Development
-
-With
-
-Kathy Leitch, Michael Dorer, Patricia De Leon`,
-  },
-  {
-    slug: "webcast-a-montessori-retrospective-with-dr-michael-dorer",
-    title: `Webcast: A Montessori Retrospective With Dr. Michael Dorer`,
-    author: `Michael Dorer`,
-    date: "2018-11-30",
-    categories: ["Empowerment","School Leadership","Video"],
-    tags: [],
-    videoIds: ["uSF3XM9Jmg4"],
-    excerpt: `Webcast A Montessori Retrospective with Kathy Leitch & Dr. Michael Dorer`,
-    content: `Webcast A Montessori Retrospective with Kathy Leitch & Dr. Michael Dorer`,
   },
   {
     slug: "webcast-re-enrollment-retention-and-the-role-of-our-faculty-unlisted",
@@ -12407,50 +10749,6 @@ Tim Seldin, Patricia De Leon, Tonya Ryskind`,
     content: `The Normalization Of New Teachers With Kitty Bravo, Michael Dorer, Jonathon Wolfe, and Kathy Leitch`,
   },
   {
-    slug: "webcast-improving-classroom-management-with-michael-dorer-part-2",
-    title: `Webcast: Improving Classroom Management With Michael Dorer Part 2`,
-    author: `Michael Dorer`,
-    date: "2019-02-19",
-    categories: ["Montessori Curriculum","Montessori Education","Montessori Teachers","School Leadership","Video"],
-    tags: [],
-    videoIds: ["Qnx-7jiLR_s"],
-    excerpt: `Improving Classroom Management with Michael Dorer Part 2`,
-    content: `Improving Classroom Management with Michael Dorer Part 2`,
-  },
-  {
-    slug: "webcast-improving-classroom-management",
-    title: `Webcast: Improving Classroom Management`,
-    author: `Michael Dorer`,
-    date: "2019-02-28",
-    categories: ["Communication","Mixed Ages","Montessori Education","Montessori Teachers","Video"],
-    tags: [],
-    videoIds: ["t1iD5HMT9js"],
-    excerpt: `Improving Classroom Management`,
-    content: `Improving Classroom Management`,
-  },
-  {
-    slug: "webcast-the-international-montessori-council-where-will-we-be-20-years-from-now",
-    title: `Webcast: The International Montessori Council - Where Will We Be 20 Years From Now`,
-    author: `Michael Dorer`,
-    date: "2019-03-07",
-    categories: ["Montessori Education","Montessori Teachers","Peace Education","Planes of Development","Prepared Environment","School Leadership","Video"],
-    tags: [],
-    videoIds: ["zabHkAWMvx8"],
-    excerpt: `The International Montessori Council Where Will We Be 20 Years From Now`,
-    content: `The International Montessori Council Where Will We Be 20 Years From Now`,
-  },
-  {
-    slug: "webcast-the-life-cycle-of-a-school-year-how-to-get-ahead-of-the-curve",
-    title: `Webcast: The Life Cycle of a School Year How To Get Ahead Of The Curve!`,
-    author: `Kathy Leitch`,
-    date: "2019-03-07",
-    categories: ["Communication","Empowerment","Mindfulness","Montessori Education","Montessori Teachers","Parent Education","Planes of Development","School Leadership","Video"],
-    tags: [],
-    videoIds: ["jQPcP3p-Zro"],
-    excerpt: `The Life Cycle of a School Year how to get ahead of the curve!`,
-    content: `The Life Cycle of a School Year how to get ahead of the curve!`,
-  },
-  {
     slug: "webcast-be-our-guest-the-art-of-hospitality-in-a-montessori-school-1",
     title: `Webcast: Be Our Guest The Art Of Hospitality In A Montessori School 1`,
     author: `Michael Dorer`,
@@ -12462,21 +10760,6 @@ Tim Seldin, Patricia De Leon, Tonya Ryskind`,
     content: `Be Our Guest The Art Of Hospitality In A Montessori School 1`,
   },
   {
-    slug: "webcast-enrollment-marketing-the-difference-between-branding-and-direct-marketin",
-    title: `Webcast: Enrollment Marketing - The Difference between Branding and Direct Marketing Strategies`,
-    author: `jonolandon`,
-    date: "2019-03-19",
-    categories: ["School Leadership","Video"],
-    tags: ["enrollment","marketing","open houses","recruitment","tours"],
-    videoIds: ["yFgHh4Rgvxs"],
-    excerpt: `Jon Landon, the founder of Hubbli, joined us on March 13, 2019, to address these two very different marketing strategies, how they are best accomplished, and when a Montessori school should employ eac...`,
-    content: `Jon Landon, the founder of Hubbli, joined us on March 13, 2019, to address these two very different marketing strategies, how they are best accomplished, and when a Montessori school should employ each one to achieve their enrollment goals.
-
-
-
-To learn more about Hubbli's automated school marketing solution, email jono@hubbli.com`,
-  },
-  {
     slug: "webcast-effective-negotiators-what-do-they-do-and-how-can-you-learn-from-them",
     title: `Webcast: Effective Negotiators What do they do and how can you learn from them`,
     author: `Michael Dorer`,
@@ -12486,28 +10769,6 @@ To learn more about Hubbli's automated school marketing solution, email jono@hub
     videoIds: ["liLSJQly53s"],
     excerpt: `Effective Negotiators What do they do and how can you learn from them`,
     content: `Effective Negotiators What do they do and how can you learn from them`,
-  },
-  {
-    slug: "webcast-how-do-you-know-if-your-professional-development-dollars-are-well-spent",
-    title: `Webcast: How Do You Know If Your Professional Development Dollars Are Well Spent`,
-    author: `Jonathan Wolff`,
-    date: "2019-04-19",
-    categories: ["Communication","Discipline","Video"],
-    tags: [],
-    videoIds: ["r1U3HxDsZ2E"],
-    excerpt: `How do you know if your Professional Development dollars are well spent`,
-    content: `How do you know if your Professional Development dollars are well spent`,
-  },
-  {
-    slug: "webcast-teaching-positive-social-development-to-all-students",
-    title: `Webcast: Teaching Positive Social Development To All Students`,
-    author: `Michael Dorer`,
-    date: "2019-04-23",
-    categories: ["Child's Work","Communication","Discipline","Empowerment","Mindfulness","Mixed Ages","Montessori Education","Peace Education","Planes of Development","Prepared Environment","Video"],
-    tags: [],
-    videoIds: ["rGrgSjcvI6M"],
-    excerpt: `Teaching Positive Social Development to ALL Students`,
-    content: `Teaching Positive Social Development to ALL Students`,
   },
   {
     slug: "webcast-webcast-how-to-design-facebook-ads-to-target-montessori-parents-for-enro",
@@ -12551,17 +10812,6 @@ In the metaphor, each course that’s served represents a cosmic principle, and 
 Enjoy your meal at the Cosmic Café`,
   },
   {
-    slug: "webcast-discovery-part-1",
-    title: `Webcast: Discovery Part 1`,
-    author: `Michael Dorer`,
-    date: "2019-06-21",
-    categories: ["Communication","Discipline","Empowerment","Imagination","Montessori Education","Planes of Development","Video"],
-    tags: [],
-    videoIds: ["VZCz1kfsbEQ"],
-    excerpt: `Discovery With Kathy Leitch and Dr. Michael Dorer`,
-    content: `Discovery With Kathy Leitch and Dr. Michael Dorer`,
-  },
-  {
     slug: "webcast-a-montessori-retrospective-with-dina-paulik",
     title: `Webcast: A Montessori Retrospective With Dina Paulik`,
     author: `Dina Paulik`,
@@ -12571,17 +10821,6 @@ Enjoy your meal at the Cosmic Café`,
     videoIds: ["Wrfks63ROPw"],
     excerpt: `A Montessori Retrospective With Dina Paulik`,
     content: `A Montessori Retrospective With Dina Paulik`,
-  },
-  {
-    slug: "webcast-discovery-part-2",
-    title: `Webcast: Discovery Part 2`,
-    author: `Michael Dorer`,
-    date: "2019-06-25",
-    categories: ["Communication","Discipline","Empowerment","Mindfulness","Montessori Education","Montessori Parenting","Montessori students","Planes of Development","Practical Life","Video"],
-    tags: [],
-    videoIds: ["ZY3U2kjT68I"],
-    excerpt: `Discovery Part 2 With Kathy Leitch and Michael Dorer`,
-    content: `Discovery Part 2 With Kathy Leitch and Michael Dorer`,
   },
   {
     slug: "webcast-driven-to-abstraction-the-impact-of-imposing-academics-on-toddlers",
@@ -12606,50 +10845,6 @@ Enjoy your meal at the Cosmic Café`,
     content: `Webcast Shifting our Mindset With Kathy Leitch and Christine Lowry`,
   },
   {
-    slug: "montessori-based-multi-tier-system-of-support-an-overview-with-christine-lowry-m",
-    title: `Montessori based Multi-Tier System of Support An overview with Christine Lowry, M.Ed`,
-    author: `Christine Lowry`,
-    date: "2019-07-02",
-    categories: ["Children with Exceptionalities","Communication","Empowerment","Mindfulness","Mixed Ages","Montessori Education","Montessori students","Planes of Development","Prepared Environment","Psychology","School Leadership","Sensitive Periods","Sensorial","Young Adolescent","Young Adults","Video"],
-    tags: [],
-    videoIds: ["muegCHTCq8c"],
-    excerpt: `Montessori Based Multi-Tier System Of Support An Overview With Christine Lowry, M Ed`,
-    content: `Montessori Based Multi-Tier System Of Support An Overview With Christine Lowry, M Ed`,
-  },
-  {
-    slug: "webcast-how-montessori-can-help-students-impacted-by-trauma",
-    title: `Webcast: How Montessori Can Help Students Impacted By Trauma`,
-    author: `Rangel Chaffin`,
-    date: "2019-07-14",
-    categories: ["Children with Exceptionalities","Communication","Emotionally Healthy Children","Mixed Ages","Montessori Education","Montessori students","Montessori Teachers","Psychology","Sensitive Periods","Video"],
-    tags: [],
-    videoIds: ["_1UojZ-vQCA"],
-    excerpt: `Webcast How Montessori Can Help Students Impacted by Trauma`,
-    content: `Webcast How Montessori Can Help Students Impacted by Trauma`,
-  },
-  {
-    slug: "webcast-the-importance-of-social-justice-practice-in-montessori-schools",
-    title: `Webcast: The Importance Of Social Justice Practice In Montessori Schools`,
-    author: `Acker LeValley`,
-    date: "2019-07-22",
-    categories: ["Emotionally Healthy Children","Empowerment","Mindfulness","Mixed Ages","Montessori Charter Schools","Prepared Environment","School Leadership","Sensitive Periods","Social Justice","Video"],
-    tags: [],
-    videoIds: ["rJzs83vWRv0"],
-    excerpt: `Webcast The Importance of Social Justice Practice in Montessori Schools`,
-    content: `Webcast The Importance of Social Justice Practice in Montessori Schools`,
-  },
-  {
-    slug: "webcast-professional-development-plans-for-the-school-year",
-    title: `Webcast: Professional Development Plans For The School Year`,
-    author: `Michael Dorer`,
-    date: "2019-08-01",
-    categories: ["Communication","Montessori Education","Montessori Teachers","Video"],
-    tags: [],
-    videoIds: ["qtYGNjWZpXo"],
-    excerpt: `Webcast Professional Development Plans for the School Year`,
-    content: `Webcast Professional Development Plans for the School Year`,
-  },
-  {
     slug: "webcast-using-budgets-to-manage-cash-flow",
     title: `Webcast Using Budgets to Manage Cash Flow`,
     author: `Marc Seldin`,
@@ -12659,28 +10854,6 @@ Enjoy your meal at the Cosmic Café`,
     videoIds: ["beHIB84tQXg"],
     excerpt: ``,
     content: ``,
-  },
-  {
-    slug: "webcast-developing-social-emotional-skills-with-diverse-learners",
-    title: `Webcast Developing Social Emotional Skills with Diverse Learners`,
-    author: `Christine Lowry`,
-    date: "2019-08-24",
-    categories: ["Children with Exceptionalities","Communication","Empowerment","Language","Mixed Ages","Montessori Education","Montessori students","Peace Education","Planes of Development","Sensorial","Video"],
-    tags: [],
-    videoIds: ["yDGkm37FrfM"],
-    excerpt: ``,
-    content: ``,
-  },
-  {
-    slug: "webcast-montessori-and-higher-education",
-    title: `Webcast: Montessori and Higher Education`,
-    author: `Jack Rice`,
-    date: "2019-09-05",
-    categories: ["Empowerment","Mixed Ages","Montessori Teachers","Prepared Environment","School Leadership","Video"],
-    tags: [],
-    videoIds: ["-F1z_1wfTEM"],
-    excerpt: `Webcast Montessori and Higher Education`,
-    content: `Webcast Montessori and Higher Education`,
   },
   {
     slug: "webcast-the-three-most-common-enrollment-marketing-mistakes-made-by-most-schools",
@@ -12694,17 +10867,6 @@ Enjoy your meal at the Cosmic Café`,
     content: `The Three most Common Enrollment Marketing Mistakes Made By Most Schools Today`,
   },
   {
-    slug: "webcast-creating-a-culture-of-self-mastery-in-the-classroom",
-    title: `Webcast: Creating A Culture Of Self Mastery In The Classroom`,
-    author: `JoeNewman`,
-    date: "2019-09-18",
-    categories: ["Children with Exceptionalities","Communication","Empowerment","Mixed Ages","Montessori Education","Psychology","Video"],
-    tags: [],
-    videoIds: ["S3ugwnWI3cA"],
-    excerpt: `Creating A Culture Of Self Mastery In The Classroom`,
-    content: `Creating A Culture Of Self Mastery In The Classroom`,
-  },
-  {
     slug: "webcast-got-challenges-how-do-we-support-all-of-today-s-learners-in-our-montesso",
     title: `Webcast: Got Challenges? How Do We Support All Of Today's Learners In Our Montessori Classrooms`,
     author: `Christine Lowry`,
@@ -12716,17 +10878,6 @@ Enjoy your meal at the Cosmic Café`,
     content: `Webcast: Got Challenges? How Do We Support All Of Today's Learners In Our Montessori Classrooms`,
   },
   {
-    slug: "webcast-delegating-to-enhance-everyone-s-outcome",
-    title: `Webcast: Delegating To Enhance Everyone’s Outcome`,
-    author: `Tanya L. Ryskind J.D`,
-    date: "2019-09-26",
-    categories: ["Communication","Empowerment","Mindfulness","School Leadership","Video"],
-    tags: [],
-    videoIds: ["0Q5u6uUIwxo"],
-    excerpt: `Webcast Delegating To Enhance Everyone’s Outcome`,
-    content: `Webcast Delegating To Enhance Everyone’s Outcome`,
-  },
-  {
     slug: "webcast-harvesting-the-3-rs-rest-renewal-and-reflection",
     title: `Webcast: Harvesting The 3 Rs  Rest, Renewal and Reflection`,
     author: `Claire Salkowski`,
@@ -12736,32 +10887,6 @@ Enjoy your meal at the Cosmic Café`,
     videoIds: ["kt-6LBOm5hE"],
     excerpt: `Webcast: Harvesting The 3 Rs Rest, Renewal and Reflection`,
     content: `Webcast: Harvesting The 3 Rs Rest, Renewal and Reflection`,
-  },
-  {
-    slug: "webcast-power-of-forgiveness",
-    title: `Webcast Power of Forgiveness`,
-    author: `Frederic Luskin PhD`,
-    date: "2019-10-08",
-    categories: ["Emotional Intelligence (EQ)","Emotionally Healthy Children","Mindfulness","Peace Education","Psychology","School Leadership","Social Justice","Video"],
-    tags: ["forgivenss","self-care"],
-    videoIds: ["jpAThhnoVfg"],
-    excerpt: `Dr. Fred Luskin, (keynote speaker for our 2019 Annual International Conference) to explore forgiveness with the goal of reducing hurt and helplessness, letting go of anger and increasing confidence an...`,
-    content: `Dr. Fred Luskin, (keynote speaker for our 2019 Annual International Conference) to explore forgiveness with the goal of reducing hurt and helplessness, letting go of anger and increasing confidence and hope as we learn how to release unwanted hurts and grudges. His presentations explore the HEAL process of forgiveness that, when learned, can lead to enhanced well-being through self-care.
-
-In the Forgive for Good workshop and class series, Dr. Frederic Luskin presents the forgiveness training methodology that has been validated through six successful research studies conducted through the Stanford Forgiveness Projects.`,
-  },
-  {
-    slug: "webcast-say-what-six-languages-of-learning-ignite-curiosity-invite-collaboration",
-    title: `Webcast: Say What? Six Languages of Learning: Ignite Curiosity, Invite Collaboration, Incite Transformative Work, & Build Trust`,
-    author: `Tanya L. Ryskind J.D`,
-    date: "2019-11-20",
-    categories: ["Emotional Intelligence (EQ)","Emotionally Healthy Children","Empowerment","Montessori Leadership Magazine Online Issue","Montessori Teachers","School Leadership","Video"],
-    tags: [],
-    videoIds: ["zsaBVgI36yA"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.0.6"][/et_pb_text][et_pb_text...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.0.6"][/et_pb_text][et_pb_text _builder_version="4.0.6"]This webcast with Tanya Ryskind invites participants to explore how languages of Empathy, Gratitude and Celebration, Personal Responsibility, Self-Improvement, Envisionment, and Empowering Collaboration can cultivate learning, social intelligence, executive function, and innovative problem-solving.
-
-Teachers who are fluent in these languages deliver the most engaging lessons, redirect behavior more fluidly, enjoy a cohesive teaching team, and experience fewer issues with parents.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "webcast-hatching-the-cosmic-egg",
@@ -12809,45 +10934,6 @@ For more information, visit: http://cgms.edu
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "the-role-we-play-to-end-systemic-and-internal-racism-what-questions-should-we-as",
-    title: `The Role We Play to End Systemic and Internal Racism  What Questions Should We Ask Ourselves?`,
-    author: `Tim Seldin`,
-    date: "2020-06-04",
-    categories: ["Emotionally Healthy Children","Empowerment","Family Resources","Free Reads","Montessori Curriculum","Montessori Teachers","Peace Education","School Leadership","Social Justice","Video"],
-    tags: [],
-    videoIds: ["lGThF2PKi1w"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" custom_padding="||54px|||"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text admin_label="video emb...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" custom_padding="||54px|||"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text admin_label="video embed code" _builder_version="4.4.7"]
-
-[/et_pb_text][et_pb_text _builder_version="4.4.7"]This was an initial conversation on issues of race and social justice with a panel that included Dr. Valaida Wise, Dr. Cindy Acker, Kristina Torres, Kathy Leitch, Jonathon Wolff and other, and a discussion about meaningful steps that Montessori educators and schools can and must take around the world to creating meaningful and enduring change. Click here to read our emailed statement on this issue. https://app.robly.com/archive?id=181e600a895e4488d7924fabc3e8abcd
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "colonizing-and-racism-the-beginning-of-education",
-    title: `Colonizing and Racism...the Beginning of Education`,
-    author: `caker`,
-    date: "2020-06-13",
-    categories: ["School Leadership","Social Justice","Video"],
-    tags: [],
-    videoIds: ["j5bxA4nB9Lo"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.4.7"][/et_pb_text][et_pb_text...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.4.7"][/et_pb_text][et_pb_text _builder_version="4.4.7"]Colonizing and Racism...the Beginning of Education 
-Join our Social Justice Task Force leader, Dr. Cindy Acker in addressing this essential topic through reflection, study, and inquiry.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "montessori-town-hall-our-role-in-ending-systemic-racism-july-17-2020",
-    title: `Montessori Town Hall Our Role in Ending Systemic Racism July 17, 2020`,
-    author: `caker`,
-    date: "2020-07-20",
-    categories: ["Montessori Teachers","Peace Education","School Leadership","School Resources","Social Justice","Video"],
-    tags: [],
-    videoIds: ["DTbnAIsdNSk"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.5.1" hover_enabled="0"][/et_p...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.5.1" hover_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.5.1" hover_enabled="0"]Our Role in Ending Systemic and Internal Racism...Focus on the Classroom
-Guided study and Dialogue Led by Dr. Cindy Acker[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "five-criteria-for-effective-discipline",
     title: `Five Criteria for Effective Discipline`,
     author: `Chip DeLorenzo M.Ed.`,
@@ -12870,17 +10956,6 @@ Guided study and Dialogue Led by Dr. Cindy Acker[/et_pb_text][/et_pb_column][/et
     videoIds: ["cH2FXjd5AGU"],
     excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.1" hover_enabled="0" sticky...`,
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.1" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.6.1" hover_enabled="0" sticky_enabled="0"]Our Role in Ending Systemic and Internal Racism...Guided study and Dialogue Led by Dr. Cindy Acker[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "parent-teacher-conferences-the-partnership-model",
-    title: `Parent-Teacher Conferences: The Partnership Model`,
-    author: `kathyleitch@montessori.org`,
-    date: "2020-10-07",
-    categories: ["Communication","Montessori Teachers","Parent-Teacher Communication","Video"],
-    tags: [],
-    videoIds: ["PWcEz1r9wDM"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.5" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.6.5" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.6.5" hover_enabled="0" sticky_enabled="0"]Preparing for conferences at this time of year can be stressful in the best of times. Current conditions warrant thoughtful and proactive preparation, clear messaging, and confident future-casting. We will discuss some keys to creating successful partnerships with parents while truly building relationships.  This will be an interactive session; we encourage questions, comments, and sharing of stories and resources. [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "montessori-town-hall-october-9th-2020",
@@ -13007,17 +11082,6 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.0" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.0" hover_enabled="0" sticky_enabled="0"]Should Parents Be Allowed to “Opt-out” of Black History Education for their Children? A discussion of recent news events and how they may affect schools.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "montessori-town-hall-meeting-february-17th-2021",
-    title: `Montessori Town Hall Meeting, February 17th, 2021`,
-    author: `caker`,
-    date: "2021-02-17",
-    categories: ["Black History","Communication","Social Justice","Town Hall","Video"],
-    tags: [],
-    videoIds: ["j5bxA4nB9Lo"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.4.7"][/et_pb_text][et_pb_text...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.4.7"][/et_pb_text][et_pb_text _builder_version="4.9.0" hover_enabled="0" sticky_enabled="0"]Should Parents Be Allowed to “Opt-out” of Black History Education for their Children? A discussion of recent news events and how they may affect schools.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "montessori-town-hall-meeting-april-14th-2021",
     title: `Montessori Town Hall Meeting, April 14th, 2021`,
     author: `caker`,
@@ -13063,28 +11127,6 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"]Our Role in Ending Systemic and Internal Racism, Led by Cindy Acker[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "the-power-of-creating-a-community-of-caring-adults",
-    title: `The Power of Creating a Community of Caring Adults`,
-    author: `kathyleitch@montessori.org`,
-    date: "2021-05-15",
-    categories: ["Communication","Parent-Teacher Communication","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["PrmYYeG_nI0"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"]The power of community that we create in Montessori classrooms provides the essential components of a healthy and supportive adult community. We will explore the many ways we can help our adult community (parents and teachers) to participate in a community based on respect, compassion, and professionalism. Implementing the “Montessori Way” throughout our school creates trusting relationships, clear expectations, and a family-friendly culture.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "the-power-of-creating-a-community-of-caring-adults-part-2",
-    title: `"The Power of Creating a Community of Caring Adults" PART 2`,
-    author: `kathyleitch@montessori.org`,
-    date: "2021-06-09",
-    categories: ["Communication","School Leadership","School Resources","Video"],
-    tags: ["Building School Community"],
-    videoIds: ["IvQUjV5iNWs"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"]The power of community that we create in Montessori classrooms provides the essential components of a healthy and supportive adult community. We will explore the many ways we can help our adult community (parents and teachers) to participate in a community based on respect, compassion, and professionalism. Implementing the “Montessori Way” throughout our school creates trusting relationships, clear expectations, and a family-friendly culture.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "montessori-town-hall-june-9th-2021",
     title: `Montessori Town Hall, June 9th, 2021`,
     author: `caker`,
@@ -13096,17 +11138,6 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.4" hover_enabled="0" sticky_enabled="0"]Our Role in Ending Systemic and Internal Racism[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "montessori-town-hall-meeting-june-23rd",
-    title: `Montessori Town Hall Meeting, June 23rd`,
-    author: `caker`,
-    date: "2021-06-23",
-    categories: ["School Leadership","Social Justice","Town Hall","Video"],
-    tags: [],
-    videoIds: ["kc2PHPVtx8k"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"]Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led by Dr. Cindy Acker[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "global-classrooms-the-future-of-montessori-e-learning-programs-2",
     title: `Global Classrooms: The Future of Montessori E-learning Programs`,
     author: `Tim Seldin`,
@@ -13116,17 +11147,6 @@ Our Role in Ending Systemic and Internal Racism… Guided study and Dialogue Led
     videoIds: ["maaoHp_PAGM"],
     excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky...`,
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"]Join Tim Seldin and Tanya Ryskind as they discuss the potential of Montessori e-learning programs as an alternative to our in-person, at-school options. What models are being created and offered? How does this option meet student/family needs? What is the best practice in e-learning and how does that correlate with essential Montessori pedagogical principles? Bring your questions and ideas as this will be an interactive session.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "montessori-leadership-forum-parents-as-partners-starting-fresh-in-a-similar-worl",
-    title: `Montessori Leadership Forum: Parents as Partners: Starting Fresh in a Similar World`,
-    author: `Renee DuChainey Farkes`,
-    date: "2021-08-18",
-    categories: ["Communication","Emotionally Healthy Children","Family Resources","Montessori Parenting","Parenting on the Same Page","School Resources","Video"],
-    tags: [],
-    videoIds: ["vvQSjAz9Rxw"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6"][et_pb_row _builder_version="4.0.6"][et_pb_column type="4_4" _builder_version="4.0.6"][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.9.7" hover_enabled="0" sticky_enabled="0"]We know that students learn best when Parents learn with them. Let’s ready ourselves for Parents to be our Partners as they too prepare to “come back to school.” Building Partnerships with Parents is our key to a success. Join us to review the value of Parents in Partnership, how to engage our parents as we prepare our school communities for success so we may lead during these continued unprecedented times.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "managing-the-elementary-montessori-curriculum-part-3",
@@ -13149,46 +11169,6 @@ This is the beginning of a new direction in your school. In this and the next we
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "managing-the-elementary-montessori-curriculum-part-2-2",
-    title: `Managing The Elementary Montessori Curriculum Part 2`,
-    author: `Michael Dorer`,
-    date: "2021-08-30",
-    categories: ["Communication","Lower Elementary (6-9)","Montessori Curriculum","Montessori Education","Montessori Teachers","School Leadership","Upper Elementary (9-12)","Webinars / MFA","Video"],
-    tags: [],
-    videoIds: ["-1ErZtG_Vk0"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="3.22" global_colors_info="{}"][et_pb_row _builder_version="3.25" background_size="initial" background_position="top_left" background_repeat="repeat" globa...`,
-    content: `[et_pb_section fb_built="1" _builder_version="3.22" global_colors_info="{}"][et_pb_row _builder_version="3.25" background_size="initial" background_position="top_left" background_repeat="repeat" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="3.25" custom_padding="|||" global_colors_info="{}" custom_padding__hover="|||"][et_pb_text _builder_version="4.11.2" background_size="initial" background_position="top_left" background_repeat="repeat" custom_padding="2px||||false|false" global_colors_info="{}"]July 13th, 2016 This week Dr. Michael Dorer continued to explore an important topic for elementary teachers, How Can You Teach it All?
-
-Many Montessorians struggle with the immensity of the whole curriculum, especially at the elementary level. There just seems to be so much. At the same time, they may grapple with how lessons should be planned, presented, completed, and followed up. These issues can actually be approached with a careful planning procedure, along with a healthy serving of gumption.
-
-Join Michael as we explore lesson planning, curriculum and managing follow-up work. This is the beginning of a new direction in your school.
-
-In this and the next webinar, we will explore the basics of lesson and curriculum management. This will serve as an introduction.
-
-[/et_pb_text][et_pb_text admin_label="Video" _builder_version="4.11.2" _module_preset="default" global_colors_info="{}"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "managing-the-elementary-montessori-curriculum-part-1",
-    title: `Managing The Elementary Montessori Curriculum Part 1`,
-    author: `Michael Dorer`,
-    date: "2021-08-30",
-    categories: ["Educational Program Coordination","Lower Elementary (6-9)","Montessori Curriculum","Montessori Education","Montessori Teachers","School Leadership","Upper Elementary (9-12)","Video"],
-    tags: [],
-    videoIds: ["d4Wx9U9nxA0"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="3.22" global_colors_info="{}"][et_pb_row _builder_version="3.25" background_size="initial" background_position="top_left" background_repeat="repeat" globa...`,
-    content: `[et_pb_section fb_built="1" _builder_version="3.22" global_colors_info="{}"][et_pb_row _builder_version="3.25" background_size="initial" background_position="top_left" background_repeat="repeat" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="3.25" custom_padding="|||" global_colors_info="{}" custom_padding__hover="|||"][et_pb_text _builder_version="4.11.2" background_size="initial" background_position="top_left" background_repeat="repeat" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]July 13th, 2016 This week Dr. Michael Dorer continued to explore an important topic for elementary teachers, How Can You Teach it All?
-
-Many Montessorians struggle with the immensity of the whole curriculum, especially at the elementary level. There just seems to be so much. At the same time, they may grapple with how lessons should be planned, presented, completed, and followed up. These issues can actually be approached with a careful planning procedure, along with a healthy serving of gumption.
-
-Join Michael as we explore lesson planning, curriculum and managing follow-up work. This is the beginning of a new direction in your school.
-
-In this and the next webinar, we will explore the basics of lesson and curriculum management. This will serve as an introduction.
-
-[/et_pb_text][et_pb_text _builder_version="4.11.2" _module_preset="default" admin_label="Video" hover_enabled="0" sticky_enabled="0"][/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "lasting-learning",
     title: `Lasting Learning`,
     author: `Michael Dorer`,
@@ -13208,78 +11188,6 @@ Download notes from Michael Dorer
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "personality-type-communication-in-schools",
-    title: `Personality Type & Communication in Schools`,
-    author: `Tim Seldin`,
-    date: "2021-09-08",
-    categories: ["Montessori students","Montessori Teachers","School Leadership","Video"],
-    tags: ["Personality Types"],
-    videoIds: ["W51MApPqGRA"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" _module_preset="default" admin_label="Video" hover_enabled="0" sticky_enabled="0"]
-
-[/et_pb_text][et_pb_text _builder_version="4.11.2" custom_padding="2px||||false|false" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]Download PDF File
-
-On September 30, 2015 we were joined by Carly Toomey.
-
-Carly Toomey was Montessori Lead Teacher for 6 years, and an Executive Board Member at Lexington Montessori near Boston. She is also the co-founder of Type-Coach which offers a suite of tools focused on the practical application of personality type. Like the MBTI (Myers Briggs Type Indicator), the Type-Coach programs are based on the Jungian model of Personality Type.
-
-We discussed how the Type-Coach online platform of tools is being used in schools to improve the dynamics on teaching teams as well as help students maximize their potential by understanding their own communication and work style. We are thrilled to report that Carly has made all of these tools available to Montessori school leaders and 3 other administrators of your choosing. You are encouraged to complete the Type-Coach Verifier prior to the webinar.
-
-You can follow the instructions below to access the full Type-Coach platform:
-
-The Type-Coach Verifier: An interactive online experience to discover and verify your best fit personality type and receive a 5 page report with tips for maximizing your natural strengths, minimizing your challenge areas, info about your stress responses, and more.
-
-Coaching Videos for YOUR type: Engaging 5 minute video animations covering each of the Top 5 Ways to Maximize Your Career Potential given your type.
-
-Type-to-Type Tool: An interactive type chart providing customized top ten tips for working with any type based on the combo of YOUR type and THEIR type. As an option, this chart can auto populate with the names of everyone in a group (i.e. your faculty) so that for example a teacher can click on the name of their co-teacher and access top tips for communicating with them based on their own type and their co-teacher's type.
-
-Online Type-Coach Course: This course teaches how to,
-
-• Identify type preferences in others and,
-
-• how to adjust your communication accordingly for maximum impact and collaboration.
-
-Instructions for Accessing Type-Coach Tools:
-
-Go to: www.type-coach.com, click on ?sign up? (top right)
-
-Create a password
-
-Enter the code:1G9Z64
-
-When you come back to the site, just click on ?login? (top right) to pick up where you left off.
-
-Download your report at the end of the Verifier.
-
-Now you can access:
-
-Coaching Videos for YOUR type (blue icon), and
-
-The Type-to-Type tool (orange icon)
-
-The Online Course (red icon)
-
-Contact info@type-coach.com with any technical questions.
-
- 
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "individualized-formative-student-assessment-for-montessori",
-    title: `Individualized Formative Student Assessment for Montessori`,
-    author: `Tim Seldin`,
-    date: "2021-09-11",
-    categories: ["Montessori Teachers","School Leadership","Video"],
-    tags: [],
-    videoIds: ["--mFy17y-Fs"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" _module_preset="default" custom_padding="2px||||false|false" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]On August 14, 2014, we explored an approach to individualized formative assessment of student progress that offers Montessori schools a meaningful alternative to standardized achievement testing; a solution that we feel is more consistent with Montessori values. Interested Montessori schools are invited to participate in a consortium of schools to launch the ongoing formative assessment program. If student assessment is an issue at your school, you may find this discussion with national specialists in formative assessment, Stephanie Day, from Scantron Global Scholars to be quite interesting. There is an echo as Stephanie speaks, but the participants found that they could clearly understand her.
-
-[/et_pb_text][et_pb_text _builder_version="4.11.2" _module_preset="default" admin_label="Video" hover_enabled="0" sticky_enabled="0"][/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "fully-implemented-public-early-childhood-montessori-programs",
     title: `Fully Implemented Public Early Childhood Montessori Programs`,
     author: `Tim Seldin`,
@@ -13293,23 +11201,6 @@ Contact info@type-coach.com with any technical questions.
  
 
 [/et_pb_text][et_pb_text _builder_version="4.11.2" _module_preset="default" admin_label="Video" hover_enabled="0" sticky_enabled="0"]
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "the-power-of-blended-residential-and-distance-learning",
-    title: `The Power of Blended Residential and Distance Learning`,
-    author: `KittyBravo`,
-    date: "2021-09-12",
-    categories: ["Montessori Education","Montessori Teachers","Online Learning","School Leadership","Video"],
-    tags: [],
-    videoIds: ["BdrdQYdr7gU"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" _module_preset="default" custom_padding="3px||||false|false" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]February 5 2015 - Kitty Bravo and Tim Seldin
-
-Blended learning combines high quality face-to-face and distance learning, along with a year of supervised practicum teaching to create a rigorous, thorough, and very effective teacher education experience that is more convenient and practical for a wide range of prospective Montessori teachers. We will explore how the approach is organized.
-
-[/et_pb_text][et_pb_text admin_label="Video" _builder_version="4.11.2" _module_preset="default" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]
 
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
@@ -13358,17 +11249,6 @@ Blended learning combines high quality face-to-face and distance learning, along
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]Join master teacher and adult educator, Cheryl Allen and Jonathan Wolff, international consultant, and leadership coach, for an overview of the ideas behind their course, Rediscover the Power of Grace and Courtesy: Six Essentials That Enhance Learning and Social Intelligence. This “next-generation” look at the Exercises of Grace and Courtesy focusing on these six essential components of Grace and Courtesy will benefit all schools and classrooms by empowering all members of the community.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "parent-teacher-conferences-the-partnership-model-2",
-    title: `Parent-Teacher Conferences: The Partnership Model`,
-    author: `kathyleitch@montessori.org`,
-    date: "2021-10-13",
-    categories: ["Communication","Montessori Teachers","Parent-Teacher Communication","School Resources","Video"],
-    tags: ["Parent-Teacher Conferences"],
-    videoIds: ["m6zqkdhZSw0"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.11.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]Preparing for conferences at this time of year can be stressful in the best of times. Current conditions warrant thoughtful and proactive preparation, clear messaging, and confident future-casting. We will discuss some keys to creating successful partnerships with parents while truly building relationships.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "montessori-town-hall-meeting-december-1st-2021",
     title: `Montessori Town Hall Meeting: December 1st, 2021`,
     author: `caker`,
@@ -13406,31 +11286,6 @@ Even if your child won’t go to a Montessori school, a Montessori home can stil
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "hope-begins-with-happiness",
-    title: `Hope Begins with Happiness`,
-    author: `kathyleitch@montessori.org`,
-    date: "2022-01-05",
-    categories: ["Communication","Covid","School Leadership","School Resources","Start of School Year","Video"],
-    tags: [],
-    videoIds: ["3fL2BNiXe_o"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_cont...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.14.4" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.4" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"]Join Kathy Leitch and our Montessori Foundation panel as we explore our hopes for 2022. Using the concepts of happiness, opportunity, purpose, and energy we will build a practice to start 2021 with hope. This will be an interactive session; we encourage questions, comments, and sharing of stories and resources.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "trust-me-cultivating-the-key-ingredient-in-learning-and-leadership",
-    title: `"Trust me" Cultivating the key ingredient in learning and leadership`,
-    author: `Jonathan Wolff`,
-    date: "2022-01-19",
-    categories: ["Communication","Montessori Teachers","School Leadership","School Resources","Video"],
-    tags: ["Trust"],
-    videoIds: ["8xBcoo50Ieg"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_cont...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.14.6" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.6" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"]Learning, teaching, and leadership demand something far more essential than the clear transmission of information and ideas. Their success largely depends upon the degree of relational safety and wellbeing felt by the participating parties -  in short, by their lived level of trust. In organizations, everywhere – including Montessori learning communities – one can observe learning, instruction, and leadership that are being diminished or have been damaged, by breaches of trust. 
-
-Dr. Stacey MacKinnon and Jonathan Wolff inquiry on how trust is cultivated in a Montessori learning community – among students, staff, parents, and administration – as well as how it can be regained when it has been lost. Whether you are a Montessori guide, instructional leader, head of school, or teacher educator, “Trust Me.” is designed to help you establish a culture of trust in your classroom and school community, as well as heal hurts and rifts where trust has been compromised. 
-"[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "macte-we-re-all-about-accreditation",
     title: `MACTE: We're all about Accreditation!`,
     author: `cpinkerton`,
@@ -13453,17 +11308,6 @@ Dr. Stacey MacKinnon and Jonathan Wolff inquiry on how trust is cultivated in a 
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}"][et_pb_row _builder_version="4.0.6" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}"][et_pb_text _builder_version="4.14.7" global_colors_info="{}"][/et_pb_text][et_pb_text _builder_version="4.14.7" global_colors_info="{}"]Our Role in Ending Systemic and Internal Racism Guided study and Dialogue Led by Dr. Cindy Acker[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "let-s-bring-back-the-love",
-    title: `"Let's Bring Back the Love!"`,
-    author: `Renee DuChainey Farkes`,
-    date: "2022-02-16",
-    categories: ["Communication","Faculty","School Resources","Video"],
-    tags: [],
-    videoIds: ["IgBxReCRrtQ"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_cont...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"]Join Renee Duchainey-Farkas leads our discussion on moving forward with new perspectives. Let's support each other to elevate our aspirations as we get back to our mission and the work we love. It's time![/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "montessori-town-hall-march-2nd-2022",
     title: `Montessori Town Hall, March 2nd, 2022`,
     author: `caker`,
@@ -13473,28 +11317,6 @@ Dr. Stacey MacKinnon and Jonathan Wolff inquiry on how trust is cultivated in a 
     videoIds: ["_ziDq6n9DT0"],
     excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_cont...`,
     content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"]Our Role in Ending Systemic and Internal Racism Guided study and Dialogue, led by Dr. Cindy Acker[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "nature-makes-differences-society-makes-handicaps",
-    title: `Nature Makes Differences, Society Makes Handicaps`,
-    author: `kathyleitch@montessori.org`,
-    date: "2022-03-09",
-    categories: ["School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["Ux4x6YaJ6RU"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_cont...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.0.6" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.14.8" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"]In this inspiring talk, Dr. Dubovoy will share her thoughts on what it really means to be inclusive and how our approach truly matters. She will also discuss our shared responsibility to respond as best as possible to the wide array of challenging situations and psychological stress that children are experiencing at this moment. Her main theme will be to focus on the children's strengths rather than the challenges, and to always keep in mind that children's lives and their personality are highly determined by the attitudes of the adults around them.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "budgeting-for-your-school-in-a-time-of-rising-costs",
-    title: `Budgeting for your School in a Time of Rising Costs`,
-    author: `Marc Seldin`,
-    date: "2022-03-30",
-    categories: ["Finances","Re-enrollment","Recruitment &amp; Admissions","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["GZnYSLVngW0"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.15" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.15" global_colors_info="{}" theme_builder_area="post_conten...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.15" global_colors_info="{}" theme_builder_area="post_content"][et_pb_row _builder_version="4.15" global_colors_info="{}" theme_builder_area="post_content"][et_pb_column type="4_4" _builder_version="4.15" global_colors_info="{}" theme_builder_area="post_content"][et_pb_text _builder_version="4.15.1" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.15.1" hover_enabled="0" global_colors_info="{}" theme_builder_area="post_content" sticky_enabled="0"]Currently in the United States and in many places around the world costs are on the rise. This week, Tim and Marc Seldin will open a conversation on how schools can re-examine their projected budget for the coming school year and prepare for rising costs., With a tight job market, we can anticipate pressure on schools to increase salaries and benefits, even though tuition is probably already set for the coming school year. This will create new challenges in balancing our schools budget.[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
     slug: "montessori-town-hall-april-6th-2022",
@@ -13508,19 +11330,6 @@ Dr. Stacey MacKinnon and Jonathan Wolff inquiry on how trust is cultivated in a 
     content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"]THI and Parental Rights in Education- The Florida Bill: Don't Say Gay and The Rights of the Child in Montessori Education.
 
 How do Florida schools and educators/guides respond to changing legislation that restricts developmental curriculum and cultural understanding?
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "the-child-is-the-teacher-a-life-of-maria-montessori",
-    title: `The Child Is the Teacher: A Life of Maria Montessori`,
-    author: `cridestefano@gmail.com`,
-    date: "2022-05-05",
-    categories: ["Maria Montessori","Research","School Leadership","School Resources","Video"],
-    tags: ["Biography"],
-    videoIds: ["fFgC0O_fi48"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.16.0" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.16.0" global_colors_info="{}"]Discussion with author, Cristina De Stefano.
 
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
@@ -13577,32 +11386,6 @@ How do Florida schools and educators/guides respond to changing legislation that
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
   {
-    slug: "two-part-series-on-the-suprising-power-of-parents-in-partnerships-at-our-schools",
-    title: `TWO PART SERIES ON THE SUPRISING POWER OF PARENTS IN PARTNERSHIPS AT OUR SCHOOLS`,
-    author: `Renee DuChainey Farkes`,
-    date: "2022-08-10",
-    categories: ["Communication","Parent Education","Parent-Teacher Communication","Recruitment &amp; Admissions","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["K9W3PjYn104"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.17.6" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]What Makes People Work Better and Harder and Stay Onboard Longer . . . In a recent article in Harvard Business Review, entitled, “Designing Work That People Love,” author Marcus Buckingham proposes that, “Creating a place where all people can find love in their work means incorporating three principles: People are the point. Employees are the most important stakeholders in your organization. One size fits one. Each of your employees is a unique person with distinct loves, interests, and skills. In trust we grow. For employees to discover and contribute their loves at work, leaders must explicitly make trust the foundation of all practices and policies.” In this period of a critical Montessori teacher shortage, unprecedented turnover, and challenges with retention (especially among Assistants) there are ways to make the everyday work life of your faculty and staff more meaningful, more energizing, and more engaging. Join Jonathan Wolff for a discussion on what makes people love their work, work better and harder, and stay with you longer.
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "two-part-series-on-the-suprising-power-of-parents-in-partnerships-at-our-schools-2",
-    title: `TWO PART SERIES ON THE SUPRISING POWER OF PARENTS IN PARTNERSHIPS AT OUR SCHOOLS`,
-    author: `Renee DuChainey Farkes`,
-    date: "2022-08-17",
-    categories: ["Communication","Parent Education","Parent-Teacher Communication","Recruitment &amp; Admissions","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["FfAKSgfwqDE"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.17.6" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]What Makes People Work Better and Harder and Stay Onboard Longer . . . In a recent article in Harvard Business Review, entitled, “Designing Work That People Love,” author Marcus Buckingham proposes that, “Creating a place where all people can find love in their work means incorporating three principles: People are the point. Employees are the most important stakeholders in your organization. One size fits one. Each of your employees is a unique person with distinct loves, interests, and skills. In trust we grow. For employees to discover and contribute their loves at work, leaders must explicitly make trust the foundation of all practices and policies.” In this period of a critical Montessori teacher shortage, unprecedented turnover, and challenges with retention (especially among Assistants) there are ways to make the everyday work life of your faculty and staff more meaningful, more energizing, and more engaging. Join Jonathan Wolff for a discussion on what makes people love their work, work better and harder, and stay with you longer.
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
     slug: "montessori-town-hall-november-16th-2022",
     title: `Montessori Town Hall, November 16th, 2022`,
     author: `caker`,
@@ -13653,88 +11436,6 @@ How do Florida schools and educators/guides respond to changing legislation that
     videoIds: ["K6pIdFbfRrc"],
     excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
     content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.20.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.20.2" global_colors_info="{}"]Join us as we discuss the current/pending laws impacting how and what we teach. As other states begin to learn about pending restrictions, legislation, or concerns regarding curriculum taught in schools, teachers, and administrators must determine how they navigate the curriculum taught in the classroom. Recognizing that schools must prepare for the changing legislative landscape, this is a webinar for everyone.
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "momentum-montessori-a-life-in-motion-with-elizabeth-slade",
-    title: `Momentum: Montessori, a Life in Motion with Elizabeth Slade`,
-    author: `eslade@montessori-action.org`,
-    date: "2024-05-22",
-    categories: ["Communication","School Leadership","School Resources","Video"],
-    tags: ["author"],
-    videoIds: ["Y_gHT58uIwk"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.23.4" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]Momentum: Montessori, a Life in Motion is a historical fiction novel offering a glimpse into the life of a remarkable woman, Dr. Maria Montessori. Taking its bones from a real diary written by Dr. Montessori in 1913 chronicling her first voyage to America, Momentum is a fictionalized retelling of that same voyage. Told from Maria’s perspective and written directly to her son to illuminate a complicated inheritance, the novel explores how she came to send her son—born out of wedlock in 1898—to be raised by others while she concentrated on her work. Join us for a conversation with Elizabeth Slade who is also the author of Montessori in Action: Building Resilient Montessori Schools, a non-fiction book, and Rest Stops, a novel about two public Montessori students that won the Next Generation Indie Book Award in 2013.
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "imc-town-hall",
-    title: `IMC Town Hall`,
-    author: `Kathy Leitch`,
-    date: "2025-03-19",
-    categories: ["Communication","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["_kiw7CvNsxA"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.25.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]We invite you to a special session with IMC leadership to discuss our exciting plans and what it means for you and your school. This meeting is an opportunity to hear directly from our team about what this means for your school and the Montessori community. We are engaged in an important evolution in IMC’s structure and mission to better serve our members.
-
-Join us to gain insights, ask questions, and explore how this transition supports your continued growth and excellence. Your questions are important to us, and we are here to address them.
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "great-governance-supports-great-schools-the-important-role-of-boards-in-montesso",
-    title: `Great Governance Supports Great Schools: The Important role of Boards in Montessori Schools`,
-    author: `Renee DuChainey Farkes`,
-    date: "2025-03-26",
-    categories: ["Boards","Communication","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["QbFdtRMceVA"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.25.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]Join us to talk about how an effective and engaged Board can impact the success of a school. We will examine the Board's role (and not!), and how it should work in partnership with the Head of School. We will specifically define the "School's work" and the "Board's work" as well as cover principles of good governance including issues, structures and the importance of alignment.
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "shaping-journeys-rites-of-passage-in-schools",
-    title: `"Shaping Journeys: Rites of Passage in Schools"`,
-    author: `James Moudry`,
-    date: "2025-04-02",
-    categories: ["Communication","School Identity","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["Fv_L_Wbpf3s"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.25.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]This webinar will explore meaningful traditions that shape students' journeys. Come to learn and share about rituals that set your school apart. We'll discuss how children, staff, parents, and trustees can collaborate to create impactful milestones that honor growth and foster community. Don’t miss this opportunity to enrich your school culture!
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "montessori-s-schedule-of-the-day",
-    title: `Montessori’s schedule of the day`,
-    author: `Jana Morgan Herman`,
-    date: "2025-04-23",
-    categories: ["Communication","Video"],
-    tags: ["schedule"],
-    videoIds: ["tyLmsKGCmhE"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.25.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]Join us to explore the vital connection between the work cycle and the transformative power of outdoor and movement activities in a Montessori environment. We'll delve into how to align your daily schedule with Montessori's vision, emphasizing the critical role of outdoor experiences for the mental, physical, and spiritual well-being of both children and adults, ensuring your practice resonates with her foundational principles.
-
-[/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
-  },
-  {
-    slug: "imc-town-hall-2",
-    title: `IMC Town Hall`,
-    author: `Kathy Leitch`,
-    date: "2025-04-24",
-    categories: ["Communication","School Leadership","School Resources","Video"],
-    tags: [],
-    videoIds: ["lLIf2RpMf78"],
-    excerpt: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_in...`,
-    content: `[et_pb_section fb_built="1" _builder_version="4.16" global_colors_info="{}"][et_pb_row _builder_version="4.16" global_colors_info="{}"][et_pb_column type="4_4" _builder_version="4.16" global_colors_info="{}"][et_pb_text _builder_version="4.25.2" hover_enabled="0" global_colors_info="{}" sticky_enabled="0"][/et_pb_text][et_pb_text _builder_version="4.17.6" global_colors_info="{}"]We invite you to a special session with IMC leadership to discuss our exciting plans and what it means for you and your school. This meeting is an opportunity to hear directly from our team about what this means for your school and the Montessori community. We are engaged in an important evolution in IMC’s structure and mission to serve our members better.
-
-Join us to gain insights, ask questions, and explore how this transition supports your continued growth and excellence. Your questions are important to us, and we are here to address them.
 
 [/et_pb_text][/et_pb_column][/et_pb_row][/et_pb_section]`,
   },
