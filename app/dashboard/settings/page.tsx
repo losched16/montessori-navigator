@@ -37,7 +37,9 @@ const ENV_OPTIONS = [
   { value: 'not_yet_enrolled', label: 'Not yet enrolled' },
 ]
 
-type SettingsTab = 'profile' | 'children' | 'password' | 'data' | 'danger'
+import type { FamilyMember } from '@/lib/supabase'
+
+type SettingsTab = 'profile' | 'children' | 'family' | 'password' | 'data' | 'danger'
 
 export default function SettingsPage() {
   const [tab, setTab] = useState<SettingsTab>('profile')
@@ -69,6 +71,18 @@ export default function SettingsPage() {
   const [passwordSaving, setPasswordSaving] = useState(false)
   const [passwordMessage, setPasswordMessage] = useState('')
 
+  // Family state
+  const [familyId, setFamilyId] = useState<string | null>(null)
+  const [familyName, setFamilyName] = useState('')
+  const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([])
+  const [inviteEmail, setInviteEmail] = useState('')
+  const [inviteRole, setInviteRole] = useState<'parent' | 'guardian' | 'caregiver'>('parent')
+  const [invitePermissions, setInvitePermissions] = useState<'full' | 'read_only'>('full')
+  const [inviting, setInviting] = useState(false)
+  const [inviteMessage, setInviteMessage] = useState('')
+  const [pendingInvites, setPendingInvites] = useState<any[]>([])
+  const [userRole, setUserRole] = useState<string>('primary')
+
   // Data/danger state
   const [exporting, setExporting] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState('')
@@ -96,12 +110,53 @@ export default function SettingsPage() {
         setEducationContext(parent.education_context || '')
         setCommStyle(parent.communication_style || '')
 
-        const { data: kids } = await supabase
-          .from('children')
-          .select('*')
+        // Load family membership
+        const { data: membership } = await supabase
+          .from('family_members')
+          .select('family_id, role, families(name)')
           .eq('parent_id', parent.id)
-          .order('created_at')
-        setChildren(kids || [])
+          .limit(1)
+          .single()
+
+        if (membership) {
+          setFamilyId(membership.family_id)
+          setUserRole(membership.role)
+          setFamilyName((membership as any).families?.name || '')
+
+          // Load children via family
+          const { data: kids } = await supabase
+            .from('children')
+            .select('*')
+            .eq('family_id', membership.family_id)
+            .order('created_at')
+          setChildren(kids || [])
+
+          // Load family members
+          const { data: members } = await supabase
+            .from('family_members')
+            .select('*, parents(display_name, email)')
+            .eq('family_id', membership.family_id)
+            .order('created_at')
+          setFamilyMembers((members || []).map((m: any) => ({ ...m, parent: m.parents })))
+
+          // Load pending invitations
+          const { data: invites } = await supabase
+            .from('invitations')
+            .select('*')
+            .eq('family_id', membership.family_id)
+            .eq('type', 'co_parent')
+            .eq('status', 'pending')
+            .order('created_at', { ascending: false })
+          setPendingInvites(invites || [])
+        } else {
+          // Fallback: load by parent_id
+          const { data: kids } = await supabase
+            .from('children')
+            .select('*')
+            .eq('parent_id', parent.id)
+            .order('created_at')
+          setChildren(kids || [])
+        }
       }
     }
     load()
@@ -171,7 +226,7 @@ export default function SettingsPage() {
     } else {
       const { data: newChild } = await supabase
         .from('children')
-        .insert({ ...childData, parent_id: parentId })
+        .insert({ ...childData, parent_id: parentId, family_id: familyId })
         .select()
         .single()
 
@@ -193,11 +248,9 @@ export default function SettingsPage() {
     }
 
     // Reload children
-    const { data: kids } = await supabase
-      .from('children')
-      .select('*')
-      .eq('parent_id', parentId)
-      .order('created_at')
+    const { data: kids } = familyId
+      ? await supabase.from('children').select('*').eq('family_id', familyId).order('created_at')
+      : await supabase.from('children').select('*').eq('parent_id', parentId).order('created_at')
     setChildren(kids || [])
 
     setEditingChild(null)
@@ -339,9 +392,73 @@ export default function SettingsPage() {
     }
   }
 
+  // ── Family / Co-parent invites ──
+
+  const inviteCoParent = async () => {
+    if (!parentId || !familyId || !inviteEmail.trim()) return
+    setInviting(true)
+    setInviteMessage('')
+
+    try {
+      const res = await fetch('/api/family/invite-coparent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: inviteEmail.trim(),
+          familyId,
+          role: inviteRole,
+          permissions: invitePermissions,
+        }),
+      })
+
+      const data = await res.json()
+      if (!res.ok) {
+        setInviteMessage(data.error || 'Failed to send invitation')
+      } else {
+        setInviteMessage('Invitation sent!')
+        setInviteEmail('')
+        // Reload pending invites
+        const { data: invites } = await supabase
+          .from('invitations')
+          .select('*')
+          .eq('family_id', familyId)
+          .eq('type', 'co_parent')
+          .eq('status', 'pending')
+          .order('created_at', { ascending: false })
+        setPendingInvites(invites || [])
+      }
+    } catch {
+      setInviteMessage('Failed to send invitation')
+    }
+    setInviting(false)
+  }
+
+  const revokeInvite = async (inviteId: string) => {
+    await supabase
+      .from('invitations')
+      .update({ status: 'revoked' })
+      .eq('id', inviteId)
+    setPendingInvites(prev => prev.filter(i => i.id !== inviteId))
+  }
+
+  const updateMemberPermissions = async (memberId: string, permissions: 'full' | 'read_only') => {
+    await supabase
+      .from('family_members')
+      .update({ permissions })
+      .eq('id', memberId)
+    setFamilyMembers(prev => prev.map(m => m.id === memberId ? { ...m, permissions } : m))
+  }
+
+  const removeMember = async (memberId: string, name: string) => {
+    if (!confirm(`Remove ${name} from your family? They will lose access to all shared children and data.`)) return
+    await supabase.from('family_members').delete().eq('id', memberId)
+    setFamilyMembers(prev => prev.filter(m => m.id !== memberId))
+  }
+
   const tabs: Array<{ key: SettingsTab; label: string; icon: string }> = [
     { key: 'profile', label: 'Profile', icon: '👤' },
     { key: 'children', label: 'Children', icon: '🌱' },
+    { key: 'family', label: 'Family', icon: '👨‍👩‍👧' },
     { key: 'password', label: 'Password', icon: '🔒' },
     { key: 'data', label: 'Your Data', icon: '📦' },
     { key: 'danger', label: 'Account', icon: '⚠️' },
@@ -556,6 +673,140 @@ export default function SettingsPage() {
                     Cancel
                   </button>
                 </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ Family ═══ */}
+      {tab === 'family' && (
+        <div className="space-y-4">
+          {/* Family Members */}
+          <div className="bg-white border border-gray-100 rounded-xl p-6">
+            <h2 className="font-semibold text-navy-600 mb-4">Family Members</h2>
+            <p className="text-sm text-navy-600 mb-4">
+              Everyone in your family can see your children&apos;s progress. You can control whether they have full access or read-only.
+            </p>
+            <div className="space-y-3">
+              {familyMembers.map(member => (
+                <div key={member.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div>
+                    <div className="font-medium text-navy-600 text-sm">
+                      {member.parent?.display_name || member.parent?.email || 'Unknown'}
+                      {member.role === 'primary' && (
+                        <span className="ml-2 text-xs bg-warm-100 text-warm-700 px-2 py-0.5 rounded-full">Primary</span>
+                      )}
+                    </div>
+                    <div className="text-xs text-navy-600">
+                      {member.parent?.email} · {member.role} · {member.permissions === 'full' ? 'Full access' : 'Read only'}
+                    </div>
+                  </div>
+                  {userRole === 'primary' && member.role !== 'primary' && (
+                    <div className="flex items-center gap-2">
+                      <select
+                        value={member.permissions}
+                        onChange={e => updateMemberPermissions(member.id, e.target.value as 'full' | 'read_only')}
+                        className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+                      >
+                        <option value="full">Full access</option>
+                        <option value="read_only">Read only</option>
+                      </select>
+                      <button
+                        onClick={() => removeMember(member.id, member.parent?.display_name || 'this member')}
+                        className="text-xs text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Invite Co-Parent */}
+          {userRole === 'primary' && (
+            <div className="bg-white border border-gray-100 rounded-xl p-6">
+              <h2 className="font-semibold text-navy-600 mb-2">Invite a Co-Parent or Guardian</h2>
+              <p className="text-sm text-navy-600 mb-4">
+                Send an invitation so another parent or guardian can access your family&apos;s data.
+              </p>
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-sm font-medium text-navy-600 mb-1">Email address</label>
+                  <input
+                    type="email"
+                    value={inviteEmail}
+                    onChange={e => setInviteEmail(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+                    placeholder="partner@email.com"
+                  />
+                </div>
+                <div className="flex gap-3">
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-navy-600 mb-1">Role</label>
+                    <select
+                      value={inviteRole}
+                      onChange={e => setInviteRole(e.target.value as any)}
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+                    >
+                      <option value="parent">Parent</option>
+                      <option value="guardian">Guardian</option>
+                      <option value="caregiver">Caregiver</option>
+                    </select>
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-navy-600 mb-1">Permissions</label>
+                    <select
+                      value={invitePermissions}
+                      onChange={e => setInvitePermissions(e.target.value as any)}
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+                    >
+                      <option value="full">Full access</option>
+                      <option value="read_only">Read only</option>
+                    </select>
+                  </div>
+                </div>
+                {inviteMessage && (
+                  <p className={`text-sm ${inviteMessage.includes('sent') ? 'text-warm-700' : 'text-red-500'}`}>
+                    {inviteMessage}
+                  </p>
+                )}
+                <button
+                  onClick={inviteCoParent}
+                  disabled={inviting || !inviteEmail.trim()}
+                  className="w-full py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-40"
+                >
+                  {inviting ? 'Sending...' : 'Send Invitation'}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Pending Invitations */}
+          {pendingInvites.length > 0 && (
+            <div className="bg-white border border-gray-100 rounded-xl p-6">
+              <h2 className="font-semibold text-navy-600 mb-4">Pending Invitations</h2>
+              <div className="space-y-2">
+                {pendingInvites.map(invite => (
+                  <div key={invite.id} className="flex items-center justify-between p-3 bg-amber-50 border border-amber-100 rounded-lg">
+                    <div>
+                      <div className="text-sm font-medium text-navy-600">{invite.email}</div>
+                      <div className="text-xs text-navy-600">
+                        Sent {new Date(invite.created_at).toLocaleDateString()} · Expires {new Date(invite.expires_at).toLocaleDateString()}
+                      </div>
+                    </div>
+                    {userRole === 'primary' && (
+                      <button
+                        onClick={() => revokeInvite(invite.id)}
+                        className="text-xs text-red-500 hover:text-red-700 px-2 py-1"
+                      >
+                        Revoke
+                      </button>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
           )}

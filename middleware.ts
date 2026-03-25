@@ -44,9 +44,23 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Protect school admin routes
+  if (request.nextUrl.pathname.startsWith('/school')) {
+    if (!session) {
+      return NextResponse.redirect(new URL('/auth/login', request.url))
+    }
+  }
+
+  // Allow invite and join pages for unauthenticated users (no redirect needed)
+
   // Redirect logged-in users away from auth pages
   if (request.nextUrl.pathname.startsWith('/auth')) {
     if (session) {
+      // If there's a next param (e.g., from invite), redirect there instead
+      const next = request.nextUrl.searchParams.get('next')
+      if (next) {
+        return NextResponse.redirect(new URL(next, request.url))
+      }
       return NextResponse.redirect(new URL('/dashboard', request.url))
     }
   }

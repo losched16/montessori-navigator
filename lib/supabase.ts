@@ -29,6 +29,7 @@ export interface Parent {
 export interface Child {
   id: string
   parent_id: string
+  family_id: string
   name: string
   date_of_birth: string | null
   current_environment: string | null
@@ -36,6 +37,67 @@ export interface Child {
   notes: string | null
   profile_photo_url: string | null
   created_at: string
+}
+
+export interface Family {
+  id: string
+  name: string | null
+  created_at: string
+}
+
+export interface FamilyMember {
+  id: string
+  family_id: string
+  parent_id: string
+  role: 'primary' | 'parent' | 'guardian' | 'caregiver'
+  permissions: 'full' | 'read_only'
+  created_at: string
+  parent?: Parent
+}
+
+export interface Invitation {
+  id: string
+  type: 'school_family' | 'co_parent'
+  token: string
+  school_id: string | null
+  family_id: string | null
+  invited_by: string | null
+  email: string | null
+  status: 'pending' | 'accepted' | 'expired' | 'revoked'
+  expires_at: string
+  accepted_at: string | null
+  accepted_by: string | null
+  created_at: string
+}
+
+export interface School {
+  id: string
+  name: string
+  slug: string
+  admin_user_id: string
+  address: string | null
+  website: string | null
+  phone: string | null
+  credentials: string | null
+  logo_url: string | null
+  settings: Record<string, any>
+  created_at: string
+}
+
+export interface SchoolStaff {
+  id: string
+  school_id: string
+  user_id: string
+  role: 'admin' | 'staff' | 'viewer'
+  created_at: string
+}
+
+export interface SchoolFamily {
+  id: string
+  school_id: string
+  family_id: string
+  status: 'active' | 'inactive'
+  joined_at: string
 }
 
 export type CurriculumArea = 
@@ -251,6 +313,50 @@ export async function getCurrentParent(supabase: any): Promise<Parent | null> {
 }
 
 // ================================================
+// HELPER: Get current user's primary family
+// ================================================
+
+export async function getCurrentFamily(supabase: any, parentId: string): Promise<{ family: Family; membership: FamilyMember } | null> {
+  const { data } = await supabase
+    .from('family_members')
+    .select('*, families(*)')
+    .eq('parent_id', parentId)
+    .limit(1)
+    .single()
+
+  if (!data) return null
+
+  return {
+    family: data.families,
+    membership: {
+      id: data.id,
+      family_id: data.family_id,
+      parent_id: data.parent_id,
+      role: data.role,
+      permissions: data.permissions,
+      created_at: data.created_at,
+    },
+  }
+}
+
+// ================================================
+// HELPER: Get family members with parent details
+// ================================================
+
+export async function getFamilyMembers(supabase: any, familyId: string): Promise<FamilyMember[]> {
+  const { data } = await supabase
+    .from('family_members')
+    .select('*, parents(*)')
+    .eq('family_id', familyId)
+    .order('created_at')
+
+  return (data || []).map((fm: any) => ({
+    ...fm,
+    parent: fm.parents,
+  }))
+}
+
+// ================================================
 // HELPER: Get full family context for AI
 // ================================================
 
@@ -280,12 +386,22 @@ export async function getFamilyContext(supabase: any, parentId: string): Promise
 
   if (!parent) return null
 
-  // Get children with development levels, traits, and recent observations
-  const { data: children } = await supabase
-    .from('children')
-    .select('*')
+  // Get family IDs for this parent
+  const { data: familyMemberships } = await supabase
+    .from('family_members')
+    .select('family_id')
     .eq('parent_id', parentId)
-    .order('created_at')
+
+  const familyIds = (familyMemberships || []).map((fm: any) => fm.family_id)
+
+  // Get children via family membership (supports co-parent access)
+  const { data: children } = familyIds.length > 0
+    ? await supabase
+        .from('children')
+        .select('*')
+        .in('family_id', familyIds)
+        .order('created_at')
+    : { data: [] }
 
   const enrichedChildren = await Promise.all(
     (children || []).map(async (child: Child) => {

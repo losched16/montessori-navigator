@@ -33,18 +33,59 @@ export default function SignupPage() {
 
     if (authData.user) {
       // Create parent profile
-      const { error: profileError } = await supabase
+      const { data: parentData, error: profileError } = await supabase
         .from('parents')
         .insert({
           user_id: authData.user.id,
           display_name: name,
           email: email,
         })
+        .select()
+        .single()
 
       if (profileError) {
         setError('Account created but profile setup failed. Please try logging in.')
         setLoading(false)
         return
+      }
+
+      // Create a family for this parent
+      if (parentData) {
+        const { data: family } = await supabase
+          .from('families')
+          .insert({ name: `${name}'s Family` })
+          .select()
+          .single()
+
+        if (family) {
+          await supabase
+            .from('family_members')
+            .insert({
+              family_id: family.id,
+              parent_id: parentData.id,
+              role: 'primary',
+              permissions: 'full',
+            })
+
+          // Check if there's a school invite to associate with
+          const schoolSlug = new URLSearchParams(window.location.search).get('school')
+          if (schoolSlug) {
+            const { data: school } = await supabase
+              .from('schools')
+              .select('id')
+              .eq('slug', schoolSlug)
+              .single()
+
+            if (school) {
+              await supabase
+                .from('school_families')
+                .insert({
+                  school_id: school.id,
+                  family_id: family.id,
+                })
+            }
+          }
+        }
       }
 
       router.push('/onboarding')

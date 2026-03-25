@@ -120,11 +120,22 @@ export default function OnboardingPage() {
         communication_style: communicationStyle,
       }).eq('id', parentId)
 
+      // Get family_id for this parent
+      const { data: membership } = await supabase
+        .from('family_members')
+        .select('family_id')
+        .eq('parent_id', parentId)
+        .limit(1)
+        .single()
+
+      const familyId = membership?.family_id
+
       // Create children
       for (const child of children) {
         if (!child.name.trim()) continue
         const { data: childData } = await supabase.from('children').insert({
           parent_id: parentId,
+          family_id: familyId,
           name: child.name.trim(),
           date_of_birth: child.dateOfBirth || null,
           current_environment: child.environment || null,
