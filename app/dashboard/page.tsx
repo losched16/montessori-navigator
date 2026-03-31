@@ -323,15 +323,12 @@ export default function DashboardHome() {
               href={nl.pdfPath}
               target="_blank"
               rel="noopener noreferrer"
-              className="tap-scale snap-start shrink-0 w-[140px]"
+              className="tap-scale snap-start shrink-0 w-[120px] group"
             >
-              <div className={`bg-gradient-to-br ${nl.coverColor} rounded-[18px] p-4 h-[180px] flex flex-col justify-between`}>
-                <p className="text-[10px] uppercase tracking-wide text-white/60 font-medium">Tomorrow&apos;s Child</p>
-                <div>
-                  <p className="text-base font-bold text-white leading-tight">{nl.issueLabel}</p>
-                  <p className="text-[10px] text-white/50 mt-1 flex items-center gap-1"><span>📄</span> Read PDF</p>
-                </div>
+              <div className="rounded-[14px] overflow-hidden border border-gray-100 hover:shadow-md transition bg-white">
+                <img src={nl.coverImage} alt={nl.title} className="w-full aspect-[3/4] object-cover object-top" />
               </div>
+              <p className="text-[11px] text-gray-500 mt-1.5 text-center font-medium group-hover:text-warm-600 transition">{nl.issueLabel}</p>
             </a>
           ))}
         </div>
@@ -343,15 +340,12 @@ export default function DashboardHome() {
               href={nl.pdfPath}
               target="_blank"
               rel="noopener noreferrer"
-              className="group"
+              className="tap-scale group"
             >
-              <div className={`bg-gradient-to-br ${nl.coverColor} rounded-xl p-4 h-[160px] flex flex-col justify-between hover:shadow-md transition`}>
-                <p className="text-[10px] uppercase tracking-wide text-white/60 font-medium">Tomorrow&apos;s Child</p>
-                <div>
-                  <p className="text-sm font-bold text-white leading-tight">{nl.issueLabel}</p>
-                  <p className="text-[10px] text-white/50 mt-1 flex items-center gap-1"><span>📄</span> Read PDF</p>
-                </div>
+              <div className="rounded-xl overflow-hidden border border-gray-100 hover:shadow-md transition bg-white">
+                <img src={nl.coverImage} alt={nl.title} className="w-full aspect-[3/4] object-cover object-top" />
               </div>
+              <p className="text-xs text-gray-500 mt-1.5 text-center font-medium group-hover:text-warm-600 transition">{nl.issueLabel}</p>
             </a>
           ))}
         </div>

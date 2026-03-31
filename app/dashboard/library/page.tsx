@@ -144,26 +144,23 @@ export default function LibraryPage() {
           </div>
 
           {/* Newsletter Cards */}
-          <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide sm:mx-0 sm:px-0 sm:grid sm:grid-cols-3 lg:grid-cols-6 sm:overflow-visible sm:pb-0">
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
             {LATEST_NEWSLETTERS.map(nl => (
               <a
                 key={nl.slug}
                 href={nl.pdfPath}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="tap-scale snap-start shrink-0 w-[140px] sm:w-auto"
+                className="tap-scale group"
               >
-                <div className={`bg-gradient-to-br ${nl.coverColor} rounded-[18px] sm:rounded-xl p-4 h-[180px] sm:h-[160px] flex flex-col justify-between hover:shadow-md transition`}>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-wide text-white/60 font-medium">Tomorrow&apos;s Child</p>
-                  </div>
-                  <div>
-                    <p className="text-base sm:text-sm font-bold text-white leading-tight">{nl.issueLabel}</p>
-                    <p className="text-[10px] text-white/50 mt-1 flex items-center gap-1">
-                      <span>📄</span> Read PDF
-                    </p>
-                  </div>
+                <div className="rounded-[14px] sm:rounded-xl overflow-hidden border border-gray-100 hover:shadow-md transition bg-white">
+                  <img
+                    src={nl.coverImage}
+                    alt={nl.title}
+                    className="w-full aspect-[3/4] object-cover object-top"
+                  />
                 </div>
+                <p className="text-xs text-gray-500 mt-1.5 text-center font-medium group-hover:text-warm-600 transition">{nl.issueLabel}</p>
               </a>
             ))}
           </div>
