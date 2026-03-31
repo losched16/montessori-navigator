@@ -11484,3 +11484,9 @@ export function getArticleSummariesForAI(): string {
     `[${a.slug}] "${a.title}" by ${a.author} (${a.categories.join(', ')}): ${a.excerpt}`
   ).join('\n')
 }
+
+export function getTomorrowsChildArticles(): Article[] {
+  return ARTICLES.filter(a =>
+    a.categories.some(c => c === "Tomorrow's Child" || c.startsWith("TC "))
+  ).sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+}

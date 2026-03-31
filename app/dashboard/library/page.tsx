@@ -3,8 +3,10 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { getAllArticles, getAllCategories, getAllTags, type Article } from '@/lib/articles'
+import { getAllNewsletters } from '@/lib/newsletters'
 
 const ARTICLES = getAllArticles()
+const LATEST_NEWSLETTERS = getAllNewsletters().slice(0, 6)
 const CATEGORIES = getAllCategories()
 const TAGS = getAllTags()
 
@@ -46,13 +48,19 @@ export default function LibraryPage() {
 
     // Filter by category
     if (selectedCategory !== 'all') {
-      const groupCats = CATEGORY_GROUPS[selectedCategory]
-      if (groupCats) {
+      if (selectedCategory === "Tomorrow's Child") {
         results = results.filter(a =>
-          a.categories.some(c => groupCats.includes(c))
+          a.categories.some(c => c === "Tomorrow's Child" || c.startsWith("TC "))
         )
       } else {
-        results = results.filter(a => a.categories.includes(selectedCategory))
+        const groupCats = CATEGORY_GROUPS[selectedCategory]
+        if (groupCats) {
+          results = results.filter(a =>
+            a.categories.some(c => groupCats.includes(c))
+          )
+        } else {
+          results = results.filter(a => a.categories.includes(selectedCategory))
+        }
       }
     }
 
@@ -114,6 +122,53 @@ export default function LibraryPage() {
           {ARTICLES.length} articles from the Montessori Foundation &amp; Family Alliance
         </p>
       </div>
+
+      {/* Tomorrow's Child Featured Section */}
+      {selectedCategory === 'all' && !search.trim() && (
+        <div className="mb-6">
+          {/* TC Banner */}
+          <div className="bg-gradient-to-r from-navy-700 to-navy-500 rounded-[22px] sm:rounded-xl p-5 sm:p-6 mb-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-white/60 text-xs uppercase tracking-wide mb-1">Newsletter</p>
+                <h2 className="text-lg sm:text-xl font-bold text-white">Tomorrow&apos;s Child</h2>
+                <p className="text-white/70 text-sm mt-1">The Montessori Foundation&apos;s newsletter for parents &amp; educators</p>
+              </div>
+              <button
+                onClick={() => handleFilterChange(setSelectedCategory, "Tomorrow's Child")}
+                className="tap-scale hidden sm:inline-flex px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-lg transition"
+              >
+                Browse All Issues
+              </button>
+            </div>
+          </div>
+
+          {/* Newsletter Cards */}
+          <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide sm:mx-0 sm:px-0 sm:grid sm:grid-cols-3 lg:grid-cols-6 sm:overflow-visible sm:pb-0">
+            {LATEST_NEWSLETTERS.map(nl => (
+              <a
+                key={nl.slug}
+                href={nl.pdfPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="tap-scale snap-start shrink-0 w-[140px] sm:w-auto"
+              >
+                <div className={`bg-gradient-to-br ${nl.coverColor} rounded-[18px] sm:rounded-xl p-4 h-[180px] sm:h-[160px] flex flex-col justify-between hover:shadow-md transition`}>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-white/60 font-medium">Tomorrow&apos;s Child</p>
+                  </div>
+                  <div>
+                    <p className="text-base sm:text-sm font-bold text-white leading-tight">{nl.issueLabel}</p>
+                    <p className="text-[10px] text-white/50 mt-1 flex items-center gap-1">
+                      <span>📄</span> Read PDF
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Search & Filters */}
       <div className="bg-white border border-gray-100 rounded-xl p-4 mb-6">

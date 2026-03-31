@@ -7,6 +7,13 @@ import PageBanner from '@/components/ui/PageBanner'
 import type { Child, Observation } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel, getObservationTypeLabel, getCurriculumAreaLabel, getDevelopmentLevelLabel } from '@/lib/utils'
 import { getGuideForChildAge } from '@/lib/monthly-development'
+import { getAllArticles } from '@/lib/articles'
+import { getAllNewsletters } from '@/lib/newsletters'
+
+const LATEST_ARTICLES = getAllArticles()
+  .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+  .slice(0, 6)
+const LATEST_NEWSLETTERS = getAllNewsletters().slice(0, 4)
 
 // ── Sensitive period data keyed by age in months ──
 const SENSITIVE_PERIODS: Array<{
@@ -257,6 +264,98 @@ export default function DashboardHome() {
           </div>
         </div>
       )}
+
+      {/* ═══ Latest Content ═══ */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-xs text-gray-400 font-medium uppercase tracking-wide">Latest Content</h2>
+          <Link href="/dashboard/library" className="tap-scale text-xs text-warm-600 font-medium hover:underline">See All →</Link>
+        </div>
+        {/* Mobile: carousel */}
+        <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide sm:hidden">
+          {LATEST_ARTICLES.map(article => (
+            <Link
+              key={article.slug}
+              href={`/dashboard/library/${article.slug}`}
+              className="tap-scale snap-start shrink-0 w-[220px] bg-white border border-gray-100 rounded-[18px] p-4"
+            >
+              <div className="flex flex-wrap gap-1 mb-2">
+                {article.categories.filter(c => c !== 'MFA').slice(0, 1).map(cat => (
+                  <span key={cat} className="px-2 py-0.5 rounded-full text-[9px] font-medium bg-warm-50 text-warm-700">{cat}</span>
+                ))}
+              </div>
+              <h3 className="text-sm font-semibold text-navy-600 leading-snug line-clamp-2 mb-2">{article.title}</h3>
+              <p className="text-[10px] text-gray-400">{article.author}</p>
+            </Link>
+          ))}
+        </div>
+        {/* Desktop: grid */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {LATEST_ARTICLES.slice(0, 6).map(article => (
+            <Link
+              key={article.slug}
+              href={`/dashboard/library/${article.slug}`}
+              className="bg-white border border-gray-100 rounded-xl p-4 hover:border-gray-200 hover:shadow-sm transition group"
+            >
+              <div className="flex flex-wrap gap-1 mb-2">
+                {article.categories.filter(c => c !== 'MFA').slice(0, 1).map(cat => (
+                  <span key={cat} className="px-2 py-0.5 rounded-full text-[9px] font-medium bg-warm-50 text-warm-700">{cat}</span>
+                ))}
+              </div>
+              <h3 className="text-sm font-semibold text-navy-600 leading-snug line-clamp-2 mb-1 group-hover:text-warm-600 transition">{article.title}</h3>
+              <p className="text-[10px] text-gray-400">{article.author}</p>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* ═══ Tomorrow's Child ═══ */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-xs text-gray-400 font-medium uppercase tracking-wide">Tomorrow&apos;s Child</h2>
+          <Link href="/dashboard/library" className="tap-scale text-xs text-warm-600 font-medium hover:underline">All Issues →</Link>
+        </div>
+        {/* Mobile: carousel */}
+        <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide sm:hidden">
+          {LATEST_NEWSLETTERS.map(nl => (
+            <a
+              key={nl.slug}
+              href={nl.pdfPath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tap-scale snap-start shrink-0 w-[140px]"
+            >
+              <div className={`bg-gradient-to-br ${nl.coverColor} rounded-[18px] p-4 h-[180px] flex flex-col justify-between`}>
+                <p className="text-[10px] uppercase tracking-wide text-white/60 font-medium">Tomorrow&apos;s Child</p>
+                <div>
+                  <p className="text-base font-bold text-white leading-tight">{nl.issueLabel}</p>
+                  <p className="text-[10px] text-white/50 mt-1 flex items-center gap-1"><span>📄</span> Read PDF</p>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+        {/* Desktop: grid */}
+        <div className="hidden sm:grid sm:grid-cols-4 gap-3">
+          {LATEST_NEWSLETTERS.map(nl => (
+            <a
+              key={nl.slug}
+              href={nl.pdfPath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+            >
+              <div className={`bg-gradient-to-br ${nl.coverColor} rounded-xl p-4 h-[160px] flex flex-col justify-between hover:shadow-md transition`}>
+                <p className="text-[10px] uppercase tracking-wide text-white/60 font-medium">Tomorrow&apos;s Child</p>
+                <div>
+                  <p className="text-sm font-bold text-white leading-tight">{nl.issueLabel}</p>
+                  <p className="text-[10px] text-white/50 mt-1 flex items-center gap-1"><span>📄</span> Read PDF</p>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
 
       {/* ═══ Quick Actions ═══ */}
       {/* Mobile: horizontal scroll carousel */}
