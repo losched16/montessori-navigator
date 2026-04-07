@@ -4,8 +4,8 @@ import { cookies } from 'next/headers'
 import { getOpenAIClient } from '@/lib/openai'
 import { analyzeRoom, buildImagePrompt } from '@/lib/room-vision'
 
-// Allow up to 60s for Claude Vision + OpenAI image generation
-export const maxDuration = 60
+// Allow up to 5 minutes for Claude Vision + OpenAI image generation
+export const maxDuration = 300
 
 const MAX_VISIONS_PER_ROOM = 3
 
@@ -88,24 +88,30 @@ export async function POST(request: NextRequest) {
 
       try {
         // Upload original image to Supabase Storage
+        // Normalize media type — Claude only accepts jpeg/png/gif/webp
+        const normalizedMediaType =
+          mediaType && ['image/jpeg', 'image/png', 'image/gif', 'image/webp'].includes(mediaType)
+            ? mediaType
+            : 'image/jpeg'
+        const ext = normalizedMediaType.split('/')[1] || 'jpg'
         const buffer = Buffer.from(imageBase64, 'base64')
-        const originalPath = `${parent.id}/${vision.id}/original.jpg`
+        const originalPath = `${parent.id}/${vision.id}/original.${ext}`
         const { error: uploadError } = await supabase.storage
           .from('room-vision-images')
           .upload(originalPath, buffer, {
-            contentType: mediaType || 'image/jpeg',
-            upsert: false,
+            contentType: normalizedMediaType,
+            upsert: true,
           })
 
         if (uploadError) {
-          console.error('Storage upload error:', uploadError)
+          console.error('Storage upload error:', uploadError.message, uploadError)
           // Continue anyway — analysis still works without storage
         }
 
         // Step 1: Claude Vision analysis
         const analysis = await analyzeRoom(
           imageBase64,
-          mediaType || 'image/jpeg',
+          normalizedMediaType,
           room,
           agePlane
         )
@@ -127,13 +133,27 @@ export async function POST(request: NextRequest) {
         try {
           generationPrompt = buildImagePrompt(analysis, room, agePlane)
 
-          const imageResponse = await getOpenAIClient().images.generate({
-            model: 'gpt-image-1',
-            prompt: generationPrompt,
-            n: 1,
-            size: '1024x1024',
-            quality: 'medium',
-          } as any)
+          // Try gpt-image-1 first, fall back to dall-e-3 if unavailable
+          let imageResponse: any
+          try {
+            imageResponse = await getOpenAIClient().images.generate({
+              model: 'gpt-image-1',
+              prompt: generationPrompt,
+              n: 1,
+              size: '1024x1024',
+              quality: 'medium',
+            } as any)
+          } catch (gptImageError: any) {
+            console.warn('gpt-image-1 failed, falling back to dall-e-3:', gptImageError?.message)
+            imageResponse = await getOpenAIClient().images.generate({
+              model: 'dall-e-3',
+              prompt: generationPrompt.substring(0, 4000), // dall-e-3 has a 4000 char limit
+              n: 1,
+              size: '1024x1024',
+              quality: 'standard',
+              response_format: 'b64_json',
+            } as any)
+          }
 
           const responseData = imageResponse.data?.[0]
           let genBuffer: Buffer | null = null
@@ -154,18 +174,18 @@ export async function POST(request: NextRequest) {
               .from('room-vision-images')
               .upload(generatedImagePath, genBuffer, {
                 contentType: 'image/png',
-                upsert: false,
+                upsert: true,
               })
 
             if (genUploadError) {
-              console.error('Generated image upload error:', genUploadError)
+              console.error('Generated image upload error:', genUploadError.message, genUploadError)
               generatedImagePath = null
             }
           } else {
             console.error('No image data in OpenAI response:', JSON.stringify(imageResponse.data?.[0] || {}).substring(0, 200))
           }
         } catch (genError: any) {
-          console.error('Image generation error:', genError?.message || genError)
+          console.error('Image generation error:', genError?.message || genError, genError?.response?.data || '')
           // Graceful degradation — still return analysis without generated image
         }
 
