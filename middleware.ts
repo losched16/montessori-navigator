@@ -44,8 +44,12 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // Protect school admin routes
-  if (request.nextUrl.pathname.startsWith('/school')) {
+  // Protect school admin routes (note: /school singular, not /schools)
+  // Public routes: /schools, /guides, /assessment
+  if (
+    request.nextUrl.pathname === '/school' ||
+    request.nextUrl.pathname.startsWith('/school/')
+  ) {
     if (!session) {
       return NextResponse.redirect(new URL('/auth/login', request.url))
     }
