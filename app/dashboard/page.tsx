@@ -227,9 +227,14 @@ export default function DashboardHome() {
           <p className="text-white/70 text-sm leading-relaxed mb-4">
             Your Montessori journey starts here. Let&apos;s set up your family so Abigail can give you personalized recommendations.
           </p>
-          <Link href="/dashboard/settings" className="tap-scale inline-block px-5 py-3.5 sm:py-2 bg-white/20 hover:bg-white/30 text-white font-medium text-sm rounded-[16px] sm:rounded-lg transition min-h-[54px] sm:min-h-0 flex items-center">
-            Add Your First Child →
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/onboarding" className="tap-scale inline-block px-5 py-3.5 sm:py-2 bg-white text-navy-700 font-medium text-sm rounded-[16px] sm:rounded-lg transition min-h-[54px] sm:min-h-0 flex items-center hover:bg-warm-50">
+              Complete Setup →
+            </Link>
+            <Link href="/dashboard/settings" className="tap-scale inline-block px-5 py-3.5 sm:py-2 bg-white/20 hover:bg-white/30 text-white font-medium text-sm rounded-[16px] sm:rounded-lg transition min-h-[54px] sm:min-h-0 flex items-center">
+              Add a Child Manually
+            </Link>
+          </div>
         </div>
       )}
 

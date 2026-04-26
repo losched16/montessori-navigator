@@ -176,10 +176,21 @@ export default function OnboardingPage() {
   return (
     <div className="min-h-screen bg-[#fafaf8] py-8 px-4">
       <div className="max-w-2xl mx-auto">
+        {/* Skip link */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={() => router.push('/dashboard')}
+            className="text-sm text-gray-500 hover:text-warm-600 underline-offset-4 hover:underline transition"
+          >
+            Skip for now →
+          </button>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-navy-600">Welcome to Navigator</h1>
           <p className="text-gray-500 mt-1">Let&apos;s set up your family&apos;s prepared environment</p>
+          <p className="text-xs text-gray-400 mt-2">You can always come back to this later from Settings</p>
         </div>
 
         {/* Progress */}
