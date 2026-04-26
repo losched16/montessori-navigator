@@ -1,35 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase'
 
 type Plan = 'individual_monthly' | 'individual_annual'
 
 export default function PricingPage() {
   const [loading, setLoading] = useState<Plan | null>(null)
   const [error, setError] = useState('')
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null)
-  const router = useRouter()
-  const supabase = createClient()
-
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      setIsLoggedIn(!!data.user)
-    })
-  }, [])
 
   const handleSubscribe = async (plan: Plan) => {
     setError('')
-
-    // If not logged in, send to signup with plan param
-    if (!isLoggedIn) {
-      const planSlug = plan === 'individual_monthly' ? 'monthly' : 'annual'
-      router.push(`/auth/signup?plan=${planSlug}`)
-      return
-    }
-
     setLoading(plan)
     try {
       const res = await fetch('/api/stripe/checkout', {
@@ -41,6 +22,7 @@ export default function PricingPage() {
 
       if (!res.ok) {
         setError(data.error || 'Something went wrong.')
+        setLoading(null)
         return
       }
 
@@ -49,7 +31,6 @@ export default function PricingPage() {
       }
     } catch {
       setError('Failed to connect. Please try again.')
-    } finally {
       setLoading(null)
     }
   }
@@ -93,7 +74,7 @@ export default function PricingPage() {
               <FeatureList />
               <button
                 onClick={() => handleSubscribe('individual_monthly')}
-                disabled={loading !== null || isLoggedIn === null}
+                disabled={loading !== null}
                 className="mt-6 w-full bg-navy-700 hover:bg-navy-600 text-white font-medium py-3 px-6 rounded-lg transition disabled:opacity-50"
               >
                 {loading === 'individual_monthly' ? 'Loading…' : 'Start 7-Day Free Trial'}
@@ -122,7 +103,7 @@ export default function PricingPage() {
               <FeatureList />
               <button
                 onClick={() => handleSubscribe('individual_annual')}
-                disabled={loading !== null || isLoggedIn === null}
+                disabled={loading !== null}
                 className="mt-6 w-full bg-warm-500 hover:bg-warm-600 text-white font-medium py-3 px-6 rounded-lg transition disabled:opacity-50"
               >
                 {loading === 'individual_annual' ? 'Loading…' : 'Start 7-Day Free Trial'}

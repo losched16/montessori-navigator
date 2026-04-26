@@ -63,9 +63,15 @@ export async function POST(req: NextRequest) {
     }
 
     // -----------------------------------------
-    // INDIVIDUAL PARENT FLOW (new)
+    // INDIVIDUAL PARENT FLOW
+    // Guest checkout — Stripe collects email + payment.
+    // After Stripe, the user is sent to /welcome which routes
+    // them to /auth/signup (if not logged in) or links the
+    // subscription to their existing parent record.
     // -----------------------------------------
-    // Auth required — link the subscription to the parent record
+
+    // If the user happens to already be logged in, prefill their email
+    // and pass parent_id so the webhook can link immediately.
     const cookieStore = cookies()
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -80,43 +86,42 @@ export async function POST(req: NextRequest) {
     )
 
     const { data: { user } } = await supabase.auth.getUser()
-    if (!user) {
-      return NextResponse.json({ error: 'You must be signed in to subscribe.' }, { status: 401 })
-    }
 
-    const { data: parent } = await supabase
-      .from('parents')
-      .select('id, email, stripe_customer_id')
-      .eq('user_id', user.id)
-      .single()
-
-    if (!parent) {
-      return NextResponse.json({ error: 'Parent profile not found. Please complete signup first.' }, { status: 404 })
+    let existingParent: { id: string; email: string | null; stripe_customer_id: string | null } | null = null
+    if (user) {
+      const { data: parent } = await supabase
+        .from('parents')
+        .select('id, email, stripe_customer_id')
+        .eq('user_id', user.id)
+        .single()
+      existingParent = parent as any
     }
 
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
-      client_reference_id: parent.id,
       metadata: {
         plan,
-        parent_id: parent.id,
+        ...(existingParent ? { parent_id: existingParent.id } : {}),
       },
       subscription_data: {
         trial_period_days: 7,
         metadata: {
           plan,
-          parent_id: parent.id,
+          ...(existingParent ? { parent_id: existingParent.id } : {}),
         },
       },
       success_url: `${appUrl}/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl}/pricing`,
     }
 
-    if (parent.stripe_customer_id) {
-      sessionParams.customer = parent.stripe_customer_id
-    } else if (parent.email || user.email) {
-      sessionParams.customer_email = parent.email || user.email
+    if (existingParent) {
+      sessionParams.client_reference_id = existingParent.id
+      if (existingParent.stripe_customer_id) {
+        sessionParams.customer = existingParent.stripe_customer_id
+      } else if (existingParent.email || user?.email) {
+        sessionParams.customer_email = existingParent.email || user?.email
+      }
     }
 
     const session = await stripe.checkout.sessions.create(sessionParams)

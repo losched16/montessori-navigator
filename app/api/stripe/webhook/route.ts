@@ -64,9 +64,13 @@ export async function POST(req: NextRequest) {
         const customerId = session.customer as string
         const subscriptionId = session.subscription as string
         const parentId = session.client_reference_id || session.metadata?.parent_id
+        const planMeta = session.metadata?.plan
+        const sessionEmail = session.customer_details?.email || session.customer_email || null
 
-        // Branch: parent vs school based on whether parent_id is set
-        if (parentId) {
+        // Detect individual parent flow: either parent_id is set, or plan metadata says individual
+        const isIndividualFlow = !!parentId || planMeta === 'individual_monthly' || planMeta === 'individual_annual'
+
+        if (isIndividualFlow) {
           // ----- PARENT SUBSCRIPTION -----
           // Fetch the subscription to get accurate status, trial_end, current_period_end, plan
           const sub = await stripe.subscriptions.retrieve(subscriptionId)
@@ -78,17 +82,33 @@ export async function POST(req: NextRequest) {
             ? new Date((sub as any).current_period_end * 1000).toISOString()
             : null
 
-          await supabase
-            .from('parents')
-            .update({
-              stripe_customer_id: customerId,
-              stripe_subscription_id: subscriptionId,
-              subscription_status: status,
-              subscription_plan: plan,
-              trial_ends_at: trialEndsAt,
-              current_period_end: currentPeriodEnd,
-            })
-            .eq('id', parentId)
+          const updateData = {
+            stripe_customer_id: customerId,
+            stripe_subscription_id: subscriptionId,
+            subscription_status: status,
+            subscription_plan: plan,
+            trial_ends_at: trialEndsAt,
+            current_period_end: currentPeriodEnd,
+          }
+
+          if (parentId) {
+            // Direct match by parent ID
+            await supabase.from('parents').update(updateData).eq('id', parentId)
+          } else if (sessionEmail) {
+            // Guest checkout — try matching by email. The parent record may not
+            // exist yet (signup happens after Stripe). If so, the link-session
+            // call from the signup page will fill in the data; this is a fallback.
+            const { data: existingParent } = await supabase
+              .from('parents')
+              .select('id')
+              .eq('email', sessionEmail)
+              .maybeSingle()
+            if (existingParent) {
+              await supabase.from('parents').update(updateData).eq('id', existingParent.id)
+            } else {
+              console.log(`[webhook] No parent yet for ${sessionEmail} — link-session will handle it post-signup`)
+            }
+          }
           break
         }
 
