@@ -28,6 +28,35 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
         .eq('user_id', user.id)
         .single()
       if (!parentData) { router.push('/onboarding'); return }
+
+      // Subscription gate: parents must have an active or trialing subscription
+      // (Skip gate for school-affiliated parents — they have access via school)
+      const status = parentData.subscription_status || 'inactive'
+      const activeStatuses = ['trialing', 'active']
+      if (!activeStatuses.includes(status)) {
+        // Check if they're part of a school (school admin paid on their behalf)
+        const { data: famMembers } = await supabase
+          .from('family_members')
+          .select('family_id')
+          .eq('parent_id', parentData.id)
+        const familyIds = (famMembers || []).map(f => f.family_id)
+        let hasActiveSchool = false
+        if (familyIds.length > 0) {
+          const { data: schoolFams } = await supabase
+            .from('school_families')
+            .select('school_id, schools!inner(subscription_status)')
+            .in('family_id', familyIds)
+            .eq('status', 'active')
+          hasActiveSchool = (schoolFams || []).some((sf: any) =>
+            ['active', 'trialing', 'past_due'].includes(sf.schools?.subscription_status)
+          )
+        }
+        if (!hasActiveSchool) {
+          router.push('/pricing')
+          return
+        }
+      }
+
       setParent(parentData)
     }
     loadParent()

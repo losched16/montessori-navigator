@@ -15,6 +15,28 @@ function getSupabase() {
   )
 }
 
+// Map Stripe subscription status -> our enum
+function normalizeStatus(stripeStatus: string): 'inactive' | 'trialing' | 'active' | 'past_due' | 'canceled' {
+  switch (stripeStatus) {
+    case 'trialing': return 'trialing'
+    case 'active': return 'active'
+    case 'past_due': return 'past_due'
+    case 'canceled':
+    case 'unpaid':
+    case 'incomplete_expired':
+      return 'canceled'
+    default:
+      return 'inactive'
+  }
+}
+
+function planFromPriceId(priceId: string | undefined): 'individual_monthly' | 'individual_annual' | null {
+  if (!priceId) return null
+  if (priceId === process.env.STRIPE_PRICE_ID_INDIVIDUAL_MONTHLY) return 'individual_monthly'
+  if (priceId === process.env.STRIPE_PRICE_ID_INDIVIDUAL_ANNUAL) return 'individual_annual'
+  return null
+}
+
 export async function POST(req: NextRequest) {
   const stripe = getStripe()
   const supabase = getSupabase()
@@ -41,11 +63,40 @@ export async function POST(req: NextRequest) {
         const session = event.data.object as Stripe.Checkout.Session
         const customerId = session.customer as string
         const subscriptionId = session.subscription as string
+        const parentId = session.client_reference_id || session.metadata?.parent_id
+
+        // Branch: parent vs school based on whether parent_id is set
+        if (parentId) {
+          // ----- PARENT SUBSCRIPTION -----
+          // Fetch the subscription to get accurate status, trial_end, current_period_end, plan
+          const sub = await stripe.subscriptions.retrieve(subscriptionId)
+          const priceId = sub.items.data[0]?.price.id
+          const plan = planFromPriceId(priceId)
+          const status = normalizeStatus(sub.status)
+          const trialEndsAt = sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null
+          const currentPeriodEnd = (sub as any).current_period_end
+            ? new Date((sub as any).current_period_end * 1000).toISOString()
+            : null
+
+          await supabase
+            .from('parents')
+            .update({
+              stripe_customer_id: customerId,
+              stripe_subscription_id: subscriptionId,
+              subscription_status: status,
+              subscription_plan: plan,
+              trial_ends_at: trialEndsAt,
+              current_period_end: currentPeriodEnd,
+            })
+            .eq('id', parentId)
+          break
+        }
+
+        // ----- SCHOOL SUBSCRIPTION (existing flow) -----
         const familyCount = parseInt(session.metadata?.familyCount || '0', 10)
         const schoolName = session.metadata?.schoolName || 'Unknown School'
         const billingEmail = session.customer_email || ''
 
-        // Check if school already exists for this Stripe customer
         const { data: existingSchool } = await supabase
           .from('schools')
           .select('id')
@@ -53,7 +104,6 @@ export async function POST(req: NextRequest) {
           .single()
 
         if (existingSchool) {
-          // Update existing school
           await supabase
             .from('schools')
             .update({
@@ -64,7 +114,6 @@ export async function POST(req: NextRequest) {
             })
             .eq('id', existingSchool.id)
         } else {
-          // Create new school record
           const slug = schoolName
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
@@ -74,7 +123,7 @@ export async function POST(req: NextRequest) {
           await supabase.from('schools').insert({
             name: schoolName,
             slug,
-            admin_user_id: '00000000-0000-0000-0000-000000000000', // placeholder until admin creates account
+            admin_user_id: '00000000-0000-0000-0000-000000000000',
             stripe_customer_id: customerId,
             stripe_subscription_id: subscriptionId,
             subscription_status: 'active',
@@ -85,18 +134,33 @@ export async function POST(req: NextRequest) {
         break
       }
 
-      case 'customer.subscription.updated': {
+      case 'customer.subscription.updated':
+      case 'customer.subscription.created': {
         const subscription = event.data.object as Stripe.Subscription
         const customerId = subscription.customer as string
-        const status = subscription.status === 'active' ? 'active'
-          : subscription.status === 'past_due' ? 'past_due'
-          : subscription.status === 'canceled' ? 'canceled'
-          : 'inactive'
+        const status = normalizeStatus(subscription.status)
+        const trialEndsAt = subscription.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null
+        const currentPeriodEnd = (subscription as any).current_period_end
+          ? new Date((subscription as any).current_period_end * 1000).toISOString()
+          : null
 
-        await supabase
-          .from('schools')
-          .update({ subscription_status: status })
+        // Try to update parent first; if no row matches, fall back to school
+        const { data: parentMatch } = await supabase
+          .from('parents')
+          .update({
+            subscription_status: status,
+            trial_ends_at: trialEndsAt,
+            current_period_end: currentPeriodEnd,
+          })
           .eq('stripe_customer_id', customerId)
+          .select('id')
+
+        if (!parentMatch || parentMatch.length === 0) {
+          await supabase
+            .from('schools')
+            .update({ subscription_status: status === 'trialing' ? 'active' : status })
+            .eq('stripe_customer_id', customerId)
+        }
         break
       }
 
@@ -104,10 +168,18 @@ export async function POST(req: NextRequest) {
         const subscription = event.data.object as Stripe.Subscription
         const customerId = subscription.customer as string
 
-        await supabase
-          .from('schools')
+        const { data: parentMatch } = await supabase
+          .from('parents')
           .update({ subscription_status: 'canceled' })
           .eq('stripe_customer_id', customerId)
+          .select('id')
+
+        if (!parentMatch || parentMatch.length === 0) {
+          await supabase
+            .from('schools')
+            .update({ subscription_status: 'canceled' })
+            .eq('stripe_customer_id', customerId)
+        }
         break
       }
 
@@ -115,10 +187,18 @@ export async function POST(req: NextRequest) {
         const invoice = event.data.object as Stripe.Invoice
         const customerId = invoice.customer as string
 
-        await supabase
-          .from('schools')
+        const { data: parentMatch } = await supabase
+          .from('parents')
           .update({ subscription_status: 'past_due' })
           .eq('stripe_customer_id', customerId)
+          .select('id')
+
+        if (!parentMatch || parentMatch.length === 0) {
+          await supabase
+            .from('schools')
+            .update({ subscription_status: 'past_due' })
+            .eq('stripe_customer_id', customerId)
+        }
         break
       }
     }

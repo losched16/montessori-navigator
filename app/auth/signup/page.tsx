@@ -88,6 +88,28 @@ export default function SignupPage() {
         }
       }
 
+      // If a plan was selected on /pricing, send straight to Stripe Checkout
+      const planParam = new URLSearchParams(window.location.search).get('plan')
+      if (planParam === 'monthly' || planParam === 'annual') {
+        const plan = planParam === 'monthly' ? 'individual_monthly' : 'individual_annual'
+        try {
+          const res = await fetch('/api/stripe/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ plan }),
+          })
+          const data = await res.json()
+          if (res.ok && data.url) {
+            window.location.href = data.url
+            return
+          }
+          // If checkout fails, fall through to onboarding (user can try again from /pricing)
+          console.error('Checkout creation failed:', data.error)
+        } catch (err) {
+          console.error('Checkout request failed:', err)
+        }
+      }
+
       router.push('/onboarding')
     }
   }

@@ -59,6 +59,7 @@ export default function SchoolsPage() {
               <p className="text-[clamp(1rem,1.5vw,1.1rem)] text-white/45 max-w-[500px] leading-relaxed mb-7" style={{ animation: 'fadeUp 0.8s ease 0.25s both' }}>Navigator helps your families understand Montessori, stay engaged, and become your strongest advocates. Powered by Tim Seldin and the Montessori Foundation.</p>
               <div className="flex flex-col sm:flex-row gap-3" style={{ animation: 'fadeUp 0.8s ease 0.4s both' }}>
                 <a href="#contact" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-semibold rounded-full text-[0.95rem] transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>Schedule a Conversation →</a>
+                <Link href="/for-schools/pricing" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-medium rounded-full text-[0.95rem] border border-white/30 hover:bg-white/5 transition">View Pricing</Link>
                 <a href="#how-it-helps" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white/70 font-medium rounded-full text-[0.95rem] border border-white/15 hover:text-white hover:border-white/30 transition">See How It Works</a>
               </div>
             </div>

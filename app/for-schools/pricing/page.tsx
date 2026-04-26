@@ -30,7 +30,7 @@ export default function SchoolPricingPage() {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ familyCount, schoolName, email }),
+        body: JSON.stringify({ plan: 'school', familyCount, schoolName, email }),
       })
       const data = await res.json()
 
