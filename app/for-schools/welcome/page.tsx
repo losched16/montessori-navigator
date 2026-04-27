@@ -1,8 +1,24 @@
 'use client'
 
+import { Suspense } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 export default function SchoolWelcomePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#fafaf8]" />}>
+      <SchoolWelcomePageInner />
+    </Suspense>
+  )
+}
+
+function SchoolWelcomePageInner() {
+  const searchParams = useSearchParams()
+  const sessionId = searchParams.get('session_id')
+  const signupHref = sessionId
+    ? `/auth/signup/school?session_id=${encodeURIComponent(sessionId)}`
+    : '/auth/signup/school'
+
   return (
     <div className="min-h-screen bg-[#fafaf8]">
       {/* Header */}
@@ -54,7 +70,7 @@ export default function SchoolWelcomePage() {
 
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            href="/auth/signup"
+            href={signupHref}
             className="bg-warm-500 hover:bg-warm-600 text-white font-semibold px-8 py-3.5 rounded-xl transition text-center"
           >
             Create Your Account
