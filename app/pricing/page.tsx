@@ -40,7 +40,7 @@ export default function PricingPage() {
       {/* Header */}
       <header className="bg-navy-700 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Montessori Navigator</Link>
+          <Link href="/" className="text-lg font-bold">Montessori Family Alliance</Link>
           <Link href="/auth/login" className="text-sm text-white/70 hover:text-white">Log in</Link>
         </div>
       </header>
@@ -123,7 +123,7 @@ export default function PricingPage() {
           <h2 className="text-xl font-bold text-navy-700 mb-6 text-center">Common Questions</h2>
           <div className="space-y-4">
             <Faq q="How does the free trial work?">
-              You get full access to Montessori Navigator for 7 days. We collect your card up front, but you won&apos;t be charged until day 8. Cancel anytime during the trial and you won&apos;t be charged at all.
+              You get full access to Montessori Family Alliance for 7 days. We collect your card up front, but you won&apos;t be charged until day 8. Cancel anytime during the trial and you won&apos;t be charged at all.
             </Faq>
             <Faq q="Can I cancel anytime?">
               Yes. Cancel from your account settings — no questions asked. If you cancel during the trial, you won&apos;t be charged.

@@ -54,7 +54,7 @@ export default function SchoolPricingPage() {
       {/* Header */}
       <header className="bg-navy-700 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Montessori Navigator</Link>
+          <Link href="/" className="text-lg font-bold">Montessori Family Alliance</Link>
           <Link href="/auth/login" className="text-sm text-white/70 hover:text-white">Log in</Link>
         </div>
       </header>
@@ -66,7 +66,7 @@ export default function SchoolPricingPage() {
             Pricing for Schools
           </h1>
           <p className="text-lg text-navy-600/70 max-w-2xl mx-auto">
-            Give every family in your school access to Montessori Navigator.
+            Give every family in your school access to Montessori Family Alliance.
             One simple price, billed annually.
           </p>
         </div>
@@ -237,7 +237,7 @@ export default function SchoolPricingPage() {
       {/* Footer */}
       <footer className="border-t border-gray-100 py-8 text-center text-sm text-navy-600/40">
         <div className="max-w-5xl mx-auto px-4">
-          © {new Date().getFullYear()} Montessori Navigator. All rights reserved.
+          © {new Date().getFullYear()} Montessori Family Alliance. All rights reserved.
         </div>
       </footer>
     </div>

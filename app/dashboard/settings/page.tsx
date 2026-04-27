@@ -873,7 +873,7 @@ export default function SettingsPage() {
           <div className="bg-white border border-gray-100 rounded-xl p-6">
             <h2 className="font-semibold text-navy-600 mb-2">Your Privacy</h2>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Your data is stored securely with Supabase (PostgreSQL with row-level security). No other family can see your data. Your conversations with Abigail are private. If your school uses Navigator, they see engagement metrics only — never your conversations, observations, or family details.
+              Your data is stored securely with Supabase (PostgreSQL with row-level security). No other family can see your data. Your conversations with Abigail are private. If your school uses Family Alliance, they see engagement metrics only — never your conversations, observations, or family details.
             </p>
           </div>
         </div>

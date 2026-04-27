@@ -151,7 +151,7 @@ export default function StartHerePage() {
       <PageBanner
         image="/images/environment/play-area.jpg"
         title={isCompleted ? "You're all set!" : `Welcome${parentName ? ` ${parentName}` : ''}!`}
-        subtitle={isCompleted ? "You've explored Navigator. Come back any time." : 'Follow the steps below to get started.'}
+        subtitle={isCompleted ? "You've explored Family Alliance. Come back any time." : 'Follow the steps below to get started.'}
       />
 
       {/* Progress + actions bar */}

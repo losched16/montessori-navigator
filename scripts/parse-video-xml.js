@@ -2,21 +2,29 @@ const fs = require('fs')
 const path = require('path')
 
 // ── Config ──
-const XML_DIR = path.resolve('C:/Users/thelo/OneDrive/Desktop/montessori-navigator-v7/Webcasts and webinars')
+const XML_DIR = path.resolve('C:/Users/thelo/Downloads')
 const ARTICLES_FILE = path.join(__dirname, '..', 'lib', 'articles.ts')
 
 const XML_FILES = [
-  'montessorifoundationmontessorifamilyalliance.WordPress.2026-03-03.xml',
-  'montessorifoundationmontessorifamilyalliance.WordPress.2026-03-03 (1).xml',
+  'montessorifoundationmontessorifamilyalliance.WordPress.2026-03-24.xml',
 ]
 
-// Categories to filter out (don't label as IMC)
+// Categories to filter out
 const EXCLUDED_CATEGORIES = [
   'The International Montessori Council',
   'Webcasts / IMC',
   'IMC',
   'MFA',
   'Uncategorized',
+]
+
+// Skip articles with any of these categories (admin-focused content)
+const SKIP_CATEGORIES = [
+  'Administrative Team',
+  'Montessori Administrators',
+  'Boards',
+  'Communication',
+  'School Leadership',
 ]
 
 // ── Helpers ──
@@ -198,7 +206,11 @@ for (const file of XML_FILES) {
   }
 }
 
-console.log(`\nTotal unique video posts: ${allVideoPosts.length}`)
+// Filter out admin-focused content
+const beforeFilter = allVideoPosts.length
+allVideoPosts = allVideoPosts.filter(p => !p.categories.some(c => SKIP_CATEGORIES.includes(c)))
+console.log(`\nFiltered out ${beforeFilter - allVideoPosts.length} admin-focused posts`)
+console.log(`Total unique video posts: ${allVideoPosts.length}`)
 
 // Count total unique YouTube IDs
 const allYouTubeIds = new Set()

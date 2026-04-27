@@ -36,12 +36,12 @@ export default function SchoolsPage() {
       <div className="sp">
         <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4" style={{ background: 'linear-gradient(180deg, rgba(15,26,60,0.97) 0%, rgba(15,26,60,0) 100%)' }}>
           <div className="max-w-6xl mx-auto flex justify-between items-center">
-            <Link href="/" className="serif text-xl font-semibold text-white tracking-wide">Montessori <span className="text-[#c4b1e0] font-normal">Navigator</span></Link>
+            <Link href="/" className="serif text-xl font-semibold text-white tracking-wide">Montessori <span className="text-[#c4b1e0] font-normal">Family Alliance</span></Link>
             <div className="flex items-center gap-5">
               <a href="#how-it-helps" className="hidden sm:inline text-white/50 text-sm hover:text-white transition">How It Helps</a>
-              <a href="#content" className="hidden sm:inline text-white/50 text-sm hover:text-white transition">Content</a>
-              <a href="#privacy" className="hidden sm:inline text-white/50 text-sm hover:text-white transition">Privacy</a>
+              <Link href="/for-schools/pricing" className="hidden sm:inline text-white/50 text-sm hover:text-white transition">Pricing</Link>
               <Link href="/" className="hidden sm:inline text-white/50 text-sm hover:text-white transition">For Parents</Link>
+              <Link href="/auth/login" className="hidden md:inline text-white/50 text-sm hover:text-white transition">Log in</Link>
               <a href="#contact" className="text-white text-sm font-medium px-5 py-2 rounded-full border border-white/15 bg-white/10 hover:bg-white/[0.18] transition">Talk to Us</a>
             </div>
           </div>
@@ -56,7 +56,7 @@ export default function SchoolsPage() {
                 <span className="text-[11px] text-[#c4b1e0] font-medium tracking-widest uppercase">For Montessori Schools</span>
               </div>
               <h1 className="serif text-[clamp(2.4rem,5vw,4.2rem)] font-normal text-white leading-[1.08] mb-5" style={{ animation: 'fadeUp 0.8s ease 0.1s both' }}>Your partner in <em className="text-[#c4b1e0]">recruiting, onboarding, and retaining</em> families</h1>
-              <p className="text-[clamp(1rem,1.5vw,1.1rem)] text-white/45 max-w-[500px] leading-relaxed mb-7" style={{ animation: 'fadeUp 0.8s ease 0.25s both' }}>Navigator helps your families understand Montessori, stay engaged, and become your strongest advocates. Powered by Tim Seldin and the Montessori Foundation.</p>
+              <p className="text-[clamp(1rem,1.5vw,1.1rem)] text-white/45 max-w-[500px] leading-relaxed mb-7" style={{ animation: 'fadeUp 0.8s ease 0.25s both' }}>Family Alliance helps your families understand Montessori, stay engaged, and become your strongest advocates. Powered by Tim Seldin and the Montessori Foundation.</p>
               <div className="flex flex-col sm:flex-row gap-3" style={{ animation: 'fadeUp 0.8s ease 0.4s both' }}>
                 <a href="#contact" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-semibold rounded-full text-[0.95rem] transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>Schedule a Conversation →</a>
                 <Link href="/for-schools/pricing" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-medium rounded-full text-[0.95rem] border border-white/30 hover:bg-white/5 transition">View Pricing</Link>
@@ -97,7 +97,7 @@ export default function SchoolsPage() {
         <section id="how-it-helps" className="py-20 px-6" style={{ background: '#faf8ff' }}>
           <div className="max-w-5xl mx-auto">
             <div className="reveal text-center mb-12">
-              <div className="text-xs font-semibold tracking-[0.15em] uppercase text-[#7b5ea7] mb-2">How Navigator Helps Your School</div>
+              <div className="text-xs font-semibold tracking-[0.15em] uppercase text-[#7b5ea7] mb-2">How Family Alliance Helps Your School</div>
               <h2 className="serif text-[clamp(1.8rem,3.5vw,2.6rem)] font-normal text-[#1a0e2e] leading-[1.15]">Three ways we become <em className="text-[#4a2c82]">your partner</em></h2>
             </div>
 
@@ -105,7 +105,7 @@ export default function SchoolsPage() {
               <div>
                 <div className="text-xs font-bold text-[#8b9cf7] tracking-wider mb-2">01 — RECRUIT &amp; ONBOARD</div>
                 <h3 className="serif text-[clamp(1.5rem,2.5vw,2rem)] font-medium text-[#1a0e2e] leading-[1.2] mb-4">Turn inquiring families into confident community members</h3>
-                <p className="text-[#5c4a7e] leading-relaxed mb-4">Navigator gives prospective families a <strong className="text-[#1a0e2e]">free readiness assessment</strong> that helps them understand if Montessori is right for them — and connects them to your school. For new enrollments, we provide a <strong className="text-[#1a0e2e]">structured onboarding playbook</strong> that walks families through Montessori philosophy, classroom expectations, and how to support learning at home.</p>
+                <p className="text-[#5c4a7e] leading-relaxed mb-4">Family Alliance gives prospective families a <strong className="text-[#1a0e2e]">free readiness assessment</strong> that helps them understand if Montessori is right for them — and connects them to your school. For new enrollments, we provide a <strong className="text-[#1a0e2e]">structured onboarding playbook</strong> that walks families through Montessori philosophy, classroom expectations, and how to support learning at home.</p>
                 <div className="space-y-2">
                   {['Readiness assessment drives qualified inquiries to your school', 'New family onboarding playbook reduces confusion from day one', 'Parents understand Montessori before their first conference', 'School tour evaluation tool helps families ask the right questions'].map((item, i) => (
                     <div key={i} className="flex items-start gap-2 text-sm text-[#5c4a7e]"><span className="text-[#4a2c82] mt-0.5">✦</span><span>{item}</span></div>
@@ -121,10 +121,10 @@ export default function SchoolsPage() {
               <div className="md:order-2">
                 <div className="text-xs font-bold text-[#8b9cf7] tracking-wider mb-2">02 — EDUCATE &amp; RETAIN</div>
                 <h3 className="serif text-[clamp(1.5rem,2.5vw,2rem)] font-medium text-[#1a0e2e] leading-[1.2] mb-4">Keep families engaged, informed, and re-enrolling</h3>
-                <p className="text-[#5c4a7e] leading-relaxed mb-4">Re-enrollment is everything. Families who understand the value of what you do don&apos;t leave. Navigator gives your parents an <strong className="text-[#1a0e2e]">AI guide who reinforces your school&apos;s philosophy</strong> 24/7 — answering questions at 10pm that would otherwise become confused emails to your head of school.</p>
+                <p className="text-[#5c4a7e] leading-relaxed mb-4">Re-enrollment is everything. Families who understand the value of what you do don&apos;t leave. Family Alliance gives your parents <strong className="text-[#1a0e2e]">Abigail — an AI guide who reinforces your school&apos;s philosophy</strong> 24/7 — answering questions at 10pm that would otherwise become confused emails to your head of school.</p>
                 <p className="text-[#5c4a7e] leading-relaxed mb-4">We also provide a <strong className="text-[#1a0e2e]">re-enrollment playbook</strong> with strategies and touchpoints that strengthen the parent-school relationship throughout the year.</p>
                 <div className="space-y-2">
-                  {['AI guide answers parent questions aligned with YOUR philosophy', 'Re-enrollment playbook with year-round retention strategies', 'Development tracking helps parents see their child\'s growth', 'Progress reports give families concrete evidence of Montessori\'s impact'].map((item, i) => (
+                  {['Abigail answers parent questions aligned with YOUR philosophy', 'Re-enrollment playbook with year-round retention strategies', 'Development tracking helps parents see their child\'s growth', 'Progress reports give families concrete evidence of Montessori\'s impact'].map((item, i) => (
                     <div key={i} className="flex items-start gap-2 text-sm text-[#5c4a7e]"><span className="text-[#4a2c82] mt-0.5">✦</span><span>{item}</span></div>
                   ))}
                 </div>
@@ -138,7 +138,7 @@ export default function SchoolsPage() {
               <div>
                 <div className="text-xs font-bold text-[#8b9cf7] tracking-wider mb-2">03 — CONTENT FROM THE SOURCE</div>
                 <h3 className="serif text-[clamp(1.5rem,2.5vw,2rem)] font-medium text-[#1a0e2e] leading-[1.2] mb-4">Give your families Foundation content — under your name</h3>
-                <p className="text-[#5c4a7e] leading-relaxed mb-4">Your families need Montessori education. But creating that content is expensive and time-consuming. Navigator gives your school access to <strong className="text-[#1a0e2e]">495+ articles and videos from Tim Seldin and the Montessori Foundation</strong> that you can share with your parent community as your own resource.</p>
+                <p className="text-[#5c4a7e] leading-relaxed mb-4">Your families need Montessori education. But creating that content is expensive and time-consuming. Family Alliance gives your school access to <strong className="text-[#1a0e2e]">495+ articles and videos from Tim Seldin and the Montessori Foundation</strong> that you can share with your parent community as your own resource.</p>
                 <p className="text-[#5c4a7e] leading-relaxed mb-4">This isn&apos;t generic parenting content from the internet. It&apos;s <strong className="text-[#1a0e2e]">curated, Foundation-approved education</strong> that aligns with what your teachers are doing in the classroom. Send it in your newsletter. Share it at parent nights. Use it in onboarding. It&apos;s all consistent with authentic Montessori.</p>
                 <div className="space-y-2">
                   {['495+ articles and videos from Tim Seldin & the Foundation', 'Push content to your parent community through the platform', 'Consistent messaging that aligns with your classroom practice', 'New content added regularly — always current, always authentic'].map((item, i) => (
@@ -184,7 +184,7 @@ export default function SchoolsPage() {
             </div>
             <div className="reveal grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
               {[
-                { title: 'What you see', items: ['Percentage of families actively using Navigator', 'Most-viewed content and resources', 'Engagement trends over time', 'Aggregate milestone and observation counts'] },
+                { title: 'What you see', items: ['Percentage of families actively using Family Alliance', 'Most-viewed content and resources', 'Engagement trends over time', 'Aggregate milestone and observation counts'] },
                 { title: 'What you never see', items: ['Individual family conversations with Abigail', 'Specific child observations or development data', 'Parent notes or personal reflections', 'Any data that identifies a specific family'] },
               ].map((col, ci) => (
                 <div key={ci} className="bg-white border border-gray-100 rounded-xl p-6">
@@ -230,14 +230,14 @@ export default function SchoolsPage() {
         <section id="contact" className="py-24 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(165deg, #0f1a3c 0%, #1a0e2e 50%, #2d1b4e 100%)' }}>
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
           <h2 className="serif text-[clamp(2rem,4vw,3rem)] font-normal text-white leading-[1.15] max-w-[600px] mx-auto mb-4 relative z-10">Let&apos;s make your families <em className="text-[#c4b1e0]">your strongest advocates</em></h2>
-          <p className="text-white/40 max-w-[460px] mx-auto mb-7 leading-relaxed relative z-10">We&apos;d love to show you how Navigator can support your school&apos;s parent education, onboarding, and retention. No pressure — just a conversation.</p>
+          <p className="text-white/40 max-w-[460px] mx-auto mb-7 leading-relaxed relative z-10">We&apos;d love to show you how Family Alliance can support your school&apos;s parent education, onboarding, and retention. No pressure — just a conversation.</p>
           <a href="mailto:schools@montessori.org" className="relative z-10 inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-full text-[0.95rem] transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>Schedule a Conversation →</a>
           <p className="text-white/20 text-xs mt-4 relative z-10">Or email us directly at schools@montessori.org</p>
         </section>
 
         <footer className="py-10 px-6" style={{ background: '#0f1a3c', borderTop: '1px solid rgba(196,177,224,0.06)' }}>
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="serif text-lg font-semibold text-white/50">Montessori Navigator™</div>
+            <div className="serif text-lg font-semibold text-white/50">Montessori Family Alliance™</div>
             <div className="flex gap-6">
               {[{ label: 'For Parents', href: '/' }, { label: 'Free Assessment', href: '/assessment' }, { label: 'Guides', href: '/guides' }, { label: 'Privacy', href: '#' }].map(link => (
                 <Link key={link.label} href={link.href} className="text-sm text-white/25 hover:text-white/50 transition">{link.label}</Link>

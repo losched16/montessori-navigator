@@ -175,7 +175,7 @@ function SchoolSignupPageInner() {
     <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Navigator</h1>
+          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Family Alliance</h1>
           <p className="text-warm-600 italic">School Administration</p>
         </div>
 
@@ -192,7 +192,7 @@ function SchoolSignupPageInner() {
           <p className="text-navy-600 text-sm mb-6">
             {fromCheckout
               ? 'You\'ll be linked as the admin on the school you just paid for.'
-              : 'Create a school account to invite and support your families on Montessori Navigator.'}
+              : 'Create a school account to invite and support your families on Montessori Family Alliance.'}
           </p>
 
           <form onSubmit={handleSignup} className="space-y-4">

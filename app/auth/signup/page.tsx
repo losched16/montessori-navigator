@@ -155,14 +155,14 @@ function SignupPageInner() {
     <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Navigator</h1>
+          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Family Alliance</h1>
           <p className="text-warm-600 italic">A Prepared Environment for Parents</p>
         </div>
 
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
           {fromCheckout && (
             <div className="bg-warm-50 border border-warm-200 text-warm-700 text-sm rounded-lg p-3 mb-5">
-              ✓ Trial started! Finish creating your account to access Montessori Navigator.
+              ✓ Trial started! Finish creating your account to access Montessori Family Alliance.
             </div>
           )}
 

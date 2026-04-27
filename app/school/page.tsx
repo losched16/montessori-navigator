@@ -99,7 +99,7 @@ export default function SchoolDashboard() {
       {schoolSlug && (
         <div className="bg-warm-50 border border-warm-100 rounded-xl p-5">
           <h3 className="font-semibold text-navy-600 mb-2">Your Invite Link</h3>
-          <p className="text-sm text-navy-600 mb-3">Share this link with families to invite them to Montessori Navigator:</p>
+          <p className="text-sm text-navy-600 mb-3">Share this link with families to invite them to Montessori Family Alliance:</p>
           <div className="bg-white rounded-lg p-3 border border-warm-200 text-sm text-navy-600 font-mono break-all">
             {typeof window !== 'undefined' ? `${window.location.origin}/join/${schoolSlug}` : `/join/${schoolSlug}`}
           </div>
@@ -111,7 +111,7 @@ export default function SchoolDashboard() {
         <h3 className="font-semibold text-navy-600 mb-2">Privacy</h3>
         <p className="text-sm text-navy-600">
           You can see family names, children count, and enrollment dates. You <strong>cannot</strong> see family conversations,
-          observations, development levels, or any private data. Families trust Navigator to keep their data private.
+          observations, development levels, or any private data. Families trust Family Alliance to keep their data private.
         </p>
       </div>
     </div>

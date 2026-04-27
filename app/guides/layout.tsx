@@ -7,7 +7,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
       <header className="border-b border-gray-100 sticky top-0 bg-white z-30">
         <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link href="/" className="text-lg font-bold text-[#1a0e2e]" style={{ fontFamily: 'Georgia, serif' }}>
-            Montessori <span className="text-[#7b5ea7] font-normal">Navigator</span>
+            Montessori <span className="text-[#7b5ea7] font-normal">Family Alliance</span>
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/assessment" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-700">Free Assessment</Link>
@@ -34,7 +34,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
             Take Free Assessment
           </Link>
           <Link href="/auth/signup" className="px-5 py-2.5 text-white text-sm font-medium rounded-full transition" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)' }}>
-            Start Using Navigator →
+            Start Using Family Alliance →
           </Link>
         </div>
       </section>
@@ -42,7 +42,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
       {/* Footer */}
       <footer className="py-8 px-6 bg-[#1a0e2e] border-t border-white/5">
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-white/30" style={{ fontFamily: 'Georgia, serif' }}>Montessori Navigator™</div>
+          <div className="text-sm text-white/30" style={{ fontFamily: 'Georgia, serif' }}>Montessori Family Alliance™</div>
           <div className="flex gap-6">
             <Link href="/guides" className="text-xs text-white/30 hover:text-white/50">All Guides</Link>
             <Link href="/assessment" className="text-xs text-white/30 hover:text-white/50">Readiness Assessment</Link>

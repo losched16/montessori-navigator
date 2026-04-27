@@ -28,7 +28,7 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-[#1a0e2e] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'Georgia, serif' }}>Montessori Navigator</h1>
+          <h1 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'Georgia, serif' }}>Montessori Family Alliance</h1>
           <p className="text-white/40">Loading...</p>
         </div>
       </div>

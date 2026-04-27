@@ -104,7 +104,7 @@ export const START_HERE_FEATURES: StartHereFeature[] = [
   {
     id: 'guide',
     icon: '💬',
-    label: 'Guide',
+    label: 'Abigail',
     href: '/dashboard/chat',
     tagline: 'Your personal AI Montessori advisor, available 24/7.',
     whatYouCanDo: [

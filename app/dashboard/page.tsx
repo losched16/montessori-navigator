@@ -223,7 +223,7 @@ export default function DashboardHome() {
       {children.length === 0 && (
         <div className="bg-gradient-to-br from-navy-700 to-navy-500 rounded-[22px] sm:rounded-2xl p-6 sm:p-6 text-white mb-6">
           <div className="text-3xl mb-3">🌱</div>
-          <h2 className="text-lg font-bold mb-1">Welcome to Navigator</h2>
+          <h2 className="text-lg font-bold mb-1">Welcome to Family Alliance</h2>
           <p className="text-white/70 text-sm leading-relaxed mb-4">
             Your Montessori journey starts here. Let&apos;s set up your family so Abigail can give you personalized recommendations.
           </p>

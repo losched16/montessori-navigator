@@ -55,12 +55,14 @@ export default function MarketingPage() {
           <div className="absolute -top-[40%] -right-[20%] w-[80%] h-[80%] pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(74,108,247,0.12) 0%, transparent 70%)' }} />
 
           <nav className="relative z-10 px-6 py-5 flex justify-between items-center">
-            <div className="serif text-xl font-semibold text-white tracking-wide">Montessori <span className="text-[#c4b1e0] font-normal">Navigator</span></div>
+            <Link href="/" className="serif text-xl font-semibold text-white tracking-wide">Montessori <span className="text-[#c4b1e0] font-normal">Family Alliance</span></Link>
             <div className="flex items-center gap-6">
               <a href="#features" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Features</a>
               <a href="#who" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Who it&apos;s for</a>
-              <a href="#schools" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Schools</a>
-              <Link href="/auth/signup" className="text-white text-sm font-medium px-5 py-2 rounded-full border border-white/15 bg-white/10 hover:bg-white/[0.18] transition">
+              <Link href="/schools" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">For Schools</Link>
+              <Link href="/pricing" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Pricing</Link>
+              <Link href="/auth/login" className="hidden md:inline text-white/60 text-sm font-medium hover:text-white transition">Log in</Link>
+              <Link href="/pricing" className="text-white text-sm font-medium px-5 py-2 rounded-full border border-white/15 bg-white/10 hover:bg-white/[0.18] transition">
                 Get Started
               </Link>
             </div>
@@ -81,7 +83,7 @@ export default function MarketingPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3" style={{ animation: 'fadeUp 0.8s ease 0.45s both' }}>
-              <Link href="/auth/signup" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-semibold rounded-full text-[0.95rem] transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>
+              <Link href="/pricing" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-semibold rounded-full text-[0.95rem] transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>
                 Begin Your Journey →
               </Link>
               <a href="#features" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white/70 font-medium rounded-full text-[0.95rem] border border-white/15 hover:text-white hover:border-white/35 hover:bg-white/5 transition">
@@ -112,7 +114,7 @@ export default function MarketingPage() {
               Parenting today is <em className="text-[#4a2c82]">noisy</em>. Montessori shouldn&apos;t be.
             </h2>
             <p className="text-base text-[#5c4a7e] leading-relaxed max-w-[600px]">
-              Parents are overwhelmed with conflicting information, inconsistent online advice, and anxiety around every decision. Montessori Navigator cuts through the noise with clarity grounded in philosophy.
+              Parents are overwhelmed with conflicting information, inconsistent online advice, and anxiety around every decision. Montessori Family Alliance cuts through the noise with clarity grounded in philosophy.
             </p>
           </div>
 
@@ -136,7 +138,7 @@ export default function MarketingPage() {
         <section id="features" className="py-24 px-6" style={{ background: 'linear-gradient(180deg, #f8f5ff 0%, white 100%)' }}>
           <div className="max-w-[1100px] mx-auto">
             <div className="text-center mb-16 reveal">
-              <div className="text-xs font-semibold tracking-[0.15em] uppercase text-[#7b5ea7] mb-3">What Navigator Does</div>
+              <div className="text-xs font-semibold tracking-[0.15em] uppercase text-[#7b5ea7] mb-3">What Family Alliance Does</div>
               <h2 className="serif text-[clamp(2rem,4vw,3rem)] font-normal text-[#1a0e2e] leading-[1.2] max-w-[700px] mx-auto">
                 Everything a Montessori parent needs, <em className="text-[#4a2c82]">nothing they don&apos;t</em>
               </h2>
@@ -250,7 +252,7 @@ export default function MarketingPage() {
             {[
               { icon: '🏡', title: 'Homeschooling Families', desc: 'Your primary curriculum partner. Scope and sequence planning, daily learning plans, developmental tracking, and Abigail, your AI-powered Montessori guide who knows pedagogy inside and out.' },
               { icon: '🌿', title: 'Montessori School Parents', desc: "Extend the classroom home. Understand what your child is learning, support it with aligned activities, and speak the same language as your child's teachers." },
-              { icon: '🔭', title: 'Montessori-Curious Families', desc: 'Exploring Montessori for the first time? Navigator meets you where you are — with school evaluation tools, gentle guidance, and a foundation of understanding.' },
+              { icon: '🔭', title: 'Montessori-Curious Families', desc: 'Exploring Montessori for the first time? Family Alliance meets you where you are — with school evaluation tools, gentle guidance, and a foundation of understanding.' },
             ].map((card, i) => (
               <div key={i} className="reveal p-8 rounded-2xl relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1a0e2e 0%, #2d1b4e 100%)' }}>
                 <span className="text-3xl mb-4 block relative z-10">{card.icon}</span>
@@ -267,10 +269,10 @@ export default function MarketingPage() {
             <div className="reveal">
               <div className="text-xs font-semibold tracking-[0.15em] uppercase text-[#7b5ea7] mb-3">For Schools</div>
               <h2 className="serif text-[clamp(2rem,4vw,3rem)] font-normal text-[#1a0e2e] leading-[1.2] max-w-[700px] mx-auto mb-4">
-                Navigator <em className="text-[#4a2c82]">supports</em> schools. It never replaces them.
+                Family Alliance <em className="text-[#4a2c82]">supports</em> schools. It never replaces them.
               </h2>
               <p className="text-base text-[#5c4a7e] leading-relaxed max-w-[550px] mx-auto">
-                Licensed schools provide Navigator to their parent community — reducing confusion, strengthening alignment, and extending their educational mission without increasing staff workload.
+                Licensed schools provide Family Alliance to their parent community — reducing confusion, strengthening alignment, and extending their educational mission without increasing staff workload.
               </p>
             </div>
 
@@ -299,15 +301,15 @@ export default function MarketingPage() {
           <p className="text-lg text-white/40 max-w-[450px] mx-auto mb-8 leading-relaxed relative z-10">
             Join families who are bringing intentionality to every part of their child&apos;s world.
           </p>
-          <Link href="/auth/signup" className="relative z-10 inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-full text-lg transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>
-            Start Using Navigator →
+          <Link href="/pricing" className="relative z-10 inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-full text-lg transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>
+            Start Using Family Alliance →
           </Link>
         </section>
 
         {/* ====== FOOTER ====== */}
         <footer className="py-10 px-6" style={{ background: '#1a0e2e', borderTop: '1px solid rgba(196,177,224,0.06)' }}>
           <div className="max-w-[1100px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="serif text-lg font-semibold text-white/60">Montessori Navigator™</div>
+            <div className="serif text-lg font-semibold text-white/60">Montessori Family Alliance™</div>
             <div className="flex gap-6">
               {['Privacy', 'Terms', 'Contact', 'For Schools'].map(link => (
                 <a key={link} href="#" className="text-sm text-white/30 hover:text-white/60 transition">{link}</a>

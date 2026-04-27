@@ -291,7 +291,7 @@ export default function AssessmentPage() {
       {/* Header */}
       <header className="px-6 py-5 flex justify-between items-center max-w-3xl mx-auto">
         <Link href="/" className="text-lg font-bold text-[#1a0e2e]" style={{ fontFamily: 'Georgia, serif' }}>
-          Navigator
+          Family Alliance
         </Link>
         <Link href="/auth/signup" className="text-sm text-[#4a2c82] font-medium hover:underline">
           Sign up
@@ -445,10 +445,10 @@ export default function AssessmentPage() {
             <div className="text-center py-8">
               <h3 className="text-lg font-semibold text-[#1a0e2e] mb-2">Ready to go deeper?</h3>
               <p className="text-sm text-gray-500 mb-4 max-w-md mx-auto">
-                Montessori Navigator gives you personalized guidance, curriculum planning, and development tracking — all grounded in the Montessori Foundation&apos;s expertise.
+                Montessori Family Alliance gives you personalized guidance, curriculum planning, and development tracking — all grounded in the Montessori Foundation&apos;s expertise.
               </p>
               <Link href="/auth/signup" className="inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-full text-sm transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>
-                Start Using Navigator →
+                Start Using Family Alliance →
               </Link>
             </div>
           </div>

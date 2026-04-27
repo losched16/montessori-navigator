@@ -24,7 +24,7 @@ function SchoolWelcomePageInner() {
       {/* Header */}
       <header className="bg-navy-700 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Montessori Navigator</Link>
+          <Link href="/" className="text-lg font-bold">Montessori Family Alliance</Link>
           <Link href="/auth/login" className="text-sm text-white/70 hover:text-white">Log in</Link>
         </div>
       </header>
@@ -32,7 +32,7 @@ function SchoolWelcomePageInner() {
       <main className="max-w-xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
         <div className="text-5xl mb-6">🎉</div>
         <h1 className="text-3xl font-bold text-navy-700 mb-3">
-          Welcome to Montessori Navigator!
+          Welcome to Montessori Family Alliance!
         </h1>
         <p className="text-lg text-navy-600/70 mb-8">
           Your subscription is confirmed. Let&apos;s get your school set up so families can start using the platform.

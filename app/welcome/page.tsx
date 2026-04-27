@@ -119,7 +119,7 @@ function WelcomePageInner() {
     <div className="min-h-screen bg-[#fafaf8] flex flex-col">
       <header className="bg-navy-700 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center">
-          <Link href="/" className="text-lg font-bold">Montessori Navigator</Link>
+          <Link href="/" className="text-lg font-bold">Montessori Family Alliance</Link>
         </div>
       </header>
 

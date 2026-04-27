@@ -188,7 +188,7 @@ export default function OnboardingPage() {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-navy-600">Welcome to Navigator</h1>
+          <h1 className="text-2xl font-bold text-navy-600">Welcome to Family Alliance</h1>
           <p className="text-gray-500 mt-1">Let&apos;s set up your family&apos;s prepared environment</p>
           <p className="text-xs text-gray-400 mt-2">You can always come back to this later from Settings</p>
         </div>
@@ -259,7 +259,7 @@ export default function OnboardingPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">How should Navigator talk to you?</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">How should Family Alliance talk to you?</label>
                   <div className="grid grid-cols-2 gap-2">
                     {[
                       { value: 'gentle', label: 'Warm & Encouraging' },
@@ -493,7 +493,7 @@ export default function OnboardingPage() {
                   disabled={loading}
                   className="flex-1 bg-warm-500 hover:bg-warm-600 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50"
                 >
-                  {loading ? 'Setting up...' : 'Start Using Navigator'}
+                  {loading ? 'Setting up...' : 'Start Using Family Alliance'}
                 </button>
               </div>
             </div>

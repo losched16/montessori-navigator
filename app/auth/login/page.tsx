@@ -33,7 +33,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Navigator</h1>
+          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Family Alliance</h1>
           <p className="text-warm-600 italic">A Prepared Environment for Parents</p>
         </div>
 
@@ -79,7 +79,7 @@ export default function LoginPage() {
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
-            New to Navigator?{' '}
+            New to Family Alliance?{' '}
             <Link href="/auth/signup" className="text-warm-600 hover:text-warm-600 font-medium">
               Create an account
             </Link>

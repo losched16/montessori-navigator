@@ -76,7 +76,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
   const navItems = [
     { href: '/dashboard', label: 'Home', icon: '🏠' },
     ...(showStartHere ? [{ href: '/dashboard/start-here', label: 'Start Here', icon: '🚀' }] : []),
-    { href: '/dashboard/chat', label: 'Guide', icon: '💬' },
+    { href: '/dashboard/chat', label: 'Abigail', icon: '💬' },
     { href: '/dashboard/children', label: 'Children', icon: '🌱' },
     { href: '/dashboard/development', label: 'Baby Milestones', icon: '👶' },
     { href: '/dashboard/journey', label: 'Journey', icon: '✨', children: [
@@ -106,7 +106,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/dashboard" className="text-lg font-bold text-white">
-              Navigator
+              Family Alliance
             </Link>
 
             {/* Child selector */}

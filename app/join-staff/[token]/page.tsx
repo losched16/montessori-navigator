@@ -173,7 +173,7 @@ export default function JoinStaffPage() {
     <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Navigator</h1>
+          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Family Alliance</h1>
           <p className="text-warm-600 italic">School Administration</p>
         </div>
 

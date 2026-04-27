@@ -83,7 +83,7 @@ export default function InvitePage() {
     <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Navigator</h1>
+          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Family Alliance</h1>
           <p className="text-warm-600 italic">A Prepared Environment for Parents</p>
         </div>
 
@@ -111,7 +111,7 @@ export default function InvitePage() {
                 <div className="text-4xl mb-3">👨‍👩‍👧</div>
                 <h2 className="text-xl font-semibold text-navy-600 mb-2">Family Invitation</h2>
                 <p className="text-navy-600 text-sm">
-                  You&apos;ve been invited to join <strong>{inviteInfo.familyName || 'a family'}</strong> on Montessori Navigator.
+                  You&apos;ve been invited to join <strong>{inviteInfo.familyName || 'a family'}</strong> on Montessori Family Alliance.
                 </p>
               </div>
 
@@ -155,7 +155,7 @@ export default function InvitePage() {
                 <div className="text-4xl mb-3">🏫</div>
                 <h2 className="text-xl font-semibold text-navy-600 mb-2">School Invitation</h2>
                 <p className="text-navy-600 text-sm">
-                  <strong>{inviteInfo.schoolName || 'A school'}</strong> has invited you to join Montessori Navigator.
+                  <strong>{inviteInfo.schoolName || 'A school'}</strong> has invited you to join Montessori Family Alliance.
                 </p>
               </div>
 

@@ -1,10 +1,10 @@
-# Montessori Navigator
+# Montessori Family Alliance
 
 **A Prepared Environment for Parents** — AI-powered Montessori guidance, curriculum planning, and child development tracking. Built by the Montessori Foundation.
 
 ## What This Is
 
-Montessori Navigator is a subscription-based parent intelligence platform that helps families implement Montessori principles at home. It combines Foundation-curated content with AI personalization to provide:
+Montessori Family Alliance is a subscription-based parent intelligence platform that helps families implement Montessori principles at home. It combines Foundation-curated content with AI personalization to provide:
 
 - **AI Montessori Guide** — Conversational assistant grounded in authentic Montessori pedagogy, with 400+ line knowledge base covering all four planes of development, sensitive periods, scope & sequence, discipline framework, and parent coaching
 - **Intelligent Dashboard** — Personalized insights, sensitive period alerts, observation prompts, and smart next-action recommendations
