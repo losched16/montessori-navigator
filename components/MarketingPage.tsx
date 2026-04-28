@@ -48,26 +48,30 @@ export default function MarketingPage() {
       `}</style>
 
       <div className="landing-page">
+        {/* ====== HEADER (white) ====== */}
+        <header className="bg-white border-b border-gray-100 sticky top-0 z-30">
+          <nav className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+            <Logo variant="dark" imgClassName="h-9 sm:h-10 w-auto" />
+            <div className="flex items-center gap-6">
+              <a href="#features" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Features</a>
+              <a href="#who" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Who it&apos;s for</a>
+              <Link href="/schools" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">For Schools</Link>
+              <Link href="/pricing" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Pricing</Link>
+              <Link href="/auth/login" className="hidden md:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Log in</Link>
+              <Link href="/pricing" className="text-white text-sm font-medium px-5 py-2 rounded-full transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 16px rgba(74,108,247,0.25)' }}>
+                Get Started
+              </Link>
+            </div>
+          </nav>
+        </header>
+
         {/* ====== HERO ====== */}
-        <section className="min-h-screen relative flex flex-col overflow-hidden" style={{ background: 'linear-gradient(165deg, #1a0e2e 0%, #2d1b4e 30%, #0f1a3c 70%, #1a2d6d 100%)' }}>
+        <section className="min-h-[calc(100vh-4rem)] relative flex flex-col overflow-hidden" style={{ background: 'linear-gradient(165deg, #1a0e2e 0%, #2d1b4e 30%, #0f1a3c 70%, #1a2d6d 100%)' }}>
           {/* Grain */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`, backgroundSize: '200px' }} />
           {/* Glow */}
           <div className="absolute -top-[40%] -right-[20%] w-[80%] h-[80%] pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(74,108,247,0.12) 0%, transparent 70%)' }} />
 
-          <nav className="relative z-10 px-6 py-5 flex justify-between items-center">
-            <Logo variant="light" imgClassName="h-9 sm:h-10 w-auto" />
-            <div className="flex items-center gap-6">
-              <a href="#features" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Features</a>
-              <a href="#who" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Who it&apos;s for</a>
-              <Link href="/schools" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">For Schools</Link>
-              <Link href="/pricing" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Pricing</Link>
-              <Link href="/auth/login" className="hidden md:inline text-white/60 text-sm font-medium hover:text-white transition">Log in</Link>
-              <Link href="/pricing" className="text-white text-sm font-medium px-5 py-2 rounded-full border border-white/15 bg-white/10 hover:bg-white/[0.18] transition">
-                Get Started
-              </Link>
-            </div>
-          </nav>
 
           <div className="flex-1 flex flex-col justify-center items-center text-center px-6 relative z-5">
             <div className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/10 px-4 py-1.5 rounded-full mb-8" style={{ animation: 'fadeUp 0.8s ease both' }}>
