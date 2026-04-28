@@ -21,18 +21,50 @@ export default function ResetPasswordPage() {
   const [authReady, setAuthReady] = useState(false)
   const [hasSession, setHasSession] = useState(false)
 
-  // Wait for Supabase to process the URL hash and establish a recovery session
+  // The recovery link can land here in one of three ways:
+  //   1. PKCE flow: ?code=XXX  → call exchangeCodeForSession
+  //   2. Implicit flow: #access_token=XXX&refresh_token=YYY&type=recovery
+  //      → manually set the session
+  //   3. Already-authenticated session (e.g. admin.generateLink return)
+  //      → just read from getSession()
+  // Try them in order; the first that works wins.
   useEffect(() => {
     let cancelled = false
-    const check = async () => {
-      // Give supabase a tick to read the hash
-      await new Promise(r => setTimeout(r, 200))
+    const exchange = async () => {
+      try {
+        // Path 1: PKCE — code in query string
+        const params = new URLSearchParams(window.location.search)
+        const code = params.get('code')
+        if (code) {
+          const { error: exErr } = await supabase.auth.exchangeCodeForSession(code)
+          if (exErr) console.warn('exchangeCodeForSession:', exErr.message)
+          // Strip the code from the URL so a refresh doesn't try to re-use it
+          window.history.replaceState({}, '', window.location.pathname)
+        } else {
+          // Path 2: implicit — tokens in hash
+          const hash = window.location.hash.startsWith('#')
+            ? window.location.hash.substring(1)
+            : window.location.hash
+          if (hash) {
+            const hashParams = new URLSearchParams(hash)
+            const accessToken = hashParams.get('access_token')
+            const refreshToken = hashParams.get('refresh_token')
+            if (accessToken && refreshToken) {
+              await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken })
+              window.history.replaceState({}, '', window.location.pathname)
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('Reset session bootstrap error:', err)
+      }
+
       const { data: { session } } = await supabase.auth.getSession()
       if (cancelled) return
       setHasSession(!!session)
       setAuthReady(true)
     }
-    check()
+    exchange()
     return () => { cancelled = true }
   }, [])
 
