@@ -11,7 +11,10 @@ export default function SchoolPricingPage() {
   const [error, setError] = useState('')
 
   const pricePerFamily = 12
-  const total = familyCount * pricePerFamily
+  const MIN_FAMILIES = 10
+  const billedCount = Math.max(familyCount, MIN_FAMILIES)
+  const total = billedCount * pricePerFamily
+  const belowMinimum = familyCount < MIN_FAMILIES
 
   const handleSubscribe = async () => {
     setError('')
@@ -114,6 +117,9 @@ export default function SchoolPricingPage() {
                     className="w-20 text-center border border-gray-200 rounded-lg px-2 py-2 text-navy-700 font-medium focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
                   />
                 </div>
+                <p className="text-xs text-navy-600/50 mt-2">
+                  Minimum billing applies for schools with fewer than {MIN_FAMILIES} families.
+                </p>
               </div>
 
               {/* Total */}
@@ -124,8 +130,19 @@ export default function SchoolPricingPage() {
                   <span className="text-lg font-normal text-navy-600/50">/year</span>
                 </div>
                 <div className="text-sm text-navy-600/50 mt-1">
-                  {familyCount} families × ${pricePerFamily}/year
+                  {belowMinimum ? (
+                    <>
+                      {billedCount} families ({MIN_FAMILIES} minimum) × ${pricePerFamily}/year
+                    </>
+                  ) : (
+                    <>{billedCount} families × ${pricePerFamily}/year</>
+                  )}
                 </div>
+                {belowMinimum && (
+                  <div className="mt-2 text-xs text-warm-700 bg-warm-100/50 rounded-md px-3 py-1.5 inline-block">
+                    {MIN_FAMILIES}-family minimum applies (you entered {familyCount})
+                  </div>
+                )}
               </div>
 
               {/* Form fields */}

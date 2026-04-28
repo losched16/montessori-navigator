@@ -113,7 +113,11 @@ export async function POST(req: NextRequest) {
         }
 
         // ----- SCHOOL SUBSCRIPTION (existing flow) -----
-        const familyCount = parseInt(session.metadata?.familyCount || '0', 10)
+        // family_count = billed quantity (the seats they're paying for, which
+        // is at least the 10-family minimum). We also record the actual count
+        // they entered in metadata for reference.
+        const billedQuantity = parseInt(session.metadata?.billedQuantity || session.metadata?.familyCount || '0', 10)
+        const familyCount = billedQuantity
         const schoolName = session.metadata?.schoolName || 'Unknown School'
         const billingEmail = session.customer_email || ''
 

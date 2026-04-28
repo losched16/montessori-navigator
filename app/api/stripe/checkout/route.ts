@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
     // -----------------------------------------
     if (plan === 'school') {
       const { familyCount, schoolName, email } = body
+      const MIN_FAMILIES = 10
 
       if (!familyCount || familyCount < 1) {
         return NextResponse.json({ error: 'Family count must be at least 1' }, { status: 400 })
@@ -46,13 +47,17 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Email is required' }, { status: 400 })
       }
 
+      // Enforce 10-family minimum: schools with fewer families pay for the minimum.
+      const billedQuantity = Math.max(Number(familyCount), MIN_FAMILIES)
+
       const session = await stripe.checkout.sessions.create({
         mode: 'subscription',
         customer_email: email,
-        line_items: [{ price: priceId, quantity: familyCount }],
+        line_items: [{ price: priceId, quantity: billedQuantity }],
         metadata: {
           plan: 'school',
           familyCount: String(familyCount),
+          billedQuantity: String(billedQuantity),
           schoolName,
         },
         success_url: `${appUrl}/for-schools/welcome?session_id={CHECKOUT_SESSION_ID}`,
