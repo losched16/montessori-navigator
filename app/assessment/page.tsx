@@ -293,7 +293,7 @@ export default function AssessmentPage() {
         <Link href="/" className="text-lg font-bold text-[#1a0e2e]" style={{ fontFamily: 'Georgia, serif' }}>
           Family Alliance
         </Link>
-        <Link href="/auth/signup" className="text-sm text-[#4a2c82] font-medium hover:underline">
+        <Link href="/pricing" className="text-sm text-[#4a2c82] font-medium hover:underline">
           Sign up
         </Link>
       </header>
@@ -371,7 +371,7 @@ export default function AssessmentPage() {
                       <h4 className="font-semibold text-[#1a0e2e] mb-1">Full Report Available</h4>
                       <p className="text-sm text-gray-500 mb-3 max-w-xs">Detailed analysis, personalized next steps, and school readiness notes</p>
                       <div className="flex gap-2 justify-center">
-                        <Link href="/auth/signup" className="px-5 py-2 bg-[#4a2c82] hover:bg-[#3d2470] text-white text-sm font-medium rounded-lg transition">
+                        <Link href="/pricing" className="px-5 py-2 bg-[#4a2c82] hover:bg-[#3d2470] text-white text-sm font-medium rounded-lg transition">
                           Sign Up Free
                         </Link>
                         <button
@@ -447,7 +447,7 @@ export default function AssessmentPage() {
               <p className="text-sm text-gray-500 mb-4 max-w-md mx-auto">
                 Montessori Family Alliance gives you personalized guidance, curriculum planning, and development tracking — all grounded in the Montessori Foundation&apos;s expertise.
               </p>
-              <Link href="/auth/signup" className="inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-full text-sm transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>
+              <Link href="/pricing" className="inline-flex items-center gap-2 px-6 py-3 text-white font-semibold rounded-full text-sm transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>
                 Start Using Family Alliance →
               </Link>
             </div>

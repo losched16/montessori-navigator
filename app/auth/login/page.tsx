@@ -81,8 +81,8 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-gray-500 mt-6">
             New to Family Alliance?{' '}
-            <Link href="/auth/signup" className="text-warm-600 hover:text-warm-600 font-medium">
-              Create an account
+            <Link href="/pricing" className="text-warm-600 hover:text-warm-600 font-medium">
+              Choose a plan to get started
             </Link>
           </p>
         </div>

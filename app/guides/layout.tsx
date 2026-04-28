@@ -12,7 +12,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
           <div className="flex items-center gap-4">
             <Link href="/assessment" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-700">Free Assessment</Link>
             <Link href="/guides" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-700">Guides</Link>
-            <Link href="/auth/signup" className="text-sm font-medium text-white bg-[#4a2c82] hover:bg-[#3d2470] px-4 py-1.5 rounded-full transition">
+            <Link href="/pricing" className="text-sm font-medium text-white bg-[#4a2c82] hover:bg-[#3d2470] px-4 py-1.5 rounded-full transition">
               Get Started
             </Link>
           </div>
@@ -33,7 +33,7 @@ export default function GuidesLayout({ children }: { children: React.ReactNode }
           <Link href="/assessment" className="px-5 py-2.5 bg-white/10 border border-white/20 text-white text-sm font-medium rounded-full hover:bg-white/20 transition">
             Take Free Assessment
           </Link>
-          <Link href="/auth/signup" className="px-5 py-2.5 text-white text-sm font-medium rounded-full transition" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)' }}>
+          <Link href="/pricing" className="px-5 py-2.5 text-white text-sm font-medium rounded-full transition" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)' }}>
             Start Using Family Alliance →
           </Link>
         </div>

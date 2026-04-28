@@ -34,6 +34,14 @@ function SchoolSignupPageInner() {
 
   const supabase = createClient()
 
+  // Payment gate: school admin signup requires a Stripe checkout session.
+  // Direct visitors are sent to /for-schools/pricing to start a trial first.
+  useEffect(() => {
+    if (!sessionId) {
+      router.replace('/for-schools/pricing')
+    }
+  }, [sessionId])
+
   // On mount: if a session_id is present, fetch the Stripe session details
   // and find the school that the webhook already created for this customer.
   useEffect(() => {
@@ -274,7 +282,7 @@ function SchoolSignupPageInner() {
           </p>
           <p className="text-center text-sm text-navy-600 mt-2">
             Looking for a parent account?{' '}
-            <Link href="/auth/signup" className="text-warm-600 hover:text-warm-700 font-medium">
+            <Link href="/pricing" className="text-warm-600 hover:text-warm-700 font-medium">
               Sign up as a parent
             </Link>
           </p>

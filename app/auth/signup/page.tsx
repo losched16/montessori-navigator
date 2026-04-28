@@ -19,18 +19,32 @@ function SignupPageInner() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
   const prefillEmail = searchParams.get('email')
+  const schoolSlug = searchParams.get('school')
+  const planParam = searchParams.get('plan')
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState(prefillEmail || '')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [gateChecked, setGateChecked] = useState(false)
 
   const supabase = createClient()
 
   useEffect(() => {
     if (prefillEmail) setEmail(prefillEmail)
   }, [prefillEmail])
+
+  // Payment gate: signup is only valid via Stripe checkout (session_id),
+  // a school invite (school slug), or the legacy plan param.
+  // Direct visitors are sent to /pricing to choose a plan first.
+  useEffect(() => {
+    if (sessionId || schoolSlug || planParam === 'monthly' || planParam === 'annual') {
+      setGateChecked(true)
+      return
+    }
+    router.replace('/pricing')
+  }, [sessionId, schoolSlug, planParam])
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -151,6 +165,15 @@ function SignupPageInner() {
   }
 
   const fromCheckout = !!sessionId
+
+  // While we resolve the gate, show a quiet loading state instead of the form
+  if (!gateChecked) {
+    return (
+      <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
+        <div className="text-navy-600 text-sm">Loading…</div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
