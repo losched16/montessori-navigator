@@ -3,6 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { randomUUID } from 'crypto'
+import { sendSchoolStaffInvite } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
@@ -138,6 +139,23 @@ export async function POST(req: NextRequest) {
 
   if (error) {
     return NextResponse.json({ error: 'Failed to create invitation: ' + error.message }, { status: 500 })
+  }
+
+  // Send invitation email (best-effort)
+  try {
+    const { data: school } = await service
+      .from('schools')
+      .select('name')
+      .eq('id', auth.schoolId)
+      .maybeSingle()
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    await sendSchoolStaffInvite({
+      to: normalizedEmail,
+      schoolName: school?.name || 'Your school',
+      inviteUrl: `${appUrl}/join-staff/${token}`,
+    })
+  } catch (emailErr) {
+    console.error('[school/staff] invite email failed:', emailErr)
   }
 
   return NextResponse.json({ ok: true, token })

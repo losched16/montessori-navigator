@@ -79,6 +79,12 @@ export default function LoginPage() {
             </button>
           </form>
 
+          <p className="text-center text-sm text-gray-500 mt-4">
+            <Link href="/auth/forgot-password" className="text-warm-600 hover:text-warm-700 font-medium">
+              Forgot your password?
+            </Link>
+          </p>
+
           <p className="text-center text-sm text-gray-500 mt-6">
             New to Family Alliance?{' '}
             <Link href="/pricing" className="text-warm-600 hover:text-warm-600 font-medium">

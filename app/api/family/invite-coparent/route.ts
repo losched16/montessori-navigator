@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { randomUUID } from 'crypto'
+import { sendCoParentInvite } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
     // Verify the user is a primary member of this family
     const { data: parent } = await supabase
       .from('parents')
-      .select('id')
+      .select('id, display_name')
       .eq('user_id', user.id)
       .single()
 
@@ -107,12 +108,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to create invitation' }, { status: 500 })
     }
 
-    // Store the role and permissions in the invitation for when it's accepted
-    // We'll use a simple approach: store in a metadata field or handle on acceptance
-
-    // TODO: Send invite email via Resend or Supabase Edge Function
-    // For now, the invite link is generated client-side from the token
-    // The link format is: /invite/[token]
+    // Send invitation email (best-effort)
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+    const inviteUrl = `${appUrl}/invite/${token}`
+    try {
+      await sendCoParentInvite({
+        to: email,
+        inviterName: parent.display_name,
+        inviteUrl,
+      })
+    } catch (emailErr) {
+      console.error('[invite-coparent] email send failed:', emailErr)
+      // Don't fail the request — admin can resend the link from the UI
+    }
 
     return NextResponse.json({
       success: true,

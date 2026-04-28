@@ -3,6 +3,7 @@ import Stripe from 'stripe'
 import { createServerClient } from '@supabase/ssr'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
+import { sendSchoolAdminWelcome } from '@/lib/email'
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -117,6 +118,30 @@ export async function POST(req: NextRequest) {
         .from('school_staff')
         .update({ role: 'admin' })
         .eq('id', existingStaff.id)
+    }
+
+    // Send welcome email (best-effort)
+    try {
+      const finalSchoolName = (schoolName && schoolName.trim()) || school.name || 'Your school'
+      const { data: schoolAfter } = await service
+        .from('schools')
+        .select('trial_ends_at, billing_email')
+        .eq('id', school.id)
+        .maybeSingle()
+      const emailTo = schoolAfter?.billing_email || user.email
+      if (emailTo) {
+        const trialEndDate = schoolAfter?.trial_ends_at
+          ? new Date(schoolAfter.trial_ends_at).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+          : undefined
+        await sendSchoolAdminWelcome({
+          to: emailTo,
+          schoolName: finalSchoolName,
+          trialEndDate,
+          appUrl: process.env.NEXT_PUBLIC_APP_URL,
+        })
+      }
+    } catch (emailErr) {
+      console.error('[school/claim] welcome email failed:', emailErr)
     }
 
     return NextResponse.json({ ok: true, schoolId: school.id, schoolName: school.name })

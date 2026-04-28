@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import { sendParentWelcome } from '@/lib/email'
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -63,7 +64,7 @@ export async function POST(req: NextRequest) {
 
     const { data: parent } = await supabase
       .from('parents')
-      .select('id')
+      .select('id, email, display_name')
       .eq('user_id', user.id)
       .single()
 
@@ -101,6 +102,24 @@ export async function POST(req: NextRequest) {
         current_period_end: currentPeriodEnd,
       })
       .eq('id', parent.id)
+
+    // Send welcome email (best-effort — don't fail the request if email errors)
+    try {
+      const emailTo = parent.email || user.email
+      if (emailTo) {
+        const trialEndDate = trialEndsAt
+          ? new Date(trialEndsAt).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })
+          : undefined
+        await sendParentWelcome({
+          to: emailTo,
+          name: parent.display_name,
+          trialEndDate,
+          appUrl: process.env.NEXT_PUBLIC_APP_URL,
+        })
+      }
+    } catch (emailErr) {
+      console.error('[link-session] welcome email failed:', emailErr)
+    }
 
     return NextResponse.json({ ok: true, status, plan, trialEndsAt })
   } catch (error: unknown) {
