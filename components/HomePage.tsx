@@ -37,7 +37,7 @@ export default function HomePage() {
               <Link href="/schools" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">For Schools</Link>
               <Link href="/guides" className="hidden md:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Guides</Link>
               <Link href="/auth/login" className="hidden md:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Log in</Link>
-              <Link href="/pricing" className="text-white text-sm font-medium px-5 py-2 rounded-full transition hover:-translate-y-0.5"
+              <Link href="/get-started" className="text-white text-sm font-medium px-5 py-2 rounded-full transition hover:-translate-y-0.5"
                 style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 16px rgba(74,108,247,0.25)' }}>
                 Get Started
               </Link>
