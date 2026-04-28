@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
 
@@ -7,6 +8,20 @@ import Logo from '@/components/ui/Logo'
 // Messaging is intentionally neutral: the Alliance supports school-based
 // Montessori learning (it does NOT promote homeschool or replacing teachers).
 export default function HomePage() {
+  const [learningOpen, setLearningOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setLearningOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
   return (
     <>
       <style jsx global>{`
@@ -35,7 +50,42 @@ export default function HomePage() {
             <div className="flex items-center gap-6">
               <Link href="/for-parents" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">For Parents</Link>
               <Link href="/schools" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">For Schools</Link>
-              <Link href="/guides" className="hidden md:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Guides</Link>
+              <div
+                ref={dropdownRef}
+                className="hidden md:block relative"
+                onMouseEnter={() => setLearningOpen(true)}
+                onMouseLeave={() => setLearningOpen(false)}
+              >
+                <button
+                  type="button"
+                  onClick={() => setLearningOpen(o => !o)}
+                  className="inline-flex items-center gap-1 text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition"
+                >
+                  Learning Center
+                  <span className={`text-[10px] transition-transform ${learningOpen ? 'rotate-180' : ''}`}>▾</span>
+                </button>
+                {learningOpen && (
+                  <div className="absolute top-full right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-40">
+                    <Link
+                      href="/guides"
+                      onClick={() => setLearningOpen(false)}
+                      className="block px-4 py-3 hover:bg-[#fafaf8] transition"
+                    >
+                      <div className="font-medium text-[#1a0e2e] text-sm">Articles</div>
+                      <div className="text-xs text-[#5c4a7e] mt-0.5">Montessori guides for parents</div>
+                    </Link>
+                    <div className="border-t border-gray-100" />
+                    <Link
+                      href="/assessment"
+                      onClick={() => setLearningOpen(false)}
+                      className="block px-4 py-3 hover:bg-[#fafaf8] transition"
+                    >
+                      <div className="font-medium text-[#1a0e2e] text-sm">Free Montessori Assessment</div>
+                      <div className="text-xs text-[#5c4a7e] mt-0.5">Find out where to start</div>
+                    </Link>
+                  </div>
+                )}
+              </div>
               <Link href="/auth/login" className="hidden md:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Log in</Link>
               <Link href="/get-started" className="text-white text-sm font-medium px-5 py-2 rounded-full transition hover:-translate-y-0.5"
                 style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 16px rgba(74,108,247,0.25)' }}>
@@ -193,7 +243,7 @@ export default function HomePage() {
             {[
               { label: 'For Parents', href: '/for-parents' },
               { label: 'For Schools', href: '/schools' },
-              { label: 'Guides', href: '/guides' },
+              { label: 'Articles', href: '/guides' },
               { label: 'Free Assessment', href: '/assessment' },
               { label: 'Pricing', href: '/pricing' },
               { label: 'Log in', href: '/auth/login' },

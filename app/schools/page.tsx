@@ -242,7 +242,7 @@ export default function SchoolsPage() {
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="serif text-lg font-semibold text-white/50">Montessori Family Alliance™</div>
             <div className="flex gap-6">
-              {[{ label: 'For Parents', href: '/for-parents' }, { label: 'Free Assessment', href: '/assessment' }, { label: 'Guides', href: '/guides' }, { label: 'Privacy', href: '#' }].map(link => (
+              {[{ label: 'For Parents', href: '/for-parents' }, { label: 'Free Assessment', href: '/assessment' }, { label: 'Articles', href: '/guides' }, { label: 'Privacy', href: '#' }].map(link => (
                 <Link key={link.label} href={link.href} className="text-sm text-white/25 hover:text-white/50 transition">{link.label}</Link>
               ))}
             </div>
