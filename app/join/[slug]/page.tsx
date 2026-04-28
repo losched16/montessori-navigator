@@ -129,55 +129,116 @@ export default function JoinSchoolPage() {
     setJoining(true)
     setFormError('')
 
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) {
+        setFormError('You appear to be signed out. Please refresh the page.')
+        setJoining(false)
+        return
+      }
 
-    const { data: parent } = await supabase
-      .from('parents')
-      .select('id')
-      .eq('user_id', user.id)
-      .single()
+      // Get or create parent profile (e.g. user signed up as school admin
+      // and now wants to join their own school as a parent)
+      let { data: parent } = await supabase
+        .from('parents')
+        .select('id')
+        .eq('user_id', user.id)
+        .maybeSingle()
 
-    if (!parent) { setJoining(false); return }
+      if (!parent) {
+        const { data: newParent, error: parentErr } = await supabase
+          .from('parents')
+          .insert({
+            user_id: user.id,
+            email: user.email,
+            display_name: user.email?.split('@')[0] || null,
+          })
+          .select('id')
+          .single()
+        if (parentErr || !newParent) {
+          setFormError('Failed to create parent profile: ' + (parentErr?.message || 'unknown'))
+          setJoining(false)
+          return
+        }
+        parent = newParent
+      }
 
-    // Get their family
-    const { data: membership } = await supabase
-      .from('family_members')
-      .select('family_id')
-      .eq('parent_id', parent.id)
-      .limit(1)
-      .single()
+      // Get or create family
+      const { data: membership } = await supabase
+        .from('family_members')
+        .select('family_id')
+        .eq('parent_id', parent.id)
+        .limit(1)
+        .maybeSingle()
 
-    if (!membership) { setJoining(false); return }
+      let familyId = membership?.family_id
 
-    // Get school
-    const { data: schoolData } = await supabase
-      .from('schools')
-      .select('id')
-      .eq('slug', slug)
-      .single()
+      if (!familyId) {
+        familyId = crypto.randomUUID()
+        const { error: famErr } = await supabase
+          .from('families')
+          .insert({ id: familyId, name: 'My Family' })
+        if (famErr) {
+          setFormError('Failed to create family: ' + famErr.message)
+          setJoining(false)
+          return
+        }
+        const { error: memErr } = await supabase
+          .from('family_members')
+          .insert({
+            family_id: familyId,
+            parent_id: parent.id,
+            role: 'primary',
+            permissions: 'full',
+          })
+        if (memErr) {
+          setFormError('Failed to link parent to family: ' + memErr.message)
+          setJoining(false)
+          return
+        }
+      }
 
-    if (!schoolData) { setJoining(false); return }
+      // Get school
+      const { data: schoolData } = await supabase
+        .from('schools')
+        .select('id')
+        .eq('slug', slug)
+        .maybeSingle()
 
-    // Check if already enrolled
-    const { data: existing } = await supabase
-      .from('school_families')
-      .select('id')
-      .eq('school_id', schoolData.id)
-      .eq('family_id', membership.family_id)
-      .single()
+      if (!schoolData) {
+        setFormError('School not found.')
+        setJoining(false)
+        return
+      }
 
-    if (!existing) {
-      await supabase
+      // Check if already enrolled
+      const { data: existing } = await supabase
         .from('school_families')
-        .insert({
-          school_id: schoolData.id,
-          family_id: membership.family_id,
-        })
-    }
+        .select('id')
+        .eq('school_id', schoolData.id)
+        .eq('family_id', familyId)
+        .maybeSingle()
 
-    setJoined(true)
-    setTimeout(() => router.push('/dashboard'), 2000)
+      if (!existing) {
+        const { error: enrollErr } = await supabase
+          .from('school_families')
+          .insert({
+            school_id: schoolData.id,
+            family_id: familyId,
+          })
+        if (enrollErr) {
+          setFormError('Failed to enroll in school: ' + enrollErr.message)
+          setJoining(false)
+          return
+        }
+      }
+
+      setJoined(true)
+      setTimeout(() => router.push('/dashboard'), 2000)
+    } catch (err: any) {
+      setFormError('Unexpected error: ' + (err?.message || 'unknown'))
+      setJoining(false)
+    }
   }
 
   if (loading) {
