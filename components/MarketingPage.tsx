@@ -51,10 +51,9 @@ export default function MarketingPage() {
         {/* ====== HEADER (white) ====== */}
         <header className="bg-white border-b border-gray-100 sticky top-0 z-30">
           <nav className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-            <Logo variant="dark" imgClassName="h-9 sm:h-10 w-auto" />
+            <Logo variant="dark" href="/" imgClassName="h-9 sm:h-10 w-auto" />
             <div className="flex items-center gap-6">
-              <a href="#features" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Features</a>
-              <a href="#who" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Who it&apos;s for</a>
+              <Link href="/for-parents" className="hidden sm:inline text-[#1a0e2e] text-sm font-semibold hover:text-[#4a2c82] transition">For Parents</Link>
               <Link href="/schools" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">For Schools</Link>
               <Link href="/pricing" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Pricing</Link>
               <Link href="/auth/login" className="hidden md:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Log in</Link>

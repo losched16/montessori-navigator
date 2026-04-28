@@ -41,7 +41,7 @@ export default function SchoolsPage() {
             <div className="flex items-center gap-5">
               <a href="#how-it-helps" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">How It Helps</a>
               <Link href="/for-schools/pricing" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Pricing</Link>
-              <Link href="/" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">For Parents</Link>
+              <Link href="/for-parents" className="hidden sm:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">For Parents</Link>
               <Link href="/auth/login" className="hidden md:inline text-[#5c4a7e] text-sm font-medium hover:text-[#1a0e2e] transition">Log in</Link>
               <Link href="/for-schools/demo" className="text-white text-sm font-medium px-5 py-2 rounded-full transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 16px rgba(74,108,247,0.25)' }}>Get a Demo</Link>
             </div>
@@ -242,7 +242,7 @@ export default function SchoolsPage() {
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <div className="serif text-lg font-semibold text-white/50">Montessori Family Alliance™</div>
             <div className="flex gap-6">
-              {[{ label: 'For Parents', href: '/' }, { label: 'Free Assessment', href: '/assessment' }, { label: 'Guides', href: '/guides' }, { label: 'Privacy', href: '#' }].map(link => (
+              {[{ label: 'For Parents', href: '/for-parents' }, { label: 'Free Assessment', href: '/assessment' }, { label: 'Guides', href: '/guides' }, { label: 'Privacy', href: '#' }].map(link => (
                 <Link key={link.label} href={link.href} className="text-sm text-white/25 hover:text-white/50 transition">{link.label}</Link>
               ))}
             </div>

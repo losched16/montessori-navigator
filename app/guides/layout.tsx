@@ -1,17 +1,16 @@
 import Link from 'next/link'
+import Logo from '@/components/ui/Logo'
 
 export default function GuidesLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-white">
       {/* Nav */}
       <header className="border-b border-gray-100 sticky top-0 bg-white z-30">
-        <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold text-[#1a0e2e]" style={{ fontFamily: 'Georgia, serif' }}>
-            Montessori <span className="text-[#7b5ea7] font-normal">Family Alliance</span>
-          </Link>
+        <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Logo variant="dark" href="/" imgClassName="h-8 sm:h-9 w-auto" />
           <div className="flex items-center gap-4">
-            <Link href="/assessment" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-700">Free Assessment</Link>
-            <Link href="/guides" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-700">Guides</Link>
+            <Link href="/for-parents" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-700">For Parents</Link>
+            <Link href="/schools" className="hidden sm:inline text-sm text-gray-500 hover:text-gray-700">For Schools</Link>
             <Link href="/pricing" className="text-sm font-medium text-white bg-[#4a2c82] hover:bg-[#3d2470] px-4 py-1.5 rounded-full transition">
               Get Started
             </Link>

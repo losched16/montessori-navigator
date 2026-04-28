@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
-import HomePage from '@/components/HomePage'
+import MarketingPage from '@/components/MarketingPage'
 
-export default function Home() {
+export default function ForParentsPage() {
   const [loading, setLoading] = useState(true)
   const [authenticated, setAuthenticated] = useState(false)
   const router = useRouter()
@@ -34,5 +34,5 @@ export default function Home() {
 
   if (authenticated) return null
 
-  return <HomePage />
+  return <MarketingPage />
 }
