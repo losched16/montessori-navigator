@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
+import Logo from '@/components/ui/Logo'
 
 export default function WelcomePage() {
   return (
@@ -117,9 +118,9 @@ function WelcomePageInner() {
 
   return (
     <div className="min-h-screen bg-[#fafaf8] flex flex-col">
-      <header className="bg-navy-700 text-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center">
-          <Link href="/" className="text-lg font-bold">Montessori Family Alliance</Link>
+      <header className="bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center">
+          <Logo />
         </div>
       </header>
 

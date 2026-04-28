@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
+import Logo from '@/components/ui/Logo'
 
 export default function JoinSchoolPage() {
   const [school, setSchool] = useState<{ name: string; credentials: string | null } | null>(null)
@@ -198,7 +199,7 @@ export default function JoinSchoolPage() {
     <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-navy-600 mb-1">Montessori Family Alliance</h1>
+          <div className="flex justify-center mb-3"><Logo href="/" imgClassName="h-10 w-auto" /></div>
           <p className="text-warm-600 italic">A Prepared Environment for Parents</p>
         </div>
 

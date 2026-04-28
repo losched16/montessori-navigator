@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import Logo from '@/components/ui/Logo'
 
 const IMAGES = {
   hero: '/schools/hero.jpg',
@@ -36,7 +37,7 @@ export default function SchoolsPage() {
       <div className="sp">
         <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4" style={{ background: 'linear-gradient(180deg, rgba(15,26,60,0.97) 0%, rgba(15,26,60,0) 100%)' }}>
           <div className="max-w-6xl mx-auto flex justify-between items-center">
-            <Link href="/" className="serif text-xl font-semibold text-white tracking-wide">Montessori <span className="text-[#c4b1e0] font-normal">Family Alliance</span></Link>
+            <Logo variant="light" href="/" imgClassName="h-9 sm:h-10 w-auto" />
             <div className="flex items-center gap-5">
               <a href="#how-it-helps" className="hidden sm:inline text-white/50 text-sm hover:text-white transition">How It Helps</a>
               <Link href="/for-schools/pricing" className="hidden sm:inline text-white/50 text-sm hover:text-white transition">Pricing</Link>

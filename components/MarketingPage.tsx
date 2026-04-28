@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import Logo from '@/components/ui/Logo'
 
 export default function MarketingPage() {
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function MarketingPage() {
           <div className="absolute -top-[40%] -right-[20%] w-[80%] h-[80%] pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(74,108,247,0.12) 0%, transparent 70%)' }} />
 
           <nav className="relative z-10 px-6 py-5 flex justify-between items-center">
-            <Link href="/" className="serif text-xl font-semibold text-white tracking-wide">Montessori <span className="text-[#c4b1e0] font-normal">Family Alliance</span></Link>
+            <Logo variant="light" imgClassName="h-9 sm:h-10 w-auto" />
             <div className="flex items-center gap-6">
               <a href="#features" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Features</a>
               <a href="#who" className="hidden sm:inline text-white/60 text-sm font-medium hover:text-white transition">Who it&apos;s for</a>

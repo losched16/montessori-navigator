@@ -8,6 +8,7 @@ import type { Parent } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel } from '@/lib/utils'
 import { ChildProvider, useChild } from '@/lib/child-context'
 import { isStartHereHidden } from '@/lib/start-here-progress'
+import Logo from '@/components/ui/Logo'
 
 function DashboardInner({ children }: { children: React.ReactNode }) {
   const [parent, setParent] = useState<Parent | null>(null)
@@ -102,19 +103,17 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#fafaf8]">
       {/* Top bar */}
-      <header className="bg-navy-700 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-lg font-bold text-white">
-              Family Alliance
-            </Link>
+            <Logo href="/dashboard" imgClassName="h-8 w-auto" />
 
             {/* Child selector */}
             {childrenList.length > 0 && (
               <select
                 value={selectedChildId || ''}
                 onChange={e => setSelectedChildId(e.target.value)}
-                className="text-sm border border-white/20 rounded-lg px-3 py-1.5 bg-white/10 text-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none [&>option]:text-navy-700 [&>option]:bg-white"
+                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-navy-700 focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
               >
                 {childrenList.map(child => (
                   <option key={child.id} value={child.id}>
@@ -126,13 +125,13 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-sm text-white/60 hidden sm:inline">{parent?.display_name}</span>
-            <button onClick={handleSignOut} className="hidden sm:inline text-xs text-white/40 hover:text-white/70">
+            <span className="text-sm text-gray-500 hidden sm:inline">{parent?.display_name}</span>
+            <button onClick={handleSignOut} className="hidden sm:inline text-xs text-gray-400 hover:text-gray-600">
               Sign out
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="sm:hidden p-1 text-white/70"
+              className="sm:hidden p-1 text-gray-500"
             >
               ☰
             </button>

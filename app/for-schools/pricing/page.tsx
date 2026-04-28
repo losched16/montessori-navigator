@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Logo from '@/components/ui/Logo'
 
 export default function SchoolPricingPage() {
   const [familyCount, setFamilyCount] = useState(50)
@@ -55,10 +56,10 @@ export default function SchoolPricingPage() {
   return (
     <div className="min-h-screen bg-[#fafaf8]">
       {/* Header */}
-      <header className="bg-navy-700 text-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Montessori Family Alliance</Link>
-          <Link href="/auth/login" className="text-sm text-white/70 hover:text-white">Log in</Link>
+      <header className="bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <Logo />
+          <Link href="/auth/login" className="text-sm text-navy-600 hover:text-navy-700 font-medium">Log in</Link>
         </div>
       </header>
 

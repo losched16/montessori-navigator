@@ -5,6 +5,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import type { School } from '@/lib/supabase'
+import Logo from '@/components/ui/Logo'
 
 export default function SchoolLayout({ children }: { children: React.ReactNode }) {
   const [school, setSchool] = useState<School | null>(null)
@@ -74,15 +75,21 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
   return (
     <div className="min-h-screen bg-[#fafaf8]">
       {/* Top bar */}
-      <header className="bg-navy-700 sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/school" className="text-lg font-bold text-white">
-              {school?.name || 'School Dashboard'}
-            </Link>
+            <Logo href="/school" imgClassName="h-8 w-auto" />
+            {school?.name && (
+              <>
+                <span className="hidden sm:inline text-gray-300">·</span>
+                <span className="hidden sm:inline text-sm font-medium text-navy-700">
+                  {school.name}
+                </span>
+              </>
+            )}
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={handleSignOut} className="text-xs text-white/40 hover:text-white/70">
+            <button onClick={handleSignOut} className="text-xs text-gray-400 hover:text-gray-600">
               Sign out
             </button>
           </div>

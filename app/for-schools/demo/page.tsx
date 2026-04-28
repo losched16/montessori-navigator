@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Logo from '@/components/ui/Logo'
 
 export default function DemoPage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -27,13 +28,13 @@ export default function DemoPage() {
   return (
     <div className="min-h-screen bg-[#fafaf8]">
       {/* Header */}
-      <header className="bg-navy-700 text-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Montessori Family Alliance</Link>
-          <div className="flex items-center gap-4">
-            <Link href="/schools" className="hidden sm:inline text-sm text-white/70 hover:text-white">For Schools</Link>
-            <Link href="/for-schools/pricing" className="hidden sm:inline text-sm text-white/70 hover:text-white">Pricing</Link>
-            <Link href="/auth/login" className="text-sm text-white/70 hover:text-white">Log in</Link>
+      <header className="bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <Logo />
+          <div className="flex items-center gap-5">
+            <Link href="/schools" className="hidden sm:inline text-sm text-navy-600 hover:text-navy-700 font-medium">For Schools</Link>
+            <Link href="/for-schools/pricing" className="hidden sm:inline text-sm text-navy-600 hover:text-navy-700 font-medium">Pricing</Link>
+            <Link href="/auth/login" className="text-sm text-navy-600 hover:text-navy-700 font-medium">Log in</Link>
           </div>
         </div>
       </header>
