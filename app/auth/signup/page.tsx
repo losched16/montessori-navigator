@@ -86,40 +86,55 @@ function SignupPageInner() {
       return
     }
 
-    // Create a family for this parent
+    // Create a family for this parent.
+    // Note: we generate the family ID client-side instead of reading it back
+    // via .select() because the families RLS SELECT policy requires the user
+    // to already be a family member — but we haven't inserted family_members
+    // yet, so the read-back would return null and silently break the chain.
     if (parentData) {
-      const { data: family } = await supabase
+      const familyId = crypto.randomUUID()
+      const { error: familyErr } = await supabase
         .from('families')
-        .insert({ name: `${name}'s Family` })
-        .select()
-        .single()
+        .insert({ id: familyId, name: `${name}'s Family` })
 
-      if (family) {
-        await supabase
-          .from('family_members')
-          .insert({
-            family_id: family.id,
-            parent_id: parentData.id,
-            role: 'primary',
-            permissions: 'full',
-          })
+      if (familyErr) {
+        console.error('Failed to create family:', familyErr)
+        setError('Account created but family setup failed: ' + familyErr.message)
+        setLoading(false)
+        return
+      }
 
-        // Check if there's a school invite to associate with
-        const schoolSlug = searchParams.get('school')
-        if (schoolSlug) {
-          const { data: school } = await supabase
-            .from('schools')
-            .select('id')
-            .eq('slug', schoolSlug)
-            .single()
+      const { error: memberErr } = await supabase
+        .from('family_members')
+        .insert({
+          family_id: familyId,
+          parent_id: parentData.id,
+          role: 'primary',
+          permissions: 'full',
+        })
 
-          if (school) {
-            await supabase
-              .from('school_families')
-              .insert({
-                school_id: school.id,
-                family_id: family.id,
-              })
+      if (memberErr) {
+        console.error('Failed to link parent to family:', memberErr)
+      }
+
+      // Check if there's a school invite to associate with
+      const schoolSlug = searchParams.get('school')
+      if (schoolSlug) {
+        const { data: school } = await supabase
+          .from('schools')
+          .select('id')
+          .eq('slug', schoolSlug)
+          .maybeSingle()
+
+        if (school) {
+          const { error: enrollErr } = await supabase
+            .from('school_families')
+            .insert({
+              school_id: school.id,
+              family_id: familyId,
+            })
+          if (enrollErr) {
+            console.error('Failed to enroll family in school:', enrollErr)
           }
         }
       }

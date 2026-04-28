@@ -41,17 +41,24 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
           .select('family_id')
           .eq('parent_id', parentData.id)
         const familyIds = (famMembers || []).map(f => f.family_id)
-        let hasActiveSchool = false
-        if (familyIds.length > 0) {
-          const { data: schoolFams } = await supabase
-            .from('school_families')
-            .select('school_id, schools!inner(subscription_status)')
-            .in('family_id', familyIds)
-            .eq('status', 'active')
-          hasActiveSchool = (schoolFams || []).some((sf: any) =>
-            ['active', 'trialing', 'past_due'].includes(sf.schools?.subscription_status)
-          )
+
+        // Orphan parent (no family at all) — send to onboarding, which can
+        // create the family. Don't bounce to /pricing because they may be a
+        // school invitee whose enrollment is pending until they have a family.
+        if (familyIds.length === 0) {
+          router.push('/onboarding')
+          return
         }
+
+        let hasActiveSchool = false
+        const { data: schoolFams } = await supabase
+          .from('school_families')
+          .select('school_id, schools!inner(subscription_status)')
+          .in('family_id', familyIds)
+          .eq('status', 'active')
+        hasActiveSchool = (schoolFams || []).some((sf: any) =>
+          ['active', 'trialing', 'past_due'].includes(sf.schools?.subscription_status)
+        )
         if (!hasActiveSchool) {
           router.push('/pricing')
           return

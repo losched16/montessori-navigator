@@ -114,29 +114,34 @@ export async function POST(request: NextRequest) {
         .select('family_id')
         .eq('parent_id', parent.id)
         .limit(1)
-        .single()
+        .maybeSingle()
 
       let familyId = membership?.family_id
 
       if (!familyId) {
-        // Create a family for this user
-        const { data: family } = await supabase
+        // Create a family for this user. Generate UUID client-side because
+        // RLS SELECT on families requires membership which doesn't exist
+        // yet — .select() read-back would return null.
+        const { randomUUID } = await import('crypto')
+        const newFamilyId = randomUUID()
+        const { error: familyErr } = await supabase
           .from('families')
-          .insert({ name: `${user.email?.split('@')[0]}'s Family` })
-          .select()
-          .single()
+          .insert({ id: newFamilyId, name: `${user.email?.split('@')[0]}'s Family` })
 
-        if (family) {
-          familyId = family.id
-          await supabase
-            .from('family_members')
-            .insert({
-              family_id: family.id,
-              parent_id: parent.id,
-              role: 'primary',
-              permissions: 'full',
-            })
+        if (familyErr) {
+          return NextResponse.json({ error: 'Failed to create family: ' + familyErr.message }, { status: 500 })
         }
+
+        familyId = newFamilyId
+        const { error: memberErr } = await supabase
+          .from('family_members')
+          .insert({
+            family_id: familyId,
+            parent_id: parent.id,
+            role: 'primary',
+            permissions: 'full',
+          })
+        if (memberErr) console.error('Failed to link parent to family:', memberErr)
       }
 
       if (familyId && invitation.school_id) {

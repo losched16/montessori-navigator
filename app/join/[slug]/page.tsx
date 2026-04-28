@@ -79,38 +79,45 @@ export default function JoinSchoolPage() {
         .single()
 
       if (parentData) {
-        // Create family
-        const { data: family } = await supabase
+        // Generate family ID client-side. RLS SELECT on families requires
+        // membership which doesn't exist yet, so .select() after insert
+        // returns null. Skip the read-back, use the UUID directly.
+        const familyId = crypto.randomUUID()
+        const { error: familyErr } = await supabase
           .from('families')
-          .insert({ name: `${name}'s Family` })
-          .select()
-          .single()
+          .insert({ id: familyId, name: `${name}'s Family` })
 
-        if (family) {
-          await supabase
-            .from('family_members')
+        if (familyErr) {
+          setFormError('Family setup failed: ' + familyErr.message)
+          setSubmitting(false)
+          return
+        }
+
+        const { error: memberErr } = await supabase
+          .from('family_members')
+          .insert({
+            family_id: familyId,
+            parent_id: parentData.id,
+            role: 'primary',
+            permissions: 'full',
+          })
+        if (memberErr) console.error('Failed to link parent to family:', memberErr)
+
+        // Associate with school
+        const { data: schoolData } = await supabase
+          .from('schools')
+          .select('id')
+          .eq('slug', slug)
+          .maybeSingle()
+
+        if (schoolData) {
+          const { error: enrollErr } = await supabase
+            .from('school_families')
             .insert({
-              family_id: family.id,
-              parent_id: parentData.id,
-              role: 'primary',
-              permissions: 'full',
+              school_id: schoolData.id,
+              family_id: familyId,
             })
-
-          // Associate with school
-          const { data: schoolData } = await supabase
-            .from('schools')
-            .select('id')
-            .eq('slug', slug)
-            .single()
-
-          if (schoolData) {
-            await supabase
-              .from('school_families')
-              .insert({
-                school_id: schoolData.id,
-                family_id: family.id,
-              })
-          }
+          if (enrollErr) console.error('Failed to enroll family in school:', enrollErr)
         }
       }
 

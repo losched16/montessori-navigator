@@ -120,15 +120,34 @@ export default function OnboardingPage() {
         communication_style: communicationStyle,
       }).eq('id', parentId)
 
-      // Get family_id for this parent
+      // Get family_id for this parent. If missing (e.g. orphan parent from a
+      // prior signup that didn't complete the family chain), create one now.
       const { data: membership } = await supabase
         .from('family_members')
         .select('family_id')
         .eq('parent_id', parentId)
         .limit(1)
-        .single()
+        .maybeSingle()
 
-      const familyId = membership?.family_id
+      let familyId = membership?.family_id
+
+      if (!familyId) {
+        familyId = crypto.randomUUID()
+        const { error: famErr } = await supabase
+          .from('families')
+          .insert({ id: familyId, name: 'My Family' })
+        if (famErr) console.error('Failed to create family in onboarding:', famErr)
+
+        const { error: memErr } = await supabase
+          .from('family_members')
+          .insert({
+            family_id: familyId,
+            parent_id: parentId,
+            role: 'primary',
+            permissions: 'full',
+          })
+        if (memErr) console.error('Failed to link parent to family in onboarding:', memErr)
+      }
 
       // Create children
       for (const child of children) {
