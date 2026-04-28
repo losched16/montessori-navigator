@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { randomUUID } from 'crypto'
+import { sendSchoolFamilyInvite } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -92,16 +93,40 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Failed to create invitations: ' + insertError.message }, { status: 500 })
       }
 
-      sent.push(...newEmails)
+      // Look up school slug + name for the invite email
+      const { data: school } = await supabase
+        .from('schools')
+        .select('name, slug')
+        .eq('id', schoolId)
+        .single()
+
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
+
+      // Send invitation emails (best-effort: failures are reported in `errors`
+      // but do not roll back the database row, since the admin can re-send)
+      for (const invite of invitations) {
+        try {
+          const inviteUrl = `${appUrl}/join/${school?.slug || ''}?invite=${invite.token}`
+          const result = await sendSchoolFamilyInvite({
+            to: invite.email,
+            schoolName: school?.name || 'Your school',
+            inviteUrl,
+          })
+          if (result.error) {
+            errors.push(`${invite.email}: ${result.error.message || 'email failed'}`)
+          } else {
+            sent.push(invite.email)
+          }
+        } catch (err: any) {
+          errors.push(`${invite.email}: ${err?.message || 'email failed'}`)
+        }
+      }
     }
 
     // Report already-invited emails
     alreadyInvited.forEach(email => {
       errors.push(`${email}: already invited or accepted`)
     })
-
-    // TODO: Send actual invitation emails via Resend or similar
-    // For now, invitations are created in the database and the invite link is the school's /join/[slug] page
 
     return NextResponse.json({
       sent: sent.length,
