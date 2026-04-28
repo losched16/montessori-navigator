@@ -4,9 +4,9 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 
 const IMAGES = {
-  hero: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&q=80',
-  parent: 'https://images.unsplash.com/photo-1536640712-4d4c36ff0e4e?w=800&q=80',
-  children: 'https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=800&q=80',
+  hero: '/schools/hero.jpg',
+  parent: '/schools/recruit.jpg',
+  children: '/schools/retain.jpg',
 }
 
 export default function SchoolsPage() {
