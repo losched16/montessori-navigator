@@ -74,9 +74,7 @@ function emailLayout({ heading, body, ctaLabel, ctaUrl, footnote }: {
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:560px; background:${COLORS.white}; border-radius:16px; border:1px solid ${COLORS.border};">
           <tr>
             <td style="padding:32px 40px 0; text-align:center;">
-              <div style="font-family: Georgia, serif; font-size:20px; font-weight:600; color:${COLORS.royalPurple};">
-                Montessori <span style="color:${COLORS.deepPlum}; font-weight:700; letter-spacing:0.05em;">FAMILY ALLIANCE</span>
-              </div>
+              <img src="https://familyalliance.montessori.org/branding/logo.png" alt="Montessori Family Alliance" width="220" style="display:inline-block; max-width:100%; height:auto; border:0;" />
             </td>
           </tr>
           <tr>
@@ -111,7 +109,7 @@ function emailLayout({ heading, body, ctaLabel, ctaUrl, footnote }: {
           ` : `<tr><td style="padding:16px 40px 32px;"></td></tr>`}
         </table>
         <p style="font-size:12px; color:${COLORS.muted}; opacity:0.6; margin:24px 0 0;">
-          A product of Tim Seldin and The Montessori Foundation.
+          Powered by The Montessori Foundation
         </p>
       </td>
     </tr>
