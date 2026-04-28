@@ -44,15 +44,22 @@ function SchoolSignupPageInner() {
 
   // On mount: if a session_id is present, fetch the Stripe session details
   // and find the school that the webhook already created for this customer.
+  // If the webhook hasn't fired yet we retry a few times, since Stripe webhooks
+  // usually arrive within a couple of seconds.
   useEffect(() => {
     if (!sessionId) return
     let cancelled = false
+
+    const wait = (ms: number) => new Promise(r => setTimeout(r, ms))
 
     const run = async () => {
       try {
         const sessionRes = await fetch(`/api/stripe/session?id=${encodeURIComponent(sessionId)}`)
         const sessionData = await sessionRes.json()
-        if (!sessionRes.ok || cancelled) return
+        if (!sessionRes.ok || cancelled) {
+          if (!cancelled) setBootstrapped(true)
+          return
+        }
 
         if (sessionData.email) {
           setEmail(sessionData.email)
@@ -60,15 +67,23 @@ function SchoolSignupPageInner() {
         }
 
         if (sessionData.customerId) {
-          const { data: school } = await supabase
-            .from('schools')
-            .select('id, name')
-            .eq('stripe_customer_id', sessionData.customerId)
-            .maybeSingle()
-          if (school && !cancelled) {
-            setExistingSchoolId(school.id)
-            setPrefilledSchoolName(school.name || null)
-            setSchoolName(school.name || '')
+          // Retry up to 5 times (max ~10s) waiting for the webhook to create the school
+          for (let attempt = 0; attempt < 5 && !cancelled; attempt++) {
+            const { data: school } = await supabase
+              .from('schools')
+              .select('id, name')
+              .eq('stripe_customer_id', sessionData.customerId)
+              .maybeSingle()
+
+            if (school) {
+              if (!cancelled) {
+                setExistingSchoolId(school.id)
+                setPrefilledSchoolName(school.name || null)
+                setSchoolName(school.name || '')
+              }
+              break
+            }
+            await wait(2000)
           }
         }
       } catch (err) {
@@ -82,22 +97,13 @@ function SchoolSignupPageInner() {
     return () => { cancelled = true }
   }, [sessionId])
 
-  const generateSlug = (name: string) => {
-    return name
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim()
-  }
-
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
 
-    if (!schoolName.trim() && !existingSchoolId) {
-      setError('School name is required')
+    if (!sessionId || !existingSchoolId) {
+      setError('Could not find your subscription. Please refresh, or contact support if this persists.')
       setLoading(false)
       return
     }
@@ -120,51 +126,17 @@ function SchoolSignupPageInner() {
       return
     }
 
-    // ─── PATH A: Link to existing school created by Stripe webhook ───
-    if (sessionId && existingSchoolId) {
-      // Use a backend endpoint with service role to bypass RLS for the bootstrap
-      const claimRes = await fetch('/api/school/claim', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId, schoolName: schoolName.trim() }),
-      })
-      const claimData = await claimRes.json()
-      if (!claimRes.ok) {
-        setError(claimData.error || 'Failed to link your account to the school.')
-        setLoading(false)
-        return
-      }
-
-      router.push('/school')
-      return
-    }
-
-    // ─── PATH B: Direct signup (no checkout session) — create a new school ───
-    const slug = generateSlug(schoolName) + '-' + Math.random().toString(36).substring(2, 6)
-    const { data: school, error: schoolError } = await supabase
-      .from('schools')
-      .insert({
-        name: schoolName.trim(),
-        slug,
-        admin_user_id: authData.user.id,
-      })
-      .select()
-      .single()
-
-    if (schoolError) {
-      setError('Account created but school setup failed: ' + schoolError.message)
+    // Link to existing school created by Stripe webhook (uses service role)
+    const claimRes = await fetch('/api/school/claim', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId, schoolName: schoolName.trim() }),
+    })
+    const claimData = await claimRes.json()
+    if (!claimRes.ok) {
+      setError(claimData.error || 'Failed to link your account to the school.')
       setLoading(false)
       return
-    }
-
-    if (school) {
-      await supabase
-        .from('school_staff')
-        .insert({
-          school_id: school.id,
-          user_id: authData.user.id,
-          role: 'admin',
-        })
     }
 
     router.push('/school')
@@ -174,6 +146,34 @@ function SchoolSignupPageInner() {
     return (
       <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center">
         <div className="text-navy-600 text-sm">Looking up your subscription…</div>
+      </div>
+    )
+  }
+
+  // Bootstrap finished but no school was found yet — show a wait-and-retry state
+  // so the user doesn't try to submit a form that can't link properly.
+  if (!existingSchoolId) {
+    return (
+      <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
+        <div className="w-full max-w-md text-center">
+          <div className="flex justify-center mb-6"><Logo href="/" imgClassName="h-10 w-auto" /></div>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+            <div className="text-3xl mb-4">⏳</div>
+            <h1 className="text-xl font-semibold text-navy-600 mb-2">Setting up your subscription</h1>
+            <p className="text-sm text-gray-600 mb-6">
+              Stripe is finalizing your trial. This usually takes a few seconds. Click refresh to try again.
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-warm-500 hover:bg-warm-600 text-white font-medium px-5 py-2.5 rounded-lg transition"
+            >
+              Refresh
+            </button>
+            <p className="text-xs text-gray-400 mt-6">
+              Still stuck after a minute? Email <a href="mailto:hello@montessori.org" className="underline">hello@montessori.org</a> with your billing email.
+            </p>
+          </div>
+        </div>
       </div>
     )
   }
