@@ -121,6 +121,14 @@ export async function POST(req: NextRequest) {
         const schoolName = session.metadata?.schoolName || 'Unknown School'
         const billingEmail = session.customer_email || ''
 
+        // Pull true status from the subscription so trial state is captured
+        const schoolSub = await stripe.subscriptions.retrieve(subscriptionId)
+        const schoolStatus = normalizeStatus(schoolSub.status) // 'trialing' | 'active' | etc
+        const schoolTrialEndsAt = schoolSub.trial_end ? new Date(schoolSub.trial_end * 1000).toISOString() : null
+        const schoolCurrentPeriodEnd = (schoolSub as any).current_period_end
+          ? new Date((schoolSub as any).current_period_end * 1000).toISOString()
+          : null
+
         const { data: existingSchool } = await supabase
           .from('schools')
           .select('id')
@@ -132,9 +140,11 @@ export async function POST(req: NextRequest) {
             .from('schools')
             .update({
               stripe_subscription_id: subscriptionId,
-              subscription_status: 'active',
+              subscription_status: schoolStatus,
               family_count: familyCount,
               billing_email: billingEmail,
+              trial_ends_at: schoolTrialEndsAt,
+              current_period_end: schoolCurrentPeriodEnd,
             })
             .eq('id', existingSchool.id)
         } else {
@@ -150,9 +160,11 @@ export async function POST(req: NextRequest) {
             admin_user_id: '00000000-0000-0000-0000-000000000000',
             stripe_customer_id: customerId,
             stripe_subscription_id: subscriptionId,
-            subscription_status: 'active',
+            subscription_status: schoolStatus,
             family_count: familyCount,
             billing_email: billingEmail,
+            trial_ends_at: schoolTrialEndsAt,
+            current_period_end: schoolCurrentPeriodEnd,
           })
         }
         break
@@ -182,7 +194,11 @@ export async function POST(req: NextRequest) {
         if (!parentMatch || parentMatch.length === 0) {
           await supabase
             .from('schools')
-            .update({ subscription_status: status === 'trialing' ? 'active' : status })
+            .update({
+              subscription_status: status,
+              trial_ends_at: trialEndsAt,
+              current_period_end: currentPeriodEnd,
+            })
             .eq('stripe_customer_id', customerId)
         }
         break

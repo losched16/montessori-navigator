@@ -39,7 +39,7 @@ const ENV_OPTIONS = [
 
 import type { FamilyMember } from '@/lib/supabase'
 
-type SettingsTab = 'profile' | 'children' | 'family' | 'password' | 'data' | 'danger'
+type SettingsTab = 'profile' | 'children' | 'family' | 'billing' | 'password' | 'data' | 'danger'
 
 export default function SettingsPage() {
   const [tab, setTab] = useState<SettingsTab>('profile')
@@ -83,6 +83,14 @@ export default function SettingsPage() {
   const [pendingInvites, setPendingInvites] = useState<any[]>([])
   const [userRole, setUserRole] = useState<string>('primary')
 
+  // Billing state
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string>('inactive')
+  const [subscriptionPlan, setSubscriptionPlan] = useState<string | null>(null)
+  const [trialEndsAt, setTrialEndsAt] = useState<string | null>(null)
+  const [currentPeriodEnd, setCurrentPeriodEnd] = useState<string | null>(null)
+  const [hasStripeCustomer, setHasStripeCustomer] = useState(false)
+  const [openingPortal, setOpeningPortal] = useState(false)
+
   // Data/danger state
   const [exporting, setExporting] = useState(false)
   const [deleteConfirm, setDeleteConfirm] = useState('')
@@ -109,6 +117,11 @@ export default function SettingsPage() {
         setExperience(parent.montessori_experience || '')
         setEducationContext(parent.education_context || '')
         setCommStyle(parent.communication_style || '')
+        setSubscriptionStatus(parent.subscription_status || 'inactive')
+        setSubscriptionPlan(parent.subscription_plan || null)
+        setTrialEndsAt(parent.trial_ends_at || null)
+        setCurrentPeriodEnd(parent.current_period_end || null)
+        setHasStripeCustomer(!!parent.stripe_customer_id)
 
         // Load family membership
         const { data: membership } = await supabase
@@ -354,6 +367,53 @@ export default function SettingsPage() {
     }
   }
 
+  // ── Billing / Customer Portal ──
+
+  const openBillingPortal = async () => {
+    setOpeningPortal(true)
+    try {
+      const res = await fetch('/api/stripe/portal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || 'Could not open billing portal.')
+        setOpeningPortal(false)
+        return
+      }
+      if (data.url) window.location.href = data.url
+    } catch (err) {
+      alert('Could not open billing portal. Please try again.')
+      setOpeningPortal(false)
+    }
+  }
+
+  const formatPlanLabel = (plan: string | null) => {
+    if (plan === 'individual_monthly') return 'Individual Monthly ($8/mo)'
+    if (plan === 'individual_annual') return 'Individual Annual ($59/yr)'
+    return plan || '—'
+  }
+
+  const formatStatusLabel = (status: string) => {
+    const labels: Record<string, string> = {
+      trialing: 'Trial Active',
+      active: 'Active',
+      past_due: 'Past Due',
+      canceled: 'Canceled',
+      inactive: 'Inactive',
+    }
+    return labels[status] || status
+  }
+
+  const formatDate = (iso: string | null) => {
+    if (!iso) return '—'
+    return new Date(iso).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric',
+    })
+  }
+
   // ── Delete Account ──
 
   const deleteAccount = async () => {
@@ -459,6 +519,7 @@ export default function SettingsPage() {
     { key: 'profile', label: 'Profile', icon: '👤' },
     { key: 'children', label: 'Children', icon: '🌱' },
     { key: 'family', label: 'Family', icon: '👨‍👩‍👧' },
+    { key: 'billing', label: 'Billing', icon: '💳' },
     { key: 'password', label: 'Password', icon: '🔒' },
     { key: 'data', label: 'Your Data', icon: '📦' },
     { key: 'danger', label: 'Account', icon: '⚠️' },
@@ -810,6 +871,91 @@ export default function SettingsPage() {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* ═══ Billing ═══ */}
+      {tab === 'billing' && (
+        <div className="space-y-4">
+          <div className="bg-white border border-gray-100 rounded-xl p-6">
+            <h2 className="font-semibold text-navy-600 mb-4">Subscription</h2>
+
+            {!hasStripeCustomer ? (
+              <div>
+                <p className="text-sm text-gray-600 mb-4">
+                  You don&apos;t have an active subscription yet. Start a 7-day free trial — no charge until your trial ends.
+                </p>
+                <button
+                  onClick={() => router.push('/pricing')}
+                  className="bg-warm-500 hover:bg-warm-600 text-white font-medium px-5 py-2.5 rounded-lg transition"
+                >
+                  View Plans →
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Status</div>
+                    <div className="font-medium text-navy-600 flex items-center gap-2">
+                      <span className={`inline-block w-2 h-2 rounded-full ${
+                        subscriptionStatus === 'active' || subscriptionStatus === 'trialing' ? 'bg-emerald-500'
+                        : subscriptionStatus === 'past_due' ? 'bg-amber-500'
+                        : 'bg-gray-400'
+                      }`} />
+                      {formatStatusLabel(subscriptionStatus)}
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Plan</div>
+                    <div className="font-medium text-navy-600">
+                      {formatPlanLabel(subscriptionPlan)}
+                    </div>
+                  </div>
+
+                  {subscriptionStatus === 'trialing' && trialEndsAt && (
+                    <div className="bg-warm-50 rounded-lg p-4 sm:col-span-2">
+                      <div className="text-xs text-warm-700 uppercase tracking-wide mb-1">Trial Ends</div>
+                      <div className="font-medium text-navy-600">{formatDate(trialEndsAt)}</div>
+                      <div className="text-xs text-gray-500 mt-1">You won&apos;t be charged until this date.</div>
+                    </div>
+                  )}
+
+                  {subscriptionStatus === 'active' && currentPeriodEnd && (
+                    <div className="bg-gray-50 rounded-lg p-4 sm:col-span-2">
+                      <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Next Billing Date</div>
+                      <div className="font-medium text-navy-600">{formatDate(currentPeriodEnd)}</div>
+                    </div>
+                  )}
+
+                  {subscriptionStatus === 'canceled' && (
+                    <div className="bg-amber-50 rounded-lg p-4 sm:col-span-2">
+                      <div className="text-xs text-amber-700 uppercase tracking-wide mb-1">Canceled</div>
+                      <div className="text-sm text-navy-600">
+                        Your subscription has been canceled.
+                        {currentPeriodEnd && (
+                          <> Access continues until <strong>{formatDate(currentPeriodEnd)}</strong>.</>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <button
+                  onClick={openBillingPortal}
+                  disabled={openingPortal}
+                  className="w-full sm:w-auto bg-navy-600 hover:bg-navy-700 text-white font-medium px-5 py-2.5 rounded-lg transition disabled:opacity-50"
+                >
+                  {openingPortal ? 'Opening…' : 'Manage Subscription'}
+                </button>
+
+                <p className="text-xs text-gray-500">
+                  Manage your payment method, view invoices, change plan, or cancel — all securely through Stripe.
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       )}
 

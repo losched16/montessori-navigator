@@ -15,6 +15,14 @@ export default function SchoolSettingsPage() {
   const [saved, setSaved] = useState(false)
   const [loading, setLoading] = useState(true)
 
+  // Billing state
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string>('inactive')
+  const [trialEndsAt, setTrialEndsAt] = useState<string | null>(null)
+  const [currentPeriodEnd, setCurrentPeriodEnd] = useState<string | null>(null)
+  const [familyCount, setFamilyCount] = useState<number>(0)
+  const [hasStripeCustomer, setHasStripeCustomer] = useState(false)
+  const [openingPortal, setOpeningPortal] = useState(false)
+
   const supabase = createClient()
   const router = useRouter()
 
@@ -45,11 +53,55 @@ export default function SchoolSettingsPage() {
         setWebsite(school.website || '')
         setPhone(school.phone || '')
         setCredentials(school.credentials || '')
+        setSubscriptionStatus(school.subscription_status || 'inactive')
+        setTrialEndsAt(school.trial_ends_at || null)
+        setCurrentPeriodEnd(school.current_period_end || null)
+        setFamilyCount(school.family_count || 0)
+        setHasStripeCustomer(!!school.stripe_customer_id)
       }
       setLoading(false)
     }
     load()
   }, [])
+
+  const openBillingPortal = async () => {
+    setOpeningPortal(true)
+    try {
+      const res = await fetch('/api/stripe/portal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        alert(data.error || 'Could not open billing portal.')
+        setOpeningPortal(false)
+        return
+      }
+      if (data.url) window.location.href = data.url
+    } catch {
+      alert('Could not open billing portal. Please try again.')
+      setOpeningPortal(false)
+    }
+  }
+
+  const formatStatusLabel = (status: string) => {
+    const labels: Record<string, string> = {
+      trialing: 'Trial Active',
+      active: 'Active',
+      past_due: 'Past Due',
+      canceled: 'Canceled',
+      inactive: 'Inactive',
+    }
+    return labels[status] || status
+  }
+
+  const formatDate = (iso: string | null) => {
+    if (!iso) return '—'
+    return new Date(iso).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric',
+    })
+  }
 
   const save = async () => {
     if (!schoolId) return
@@ -150,6 +202,89 @@ export default function SchoolSettingsPage() {
             {saving ? 'Saving...' : saved ? 'Saved!' : 'Save Settings'}
           </button>
         </div>
+      </div>
+
+      {/* Billing & Subscription */}
+      <div className="bg-white border border-gray-100 rounded-xl p-6 mt-6">
+        <h2 className="font-semibold text-navy-600 mb-4">Subscription</h2>
+
+        {!hasStripeCustomer ? (
+          <div>
+            <p className="text-sm text-gray-600 mb-4">
+              No subscription is attached to this school account yet.
+            </p>
+            <button
+              onClick={() => router.push('/for-schools/pricing')}
+              className="bg-warm-500 hover:bg-warm-600 text-white font-medium px-5 py-2.5 rounded-lg transition"
+            >
+              View School Pricing →
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Status</div>
+                <div className="font-medium text-navy-600 flex items-center gap-2">
+                  <span className={`inline-block w-2 h-2 rounded-full ${
+                    subscriptionStatus === 'active' || subscriptionStatus === 'trialing' ? 'bg-emerald-500'
+                    : subscriptionStatus === 'past_due' ? 'bg-amber-500'
+                    : 'bg-gray-400'
+                  }`} />
+                  {formatStatusLabel(subscriptionStatus)}
+                </div>
+              </div>
+
+              <div className="bg-gray-50 rounded-lg p-4">
+                <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Family Seats</div>
+                <div className="font-medium text-navy-600">
+                  {familyCount} families
+                </div>
+              </div>
+
+              {subscriptionStatus === 'trialing' && trialEndsAt && (
+                <div className="bg-warm-50 rounded-lg p-4 sm:col-span-2">
+                  <div className="text-xs text-warm-700 uppercase tracking-wide mb-1">Trial Ends</div>
+                  <div className="font-medium text-navy-600">{formatDate(trialEndsAt)}</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    You won&apos;t be charged until this date. Cancel anytime through &ldquo;Manage Subscription&rdquo; below.
+                  </div>
+                </div>
+              )}
+
+              {subscriptionStatus === 'active' && currentPeriodEnd && (
+                <div className="bg-gray-50 rounded-lg p-4 sm:col-span-2">
+                  <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Next Billing Date</div>
+                  <div className="font-medium text-navy-600">{formatDate(currentPeriodEnd)}</div>
+                </div>
+              )}
+
+              {subscriptionStatus === 'canceled' && (
+                <div className="bg-amber-50 rounded-lg p-4 sm:col-span-2">
+                  <div className="text-xs text-amber-700 uppercase tracking-wide mb-1">Canceled</div>
+                  <div className="text-sm text-navy-600">
+                    Your subscription has been canceled.
+                    {currentPeriodEnd && (
+                      <> Access continues until <strong>{formatDate(currentPeriodEnd)}</strong>.</>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={openBillingPortal}
+              disabled={openingPortal}
+              className="w-full sm:w-auto bg-navy-600 hover:bg-navy-700 text-white font-medium px-5 py-2.5 rounded-lg transition disabled:opacity-50"
+            >
+              {openingPortal ? 'Opening…' : 'Manage Subscription'}
+            </button>
+
+            <p className="text-xs text-gray-500">
+              Manage your payment method, view invoices, change family seats, or cancel — all securely through Stripe.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   )

@@ -32,10 +32,10 @@ function SchoolWelcomePageInner() {
       <main className="max-w-xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
         <div className="text-5xl mb-6">🎉</div>
         <h1 className="text-3xl font-bold text-navy-700 mb-3">
-          Welcome to Montessori Family Alliance!
+          Your 14-day trial has started!
         </h1>
         <p className="text-lg text-navy-600/70 mb-8">
-          Your subscription is confirmed. Let&apos;s get your school set up so families can start using the platform.
+          Welcome to Montessori Family Alliance. You won&apos;t be charged until your trial ends — cancel anytime. Let&apos;s get your school set up so families can start using the platform.
         </p>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 sm:px-8 py-8 text-left space-y-6">

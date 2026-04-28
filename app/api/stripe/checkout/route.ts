@@ -60,6 +60,17 @@ export async function POST(req: NextRequest) {
           billedQuantity: String(billedQuantity),
           schoolName,
         },
+        subscription_data: {
+          trial_period_days: 14,
+          metadata: {
+            plan: 'school',
+            familyCount: String(familyCount),
+            billedQuantity: String(billedQuantity),
+            schoolName,
+          },
+        },
+        // Card collection is required up-front so the trial converts seamlessly
+        payment_method_collection: 'always',
         success_url: `${appUrl}/for-schools/welcome?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${appUrl}/for-schools/pricing`,
       })

@@ -65,12 +65,15 @@ export default function SchoolPricingPage() {
       <main className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
         {/* Hero */}
         <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 bg-warm-50 text-warm-700 text-xs font-semibold uppercase tracking-wide px-3 py-1.5 rounded-full mb-4">
+            ✨ 14-Day Free Trial
+          </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-navy-700 mb-3">
             Pricing for Schools
           </h1>
           <p className="text-lg text-navy-600/70 max-w-2xl mx-auto">
             Give every family in your school access to Montessori Family Alliance.
-            One simple price, billed annually.
+            Try it free for 14 days — no charge until your trial ends. Cancel anytime.
           </p>
         </div>
 
@@ -185,12 +188,12 @@ export default function SchoolPricingPage() {
                 disabled={loading}
                 className="w-full bg-warm-500 hover:bg-warm-600 text-white font-semibold py-3.5 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? 'Redirecting to checkout...' : `Subscribe — $${total.toLocaleString()}/year`}
+                {loading ? 'Redirecting to checkout...' : `Start 14-Day Free Trial`}
               </button>
 
-              <p className="text-xs text-center text-navy-600/40">
-                You&apos;ll be redirected to Stripe for secure payment.
-                Cancel anytime from your school dashboard.
+              <p className="text-xs text-center text-navy-600/50 leading-relaxed">
+                We&apos;ll collect your card now, but you won&apos;t be charged until your 14-day trial ends.
+                After that, ${total.toLocaleString()}/year. Cancel anytime from your school dashboard.
               </p>
             </div>
           </div>
