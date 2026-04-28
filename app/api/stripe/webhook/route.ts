@@ -133,10 +133,10 @@ export async function POST(req: NextRequest) {
           .from('schools')
           .select('id')
           .eq('stripe_customer_id', customerId)
-          .single()
+          .maybeSingle()
 
         if (existingSchool) {
-          await supabase
+          const { error: updateError } = await supabase
             .from('schools')
             .update({
               stripe_subscription_id: subscriptionId,
@@ -147,6 +147,10 @@ export async function POST(req: NextRequest) {
               current_period_end: schoolCurrentPeriodEnd,
             })
             .eq('id', existingSchool.id)
+          if (updateError) {
+            console.error('[webhook] Failed to update school:', updateError.message, updateError)
+            return NextResponse.json({ error: 'School update failed' }, { status: 500 })
+          }
         } else {
           const slug = schoolName
             .toLowerCase()
@@ -154,10 +158,13 @@ export async function POST(req: NextRequest) {
             .replace(/(^-|-$)/g, '')
             + '-' + Date.now().toString(36)
 
-          await supabase.from('schools').insert({
+          // admin_user_id is intentionally NOT set here. It's filled in by
+          // /api/school/claim once the admin completes signup. The schema
+          // allows admin_user_id to be NULL for this reason (see
+          // supabase-migration-school-admin-nullable.sql).
+          const { error: insertError } = await supabase.from('schools').insert({
             name: schoolName,
             slug,
-            admin_user_id: '00000000-0000-0000-0000-000000000000',
             stripe_customer_id: customerId,
             stripe_subscription_id: subscriptionId,
             subscription_status: schoolStatus,
@@ -166,6 +173,11 @@ export async function POST(req: NextRequest) {
             trial_ends_at: schoolTrialEndsAt,
             current_period_end: schoolCurrentPeriodEnd,
           })
+          if (insertError) {
+            console.error('[webhook] Failed to insert school:', insertError.message, insertError)
+            // Return 500 so Stripe retries the webhook
+            return NextResponse.json({ error: 'School insert failed' }, { status: 500 })
+          }
         }
         break
       }
