@@ -10,6 +10,7 @@ import Logo from '@/components/ui/Logo'
 export default function SchoolLayout({ children }: { children: React.ReactNode }) {
   const [school, setSchool] = useState<School | null>(null)
   const [loading, setLoading] = useState(true)
+  const [hasParentRole, setHasParentRole] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
   const supabase = createClient()
@@ -25,7 +26,7 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
         .select('school_id, role')
         .eq('user_id', user.id)
         .limit(1)
-        .single()
+        .maybeSingle()
 
       if (!staffEntry) {
         router.push('/auth/signup/school')
@@ -41,6 +42,15 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
       if (schoolData) {
         setSchool(schoolData)
       }
+
+      // Check whether this user also has a parent role (for the context switcher)
+      const { data: parentRow } = await supabase
+        .from('parents')
+        .select('id')
+        .eq('user_id', user.id)
+        .maybeSingle()
+      setHasParentRole(!!parentRow)
+
       setLoading(false)
     }
     load()
@@ -89,6 +99,15 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
             )}
           </div>
           <div className="flex items-center gap-3">
+            {hasParentRole && (
+              <Link
+                href="/dashboard"
+                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-navy-600 hover:text-navy-700 px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition"
+                title="Switch to your parent dashboard"
+              >
+                <span>👨‍👩‍👧</span> Parent View →
+              </Link>
+            )}
             <button onClick={handleSignOut} className="text-xs text-gray-400 hover:text-gray-600">
               Sign out
             </button>

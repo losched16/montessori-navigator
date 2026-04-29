@@ -19,16 +19,41 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
   const supabase = createClient()
   const { children: childrenList, selectedChildId, setSelectedChildId, selectedChild } = useChild()
 
+  const [hasSchoolRole, setHasSchoolRole] = useState(false)
+
   useEffect(() => {
     const loadParent = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) { router.push('/auth/login'); return }
+
       const { data: parentData } = await supabase
         .from('parents')
         .select('*')
         .eq('user_id', user.id)
-        .single()
-      if (!parentData) { router.push('/onboarding'); return }
+        .maybeSingle()
+
+      // Check whether this user is also a school admin/staff. Used to decide
+      // routing when there's no parent record, and to show the context
+      // switcher in the top bar.
+      const { data: staffEntry } = await supabase
+        .from('school_staff')
+        .select('school_id')
+        .eq('user_id', user.id)
+        .limit(1)
+        .maybeSingle()
+      const isSchoolStaff = !!staffEntry
+      setHasSchoolRole(isSchoolStaff)
+
+      if (!parentData) {
+        // School-staff-only user landed on /dashboard — send them to /school
+        // instead of forcing them through parent onboarding.
+        if (isSchoolStaff) {
+          router.push('/school')
+          return
+        }
+        router.push('/onboarding')
+        return
+      }
 
       // Subscription gate: parents must have an active or trialing subscription
       // (Skip gate for school-affiliated parents — they have access via school)
@@ -132,6 +157,15 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-3">
+            {hasSchoolRole && (
+              <Link
+                href="/school"
+                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-navy-600 hover:text-navy-700 px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition"
+                title="Switch to your school admin dashboard"
+              >
+                <span>🏫</span> School Admin →
+              </Link>
+            )}
             <span className="text-sm text-gray-500 hidden sm:inline">{parent?.display_name}</span>
             <button onClick={handleSignOut} className="hidden sm:inline text-xs text-gray-400 hover:text-gray-600">
               Sign out

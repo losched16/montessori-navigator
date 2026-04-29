@@ -19,7 +19,7 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data: signInData, error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
       setError(error.message)
@@ -27,6 +27,35 @@ export default function LoginPage() {
       return
     }
 
+    // Honor an explicit ?next= override (e.g. invite flows)
+    const params = new URLSearchParams(window.location.search)
+    const next = params.get('next')
+    if (next) {
+      router.push(next)
+      return
+    }
+
+    // Route based on roles: parent goes to /dashboard, staff-only goes to /school
+    const userId = signInData.user?.id
+    if (userId) {
+      const [{ data: parentRow }, { data: staffRow }] = await Promise.all([
+        supabase.from('parents').select('id').eq('user_id', userId).maybeSingle(),
+        supabase.from('school_staff').select('school_id').eq('user_id', userId).limit(1).maybeSingle(),
+      ])
+
+      // Both → /dashboard (parent default; switcher chip in chrome lets them flip)
+      // Parent only → /dashboard
+      // Staff only → /school
+      // Neither → /onboarding (existing fallback)
+      if (parentRow) {
+        router.push('/dashboard')
+        return
+      }
+      if (staffRow) {
+        router.push('/school')
+        return
+      }
+    }
     router.push('/dashboard')
   }
 
