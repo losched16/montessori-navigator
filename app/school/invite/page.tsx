@@ -1,7 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
+
+interface InviteUsage {
+  used: number
+  limit: number | null
+  isTrial: boolean
+  reachedLimit: boolean
+}
 
 export default function SchoolInvitePage() {
   const [schoolId, setSchoolId] = useState<string | null>(null)
@@ -10,6 +18,7 @@ export default function SchoolInvitePage() {
   const [copied, setCopied] = useState(false)
   const [pendingInvites, setPendingInvites] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [usage, setUsage] = useState<InviteUsage | null>(null)
 
   // CSV state
   const [csvEmails, setCsvEmails] = useState('')
@@ -54,6 +63,17 @@ export default function SchoolInvitePage() {
         .limit(50)
 
       setPendingInvites(invites || [])
+
+      // Load invite usage (lives on the staff endpoint since it covers
+      // the combined staff + family count for trial limits)
+      try {
+        const res = await fetch('/api/school/staff')
+        if (res.ok) {
+          const data = await res.json()
+          if (data.inviteUsage) setUsage(data.inviteUsage)
+        }
+      } catch {}
+
       setLoading(false)
     }
     load()
@@ -117,6 +137,36 @@ export default function SchoolInvitePage() {
   return (
     <div className="max-w-4xl pb-20 sm:pb-0">
       <h1 className="text-xl font-bold text-navy-600 mb-6">Invite Families</h1>
+
+      {/* Trial limit banner */}
+      {usage?.isTrial && usage.limit !== null && (
+        <div className={`rounded-xl p-4 mb-6 border ${
+          usage.reachedLimit
+            ? 'bg-amber-50 border-amber-200 text-amber-900'
+            : 'bg-warm-50 border-warm-200 text-warm-700'
+        }`}>
+          <div className="flex items-start gap-3">
+            <span className="text-xl">{usage.reachedLimit ? '⚠️' : '✨'}</span>
+            <div className="flex-1">
+              <div className="font-semibold text-sm mb-1">
+                {usage.reachedLimit
+                  ? `Trial invite limit reached (${usage.used}/${usage.limit})`
+                  : `Free trial: ${usage.used}/${usage.limit} invitations used`}
+              </div>
+              <p className="text-xs leading-relaxed">
+                {usage.reachedLimit
+                  ? `You've sent the maximum of ${usage.limit} invitations during your trial. Upgrade to a paid plan to invite all your families.`
+                  : `During your free trial you can invite up to ${usage.limit} people total (across families and admins) to test the platform. The limit lifts as soon as your trial converts to a paid subscription.`}
+              </p>
+              {usage.reachedLimit && (
+                <Link href="/school/settings" className="inline-block mt-2 text-xs font-semibold underline">
+                  Manage subscription →
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Share Link */}
       <div className="bg-white border border-gray-100 rounded-xl p-6 mb-6">

@@ -6,10 +6,19 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import Logo from '@/components/ui/Logo'
 
+interface CapacityInfo {
+  canEnroll: boolean
+  reason?: string
+  isTrial?: boolean
+  limit?: number | null
+  used?: number
+}
+
 export default function JoinSchoolPage() {
   const [school, setSchool] = useState<{ name: string; credentials: string | null } | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [capacity, setCapacity] = useState<CapacityInfo | null>(null)
 
   // Signup form
   const [name, setName] = useState('')
@@ -44,6 +53,15 @@ export default function JoinSchoolPage() {
       }
 
       setSchool(schoolData)
+
+      // Check if the school is open to enrollment (not at trial cap, not canceled)
+      try {
+        const res = await fetch(`/api/join/capacity?slug=${encodeURIComponent(slug)}`)
+        const data = await res.json()
+        setCapacity(data)
+      } catch {
+        setCapacity({ canEnroll: true })
+      }
 
       // Check if user is already logged in
       const { data: { user } } = await supabase.auth.getUser()
@@ -258,6 +276,37 @@ export default function JoinSchoolPage() {
           <Link href="/" className="text-warm-600 hover:text-warm-700 text-sm font-medium">
             Go to home page
           </Link>
+        </div>
+      </div>
+    )
+  }
+
+  // Block enrollment if the school's trial is full or subscription inactive
+  if (capacity && !capacity.canEnroll) {
+    const trialFull = capacity.reason === 'trial_cap_reached'
+    const inactive = capacity.reason === 'subscription_inactive'
+    return (
+      <div className="min-h-screen bg-[#fafaf8] flex items-center justify-center px-4">
+        <div className="w-full max-w-md">
+          <div className="text-center mb-8">
+            <div className="flex justify-center mb-3"><Logo href="/" imgClassName="h-10 w-auto" /></div>
+          </div>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
+            <div className="text-4xl mb-3">{trialFull ? '⌛' : '🔒'}</div>
+            <h2 className="text-lg font-semibold text-navy-600 mb-2">
+              {trialFull
+                ? `${school?.name || 'This school'} is currently testing the platform`
+                : 'This school isn\'t accepting new families right now'}
+            </h2>
+            <p className="text-sm text-navy-600 mb-4 leading-relaxed">
+              {trialFull
+                ? `They're on a free trial and can only invite a few people during testing. Please reach out to your school admin — they'll add you directly once their account is active.`
+                : 'Please contact your school admin to confirm enrollment.'}
+            </p>
+            <Link href="/" className="text-warm-600 hover:text-warm-700 text-sm font-medium">
+              Go to home page
+            </Link>
+          </div>
         </div>
       </div>
     )

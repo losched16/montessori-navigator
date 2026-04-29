@@ -4,6 +4,7 @@ import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { randomUUID } from 'crypto'
 import { sendSchoolStaffInvite } from '@/lib/email'
+import { getInviteUsage } from '@/lib/school-invite-limits'
 
 export const dynamic = 'force-dynamic'
 
@@ -77,6 +78,14 @@ export async function GET(req: NextRequest) {
     .eq('type', 'school_staff')
     .order('created_at', { ascending: false })
 
+  // Trial invite usage (combined staff + family count)
+  const { data: schoolForUsage } = await service
+    .from('schools')
+    .select('subscription_status')
+    .eq('id', auth.schoolId)
+    .maybeSingle()
+  const inviteUsage = await getInviteUsage(service, auth.schoolId, schoolForUsage?.subscription_status || null)
+
   return NextResponse.json({
     staff: (staff || []).map(s => ({
       id: s.id,
@@ -87,6 +96,7 @@ export async function GET(req: NextRequest) {
       isYou: s.user_id === auth.user.id,
     })),
     invites: invites || [],
+    inviteUsage,
   })
 }
 
@@ -119,6 +129,21 @@ export async function POST(req: NextRequest) {
       token: existing.token,
       reused: true,
     })
+  }
+
+  // Enforce trial invite cap (counts both staff + family invites combined)
+  const { data: schoolForCap } = await service
+    .from('schools')
+    .select('subscription_status')
+    .eq('id', auth.schoolId)
+    .maybeSingle()
+  const usage = await getInviteUsage(service, auth.schoolId, schoolForCap?.subscription_status || null)
+  if (usage.limit !== null && usage.used >= usage.limit) {
+    return NextResponse.json({
+      error: `You've used all ${usage.limit} of your trial invitations. Upgrade your subscription to invite more.`,
+      trialLimit: usage.limit,
+      used: usage.used,
+    }, { status: 403 })
   }
 
   const expiresAt = new Date()

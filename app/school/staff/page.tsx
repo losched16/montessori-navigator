@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 interface StaffMember {
   id: string
@@ -20,9 +21,17 @@ interface StaffInvite {
   expires_at: string
 }
 
+interface InviteUsage {
+  used: number
+  limit: number | null
+  isTrial: boolean
+  reachedLimit: boolean
+}
+
 export default function SchoolStaffPage() {
   const [staff, setStaff] = useState<StaffMember[]>([])
   const [invites, setInvites] = useState<StaffInvite[]>([])
+  const [usage, setUsage] = useState<InviteUsage | null>(null)
   const [loading, setLoading] = useState(true)
   const [inviteEmail, setInviteEmail] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -41,6 +50,7 @@ export default function SchoolStaffPage() {
       }
       setStaff(data.staff || [])
       setInvites(data.invites || [])
+      setUsage(data.inviteUsage || null)
     } catch (err: any) {
       setError(err.message || 'Failed to load staff')
     } finally {
@@ -133,6 +143,36 @@ export default function SchoolStaffPage() {
         <div className="bg-red-50 text-red-600 text-sm p-3 rounded-lg mb-4">{error}</div>
       )}
 
+      {/* Trial limit banner */}
+      {usage?.isTrial && usage.limit !== null && (
+        <div className={`rounded-xl p-4 mb-4 border ${
+          usage.reachedLimit
+            ? 'bg-amber-50 border-amber-200 text-amber-900'
+            : 'bg-warm-50 border-warm-200 text-warm-700'
+        }`}>
+          <div className="flex items-start gap-3">
+            <span className="text-xl">{usage.reachedLimit ? '⚠️' : '✨'}</span>
+            <div className="flex-1">
+              <div className="font-semibold text-sm mb-1">
+                {usage.reachedLimit
+                  ? `Trial invite limit reached (${usage.used}/${usage.limit})`
+                  : `Free trial: ${usage.used}/${usage.limit} invitations used`}
+              </div>
+              <p className="text-xs leading-relaxed">
+                {usage.reachedLimit
+                  ? `You've reached the ${usage.limit}-person trial cap. This includes admins, families, and pending invites combined. Upgrade to invite more.`
+                  : `During your free trial you can invite up to ${usage.limit} people total (across admins and families) to test the platform.`}
+              </p>
+              {usage.reachedLimit && (
+                <Link href="/school/settings" className="inline-block mt-2 text-xs font-semibold underline">
+                  Manage subscription →
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Invite form */}
       <div className="bg-white border border-gray-100 rounded-xl p-5 mb-6">
         <h2 className="font-semibold text-navy-600 mb-3">Invite a new admin</h2>
@@ -143,12 +183,13 @@ export default function SchoolStaffPage() {
             onChange={e => setInviteEmail(e.target.value)}
             placeholder="colleague@yourschool.edu"
             required
-            className="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+            disabled={usage?.reachedLimit || false}
+            className="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none disabled:bg-gray-50 disabled:text-gray-400"
           />
           <button
             type="submit"
-            disabled={submitting || !inviteEmail.trim()}
-            className="px-5 py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-50 text-sm"
+            disabled={submitting || !inviteEmail.trim() || (usage?.reachedLimit || false)}
+            className="px-5 py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
           >
             {submitting ? 'Creating…' : 'Create Invite'}
           </button>

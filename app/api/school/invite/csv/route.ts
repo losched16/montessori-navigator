@@ -3,6 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { randomUUID } from 'crypto'
 import { sendSchoolFamilyInvite } from '@/lib/email'
+import { getInviteUsage, TRIAL_INVITE_CAP } from '@/lib/school-invite-limits'
 
 export async function POST(request: NextRequest) {
   try {
@@ -74,6 +75,33 @@ export async function POST(request: NextRequest) {
 
     // Create invitations for new emails
     const newEmails = emails.filter((e: string) => !alreadyInvited.has(e))
+
+    // Enforce the trial invite cap. Free-trial schools can invite at most
+    // TRIAL_INVITE_CAP people total across staff + family.
+    const { data: schoolForCap } = await supabase
+      .from('schools')
+      .select('subscription_status')
+      .eq('id', schoolId)
+      .maybeSingle()
+    const usage = await getInviteUsage(supabase, schoolId, schoolForCap?.subscription_status || null)
+    if (usage.limit !== null) {
+      const remaining = Math.max(0, usage.limit - usage.used)
+      if (remaining <= 0) {
+        return NextResponse.json({
+          error: `You've used all ${usage.limit} of your trial invitations. Upgrade your subscription to invite more families.`,
+          trialLimit: usage.limit,
+          used: usage.used,
+        }, { status: 403 })
+      }
+      if (newEmails.length > remaining) {
+        return NextResponse.json({
+          error: `You can only invite ${remaining} more ${remaining === 1 ? 'person' : 'people'} during your free trial (${usage.used}/${usage.limit} used). Upgrade to invite more.`,
+          trialLimit: usage.limit,
+          used: usage.used,
+          remaining,
+        }, { status: 403 })
+      }
+    }
 
     if (newEmails.length > 0) {
       const invitations = newEmails.map((email: string) => ({
