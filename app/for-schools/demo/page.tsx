@@ -1,29 +1,10 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Script from 'next/script'
 import Logo from '@/components/ui/Logo'
 
 export default function DemoPage() {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    // Inject the GoHighLevel form embed script. The iframe in the markup
-    // wires itself up to this script when it loads.
-    const existing = document.querySelector('script[src*="link.montessori.org/js/form_embed.js"]')
-    if (existing) return
-
-    const script = document.createElement('script')
-    script.src = 'https://link.montessori.org/js/form_embed.js'
-    script.type = 'text/javascript'
-    script.async = true
-    document.body.appendChild(script)
-
-    return () => {
-      // Don't remove the script — other pages may still need it. The widget
-      // handles re-initialization on its own.
-    }
-  }, [])
 
   return (
     <div className="min-h-screen bg-[#fafaf8]">
@@ -80,18 +61,25 @@ export default function DemoPage() {
           </div>
         </div>
 
-        {/* Calendar embed */}
+        {/* Calendar embed.
+            GHL's form_embed.js scans for iframes once at load and listens for
+            postMessage events to auto-resize. We render the iframe at a real
+            height so the calendar is visible even if the resize script is slow
+            or blocked. The Script component (afterInteractive) loads it after
+            hydration so the iframe is already in the DOM when the script runs. */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          <div ref={containerRef}>
-            <iframe
-              src="https://link.montessori.org/widget/booking/WUbp5aI2sjXA1wbh0no1"
-              style={{ width: '100%', border: 'none', overflow: 'hidden', minHeight: '720px' }}
-              scrolling="no"
-              id="WUbp5aI2sjXA1wbh0no1_1777385964900"
-              title="Schedule a demo"
-            />
-          </div>
+          <iframe
+            src="https://link.montessori.org/widget/booking/jL5UH3XkPE9pQd3SSAz8"
+            style={{ width: '100%', height: '820px', border: 'none', display: 'block' }}
+            scrolling="no"
+            id="jL5UH3XkPE9pQd3SSAz8_1777473426543"
+            title="Schedule a demo"
+          />
         </div>
+        <Script
+          src="https://link.montessori.org/js/form_embed.js"
+          strategy="afterInteractive"
+        />
 
         {/* Footer copy */}
         <div className="text-center mt-10 text-sm text-navy-600/60">
