@@ -10,6 +10,7 @@ import Logo from '@/components/ui/Logo'
 export default function HomePage() {
   const [learningOpen, setLearningOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -21,6 +22,21 @@ export default function HomePage() {
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
   }, [])
+
+  // Small delay on close so a brief mouse-out (e.g. crossing internal borders
+  // or briefly leaving the dropdown bounds) doesn't dismiss the menu before
+  // the user can click an item.
+  const openMenu = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+    setLearningOpen(true)
+  }
+  const scheduleClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setLearningOpen(false), 150)
+  }
 
   return (
     <>
@@ -53,8 +69,8 @@ export default function HomePage() {
               <div
                 ref={dropdownRef}
                 className="hidden md:block relative"
-                onMouseEnter={() => setLearningOpen(true)}
-                onMouseLeave={() => setLearningOpen(false)}
+                onMouseEnter={openMenu}
+                onMouseLeave={scheduleClose}
               >
                 <button
                   type="button"
@@ -65,24 +81,34 @@ export default function HomePage() {
                   <span className={`text-[10px] transition-transform ${learningOpen ? 'rotate-180' : ''}`}>▾</span>
                 </button>
                 {learningOpen && (
-                  <div className="absolute top-full right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-40">
-                    <Link
-                      href="/guides"
-                      onClick={() => setLearningOpen(false)}
-                      className="block px-4 py-3 hover:bg-[#fafaf8] transition"
-                    >
-                      <div className="font-medium text-[#1a0e2e] text-sm">Articles</div>
-                      <div className="text-xs text-[#5c4a7e] mt-0.5">Montessori guides for parents</div>
-                    </Link>
-                    <div className="border-t border-gray-100" />
-                    <Link
-                      href="/assessment"
-                      onClick={() => setLearningOpen(false)}
-                      className="block px-4 py-3 hover:bg-[#fafaf8] transition"
-                    >
-                      <div className="font-medium text-[#1a0e2e] text-sm">Free Montessori Assessment</div>
-                      <div className="text-xs text-[#5c4a7e] mt-0.5">Find out where to start</div>
-                    </Link>
+                  // Outer wrapper sits flush against the button (no mt-*) so
+                  // there's no dead zone between button and panel — the user's
+                  // mouse stays inside a continuous hover region. The visible
+                  // panel is offset visually via pt-2 inside.
+                  <div
+                    className="absolute top-full right-0 pt-2 w-56 z-40"
+                    onMouseEnter={openMenu}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+                      <Link
+                        href="/guides"
+                        onClick={() => setLearningOpen(false)}
+                        className="block px-4 py-3 hover:bg-[#fafaf8] transition"
+                      >
+                        <div className="font-medium text-[#1a0e2e] text-sm">Articles</div>
+                        <div className="text-xs text-[#5c4a7e] mt-0.5">Montessori guides for parents</div>
+                      </Link>
+                      <div className="border-t border-gray-100" />
+                      <Link
+                        href="/assessment"
+                        onClick={() => setLearningOpen(false)}
+                        className="block px-4 py-3 hover:bg-[#fafaf8] transition"
+                      >
+                        <div className="font-medium text-[#1a0e2e] text-sm">Free Montessori Assessment</div>
+                        <div className="text-xs text-[#5c4a7e] mt-0.5">Find out where to start</div>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </div>
