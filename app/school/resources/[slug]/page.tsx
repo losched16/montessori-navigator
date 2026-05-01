@@ -5,6 +5,7 @@ import {
   getSchoolResource,
   resourceTypeLabel,
 } from '@/lib/school-resources'
+import TrackResourceView from '@/components/school/TrackResourceView'
 
 // Detail page for a single resource. Shows description + "what's inside",
 // renders the PDF inline (browser native viewer), and exposes Download / Open
@@ -26,6 +27,9 @@ export default function SchoolResourceDetailPage({ params }: Props) {
 
   return (
     <div className="max-w-5xl pb-20 sm:pb-0">
+      {/* Side-effect: log this view so the dashboard checklist auto-completes */}
+      <TrackResourceView slug={resource.slug} />
+
       {/* Breadcrumb */}
       <nav className="mb-4 text-xs text-navy-600/60">
         <Link href="/school/resources" className="hover:text-navy-700">Resources</Link>

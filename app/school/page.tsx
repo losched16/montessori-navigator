@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
+import OnboardingChecklist from '@/components/school/OnboardingChecklist'
 
 export default function SchoolDashboard() {
   const [stats, setStats] = useState({ totalFamilies: 0, activeFamilies: 0, pendingInvites: 0 })
@@ -64,6 +65,9 @@ export default function SchoolDashboard() {
   return (
     <div className="max-w-4xl pb-20 sm:pb-0">
       <h1 className="text-xl font-bold text-navy-600 mb-6">School Dashboard</h1>
+
+      {/* Setup checklist — auto-detects progress, lives here until done */}
+      <OnboardingChecklist />
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">

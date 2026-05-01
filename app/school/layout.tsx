@@ -41,6 +41,19 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
 
       if (schoolData) {
         setSchool(schoolData)
+
+        // First-login redirect: if this admin hasn't seen the welcome page
+        // yet, send them there. The welcome page itself is exempt from the
+        // redirect (otherwise it would loop). We also exempt the auth flow
+        // and any settings sub-paths just in case.
+        const onboarding = (schoolData.onboarding_state as any) || {}
+        if (
+          !onboarding.welcomed_at &&
+          pathname !== '/school/welcome'
+        ) {
+          router.push('/school/welcome')
+          return
+        }
       }
 
       // Check whether this user also has a parent role (for the context switcher)
@@ -116,50 +129,57 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto flex">
-        {/* Sidebar */}
-        <nav className="hidden sm:block w-48 shrink-0 py-4 pl-4">
-          <div className="sticky top-20 space-y-1">
-            {navItems.map(item => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
-                  isActive(item.href)
-                    ? 'bg-warm-50 text-warm-700 font-medium'
-                    : 'text-gray-600 hover:bg-gray-50'
-                }`}
-              >
-                <span className="text-base">{item.icon}</span>
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </nav>
+      {/* On the welcome page we hide the nav chrome — first-login feels like
+          a special moment, not just another tab. The top bar stays so the
+          user knows they're signed in and can sign out if they want to. */}
+      {pathname === '/school/welcome' ? (
+        <main className="max-w-3xl mx-auto p-4 sm:p-8">{children}</main>
+      ) : (
+        <div className="max-w-7xl mx-auto flex">
+          {/* Sidebar */}
+          <nav className="hidden sm:block w-48 shrink-0 py-4 pl-4">
+            <div className="sticky top-20 space-y-1">
+              {navItems.map(item => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition ${
+                    isActive(item.href)
+                      ? 'bg-warm-50 text-warm-700 font-medium'
+                      : 'text-gray-600 hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="text-base">{item.icon}</span>
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </nav>
 
-        {/* Mobile nav */}
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-30">
-          <div className="flex justify-around py-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))]">
-            {navItems.map(item => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[52px] px-3 py-1.5 rounded-xl ${
-                  isActive(item.href) ? 'text-warm-600 bg-warm-50' : 'text-gray-400'
-                }`}
-              >
-                <span className="text-2xl">{item.icon}</span>
-                <span className="text-[11px] font-medium">{item.label}</span>
-              </Link>
-            ))}
+          {/* Mobile nav */}
+          <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-30">
+            <div className="flex justify-around py-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))]">
+              {navItems.map(item => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex flex-col items-center justify-center gap-0.5 min-w-[56px] min-h-[52px] px-3 py-1.5 rounded-xl ${
+                    isActive(item.href) ? 'text-warm-600 bg-warm-50' : 'text-gray-400'
+                  }`}
+                >
+                  <span className="text-2xl">{item.icon}</span>
+                  <span className="text-[11px] font-medium">{item.label}</span>
+                </Link>
+              ))}
+            </div>
           </div>
+
+          {/* Main content */}
+          <main className="flex-1 min-w-0 p-4 sm:p-6">
+            {children}
+          </main>
         </div>
-
-        {/* Main content */}
-        <main className="flex-1 min-w-0 p-4 sm:p-6">
-          {children}
-        </main>
-      </div>
+      )}
     </div>
   )
 }
