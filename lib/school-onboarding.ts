@@ -183,9 +183,9 @@ export async function getOnboardingState(
       description:
         'See exactly what your families see. The best way to support them is to feel what they feel.',
       icon: '👨‍👩‍👧',
-      href: '/auth/signup',
+      href: '/school/become-parent',
       completed: triedParentView,
-      doneLabel: triedParentView ? 'Parent account linked' : undefined,
+      doneLabel: triedParentView ? 'Parent view enabled' : undefined,
     },
     {
       id: 'resources',

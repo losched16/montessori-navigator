@@ -57,8 +57,18 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
 
       // Subscription gate: parents must have an active or trialing subscription
       // (Skip gate for school-affiliated parents — they have access via school)
+      //
+      // Also skip for school staff: an admin who set up a parent view to feel
+      // what their families feel doesn't need a separate subscription — their
+      // school account already covers it. Without this bypass, admins who
+      // click "Try parent experience" land in /dashboard and immediately
+      // get bounced to /pricing.
       const status = parentData.subscription_status || 'inactive'
       const activeStatuses = ['trialing', 'active']
+      if (isSchoolStaff) {
+        setParent(parentData)
+        return
+      }
       if (!activeStatuses.includes(status)) {
         // Check if they're part of a school (school admin paid on their behalf)
         const { data: famMembers } = await supabase

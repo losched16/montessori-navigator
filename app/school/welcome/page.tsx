@@ -196,10 +196,10 @@ export default function SchoolWelcomePage() {
             best way to support your families: feel what they feel.
           </p>
           <Link
-            href="/auth/signup"
+            href="/school/become-parent"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-warm-600 hover:text-warm-700"
           >
-            Set up a parent account →
+            Set up your parent view →
           </Link>
         </div>
       </section>
