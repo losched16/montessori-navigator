@@ -37,9 +37,6 @@ interface RawState {
   viewed_resources?: string[]
 }
 
-const PLAYBOOK_SLUG = 'new-family-onboarding-playbook'
-const WORKBOOK_SLUG = 'family-onboarding-workbook'
-
 /**
  * Compute the full onboarding state for a school.
  *
@@ -107,21 +104,25 @@ export async function getOnboardingState(
   ].filter(v => typeof v === 'string' && v.trim().length > 0).length
   const profileCustomized = profileFieldsFilled > 0
 
-  // --- Step 2: read the New Family Onboarding Playbook
+  // --- Resources explored
+  // Tracked via viewed_resources in onboarding_state, populated by the
+  // <TrackResourceView> client component on each /school/resources/[slug]
+  // page. We don't gate on specific slugs — opening any resource counts as
+  // engaging with the library, since the goal is to make admins aware of it
+  // (and we'll keep adding new resources over time).
   const viewedResources: string[] = Array.isArray(raw.viewed_resources)
     ? raw.viewed_resources
     : []
-  const playbookRead = viewedResources.includes(PLAYBOOK_SLUG)
-  const workbookOpened = viewedResources.includes(WORKBOOK_SLUG)
+  const resourcesExplored = viewedResources.length > 0
 
-  // --- Step 4: first family invitation sent
+  // --- First family invitation sent
   // Counts both invitation rows AND active enrollments via share-link join
   // (which doesn't go through invitations). Either way, a family is now in.
   const familyInviteCount = familyInviteRes.count || 0
   const activeFamilyCount = activeFamilyRes.count || 0
   const firstInviteSent = familyInviteCount > 0 || activeFamilyCount > 0
 
-  // --- Step 5: added a co-admin
+  // --- Added a co-admin
   // school_staff includes the original admin, so 2+ means a co-admin exists.
   // Pending school_staff invitations also count — they took the action even
   // if the invitee hasn't accepted yet.
@@ -129,11 +130,14 @@ export async function getOnboardingState(
   const pendingStaffInvites = pendingStaffInviteRes.count || 0
   const coadminAdded = staffCount > 1 || pendingStaffInvites > 0
 
-  // --- Step 6: tried the parent experience
+  // --- Tried the parent experience
   // We detect this as "the admin has a parent record linked to their account".
   // The dual-role context switcher only appears when this is true.
   const triedParentView = !!parentRowRes.data
 
+  // Order: action-first, then deeper learning. We want admins to set up,
+  // invite, and feel-the-experience BEFORE they go browse the library — so
+  // when they do open a playbook, they have real context for it.
   const steps: OnboardingStep[] = [
     {
       id: 'profile',
@@ -144,26 +148,6 @@ export async function getOnboardingState(
       href: '/school/settings',
       completed: profileCustomized,
       doneLabel: profileCustomized ? 'Profile filled in' : undefined,
-    },
-    {
-      id: 'playbook',
-      title: 'Read the New Family Onboarding Playbook',
-      description:
-        'A real example of what excellent new-family onboarding looks like at a Montessori school. Borrow what fits.',
-      icon: '📘',
-      href: `/school/resources/${PLAYBOOK_SLUG}`,
-      completed: playbookRead,
-      doneLabel: playbookRead ? 'Playbook opened' : undefined,
-    },
-    {
-      id: 'workbook',
-      title: 'Open the Family Onboarding Workbook',
-      description:
-        'Use it with your leadership team to design your school’s own onboarding flow.',
-      icon: '📒',
-      href: `/school/resources/${WORKBOOK_SLUG}`,
-      completed: workbookOpened,
-      doneLabel: workbookOpened ? 'Workbook opened' : undefined,
     },
     {
       id: 'invite',
@@ -197,11 +181,23 @@ export async function getOnboardingState(
       id: 'parent',
       title: 'Try the parent experience',
       description:
-        'See exactly what your families see. Best way to support them is to feel what they feel.',
+        'See exactly what your families see. The best way to support them is to feel what they feel.',
       icon: '👨‍👩‍👧',
       href: '/auth/signup',
       completed: triedParentView,
       doneLabel: triedParentView ? 'Parent account linked' : undefined,
+    },
+    {
+      id: 'resources',
+      title: 'Explore your resource library',
+      description:
+        'The schools that grow steadily are the ones who borrow good ideas. Inside: ready-to-use playbooks, workbooks, and templates from The Montessori Foundation — for onboarding, parent conferences, community, and enrollment. New resources added regularly.',
+      icon: '📚',
+      href: '/school/resources',
+      completed: resourcesExplored,
+      doneLabel: resourcesExplored
+        ? `${viewedResources.length} ${viewedResources.length === 1 ? 'resource' : 'resources'} opened`
+        : undefined,
     },
   ]
 
