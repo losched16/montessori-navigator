@@ -57,11 +57,38 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
       }
 
       // Check whether this user also has a parent role (for the context switcher)
-      const { data: parentRow } = await supabase
+      let { data: parentRow } = await supabase
         .from('parents')
         .select('id')
         .eq('user_id', user.id)
         .maybeSingle()
+
+      // Auto-provision a parent self-account for school admins. The dual-role
+      // view switcher only appears when this exists, and we want every admin
+      // to have it ready by default — same email, same login, no clutter on
+      // the school side. The endpoint is idempotent (no-ops if already there)
+      // and the row never gets linked to school_families so it doesn't count
+      // toward the trial cap. Fire-and-forget: a failure here doesn't block
+      // the admin from using their school dashboard.
+      if (!parentRow) {
+        try {
+          const res = await fetch('/api/school/become-parent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({}),
+          })
+          if (res.ok) {
+            const refreshed = await supabase
+              .from('parents')
+              .select('id')
+              .eq('user_id', user.id)
+              .maybeSingle()
+            parentRow = refreshed.data
+          }
+        } catch {
+          // Silent — admin can still use the school side without it.
+        }
+      }
       setHasParentRole(!!parentRow)
 
       setLoading(false)

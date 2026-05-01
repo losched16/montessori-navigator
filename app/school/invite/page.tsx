@@ -150,13 +150,13 @@ export default function SchoolInvitePage() {
             <div className="flex-1">
               <div className="font-semibold text-sm mb-1">
                 {usage.reachedLimit
-                  ? `Trial invite limit reached (${usage.used}/${usage.limit})`
-                  : `Free trial: ${usage.used}/${usage.limit} invitations used`}
+                  ? `Trial member limit reached (${usage.used}/${usage.limit})`
+                  : `Free trial: ${usage.used}/${usage.limit} active members`}
               </div>
               <p className="text-xs leading-relaxed">
                 {usage.reachedLimit
-                  ? `You've sent the maximum of ${usage.limit} invitations during your trial. Upgrade to a paid plan to invite all your families.`
-                  : `During your free trial you can invite up to ${usage.limit} people total (across families and admins) to test the platform. The limit lifts as soon as your trial converts to a paid subscription.`}
+                  ? `You have ${usage.used} active members (admins + families combined). Pending invites don't count — but ${usage.limit} people have actually joined, which is your trial cap. Upgrade to invite more.`
+                  : `During your trial you can have up to ${usage.limit} active members (admins + families combined). Pending invites don't count — only people who actually sign up. The cap lifts entirely the moment you upgrade.`}
               </p>
               {usage.reachedLimit && (
                 <Link href="/school/settings" className="inline-block mt-2 text-xs font-semibold underline">

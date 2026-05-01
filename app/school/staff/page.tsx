@@ -155,13 +155,13 @@ export default function SchoolStaffPage() {
             <div className="flex-1">
               <div className="font-semibold text-sm mb-1">
                 {usage.reachedLimit
-                  ? `Trial invite limit reached (${usage.used}/${usage.limit})`
-                  : `Free trial: ${usage.used}/${usage.limit} invitations used`}
+                  ? `Trial member limit reached (${usage.used}/${usage.limit})`
+                  : `Free trial: ${usage.used}/${usage.limit} active members`}
               </div>
               <p className="text-xs leading-relaxed">
                 {usage.reachedLimit
-                  ? `You've reached the ${usage.limit}-person trial cap. This includes admins, families, and pending invites combined. Upgrade to invite more.`
-                  : `During your free trial you can invite up to ${usage.limit} people total (across admins and families) to test the platform.`}
+                  ? `You have ${usage.used} active members (admins + families combined). Pending invites don't count — but ${usage.limit} people have actually joined, which is your trial cap. Upgrade to invite more.`
+                  : `During your trial you can have up to ${usage.limit} active members (admins + families combined). Pending invites don't count — only people who actually sign up.`}
               </p>
               {usage.reachedLimit && (
                 <Link href="/school/settings" className="inline-block mt-2 text-xs font-semibold underline">

@@ -159,7 +159,7 @@ export default function JoinSchoolPage() {
       // and now wants to join their own school as a parent)
       let { data: parent } = await supabase
         .from('parents')
-        .select('id')
+        .select('id, display_name')
         .eq('user_id', user.id)
         .maybeSingle()
 
@@ -171,7 +171,7 @@ export default function JoinSchoolPage() {
             email: user.email,
             display_name: user.email?.split('@')[0] || null,
           })
-          .select('id')
+          .select('id, display_name')
           .single()
         if (parentErr || !newParent) {
           setFormError('Failed to create parent profile: ' + (parentErr?.message || 'unknown'))
@@ -193,9 +193,15 @@ export default function JoinSchoolPage() {
 
       if (!familyId) {
         familyId = crypto.randomUUID()
+        // Use the parent's name when we have it so the school admin sees a
+        // real label (e.g. "Sarah's Family") instead of a generic "My Family".
+        const parentLabel =
+          (parent as any)?.display_name ||
+          user.email?.split('@')[0] ||
+          'Family'
         const { error: famErr } = await supabase
           .from('families')
-          .insert({ id: familyId, name: 'My Family' })
+          .insert({ id: familyId, name: `${parentLabel}'s Family` })
         if (famErr) {
           setFormError('Failed to create family: ' + famErr.message)
           setJoining(false)

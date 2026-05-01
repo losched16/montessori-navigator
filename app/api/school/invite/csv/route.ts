@@ -76,31 +76,23 @@ export async function POST(request: NextRequest) {
     // Create invitations for new emails
     const newEmails = emails.filter((e: string) => !alreadyInvited.has(e))
 
-    // Enforce the trial invite cap. Free-trial schools can invite at most
-    // TRIAL_INVITE_CAP people total across staff + family.
+    // Enforce the trial cap at SEND time only when active members are already
+    // at the cap. Pending invitations don't count under the new rule, so trial
+    // schools can send invites freely — the cap only kicks in when actual
+    // sign-ups (active school_families) reach the limit. Acceptance is gated
+    // separately in /api/invite/accept and /api/join/capacity.
     const { data: schoolForCap } = await supabase
       .from('schools')
       .select('subscription_status')
       .eq('id', schoolId)
       .maybeSingle()
     const usage = await getInviteUsage(supabase, schoolId, schoolForCap?.subscription_status || null)
-    if (usage.limit !== null) {
-      const remaining = Math.max(0, usage.limit - usage.used)
-      if (remaining <= 0) {
-        return NextResponse.json({
-          error: `You've used all ${usage.limit} of your trial invitations. Upgrade your subscription to invite more families.`,
-          trialLimit: usage.limit,
-          used: usage.used,
-        }, { status: 403 })
-      }
-      if (newEmails.length > remaining) {
-        return NextResponse.json({
-          error: `You can only invite ${remaining} more ${remaining === 1 ? 'person' : 'people'} during your free trial (${usage.used}/${usage.limit} used). Upgrade to invite more.`,
-          trialLimit: usage.limit,
-          used: usage.used,
-          remaining,
-        }, { status: 403 })
-      }
+    if (usage.limit !== null && usage.used >= usage.limit) {
+      return NextResponse.json({
+        error: `You already have ${usage.used} active members during your trial (${usage.used}/${usage.limit}). Upgrade to invite more families.`,
+        trialLimit: usage.limit,
+        used: usage.used,
+      }, { status: 403 })
     }
 
     if (newEmails.length > 0) {

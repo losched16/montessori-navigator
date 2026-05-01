@@ -168,9 +168,10 @@ export default function SchoolWelcomePage() {
             <h3 className="font-semibold text-navy-700">During your free trial</h3>
           </div>
           <p className="text-sm text-navy-700 leading-relaxed mb-2">
-            You can invite <strong>3 people total</strong> — admins, families, and pending
-            invites combined. We do this on purpose: the trial is for your team to experience
-            the platform together, not to roll it out to your whole school overnight.
+            You can have up to <strong>3 active members</strong> at once — admins or families
+            who&apos;ve actually joined. <strong>Pending invitations don&apos;t count</strong>,
+            so you can send invites freely; only people who accept consume a seat. This keeps
+            the trial focused on letting your team experience the platform together.
           </p>
           <p className="text-sm text-navy-700 leading-relaxed">
             <strong>The moment you upgrade to a paid plan, that cap lifts entirely.</strong>{' '}

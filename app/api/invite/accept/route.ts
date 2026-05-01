@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
+import { getInviteUsage } from '@/lib/school-invite-limits'
 
 export async function POST(request: NextRequest) {
   try {
@@ -55,7 +57,7 @@ export async function POST(request: NextRequest) {
     // Get the current user's parent profile
     let { data: parent } = await supabase
       .from('parents')
-      .select('id')
+      .select('id, display_name')
       .eq('user_id', user.id)
       .single()
 
@@ -108,6 +110,33 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Failed to join family' }, { status: 500 })
       }
     } else if (invitation.type === 'school_family') {
+      // Gate at accept time: under the new cap rule, pending invites don't
+      // count toward the trial seat cap — only active members do. So even
+      // if an invitation was sent freely, we have to verify there's still
+      // an open slot before letting this person actually join the school.
+      if (invitation.school_id) {
+        const service = createServiceClient(
+          process.env.NEXT_PUBLIC_SUPABASE_URL!,
+          process.env.SUPABASE_SERVICE_ROLE_KEY!,
+        )
+        const { data: school } = await service
+          .from('schools')
+          .select('subscription_status')
+          .eq('id', invitation.school_id)
+          .maybeSingle()
+        const usage = await getInviteUsage(
+          service,
+          invitation.school_id,
+          school?.subscription_status || null,
+        )
+        if (usage.reachedLimit) {
+          return NextResponse.json({
+            error:
+              "This school's trial is full right now — they have the maximum number of active members. Please ask the school admin to upgrade their plan, then try again.",
+          }, { status: 403 })
+        }
+      }
+
       // Get or create the user's family
       let { data: membership } = await supabase
         .from('family_members')
@@ -124,9 +153,15 @@ export async function POST(request: NextRequest) {
         // yet — .select() read-back would return null.
         const { randomUUID } = await import('crypto')
         const newFamilyId = randomUUID()
+        // Prefer the parent's real display name over the email-prefix fallback
+        // so admins see a meaningful family label on /school/families.
+        const parentLabel =
+          (parent as any)?.display_name ||
+          user.email?.split('@')[0] ||
+          'Family'
         const { error: familyErr } = await supabase
           .from('families')
-          .insert({ id: newFamilyId, name: `${user.email?.split('@')[0]}'s Family` })
+          .insert({ id: newFamilyId, name: `${parentLabel}'s Family` })
 
         if (familyErr) {
           return NextResponse.json({ error: 'Failed to create family: ' + familyErr.message }, { status: 500 })
