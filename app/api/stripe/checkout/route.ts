@@ -69,8 +69,15 @@ export async function POST(req: NextRequest) {
             schoolName,
           },
         },
-        // Card collection is required up-front so the trial converts seamlessly
-        payment_method_collection: 'always',
+        // Show the "Add promotion code" field at checkout so we can hand out
+        // coupon codes for grandfathered / migrated members. Codes are
+        // managed in Stripe Dashboard → Products → Coupons.
+        allow_promotion_codes: true,
+        // Card collection is "if_required" so a 100%-off-forever coupon
+        // (used for fully-comped accounts) lets schools skip card entry.
+        // For any non-100% discount or trial path, Stripe still collects a
+        // card because the subscription will have a non-zero charge later.
+        payment_method_collection: 'if_required',
         success_url: `${appUrl}/for-schools/welcome?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${appUrl}/for-schools/pricing`,
       })
@@ -127,6 +134,11 @@ export async function POST(req: NextRequest) {
           ...(existingParent ? { parent_id: existingParent.id } : {}),
         },
       },
+      // Same coupon-friendly settings as the school flow — "Add promotion
+      // code" field shows up at checkout, and a 100%-off-forever code skips
+      // card entry entirely.
+      allow_promotion_codes: true,
+      payment_method_collection: 'if_required',
       success_url: `${appUrl}/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl}/pricing`,
     }
