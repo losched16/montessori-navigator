@@ -6,11 +6,10 @@ import {
   resourceTypeLabel,
   resolvePdfUrl,
 } from '@/lib/resources'
-import TrackResourceView from '@/components/school/TrackResourceView'
 
 export const dynamic = 'force-dynamic'
 
-export default async function SchoolResourceDetailPage({ params }: { params: { slug: string } }) {
+export default async function ParentResourceDetailPage({ params }: { params: { slug: string } }) {
   const service = createServiceClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
@@ -18,18 +17,15 @@ export default async function SchoolResourceDetailPage({ params }: { params: { s
   const resource = await getResourceBySlug(service, params.slug)
 
   if (!resource || !resource.isPublished) notFound()
-  // School-side page only renders resources whose audience includes schools
-  if (resource.audience === 'parent') notFound()
+  // Parent-side page only renders resources whose audience includes parents
+  if (resource.audience === 'school') notFound()
 
   const pdfUrl = resolvePdfUrl(resource.pdfPath, process.env.NEXT_PUBLIC_SUPABASE_URL!)
 
   return (
     <div className="max-w-5xl pb-20 sm:pb-0">
-      {/* Side-effect: log this view so the dashboard checklist auto-completes */}
-      <TrackResourceView slug={resource.slug} />
-
       <nav className="mb-4 text-xs text-navy-600/60">
-        <Link href="/school/resources" className="hover:text-navy-700">Resources</Link>
+        <Link href="/dashboard/resources" className="hover:text-navy-700">Resources</Link>
         <span className="mx-1.5">/</span>
         <span className="text-navy-700">{resource.title}</span>
       </nav>

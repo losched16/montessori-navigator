@@ -120,6 +120,7 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
     { href: '/dashboard', label: 'Home', icon: '🏠' },
     ...(showStartHere ? [{ href: '/dashboard/start-here', label: 'Start Here', icon: '🚀' }] : []),
     { href: '/dashboard/chat', label: 'Abigail', icon: '💬' },
+    { href: '/dashboard/resources', label: 'Resources', icon: '📘' },
     { href: '/dashboard/children', label: 'Children', icon: '🌱' },
     { href: '/dashboard/development', label: 'Baby Milestones', icon: '👶' },
     { href: '/dashboard/journey', label: 'Journey', icon: '✨', children: [

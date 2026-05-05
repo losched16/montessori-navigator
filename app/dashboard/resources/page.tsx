@@ -2,23 +2,24 @@ import Link from 'next/link'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { listPublishedResources, resourceTypeLabel } from '@/lib/resources'
 
-// School Resources library — published resources where audience is 'school'
-// or 'both'. Content is managed via /admin/resources.
+// Parent-facing resource library — mirrors /school/resources but filtered to
+// audience IN ('parent', 'both'). Same layout patterns so a single design
+// language across both sides of the platform.
 
 export const dynamic = 'force-dynamic'
 
-export default async function SchoolResourcesPage() {
+export default async function ParentResourcesPage() {
   const service = createServiceClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   )
-  const resources = await listPublishedResources(service, 'school')
+  const resources = await listPublishedResources(service, 'parent')
 
   return (
     <div className="max-w-5xl pb-20 sm:pb-0">
-      <h1 className="text-xl font-bold text-navy-600 mb-2">Resources</h1>
+      <h1 className="text-xl font-bold text-navy-700 mb-2">Resources</h1>
       <p className="text-sm text-navy-600/70 mb-6">
-        Playbooks, workbooks, and templates from The Montessori Foundation to help you build a thriving school community.
+        Guides, articles, and tools from The Montessori Foundation — to help you understand what your child is doing, what to do at home, and how to be the partner your school is hoping for.
       </p>
 
       {resources.length === 0 ? (
@@ -32,7 +33,7 @@ export default async function SchoolResourcesPage() {
           {resources.map(resource => (
             <Link
               key={resource.slug}
-              href={`/school/resources/${resource.slug}`}
+              href={`/dashboard/resources/${resource.slug}`}
               className="group bg-white border border-gray-100 rounded-2xl p-5 transition hover:-translate-y-0.5 hover:shadow-md hover:border-warm-200 flex flex-col"
             >
               <div
