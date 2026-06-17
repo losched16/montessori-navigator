@@ -85,14 +85,21 @@ export async function POST(req: NextRequest) {
   const type = String(form.get('type') || '').trim()
   const audience = String(form.get('audience') || '').trim()
   const highlightsRaw = String(form.get('highlights') || '[]')
+  const bodyMarkdown = String(form.get('body_markdown') || '').trim()
   const isPublished = String(form.get('is_published') || 'false') === 'true'
   const file = form.get('file')
 
   if (!title || !slug || !description || !type || !audience) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
   }
-  if (!(file instanceof File)) {
-    return NextResponse.json({ error: 'PDF file is required' }, { status: 400 })
+
+  const hasFile = file instanceof File && file.size > 0
+  const hasBody = bodyMarkdown.length > 0
+  if (!hasFile && !hasBody) {
+    return NextResponse.json(
+      { error: 'Either a PDF file or markdown body content is required.' },
+      { status: 400 },
+    )
   }
 
   let highlights: string[] = []
@@ -100,10 +107,15 @@ export async function POST(req: NextRequest) {
 
   const service = getServiceClient()
 
-  // Upload the PDF first — if storage fails we don't want a half-created row
-  const upload = await uploadPdf(service, file, slug, type)
-  if ('error' in upload) {
-    return NextResponse.json({ error: upload.error }, { status: 400 })
+  // Upload the PDF first if there is one — so we don't end up with a DB row
+  // pointing at a file that never got stored.
+  let pdfPath: string | null = null
+  if (hasFile) {
+    const upload = await uploadPdf(service, file as File, slug, type)
+    if ('error' in upload) {
+      return NextResponse.json({ error: upload.error }, { status: 400 })
+    }
+    pdfPath = upload.path
   }
 
   const { data, error } = await service
@@ -115,7 +127,8 @@ export async function POST(req: NextRequest) {
       type,
       audience,
       highlights,
-      pdf_path: upload.path,
+      pdf_path: pdfPath,
+      body_markdown: hasBody ? bodyMarkdown : null,
       is_published: isPublished,
       published_at: isPublished ? new Date().toISOString() : null,
       created_by: auth.user.id,
@@ -124,8 +137,10 @@ export async function POST(req: NextRequest) {
     .single()
 
   if (error) {
-    // Roll back the storage upload to avoid orphaned files
-    await service.storage.from(STORAGE_BUCKET).remove([upload.path])
+    // Roll back the storage upload if there was one
+    if (pdfPath) {
+      await service.storage.from(STORAGE_BUCKET).remove([pdfPath])
+    }
     if (error.code === '23505') {
       return NextResponse.json(
         { error: `A resource with slug "${slug}" already exists. Pick a different slug.` },

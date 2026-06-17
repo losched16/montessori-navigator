@@ -19,6 +19,7 @@ export interface Resource {
   audience: Audience
   pdfPath: string | null      // either /resources/foo.pdf (public/) or storage path
   coverPath: string | null
+  bodyMarkdown: string | null // for articles / guides without a PDF
   highlights: string[]
   isPublished: boolean
   publishedAt: string | null
@@ -36,6 +37,7 @@ interface RawResource {
   audience: string
   pdf_path: string | null
   cover_path: string | null
+  body_markdown: string | null
   highlights: string[] | null
   is_published: boolean
   published_at: string | null
@@ -54,6 +56,7 @@ function mapResource(r: RawResource): Resource {
     audience: r.audience as Audience,
     pdfPath: r.pdf_path,
     coverPath: r.cover_path,
+    bodyMarkdown: r.body_markdown,
     highlights: Array.isArray(r.highlights) ? r.highlights : [],
     isPublished: r.is_published,
     publishedAt: r.published_at,

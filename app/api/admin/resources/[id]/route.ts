@@ -52,6 +52,7 @@ export async function PATCH(
   const type = String(form.get('type') || '').trim()
   const audience = String(form.get('audience') || '').trim()
   const highlightsRaw = String(form.get('highlights') || '[]')
+  const bodyMarkdown = String(form.get('body_markdown') || '').trim()
   const isPublished = String(form.get('is_published') || 'false') === 'true'
   const file = form.get('file')
 
@@ -115,6 +116,7 @@ export async function PATCH(
     type,
     audience,
     highlights,
+    body_markdown: bodyMarkdown.length > 0 ? bodyMarkdown : null,
     is_published: isPublished,
     published_at: publishedAt,
   }

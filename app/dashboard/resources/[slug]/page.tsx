@@ -6,6 +6,7 @@ import {
   resourceTypeLabel,
   resolvePdfUrl,
 } from '@/lib/resources'
+import { renderMarkdown } from '@/lib/simple-markdown'
 
 export const dynamic = 'force-dynamic'
 
@@ -90,6 +91,13 @@ export default async function ParentResourceDetailPage({ params }: { params: { s
             style={{ height: '85vh', border: 'none', display: 'block' }}
           />
         </div>
+      )}
+
+      {!pdfUrl && resource.bodyMarkdown && (
+        <article
+          className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 prose prose-navy max-w-none prose-headings:text-navy-700 prose-a:text-warm-600"
+          dangerouslySetInnerHTML={{ __html: renderMarkdown(resource.bodyMarkdown) }}
+        />
       )}
     </div>
   )

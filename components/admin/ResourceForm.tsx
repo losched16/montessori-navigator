@@ -38,6 +38,7 @@ export default function ResourceForm({ existing }: Props) {
   const [highlightsText, setHighlightsText] = useState(
     (existing?.highlights || []).join('\n'),
   )
+  const [bodyMarkdown, setBodyMarkdown] = useState(existing?.bodyMarkdown || '')
   const [isPublished, setIsPublished] = useState(existing?.isPublished ?? false)
   const [file, setFile] = useState<File | null>(null)
   const [submitting, setSubmitting] = useState(false)
@@ -61,8 +62,17 @@ export default function ResourceForm({ existing }: Props) {
       setError('Title, slug, and description are required.')
       return
     }
-    if (!isEditing && !file) {
-      setError('Please upload a PDF file.')
+    // Each resource needs SOMETHING readable — either a PDF file or markdown
+    // body content. The detail page renders whichever is present.
+    const hasExistingFile = !!existing?.pdfPath
+    const hasExistingBody = !!(existing?.bodyMarkdown || '').trim()
+    const hasBody = bodyMarkdown.trim().length > 0
+    if (!isEditing && !file && !hasBody) {
+      setError('Please upload a PDF file or paste markdown body content.')
+      return
+    }
+    if (isEditing && !file && !hasExistingFile && !hasBody && !hasExistingBody) {
+      setError('Please upload a PDF file or paste markdown body content.')
       return
     }
 
@@ -79,6 +89,7 @@ export default function ResourceForm({ existing }: Props) {
         highlightsText.split('\n').map(l => l.trim()).filter(Boolean),
       ))
       fd.append('is_published', String(isPublished))
+      fd.append('body_markdown', bodyMarkdown)
       if (file) fd.append('file', file)
 
       const url = isEditing
@@ -209,17 +220,29 @@ export default function ResourceForm({ existing }: Props) {
       </Field>
 
       <Field
-        label={isEditing ? 'Replace PDF (optional)' : 'PDF file'}
+        label="PDF file (optional)"
         hint={isEditing
           ? `Current file: ${existing!.pdfPath || '(none)'}. Choose a new PDF to replace it, or leave blank to keep.`
-          : 'Upload the PDF that admins/parents will read. Max 25 MB.'}
-        required={!isEditing}
+          : 'Upload a PDF for playbooks, workbooks, templates. Max 25 MB. Leave blank if you only want a markdown article below.'}
       >
         <input
           type="file"
           accept="application/pdf"
           onChange={onFileChange}
           className="text-sm w-full file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:bg-warm-50 file:text-warm-700 file:text-xs file:font-medium hover:file:bg-warm-100"
+        />
+      </Field>
+
+      <Field
+        label="Body content (markdown, optional)"
+        hint="For articles and guides without a PDF. Supports basic markdown (headings, **bold**, *italic*, links, lists). Leave blank if you uploaded a PDF instead."
+      >
+        <textarea
+          value={bodyMarkdown}
+          onChange={e => setBodyMarkdown(e.target.value)}
+          rows={12}
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm font-mono focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none resize-y"
+          placeholder={"# Heading\n\nParagraph text with **bold** and *italic* and [links](https://example.com).\n\n- Bullet 1\n- Bullet 2"}
         />
       </Field>
 
