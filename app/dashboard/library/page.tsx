@@ -114,12 +114,17 @@ export default function LibraryPage() {
   }
 
   return (
-    <div>
-      {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy-600">Library</h1>
-        <p className="text-gray-500 text-sm mt-1">
-          {ARTICLES.length} articles from the Montessori Foundation &amp; Family Alliance
+    <div className="mfa-editorial">
+      {/* Header — editorial scale, true black, with serif headline */}
+      <div className="mb-8 sm:mb-10">
+        <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[color:var(--accent-warm)] mb-3">
+          The Montessori Foundation
+        </div>
+        <h1 className="serif text-[40px] sm:text-[56px] leading-[0.95] font-bold text-[color:var(--ink)] tracking-tight">
+          Library
+        </h1>
+        <p className="text-[17px] sm:text-[19px] leading-[1.45] text-[color:var(--ink-secondary)] mt-3 max-w-[560px]">
+          {ARTICLES.length.toLocaleString()} articles from the Montessori Foundation and Family Alliance.
         </p>
       </div>
 
@@ -244,21 +249,21 @@ export default function LibraryPage() {
                 ))}
               </div>
 
-              {/* Title */}
-              <h3 className="text-sm font-semibold text-navy-600 leading-snug mb-2 group-hover:text-warm-600 transition line-clamp-2">
+              {/* Title — serif, true black, big */}
+              <h3 className="serif text-[18px] sm:text-[20px] font-bold text-[color:var(--ink)] leading-[1.15] mb-2 group-hover:opacity-70 transition line-clamp-3 tracking-tight">
                 {article.videoIds && article.videoIds.length > 0 && (
-                  <span className="inline-block mr-1.5 text-red-500 align-middle">▶</span>
+                  <span className="inline-block mr-1.5 text-red-500 align-middle text-[12px]">▶</span>
                 )}
                 {article.title}
               </h3>
 
               {/* Excerpt */}
-              <p className="text-xs text-gray-500 leading-relaxed line-clamp-3 mb-3">
+              <p className="text-[14px] text-[color:var(--ink-secondary)] leading-[1.45] line-clamp-3 mb-3">
                 {article.excerpt}
               </p>
 
               {/* Meta */}
-              <div className="flex items-center justify-between text-[10px] text-gray-400">
+              <div className="flex items-center justify-between text-[11px] text-[color:var(--ink-muted)] font-medium">
                 <span>{article.author}</span>
                 <span>{formatDate(article.date)}</span>
               </div>
@@ -266,10 +271,10 @@ export default function LibraryPage() {
           ))}
         </div>
       ) : (
-        <div className="bg-white border border-gray-100 rounded-xl p-12 text-center">
-          <div className="text-3xl mb-3">📚</div>
-          <h3 className="font-medium text-navy-600 mb-1">No articles found</h3>
-          <p className="text-sm text-gray-500">Try adjusting your search or filters</p>
+        <div className="bg-white border border-[color:var(--separator)] rounded-2xl p-16 text-center">
+          <div className="text-5xl mb-4 opacity-30">📚</div>
+          <h3 className="serif text-[24px] font-bold text-[color:var(--ink)] mb-2 tracking-tight">No articles found</h3>
+          <p className="text-[15px] text-[color:var(--ink-secondary)]">Try adjusting your search or filters</p>
         </div>
       )}
 

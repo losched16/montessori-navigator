@@ -13,12 +13,12 @@ export default function ArticlePage() {
 
   if (!article) {
     return (
-      <div className="max-w-3xl mx-auto text-center py-20">
-        <div className="text-4xl mb-4">📄</div>
-        <h1 className="text-xl font-semibold text-navy-600 mb-2">Article Not Found</h1>
-        <p className="text-gray-500 mb-6">The article you&apos;re looking for doesn&apos;t exist.</p>
-        <Link href="/dashboard/library" className="text-sm text-warm-700 hover:underline">
-          ← Back to Library
+      <div className="mfa-editorial max-w-[680px] mx-auto text-center py-24">
+        <div className="text-6xl mb-5 opacity-30">📄</div>
+        <h1 className="serif text-[32px] font-bold text-[color:var(--ink)] mb-3 tracking-tight">Article Not Found</h1>
+        <p className="text-[17px] text-[color:var(--ink-secondary)] mb-8">The article you&apos;re looking for doesn&apos;t exist.</p>
+        <Link href="/dashboard/library" className="text-[15px] font-semibold text-[color:var(--ink)] hover:underline">
+          ‹ Back to Library
         </Link>
       </div>
     )
@@ -63,7 +63,7 @@ export default function ArticlePage() {
       // Check if it looks like a heading (short, no period at end, starts with uppercase)
       if (trimmed.length < 100 && !trimmed.endsWith('.') && !trimmed.startsWith('•') && /^[A-Z]/.test(trimmed) && !trimmed.includes('•')) {
         return (
-          <h3 key={i} className="text-lg font-semibold text-navy-600 mt-8 mb-3" style={{ fontFamily: 'Georgia, serif' }}>
+          <h3 key={i} className="serif text-[26px] font-bold text-[color:var(--ink)] mt-12 mb-4 tracking-tight leading-[1.15]">
             {trimmed}
           </h3>
         )
@@ -72,12 +72,12 @@ export default function ArticlePage() {
       if (trimmed.includes('\n•') || trimmed.startsWith('•')) {
         const items = trimmed.split('\n').filter(l => l.trim())
         return (
-          <ul key={i} className="space-y-1.5 my-4 ml-2">
+          <ul key={i} className="space-y-2 my-6 ml-2">
             {items.map((item, j) => (
-              <li key={j} className="text-[15px] text-gray-700 leading-relaxed flex items-start gap-2">
+              <li key={j} className="serif text-[19px] text-[color:var(--ink)] leading-[1.5] flex items-start gap-3">
                 {item.startsWith('•') ? (
                   <>
-                    <span className="text-warm-600 mt-1 shrink-0">•</span>
+                    <span className="text-[color:var(--accent-warm)] mt-1 shrink-0">•</span>
                     <span>{item.substring(1).trim()}</span>
                   </>
                 ) : (
@@ -89,7 +89,7 @@ export default function ArticlePage() {
         )
       }
       return (
-        <p key={i} className="text-[15px] text-gray-700 leading-[1.8] mb-4">
+        <p key={i} className="serif text-[19px] text-[color:var(--ink)] leading-[1.62] mb-5">
           {trimmed}
         </p>
       )
@@ -97,58 +97,45 @@ export default function ArticlePage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-        <Link href="/dashboard/library" className="hover:text-warm-600 transition">Library</Link>
-        <span>→</span>
-        <span className="text-gray-600 truncate">{article.title}</span>
+    <div className="mfa-editorial bg-white -m-4 sm:-m-6 pb-24 sm:pb-16">
+      {/* Subtle back affordance */}
+      <div className="max-w-[720px] mx-auto px-5 sm:px-6 pt-6 sm:pt-10">
+        <Link
+          href="/dashboard/library"
+          className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[color:var(--ink-secondary)] hover:text-[color:var(--ink)] transition"
+        >
+          <span className="text-[16px] leading-none">‹</span> Library
+        </Link>
       </div>
 
-      {/* Article Header */}
-      <article>
-        <div className="mb-6">
-          {/* Categories */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {article.categories.filter(c => c !== 'MFA').map(cat => (
-              <span key={cat} className={`px-2.5 py-1 rounded-full text-xs font-medium ${getCategoryColor(cat)}`}>
-                {cat}
-              </span>
-            ))}
-          </div>
-
-          <h1 className="text-2xl sm:text-3xl font-bold text-navy-600 leading-tight mb-3" style={{ fontFamily: 'Georgia, serif' }}>
-            {article.title}
-          </h1>
-
-          <div className="flex items-center gap-3 text-sm text-gray-500">
-            <span>By {article.author}</span>
-            {article.date && (
-              <>
-                <span className="text-gray-300">·</span>
-                <span>{formatDate(article.date)}</span>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Tags */}
-        {article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-6">
-            {article.tags.map(tag => (
-              <span key={tag} className="px-2 py-0.5 bg-gray-50 text-gray-500 rounded text-[11px]">
-                #{tag}
-              </span>
-            ))}
+      {/* Article header — editorial scale */}
+      <header className="max-w-[720px] mx-auto px-5 sm:px-6 mt-8 sm:mt-12">
+        {/* Category kicker — only one, uppercase */}
+        {article.categories.filter(c => c !== 'MFA')[0] && (
+          <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[color:var(--accent-warm)] mb-4">
+            {article.categories.filter(c => c !== 'MFA')[0]}
           </div>
         )}
 
-        {/* Divider */}
-        <div className="border-t border-gray-100 mb-8" />
+        <h1 className="serif text-[40px] sm:text-[60px] leading-[0.98] font-bold text-[color:var(--ink)] mb-6 tracking-tight">
+          {article.title}
+        </h1>
 
+        <div className="flex items-center gap-3 text-[14px] font-medium text-[color:var(--ink-secondary)] border-t border-[color:var(--separator)] pt-5">
+          <span className="text-[color:var(--ink)]">{article.author}</span>
+          {article.date && (
+            <>
+              <span className="text-[color:var(--separator)]">·</span>
+              <span>{formatDate(article.date)}</span>
+            </>
+          )}
+        </div>
+      </header>
+
+      <article className="max-w-[680px] mx-auto px-5 sm:px-6 mt-10 sm:mt-14">
         {/* Video embeds */}
         {article.videoIds && article.videoIds.length > 0 && (
-          <div className="space-y-4 mb-8">
+          <div className="space-y-4 mb-10">
             {article.videoIds.map(id => (
               <YouTubeEmbed key={id} videoId={id} title={article.title} />
             ))}
@@ -160,9 +147,20 @@ export default function ArticlePage() {
           {renderContent(article.content)}
         </div>
 
+        {/* Tags — moved to footer position, more subdued */}
+        {article.tags.length > 0 && (
+          <div className="mt-12 pt-8 border-t border-[color:var(--separator)] flex flex-wrap gap-1.5">
+            {article.tags.map(tag => (
+              <span key={tag} className="px-2.5 py-1 bg-gray-50 text-[color:var(--ink-secondary)] rounded-full text-[11px] font-medium">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
+
         {/* Source attribution */}
-        <div className="mt-10 pt-6 border-t border-gray-100">
-          <p className="text-xs text-gray-400 italic">
+        <div className="mt-10 pt-6 border-t border-[color:var(--separator)]">
+          <p className="text-[12px] text-[color:var(--ink-muted)] italic">
             Originally published on montessori.org by the Montessori Foundation &amp; Montessori Family Alliance.
           </p>
         </div>
@@ -170,31 +168,26 @@ export default function ArticlePage() {
 
       {/* Related Articles */}
       {relatedArticles.length > 0 && (
-        <div className="mt-10 pt-8 border-t border-gray-100">
-          <h3 className="text-sm font-semibold text-navy-600 uppercase tracking-wide mb-4">Related Articles</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="max-w-[720px] mx-auto px-5 sm:px-6 mt-16 sm:mt-24">
+          <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[color:var(--ink)] border-t border-[color:var(--separator)] pt-5 mb-6">
+            More to read
+          </div>
+          <div className="divide-y divide-[color:var(--separator)]">
             {relatedArticles.map(related => (
               <Link
                 key={related.slug}
                 href={`/dashboard/library/${related.slug}`}
-                className="p-4 bg-white border border-gray-100 rounded-xl hover:border-gray-200 hover:shadow-sm transition group"
+                className="group flex flex-col gap-1 py-5 first:pt-1"
               >
-                <h4 className="text-sm font-medium text-navy-600 leading-snug group-hover:text-warm-600 transition line-clamp-2 mb-1">
+                <h4 className="serif text-[20px] sm:text-[22px] font-bold text-[color:var(--ink)] leading-[1.15] group-hover:opacity-70 transition tracking-tight line-clamp-3">
                   {related.title}
                 </h4>
-                <p className="text-[11px] text-gray-400">{related.author}</p>
+                <p className="text-[13px] text-[color:var(--ink-muted)] font-medium">{related.author}</p>
               </Link>
             ))}
           </div>
         </div>
       )}
-
-      {/* Back to library */}
-      <div className="mt-8 pb-8">
-        <Link href="/dashboard/library" className="text-sm text-warm-700 hover:underline">
-          ← Back to Library
-        </Link>
-      </div>
     </div>
   )
 }

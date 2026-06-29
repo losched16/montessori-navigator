@@ -144,7 +144,40 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
   const isJourneySection = pathname.startsWith('/dashboard/journey') || pathname.startsWith('/dashboard/milestones') || pathname.startsWith('/dashboard/curriculum')
 
   return (
-    <div className="min-h-screen bg-[#fafaf8]">
+    <div className="min-h-screen bg-[#fafaf8] mfa-parent">
+      {/* Apple-grade typography + color tokens, scoped to parent pages.
+          Use these from any page via Tailwind arbitrary values, e.g.
+          text-[color:var(--ink)] or font-[var(--font-serif)]. */}
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700;6..72,800&display=swap');
+        .mfa-parent {
+          --ink: #1d1d1f;
+          --ink-secondary: #6e6e73;
+          --ink-muted: #86868b;
+          --separator: #d2d2d7;
+          --surface: #ffffff;
+          --surface-elevated: #fbfbfd;
+          --accent: #4a2c82;
+          --accent-warm: #c97b3b;
+          --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          --font-serif: 'Newsreader', 'Cormorant Garamond', Georgia, serif;
+        }
+        .mfa-editorial {
+          font-family: var(--font-sans);
+          color: var(--ink);
+          font-feature-settings: 'ss01', 'cv11';
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        .mfa-editorial h1, .mfa-editorial h2, .mfa-editorial h3,
+        .mfa-editorial .serif {
+          font-family: var(--font-serif);
+          letter-spacing: -0.02em;
+          color: var(--ink);
+        }
+        .mfa-editorial a { color: var(--ink); }
+      `}</style>
+
       {/* Top bar */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
