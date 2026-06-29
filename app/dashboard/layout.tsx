@@ -173,9 +173,15 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
         .mfa-editorial .serif {
           font-family: var(--font-serif);
           letter-spacing: -0.02em;
-          color: var(--ink);
+          /* No hard-coded color — headings inherit ink from .mfa-editorial by
+             default, but stay white when placed inside a text-white card
+             (e.g. the gradient hero). A forced color here would override
+             Tailwind's text-white via higher selector specificity. */
         }
-        .mfa-editorial a { color: var(--ink); }
+        /* Anchors don't inherit color (UA stylesheet), so plain links would go
+           browser-blue. Default them to ink; any link with an explicit Tailwind
+           text color (text-warm-600 etc.) wins via class specificity. */
+        .mfa-editorial a:not([class*="text-"]) { color: var(--ink); }
 
         /* Editorial body typography — applied via .mfa-body to rendered
            markdown (dangerouslySetInnerHTML output on resource detail pages).
