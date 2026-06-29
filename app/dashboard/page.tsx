@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
-import PageBanner from '@/components/ui/PageBanner'
 import type { Child, Observation } from '@/lib/supabase'
 import { formatAge, getAgePlane, getAgePlaneLabel, getObservationTypeLabel, getCurriculumAreaLabel, getDevelopmentLevelLabel } from '@/lib/utils'
 import { getGuideForChildAge } from '@/lib/monthly-development'
@@ -212,19 +211,26 @@ export default function DashboardHome() {
   const nextAction = getNextAction()
 
   return (
-    <div className="max-w-3xl pb-20 sm:pb-0">
-      <PageBanner
-        image="/images/environment/girl-reading.jpg"
-        title={`${greeting()}, ${parentName}`}
-        subtitle={new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
-      />
+    <div className="mfa-editorial max-w-3xl pb-20 sm:pb-0">
+      {/* Editorial greeting — date eyebrow + big serif salutation */}
+      <div className="pt-2 pb-6 sm:pb-8">
+        <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[color:var(--accent-warm)] mb-2">
+          {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+        </div>
+        <h1 className="serif text-[34px] sm:text-[48px] leading-[1.0] font-bold text-[color:var(--ink)] tracking-tight">
+          {greeting()}{parentName ? `, ${parentName}` : ''}.
+        </h1>
+      </div>
 
       {/* ═══ New user welcome ═══ */}
       {children.length === 0 && (
-        <div className="bg-gradient-to-br from-navy-700 to-navy-500 rounded-[22px] sm:rounded-2xl p-6 sm:p-6 text-white mb-6">
-          <div className="text-3xl mb-3">🌱</div>
-          <h2 className="text-lg font-bold mb-1">Welcome to Family Alliance</h2>
-          <p className="text-white/70 text-sm leading-relaxed mb-4">
+        <div
+          className="rounded-[22px] sm:rounded-2xl p-7 sm:p-8 text-white mb-8"
+          style={{ background: 'linear-gradient(135deg, #1a0e2e 0%, #2d1b4e 55%, #4a2c82 100%)' }}
+        >
+          <div className="text-4xl mb-4">🌱</div>
+          <h2 className="serif text-[26px] sm:text-[30px] font-bold mb-2 tracking-tight leading-tight">Welcome to Family Alliance</h2>
+          <p className="text-white/75 text-[16px] leading-relaxed mb-5 max-w-md">
             Your Montessori journey starts here. Let&apos;s set up your family so Abigail can give you personalized recommendations.
           </p>
           <div className="flex flex-wrap gap-2">
@@ -240,14 +246,18 @@ export default function DashboardHome() {
 
       {/* ═══ Suggested next action ═══ */}
       {children.length > 0 && (
-        <Link href={nextAction.href} className="tap-scale block bg-gradient-to-r from-navy-700 to-navy-500 rounded-[22px] sm:rounded-xl p-5 sm:p-4 text-white mb-6 hover:shadow-lg transition group">
-          <div className="flex items-center gap-4 sm:gap-3">
-            <div className="text-3xl sm:text-2xl">{nextAction.icon}</div>
+        <Link
+          href={nextAction.href}
+          className="tap-scale block rounded-[22px] sm:rounded-2xl p-6 sm:p-5 text-white mb-8 hover:shadow-xl transition group"
+          style={{ background: 'linear-gradient(135deg, #1a0e2e 0%, #2d1b4e 55%, #4a2c82 100%)' }}
+        >
+          <div className="flex items-center gap-4">
+            <div className="text-3xl">{nextAction.icon}</div>
             <div>
-              <div className="font-bold sm:font-semibold text-base sm:text-sm group-hover:underline">{nextAction.label}</div>
-              <div className="text-white/60 text-sm sm:text-xs">{nextAction.desc}</div>
+              <div className="serif font-bold text-[19px] sm:text-[21px] leading-tight tracking-tight">{nextAction.label}</div>
+              <div className="text-white/65 text-[14px] mt-0.5">{nextAction.desc}</div>
             </div>
-            <div className="ml-auto text-white/40 text-lg group-hover:text-white/70 transition">→</div>
+            <div className="ml-auto text-white/40 text-xl group-hover:text-white/80 group-hover:translate-x-0.5 transition">→</div>
           </div>
         </Link>
       )}
@@ -260,8 +270,8 @@ export default function DashboardHome() {
               <span className="text-xl sm:text-lg">👀</span>
             </div>
             <div>
-              <div className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-1">Today&apos;s Observation Prompt</div>
-              <p className="text-sm text-navy-600 leading-relaxed">{todayPrompt.prompt}</p>
+              <div className="text-[10px] text-[color:var(--accent-warm)] font-bold uppercase tracking-[0.18em] mb-1.5">Today&apos;s Observation Prompt</div>
+              <p className="serif text-[17px] text-[color:var(--ink)] leading-[1.35] font-medium">{todayPrompt.prompt}</p>
               <Link href="/dashboard/children" className="tap-scale text-xs text-warm-600 font-medium mt-2 inline-block hover:underline">
                 Log observation for {todayPrompt.childName} →
               </Link>
@@ -273,7 +283,7 @@ export default function DashboardHome() {
       {/* ═══ Latest Content ═══ */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xs text-gray-400 font-medium uppercase tracking-wide">Latest Content</h2>
+          <h2 className="text-[11px] text-[color:var(--ink)] font-bold uppercase tracking-[0.2em]">Latest Content</h2>
           <Link href="/dashboard/library" className="tap-scale text-xs text-warm-600 font-medium hover:underline">See All →</Link>
         </div>
         {/* Mobile: carousel */}
@@ -289,8 +299,8 @@ export default function DashboardHome() {
                   <span key={cat} className="px-2 py-0.5 rounded-full text-[9px] font-medium bg-warm-50 text-warm-700">{cat}</span>
                 ))}
               </div>
-              <h3 className="text-sm font-semibold text-navy-600 leading-snug line-clamp-2 mb-2">{article.title}</h3>
-              <p className="text-[10px] text-gray-400">{article.author}</p>
+              <h3 className="serif text-[16px] font-bold text-[color:var(--ink)] leading-[1.15] line-clamp-3 mb-2 tracking-tight">{article.title}</h3>
+              <p className="text-[11px] text-[color:var(--ink-muted)] font-medium">{article.author}</p>
             </Link>
           ))}
         </div>
@@ -307,8 +317,8 @@ export default function DashboardHome() {
                   <span key={cat} className="px-2 py-0.5 rounded-full text-[9px] font-medium bg-warm-50 text-warm-700">{cat}</span>
                 ))}
               </div>
-              <h3 className="text-sm font-semibold text-navy-600 leading-snug line-clamp-2 mb-1 group-hover:text-warm-600 transition">{article.title}</h3>
-              <p className="text-[10px] text-gray-400">{article.author}</p>
+              <h3 className="serif text-[17px] font-bold text-[color:var(--ink)] leading-[1.15] line-clamp-3 mb-1.5 tracking-tight group-hover:opacity-70 transition">{article.title}</h3>
+              <p className="text-[11px] text-[color:var(--ink-muted)] font-medium">{article.author}</p>
             </Link>
           ))}
         </div>
@@ -317,7 +327,7 @@ export default function DashboardHome() {
       {/* ═══ Tomorrow's Child ═══ */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xs text-gray-400 font-medium uppercase tracking-wide">Tomorrow&apos;s Child</h2>
+          <h2 className="text-[11px] text-[color:var(--ink)] font-bold uppercase tracking-[0.2em]">Tomorrow&apos;s Child</h2>
           <Link href="/dashboard/library" className="tap-scale text-xs text-warm-600 font-medium hover:underline">All Issues →</Link>
         </div>
         {/* Mobile: carousel */}
@@ -395,7 +405,7 @@ export default function DashboardHome() {
 
         return (
           <div key={child.id} className="mb-4">
-            <div className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-2">
+            <div className="text-[11px] text-[color:var(--ink)] font-bold uppercase tracking-[0.2em] mb-2">
               {child.name}&apos;s Active Sensitive Periods
             </div>
             <div className="space-y-2">
@@ -471,7 +481,7 @@ export default function DashboardHome() {
       {/* ═══ Children Overview with Dev Snapshot ═══ */}
       {children.length > 0 && (
         <div className="mb-6">
-          <div className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-2">Your Children</div>
+          <div className="text-[11px] text-[color:var(--ink)] font-bold uppercase tracking-[0.2em] mb-2">Your Children</div>
           {/* Mobile: horizontal carousel */}
           <div className="flex gap-3 overflow-x-auto -mx-4 px-4 pb-2 snap-x snap-mandatory scrollbar-hide sm:hidden">
             {children.map(child => {
@@ -538,7 +548,7 @@ export default function DashboardHome() {
       {recentObs.length > 0 ? (
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
-            <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">Recent Observations</div>
+            <div className="text-[11px] text-[color:var(--ink)] font-bold uppercase tracking-[0.2em]">Recent Observations</div>
             <Link href="/dashboard/children" className="text-xs text-warm-600 hover:underline">View all</Link>
           </div>
           <div className="space-y-2 sm:space-y-1.5">
@@ -550,7 +560,7 @@ export default function DashboardHome() {
                       <span className="text-xs font-medium text-warm-700">{obs.child_name}</span>
                       <span className="text-[10px] text-gray-400">{getObservationTypeLabel(obs.type)}</span>
                     </div>
-                    <p className="text-sm text-gray-700 line-clamp-2 sm:line-clamp-1">{obs.description}</p>
+                    <p className="text-[15px] text-[color:var(--ink)] line-clamp-2 sm:line-clamp-1 leading-relaxed">{obs.description}</p>
                   </div>
                   <span className="text-[10px] text-gray-400 whitespace-nowrap mt-1">
                     {new Date(obs.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
@@ -561,10 +571,10 @@ export default function DashboardHome() {
           </div>
         </div>
       ) : children.length > 0 ? (
-        <div className="bg-white border border-gray-100 rounded-xl p-6 text-center mb-6">
-          <div className="text-3xl mb-2">📓</div>
-          <h3 className="font-semibold text-navy-600 mb-1">No observations yet</h3>
-          <p className="text-xs text-gray-500 mb-3 max-w-sm mx-auto">
+        <div className="bg-white border border-[color:var(--separator)] rounded-2xl p-8 text-center mb-6">
+          <div className="text-4xl mb-3 opacity-40">📓</div>
+          <h3 className="serif text-[22px] font-bold text-[color:var(--ink)] mb-2 tracking-tight">No observations yet</h3>
+          <p className="text-[15px] text-[color:var(--ink-secondary)] mb-4 max-w-sm mx-auto leading-relaxed">
             Observation is the parent&apos;s most powerful tool. Start by watching what your child does — without judgment, without interruption.
           </p>
           <Link href="/dashboard/children" className="text-xs text-warm-600 font-medium hover:underline">
@@ -611,9 +621,9 @@ export default function DashboardHome() {
               { value: planCount, label: 'At-Home Plans', href: '/dashboard/plans' },
               { value: threadCount, label: 'Chats', href: '/dashboard/chat' },
             ].map(s => (
-              <Link key={s.label} href={s.href} className="p-3 bg-white border border-gray-100 rounded-xl text-center hover:border-warm-300 transition">
-                <div className="text-lg font-bold text-navy-600">{s.value}</div>
-                <div className="text-[10px] text-gray-400">{s.label}</div>
+              <Link key={s.label} href={s.href} className="p-4 bg-white border border-[color:var(--separator)] rounded-xl text-center hover:border-warm-300 transition">
+                <div className="text-[26px] font-bold text-[color:var(--ink)] leading-none">{s.value}</div>
+                <div className="text-[11px] text-[color:var(--ink-muted)] font-medium mt-1.5">{s.label}</div>
               </Link>
             ))}
           </div>
