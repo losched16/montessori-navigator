@@ -176,6 +176,57 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
           color: var(--ink);
         }
         .mfa-editorial a { color: var(--ink); }
+
+        /* Editorial body typography — applied via .mfa-body to rendered
+           markdown (dangerouslySetInnerHTML output on resource detail pages).
+           Lives here in the layout because the detail pages are Server
+           Components and can't use styled-jsx. */
+        .mfa-body {
+          font-family: var(--font-serif);
+          font-size: 19px;
+          line-height: 1.62;
+          color: var(--ink);
+        }
+        .mfa-body p { margin: 0 0 1.35em; }
+        .mfa-body p:first-of-type::first-letter { font-weight: 700; }
+        .mfa-body h1, .mfa-body h2, .mfa-body h3 {
+          font-family: var(--font-serif);
+          color: var(--ink);
+          letter-spacing: -0.015em;
+          line-height: 1.15;
+          margin: 2em 0 0.6em;
+        }
+        .mfa-body h1 { font-size: 36px; font-weight: 800; }
+        .mfa-body h2 { font-size: 28px; font-weight: 700; }
+        .mfa-body h3 { font-size: 22px; font-weight: 700; }
+        .mfa-body a {
+          color: var(--ink);
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 3px;
+        }
+        .mfa-body a:hover { opacity: 0.7; }
+        .mfa-body strong { font-weight: 700; color: var(--ink); }
+        .mfa-body em { font-style: italic; }
+        .mfa-body code {
+          font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+          font-size: 0.88em;
+          background: #f5f5f7;
+          padding: 0.15em 0.4em;
+          border-radius: 4px;
+        }
+        .mfa-body ul, .mfa-body ol { margin: 0 0 1.35em; padding-left: 1.4em; }
+        .mfa-body li { margin-bottom: 0.4em; }
+        .mfa-body blockquote {
+          font-size: 22px;
+          line-height: 1.45;
+          font-style: italic;
+          font-weight: 500;
+          margin: 1.6em 0;
+          padding-left: 1.2em;
+          border-left: 3px solid var(--accent-warm);
+          color: var(--ink);
+        }
       `}</style>
 
       {/* Top bar */}
