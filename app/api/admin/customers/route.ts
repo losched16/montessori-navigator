@@ -63,6 +63,7 @@ export async function GET(_req: NextRequest) {
     childrenRes,
     invitesRes,
     parentsRes,
+    observationsRes,
   ] = await Promise.all([
     service.from('schools').select('id, name, slug, subscription_status, created_at, trial_ends_at, current_period_end, family_count'),
     service.from('school_staff').select('id, school_id, user_id, created_at'),
@@ -71,6 +72,9 @@ export async function GET(_req: NextRequest) {
     service.from('children').select('id, family_id, created_at'),
     service.from('invitations').select('id, school_id, type, email, status, created_at, expires_at'),
     service.from('parents').select('id, user_id, display_name, email, subscription_status, created_at, stripe_customer_id'),
+    // Observations are our canonical "active usage" signal — meaningful
+    // engagement (not just an app open), attributable to a parent + child.
+    service.from('observations').select('parent_id, child_id, created_at, date'),
   ])
 
   const schools = schoolsRes.data || []
@@ -80,6 +84,7 @@ export async function GET(_req: NextRequest) {
   const children = childrenRes.data || []
   const invites = invitesRes.data || []
   const parents = parentsRes.data || []
+  const observations = observationsRes.data || []
 
   // Build lookups
   const familyById = new Map(families.map((f: any) => [f.id, f]))
@@ -121,6 +126,82 @@ export async function GET(_req: NextRequest) {
     return 'Unnamed Family'
   }
 
+  // ─── Engagement / activity signals ───────────────────────────────
+  // We map each observation child → family → school so usage rolls up per
+  // school, and track distinct active parents in 7d / 30d windows.
+  const nowMs = Date.now()
+  const DAY = 24 * 60 * 60 * 1000
+  const WEEK = 7 * DAY
+  const cutoff7 = nowMs - 7 * DAY
+  const cutoff30 = nowMs - 30 * DAY
+
+  const childToFamily = new Map<string, string>()
+  children.forEach((c: any) => { if (c.family_id) childToFamily.set(c.id, c.family_id) })
+
+  const familyToSchool = new Map<string, string>()
+  enrollments.forEach((e: any) => {
+    if (e.status === 'active' && !familyToSchool.has(e.family_id)) {
+      familyToSchool.set(e.family_id, e.school_id)
+    }
+  })
+
+  const obsTime = (o: any): number => {
+    const t = o.created_at || o.date
+    return t ? new Date(t).getTime() : 0
+  }
+
+  const obsCountBySchool = new Map<string, number>()
+  const activeFamilies30dBySchool = new Map<string, Set<string>>()
+  const activeParents7d = new Set<string>()
+  const activeParents30d = new Set<string>()
+  const familiesWithObs = new Set<string>()
+  let observations30d = 0
+
+  observations.forEach((o: any) => {
+    const t = obsTime(o)
+    if (o.parent_id) {
+      if (t >= cutoff7) activeParents7d.add(o.parent_id)
+      if (t >= cutoff30) activeParents30d.add(o.parent_id)
+    }
+    if (t >= cutoff30) observations30d++
+    const fam = o.child_id ? childToFamily.get(o.child_id) : undefined
+    if (fam) {
+      familiesWithObs.add(fam)
+      const sch = familyToSchool.get(fam)
+      if (sch) {
+        obsCountBySchool.set(sch, (obsCountBySchool.get(sch) || 0) + 1)
+        if (t >= cutoff30) {
+          if (!activeFamilies30dBySchool.has(sch)) activeFamilies30dBySchool.set(sch, new Set())
+          activeFamilies30dBySchool.get(sch)!.add(fam)
+        }
+      }
+    }
+  })
+
+  const totalObservations = observations.length
+  const avgObsPerActiveFamily = familiesWithObs.size > 0
+    ? Math.round((totalObservations / familiesWithObs.size) * 10) / 10
+    : 0
+
+  // Signups over the last 12 weeks — parents + schools per week bucket
+  const weekBuckets: Array<{ start: number; end: number; parents: number; schools: number }> = []
+  for (let i = 11; i >= 0; i--) {
+    const end = nowMs - i * WEEK
+    weekBuckets.push({ start: end - WEEK, end, parents: 0, schools: 0 })
+  }
+  const bucketFor = (timeStr: string | null) => {
+    if (!timeStr) return null
+    const t = new Date(timeStr).getTime()
+    return weekBuckets.find(b => t >= b.start && t < b.end) || null
+  }
+  parents.forEach((p: any) => { const b = bucketFor(p.created_at); if (b) b.parents++ })
+  schools.forEach((s: any) => { const b = bucketFor(s.created_at); if (b) b.schools++ })
+  const signupsByWeek = weekBuckets.map(b => ({
+    label: new Date(b.start).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    parents: b.parents,
+    schools: b.schools,
+  }))
+
   // Build per-school detail
   const schoolList = schools.map((s: any) => {
     const enrolledHere = enrollments.filter((e: any) => e.school_id === s.id)
@@ -143,6 +224,8 @@ export async function GET(_req: NextRequest) {
       activeFamilyCount: activeFamilies.length,
       pendingInviteCount: pendingForSchool.length,
       adminCount: staffForSchool.length,
+      observationsCount: obsCountBySchool.get(s.id) || 0,
+      activeFamilies30d: activeFamilies30dBySchool.get(s.id)?.size || 0,
       families: activeFamilies
         .sort((a: any, b: any) => (b.joined_at || '').localeCompare(a.joined_at || ''))
         .map((e: any) => ({
@@ -239,6 +322,14 @@ export async function GET(_req: NextRequest) {
       totalChildren: totalChildrenCount,
       newSchoolsLast30,
       newParentsLast30,
+    },
+    activity: {
+      activeParents7d: activeParents7d.size,
+      activeParents30d: activeParents30d.size,
+      totalObservations,
+      observations30d,
+      avgObsPerActiveFamily,
+      signupsByWeek,
     },
     schools: schoolList,
     standaloneParents: standaloneList,

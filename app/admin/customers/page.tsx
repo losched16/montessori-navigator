@@ -41,6 +41,8 @@ interface SchoolRow {
   activeFamilyCount: number
   pendingInviteCount: number
   adminCount: number
+  observationsCount: number
+  activeFamilies30d: number
   families: FamilyRow[]
   pendingInvites: PendingInviteRow[]
 }
@@ -70,8 +72,24 @@ interface Stats {
   newParentsLast30: number
 }
 
+interface WeekPoint {
+  label: string
+  parents: number
+  schools: number
+}
+
+interface Activity {
+  activeParents7d: number
+  activeParents30d: number
+  totalObservations: number
+  observations30d: number
+  avgObsPerActiveFamily: number
+  signupsByWeek: WeekPoint[]
+}
+
 interface PageData {
   stats: Stats
+  activity: Activity
   schools: SchoolRow[]
   standaloneParents: ParentRow[]
 }
@@ -135,7 +153,7 @@ export default function AdminCustomersPage() {
     )
   }
 
-  const { stats, schools, standaloneParents } = data
+  const { stats, activity, schools, standaloneParents } = data
 
   const filteredSchools = schools.filter(s => {
     if (!search.trim()) return true
@@ -157,12 +175,30 @@ export default function AdminCustomersPage() {
       </p>
 
       {/* Top stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         <StatCard label="Schools" value={stats.totalSchools} sub={`${stats.activeSchools} active`} />
         <StatCard label="Parents" value={stats.totalParents} sub={`${stats.activationRate}% with children`} />
         <StatCard label="Enrolled families" value={stats.activeFamilies} sub={`${stats.pendingInvites} pending invites`} />
         <StatCard label="Children" value={stats.totalChildren} sub={`${stats.newParentsLast30} new parents · 30d`} />
       </div>
+
+      {/* Activity / engagement */}
+      <section className="mb-8">
+        <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-navy-600/50 mb-3">
+          Activity &amp; engagement
+        </div>
+
+        {/* Engagement stat row */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+          <StatCard label="Active parents · 7d" value={activity.activeParents7d} sub="logged an observation" accent="emerald" />
+          <StatCard label="Active parents · 30d" value={activity.activeParents30d} sub="logged an observation" accent="emerald" />
+          <StatCard label="Observations · 30d" value={activity.observations30d} sub={`${activity.totalObservations.toLocaleString()} all time`} />
+          <StatCard label="Avg per active family" value={activity.avgObsPerActiveFamily} sub="observations logged" />
+        </div>
+
+        {/* Signups over time chart */}
+        <SignupsChart data={activity.signupsByWeek} />
+      </section>
 
       {/* Tabs + search */}
       <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -233,9 +269,26 @@ export default function AdminCustomersPage() {
                     <div className="px-5 pb-5 pt-1 bg-gray-50/50 border-t border-gray-100">
                       {/* Subscription mini-summary */}
                       <div className="grid sm:grid-cols-3 gap-3 mt-3 mb-4">
-                        <MiniStat label="Status" value={school.subscriptionStatus || 'inactive'} />
+                        <MiniStat label="Status" value={school.subscriptionStatus || 'inactive'} capitalize />
                         <MiniStat label="Trial ends" value={formatDate(school.trialEndsAt)} />
                         <MiniStat label="Renews" value={formatDate(school.currentPeriodEnd)} />
+                      </div>
+
+                      {/* Engagement mini-summary */}
+                      <div className="grid sm:grid-cols-3 gap-3 mb-4">
+                        <MiniStat label="Observations" value={String(school.observationsCount)} />
+                        <MiniStat
+                          label="Active families · 30d"
+                          value={`${school.activeFamilies30d} of ${school.activeFamilyCount}`}
+                        />
+                        <MiniStat
+                          label="Engagement"
+                          value={
+                            school.activeFamilyCount > 0
+                              ? `${Math.round((school.activeFamilies30d / school.activeFamilyCount) * 100)}%`
+                              : '—'
+                          }
+                        />
                       </div>
 
                       {/* Pending invites */}
@@ -331,21 +384,74 @@ export default function AdminCustomersPage() {
   )
 }
 
-function StatCard({ label, value, sub }: { label: string; value: number; sub?: string }) {
+function StatCard({
+  label, value, sub, accent,
+}: { label: string; value: number; sub?: string; accent?: 'emerald' }) {
+  const valueColor = accent === 'emerald' ? 'text-emerald-600' : 'text-navy-700'
   return (
     <div className="bg-white border border-gray-100 rounded-xl p-4">
-      <div className="text-2xl font-bold text-navy-700">{value.toLocaleString()}</div>
+      <div className={`text-2xl font-bold ${valueColor}`}>{value.toLocaleString()}</div>
       <div className="text-xs text-navy-600/70 mt-1">{label}</div>
       {sub && <div className="text-[11px] text-navy-600/50 mt-0.5">{sub}</div>}
     </div>
   )
 }
 
-function MiniStat({ label, value }: { label: string; value: string }) {
+// Signups-over-time bar chart. Pure CSS/flex — no chart lib, no external
+// assets (CSP-safe). Two series per week: parents (warm) and schools (navy).
+function SignupsChart({ data }: { data: WeekPoint[] }) {
+  const max = Math.max(1, ...data.map(d => Math.max(d.parents, d.schools)))
+  const totalParents = data.reduce((s, d) => s + d.parents, 0)
+  const totalSchools = data.reduce((s, d) => s + d.schools, 0)
+
+  return (
+    <div className="bg-white border border-gray-100 rounded-2xl p-5">
+      <div className="flex items-center justify-between mb-4">
+        <div className="text-sm font-semibold text-navy-700">Signups · last 12 weeks</div>
+        <div className="flex items-center gap-4 text-xs text-navy-600/70">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-sm bg-warm-500" /> Parents ({totalParents})
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-sm bg-navy-600" /> Schools ({totalSchools})
+          </span>
+        </div>
+      </div>
+
+      <div className="flex items-end justify-between gap-1.5 h-36">
+        {data.map((d, i) => (
+          <div key={i} className="flex-1 flex flex-col items-center justify-end gap-1 h-full group relative">
+            {/* Tooltip */}
+            <div className="absolute -top-1 opacity-0 group-hover:opacity-100 transition pointer-events-none z-10 bg-navy-700 text-white text-[10px] rounded px-2 py-1 whitespace-nowrap">
+              {d.parents} parents · {d.schools} schools
+            </div>
+            {/* Bars */}
+            <div className="w-full flex items-end justify-center gap-0.5 h-full">
+              <div
+                className="w-1/2 max-w-[14px] bg-warm-500 rounded-t-sm transition-all"
+                style={{ height: `${(d.parents / max) * 100}%` }}
+              />
+              <div
+                className="w-1/2 max-w-[14px] bg-navy-600 rounded-t-sm transition-all"
+                style={{ height: `${(d.schools / max) * 100}%` }}
+              />
+            </div>
+            {/* Label — show every other week to avoid crowding */}
+            <div className="text-[9px] text-navy-600/50 whitespace-nowrap">
+              {i % 2 === 0 ? d.label : ''}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function MiniStat({ label, value, capitalize }: { label: string; value: string; capitalize?: boolean }) {
   return (
     <div className="bg-white border border-gray-100 rounded-lg px-3 py-2">
       <div className="text-[10px] uppercase tracking-wide text-navy-600/60">{label}</div>
-      <div className="text-sm font-medium text-navy-700 capitalize">{value}</div>
+      <div className={`text-sm font-medium text-navy-700 ${capitalize ? 'capitalize' : ''}`}>{value}</div>
     </div>
   )
 }
