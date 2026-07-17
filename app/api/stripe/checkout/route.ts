@@ -23,6 +23,13 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const plan: Plan = body.plan || 'school' // default to school for back-compat with existing UI
 
+    // Rewardful affiliate referral ID (from window.Rewardful.referral on the
+    // client). We set it as client_reference_id on the Checkout Session so
+    // Rewardful can attribute the conversion. Parent linking uses metadata,
+    // not client_reference_id, so there's no collision.
+    const referral: string | undefined =
+      typeof body.referral === 'string' && body.referral ? body.referral : undefined
+
     const priceId = PRICE_MAP[plan]
     if (!priceId) {
       return NextResponse.json({ error: `No price configured for plan: ${plan}` }, { status: 500 })
@@ -78,6 +85,9 @@ export async function POST(req: NextRequest) {
         // For any non-100% discount or trial path, Stripe still collects a
         // card because the subscription will have a non-zero charge later.
         payment_method_collection: 'if_required',
+        // Rewardful attribution (school flow uses no parent linking, so this
+        // is free to carry the referral ID).
+        ...(referral ? { client_reference_id: referral } : {}),
         success_url: `${appUrl}/for-schools/welcome?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${appUrl}/for-schools/pricing`,
       })
@@ -139,12 +149,14 @@ export async function POST(req: NextRequest) {
       // card entry entirely.
       allow_promotion_codes: true,
       payment_method_collection: 'if_required',
+      // Rewardful attribution. Parent linking is carried in metadata.parent_id
+      // (set above), so client_reference_id is free for the referral ID.
+      ...(referral ? { client_reference_id: referral } : {}),
       success_url: `${appUrl}/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl}/pricing`,
     }
 
     if (existingParent) {
-      sessionParams.client_reference_id = existingParent.id
       if (existingParent.stripe_customer_id) {
         sessionParams.customer = existingParent.stripe_customer_id
       } else if (existingParent.email || user?.email) {

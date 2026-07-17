@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
+import { getRewardfulReferral } from '@/lib/rewardful'
 
 type Plan = 'individual_monthly' | 'individual_annual'
 
@@ -17,7 +18,7 @@ export default function PricingPage() {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan }),
+        body: JSON.stringify({ plan, referral: getRewardfulReferral() }),
       })
       const data = await res.json()
 

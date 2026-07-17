@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import Logo from '@/components/ui/Logo'
+import { getRewardfulReferral } from '@/lib/rewardful'
 
 export default function SignupPage() {
   return (
@@ -164,7 +165,7 @@ function SignupPageInner() {
         const res = await fetch('/api/stripe/checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ plan }),
+          body: JSON.stringify({ plan, referral: getRewardfulReferral() }),
         })
         const data = await res.json()
         if (res.ok && data.url) {

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
+import { getRewardfulReferral } from '@/lib/rewardful'
 
 export default function SchoolPricingPage() {
   const [familyCount, setFamilyCount] = useState(50)
@@ -34,7 +35,7 @@ export default function SchoolPricingPage() {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: 'school', familyCount, schoolName, email }),
+        body: JSON.stringify({ plan: 'school', familyCount, schoolName, email, referral: getRewardfulReferral() }),
       })
       const data = await res.json()
 

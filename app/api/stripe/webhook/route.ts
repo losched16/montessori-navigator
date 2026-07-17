@@ -63,7 +63,10 @@ export async function POST(req: NextRequest) {
         const session = event.data.object as Stripe.Checkout.Session
         const customerId = session.customer as string
         const subscriptionId = session.subscription as string
-        const parentId = session.client_reference_id || session.metadata?.parent_id
+        // parent_id comes from metadata only. client_reference_id now carries
+        // the Rewardful affiliate referral ID, NOT the parent — reading it here
+        // would misclassify a referred school checkout as an individual one.
+        const parentId = session.metadata?.parent_id
         const planMeta = session.metadata?.plan
         const sessionEmail = session.customer_details?.email || session.customer_email || null
 
