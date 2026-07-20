@@ -5,14 +5,34 @@ import Link from 'next/link'
 import Logo from '@/components/ui/Logo'
 import { getRewardfulReferral } from '@/lib/rewardful'
 
+// Two school tiers. Prices mirror the Stripe prices exactly (Digital
+// $12/family/yr, Digital+Print $25/family/yr) so the calculator matches
+// what customers are actually charged at checkout.
+const TIERS = {
+  digital: {
+    id: 'digital' as const,
+    label: 'Digital',
+    pricePerFamily: 12,
+    tagline: 'Full platform access for every family',
+  },
+  print: {
+    id: 'print' as const,
+    label: 'Digital + Print',
+    pricePerFamily: 25,
+    tagline: 'Everything in Digital, plus printed materials shipped to families',
+  },
+}
+type TierId = keyof typeof TIERS
+
 export default function SchoolPricingPage() {
+  const [tier, setTier] = useState<TierId>('digital')
   const [familyCount, setFamilyCount] = useState(50)
   const [schoolName, setSchoolName] = useState('')
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const pricePerFamily = 12
+  const pricePerFamily = TIERS[tier].pricePerFamily
   const MIN_FAMILIES = 10
   const billedCount = Math.max(familyCount, MIN_FAMILIES)
   const total = billedCount * pricePerFamily
@@ -35,7 +55,7 @@ export default function SchoolPricingPage() {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: 'school', familyCount, schoolName, email, referral: getRewardfulReferral() }),
+        body: JSON.stringify({ plan: 'school', schoolTier: tier, familyCount, schoolName, email, referral: getRewardfulReferral() }),
       })
       const data = await res.json()
 
@@ -79,13 +99,48 @@ export default function SchoolPricingPage() {
           </p>
         </div>
 
+        {/* Tier selector */}
+        <div className="max-w-xl mx-auto mb-6">
+          <div className="grid grid-cols-2 gap-3">
+            {(Object.values(TIERS)).map(t => {
+              const selected = tier === t.id
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => setTier(t.id)}
+                  className={`text-left rounded-2xl border-2 p-5 transition ${
+                    selected
+                      ? 'border-warm-500 bg-warm-50/60 shadow-sm'
+                      : 'border-gray-200 bg-white hover:border-gray-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="font-bold text-navy-700">{t.label}</span>
+                    <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                      selected ? 'border-warm-500' : 'border-gray-300'
+                    }`}>
+                      {selected && <span className="w-2 h-2 rounded-full bg-warm-500" />}
+                    </span>
+                  </div>
+                  <div className="text-2xl font-bold text-navy-700">
+                    ${t.pricePerFamily}
+                    <span className="text-sm font-normal text-navy-600/50">/family/yr</span>
+                  </div>
+                  <p className="text-xs text-navy-600/60 mt-1.5 leading-snug">{t.tagline}</p>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
         {/* Pricing card */}
         <div className="max-w-xl mx-auto">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             {/* Price header */}
             <div className="bg-navy-700 text-white px-6 sm:px-8 py-8 text-center">
               <div className="text-white/60 text-sm font-medium uppercase tracking-wider mb-2">
-                Per Family, Per Year
+                {TIERS[tier].label} · Per Family, Per Year
               </div>
               <div className="flex items-baseline justify-center gap-1">
                 <span className="text-5xl font-bold">${pricePerFamily}</span>

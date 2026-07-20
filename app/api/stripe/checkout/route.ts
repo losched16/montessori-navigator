@@ -54,15 +54,26 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Email is required' }, { status: 400 })
       }
 
+      // School tier: 'digital' (base) or 'print' (Digital + Print, physical
+      // materials shipped to families). Default to digital for back-compat.
+      const schoolTier = body.schoolTier === 'print' ? 'print' : 'digital'
+      const schoolPriceId = schoolTier === 'print'
+        ? process.env.STRIPE_PRICE_ID_SCHOOL_PRINT
+        : priceId // priceId === STRIPE_PRICE_ID_SCHOOL (digital)
+      if (!schoolPriceId) {
+        return NextResponse.json({ error: `No price configured for the ${schoolTier} school tier` }, { status: 500 })
+      }
+
       // Enforce 10-family minimum: schools with fewer families pay for the minimum.
       const billedQuantity = Math.max(Number(familyCount), MIN_FAMILIES)
 
       const session = await stripe.checkout.sessions.create({
         mode: 'subscription',
         customer_email: email,
-        line_items: [{ price: priceId, quantity: billedQuantity }],
+        line_items: [{ price: schoolPriceId, quantity: billedQuantity }],
         metadata: {
           plan: 'school',
+          schoolTier,
           familyCount: String(familyCount),
           billedQuantity: String(billedQuantity),
           schoolName,
@@ -71,6 +82,7 @@ export async function POST(req: NextRequest) {
           trial_period_days: 14,
           metadata: {
             plan: 'school',
+            schoolTier,
             familyCount: String(familyCount),
             billedQuantity: String(billedQuantity),
             schoolName,
