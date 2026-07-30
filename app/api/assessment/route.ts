@@ -52,7 +52,7 @@ Provide your analysis as JSON:
 }`
 
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-5',
       max_tokens: 2500,
       system: `You are a warm, knowledgeable Montessori advisor for the Montessori Foundation. You help families understand their readiness for Montessori education. Key principles:
 - There is no "failing" this assessment. Every family is somewhere on a journey.

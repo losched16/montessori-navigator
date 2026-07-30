@@ -86,7 +86,7 @@ Provide your analysis as JSON in this exact format:
 }`
 
       const response = await anthropic.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-5',
         max_tokens: 2500,
         system: `You are an expert Montessori school evaluator working for the Montessori Foundation. You help parents understand what they observed during school tours. Be balanced, thorough, and grounded in authentic Montessori principles. Never dismiss a school unfairly, but be honest about concerns. Adjust your language complexity based on the parent's experience level. Always return valid JSON.`,
         messages: [{ role: 'user', content: prompt }],
@@ -166,7 +166,7 @@ Provide a comparison as JSON:
 }`
 
       const response = await anthropic.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-5',
         max_tokens: 2000,
         system: 'You are a Montessori school evaluation expert. Provide balanced, fair comparisons. Always return valid JSON.',
         messages: [{ role: 'user', content: prompt }],

@@ -343,7 +343,7 @@ export async function generateChatResponse(
     ]
 
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-5',
       max_tokens: 2000,
       system: systemPrompt,
       messages: messages,
@@ -424,7 +424,7 @@ Format as JSON:
 }`
 
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-5',
       max_tokens: 3000,
       system: 'You are an expert Montessori curriculum planner with deep knowledge of scope and sequence across all age planes. Every activity must serve a clear developmental purpose. Always return valid JSON.',
       messages: [{ role: 'user', content: prompt }],

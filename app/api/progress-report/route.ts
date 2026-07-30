@@ -167,7 +167,7 @@ Return as JSON:
 }`
 
     const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-5',
       max_tokens: 3000,
       system: 'You are an expert Montessori educator writing developmental progress reports. Be warm, specific, and grounded in Montessori principles. Always use positive framing. Return valid JSON.',
       messages: [{ role: 'user', content: prompt }],
