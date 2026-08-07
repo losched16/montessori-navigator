@@ -40,10 +40,10 @@ export default function ForgotPasswordPage() {
               <div className="text-4xl mb-3">📧</div>
               <h2 className="text-xl font-semibold text-navy-600 mb-2">Check your email</h2>
               <p className="text-sm text-gray-600 mb-6 leading-relaxed">
-                If an account exists for <strong>{email}</strong>, we&apos;ve sent a link to reset your password. The link expires in 1 hour.
+                If an account exists for <strong>{email}</strong>, a reset link is on its way — it usually arrives within a few minutes. The link expires in 1 hour.
               </p>
-              <p className="text-xs text-gray-500">
-                Didn&apos;t receive it? Check spam, or{' '}
+              <p className="text-xs text-gray-500 leading-relaxed">
+                Didn&apos;t receive it? Check your spam folder, make sure you used the email you signed up with, or{' '}
                 <button
                   onClick={() => { setSubmitted(false); setEmail('') }}
                   className="text-warm-600 hover:underline font-medium"
