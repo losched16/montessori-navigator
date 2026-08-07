@@ -322,8 +322,12 @@ export default function ChatPage() {
 
           {loading && (
             <div className="flex justify-start">
-              <div className="bg-white border border-gray-100 rounded-2xl px-4 py-3">
-                <div className="flex items-center gap-1.5">
+              <div className="max-w-[85%] sm:max-w-[70%] bg-white border border-gray-100 rounded-2xl px-4 py-3">
+                <p className="text-sm leading-relaxed text-gray-700">
+                  Ok, I&apos;m working on it. Give me a moment.
+                </p>
+                <p className="text-sm leading-relaxed text-gray-500 mt-0.5">— Abigail</p>
+                <div className="flex items-center gap-1.5 mt-2">
                   <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                   <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                   <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
