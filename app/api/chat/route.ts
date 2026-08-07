@@ -1,8 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
-import { generateChatResponse } from '@/lib/anthropic'
+import { streamChatResponse } from '@/lib/anthropic'
+import type { MemorySuggestion } from '@/lib/anthropic'
 import { getFamilyContext } from '@/lib/supabase'
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const maxDuration = 60
+
+async function saveMemorySuggestions(supabase: any, parentId: string, suggestions: MemorySuggestion) {
+  if (suggestions?.parent_preferences) {
+    for (const pref of suggestions.parent_preferences) {
+      if (pref.confidence > 0.75) {
+        await supabase.from('parent_preferences').upsert({
+          parent_id: parentId,
+          key: pref.key,
+          value: pref.value,
+        })
+      }
+    }
+  }
+
+  if (suggestions?.child_observations) {
+    const { data: children } = await supabase
+      .from('children')
+      .select('id, name')
+      .eq('parent_id', parentId)
+
+    for (const obs of suggestions.child_observations) {
+      if (obs.confidence <= 0.75 || obs.type !== 'trait') continue
+
+      const child = (children || []).find((c: any) =>
+        c.name?.toLowerCase() === obs.child_name?.toLowerCase()
+      )
+
+      if (child) {
+        await supabase.from('child_traits').insert({
+          child_id: child.id,
+          note: obs.note,
+        })
+      }
+    }
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -43,10 +84,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Could not load family context' }, { status: 500 })
     }
 
-    // Generate AI response
-    const response = await generateChatResponse(message, context, conversationHistory || [])
-
-    // Save messages to thread
+    // Create the thread and store the parent's message up front, so the
+    // conversation survives even if the model call fails mid-stream.
     let currentThreadId = threadId
     if (!currentThreadId) {
       const { data: thread } = await supabase
@@ -61,72 +100,73 @@ export async function POST(request: NextRequest) {
       currentThreadId = thread?.id
     }
 
-    let assistantMessageId: string | null = null
-
     if (currentThreadId) {
-      // Save user message
       await supabase.from('chat_messages').insert({
         thread_id: currentThreadId,
         role: 'user',
         content: message,
       })
-
-      // Save assistant response
-      const { data: assistantMsg } = await supabase.from('chat_messages').insert({
-        thread_id: currentThreadId,
-        role: 'assistant',
-        content: response.message,
-        memory_suggestions: response.memory_suggestions,
-      }).select('id').single()
-
-      assistantMessageId = assistantMsg?.id || null
     }
 
-    // Auto-save high-confidence memory suggestions
-    const suggestions = response.memory_suggestions
-
-    if (suggestions?.parent_preferences) {
-      for (const pref of suggestions.parent_preferences) {
-        if (pref.confidence > 0.75) {
-          await supabase.from('parent_preferences').upsert({
-            parent_id: parent.id,
-            key: pref.key,
-            value: pref.value,
-          })
-        }
-      }
+    const encoder = new TextEncoder()
+    const send = (controller: ReadableStreamDefaultController, payload: any) => {
+      controller.enqueue(encoder.encode(JSON.stringify(payload) + '\n'))
     }
 
-    if (suggestions?.child_observations) {
-      for (const obs of suggestions.child_observations) {
-        if (obs.confidence > 0.75) {
-          // Find child by name
-          const { data: children } = await supabase
-            .from('children')
-            .select('id')
-            .eq('parent_id', parent.id)
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          send(controller, { type: 'meta', threadId: currentThreadId || null })
 
-          const child = (children || []).find((c: any) =>
-            c.name?.toLowerCase() === obs.child_name?.toLowerCase()
-          )
+          let finalMessage = ''
+          let suggestions: MemorySuggestion = {}
 
-          if (child) {
-            if (obs.type === 'trait') {
-              await supabase.from('child_traits').insert({
-                child_id: child.id,
-                note: obs.note,
-              })
+          for await (const chunk of streamChatResponse(message, context, conversationHistory || [])) {
+            if (chunk.type === 'delta') {
+              send(controller, { type: 'delta', text: chunk.text })
+            } else {
+              finalMessage = chunk.message
+              suggestions = chunk.memory_suggestions
             }
           }
-        }
-      }
-    }
 
-    return NextResponse.json({
-      message: response.message,
-      threadId: currentThreadId,
-      messageId: assistantMessageId || null,
-      memory_suggestions: suggestions,
+          let assistantMessageId: string | null = null
+          if (currentThreadId) {
+            const { data: assistantMsg } = await supabase.from('chat_messages').insert({
+              thread_id: currentThreadId,
+              role: 'assistant',
+              content: finalMessage,
+              memory_suggestions: suggestions,
+            }).select('id').single()
+
+            assistantMessageId = assistantMsg?.id || null
+          }
+
+          await saveMemorySuggestions(supabase, parent.id, suggestions)
+
+          send(controller, {
+            type: 'done',
+            message: finalMessage,
+            threadId: currentThreadId || null,
+            messageId: assistantMessageId,
+            memory_suggestions: suggestions,
+          })
+        } catch (error) {
+          console.error('Chat stream error:', error)
+          send(controller, { type: 'error', error: 'Failed to generate response' })
+        } finally {
+          controller.close()
+        }
+      },
+    })
+
+    return new Response(stream, {
+      headers: {
+        'Content-Type': 'application/x-ndjson; charset=utf-8',
+        'Cache-Control': 'no-cache, no-store, no-transform',
+        // Stop nginx-style proxies from buffering the stream into one blob
+        'X-Accel-Buffering': 'no',
+      },
     })
   } catch (error) {
     console.error('Chat API error:', error)

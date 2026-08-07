@@ -343,6 +343,33 @@ MEMORY_SUGGESTIONS:
 Only include suggestions with confidence > 0.65. Keep minimal and high-signal.`
 }
 
+const MEMORY_MARKER = 'MEMORY_SUGGESTIONS:'
+
+// Split a (possibly partial) response into the part safe to show the parent and
+// the trailing memory-suggestions block. While streaming, the marker can arrive
+// split across chunks, so a trailing prefix of it is held back rather than shown.
+function splitVisible(full: string): string {
+  const idx = full.indexOf(MEMORY_MARKER)
+  if (idx !== -1) return full.slice(0, idx)
+
+  const maxPartial = Math.min(MEMORY_MARKER.length - 1, full.length)
+  for (let n = maxPartial; n > 0; n--) {
+    if (MEMORY_MARKER.startsWith(full.slice(full.length - n))) return full.slice(0, full.length - n)
+  }
+  return full
+}
+
+function parseMemorySuggestions(fullContent: string): MemorySuggestion {
+  const match = fullContent.match(/MEMORY_SUGGESTIONS:\s*(\{[\s\S]*?\})\s*$/m)
+  if (!match) return {}
+  try {
+    return JSON.parse(match[1])
+  } catch (e) {
+    console.error('Failed to parse memory suggestions:', e)
+    return {}
+  }
+}
+
 export async function generateChatResponse(
   userMessage: string,
   context: FamilyContext,
@@ -363,23 +390,63 @@ export async function generateChatResponse(
     })
 
     const fullContent = ((response.content.find((b) => b.type === 'text') as any)?.text || '')
-    const memorySuggestionsMatch = fullContent.match(/MEMORY_SUGGESTIONS:\s*(\{[\s\S]*?\})\s*$/m)
-    let memorySuggestions: MemorySuggestion = {}
-    let cleanMessage = fullContent
 
-    if (memorySuggestionsMatch) {
-      try {
-        memorySuggestions = JSON.parse(memorySuggestionsMatch[1])
-        cleanMessage = fullContent.replace(/MEMORY_SUGGESTIONS:[\s\S]*$/m, '').trim()
-      } catch (e) {
-        console.error('Failed to parse memory suggestions:', e)
-      }
+    return {
+      message: splitVisible(fullContent).trim(),
+      memory_suggestions: parseMemorySuggestions(fullContent),
     }
-
-    return { message: cleanMessage, memory_suggestions: memorySuggestions }
   } catch (error) {
     console.error('Claude API error:', error)
     throw new Error('Failed to generate response')
+  }
+}
+
+/**
+ * Streaming version of generateChatResponse. Yields text deltas as they arrive
+ * so the parent sees Abigail writing instead of waiting 30-60s for the whole
+ * reply, then yields a final `done` with the memory suggestions.
+ */
+export async function* streamChatResponse(
+  userMessage: string,
+  context: FamilyContext,
+  conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }> = []
+): AsyncGenerator<
+  { type: 'delta'; text: string } | { type: 'done'; message: string; memory_suggestions: MemorySuggestion }
+> {
+  const systemPrompt = buildSystemPrompt(context)
+  const messages = [
+    ...conversationHistory.slice(-6),
+    { role: 'user' as const, content: userMessage }
+  ]
+
+  const stream = await anthropic.messages.create({
+    model: 'claude-sonnet-5',
+    max_tokens: 2000,
+    system: systemPrompt,
+    messages: messages,
+    stream: true,
+  })
+
+  let full = ''
+  let emitted = 0
+
+  for await (const event of stream) {
+    if (event.type !== 'content_block_delta') continue
+    const delta: any = event.delta
+    if (delta?.type !== 'text_delta' || !delta.text) continue
+
+    full += delta.text
+    const visible = splitVisible(full)
+    if (visible.length > emitted) {
+      yield { type: 'delta', text: visible.slice(emitted) }
+      emitted = visible.length
+    }
+  }
+
+  yield {
+    type: 'done',
+    message: splitVisible(full).trim(),
+    memory_suggestions: parseMemorySuggestions(full),
   }
 }
 

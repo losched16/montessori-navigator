@@ -15,11 +15,13 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [streaming, setStreaming] = useState(false)
   const [threadId, setThreadId] = useState<string | null>(null)
   const [threads, setThreads] = useState<Array<{ id: string; title: string; created_at: string }>>([])
   const [showThreads, setShowThreads] = useState(false)
   const [showSaveTip, setShowSaveTip] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const supabase = createClient()
 
@@ -32,8 +34,17 @@ export default function ChatPage() {
   }, [])
 
   useEffect(() => {
+    // While a reply streams in, only follow along if the parent is already at
+    // the bottom — otherwise they'd get yanked away from what they're reading.
+    const container = messagesContainerRef.current
+    if (streaming && container) {
+      const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight
+      if (distanceFromBottom > 120) return
+      messagesEndRef.current?.scrollIntoView({ behavior: 'auto' })
+      return
+    }
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+  }, [messages, streaming])
 
   const loadThreads = async () => {
     const { data: { user } } = await supabase.auth.getUser()
@@ -99,6 +110,20 @@ export default function ChatPage() {
     setInput('')
     setMessages(prev => [...prev, { role: 'user', content: userMessage }])
     setLoading(true)
+    setStreaming(false)
+
+    // Index the streamed reply will occupy: after the user message we just added.
+    const replyIndex = messages.length + 1
+    let isNewThread = !threadId
+
+    const showError = (text: string) => {
+      setMessages(prev => {
+        const next = [...prev]
+        if (next.length > replyIndex) next[replyIndex] = { role: 'assistant', content: text }
+        else next.push({ role: 'assistant', content: text })
+        return next
+      })
+    }
 
     try {
       const conversationHistory = messages.slice(-6).map(m => ({
@@ -116,21 +141,75 @@ export default function ChatPage() {
         }),
       })
 
-      const data = await res.json()
+      if (!res.ok || !res.body) {
+        showError('I had trouble responding. Please try again.')
+        return
+      }
 
-      if (data.error) {
-        setMessages(prev => [...prev, { role: 'assistant', content: 'I had trouble responding. Please try again.' }])
-      } else {
-        setMessages(prev => [...prev, { role: 'assistant', content: data.message, id: data.messageId || undefined }])
-        if (data.threadId && !threadId) {
-          setThreadId(data.threadId)
-          loadThreads()
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let buffer = ''
+      let text = ''
+      let started = false
+      let failed = false
+
+      const handleEvent = (event: any) => {
+        if (event.type === 'meta') {
+          if (event.threadId && isNewThread) setThreadId(event.threadId)
+        } else if (event.type === 'delta') {
+          text += event.text
+          if (!started) {
+            started = true
+            setStreaming(true)
+            setMessages(prev => [...prev, { role: 'assistant', content: text }])
+          } else {
+            setMessages(prev => prev.map((m, i) => i === replyIndex ? { ...m, content: text } : m))
+          }
+        } else if (event.type === 'done') {
+          const final = event.message || text
+          setMessages(prev => {
+            const msg: Message = { role: 'assistant', content: final, id: event.messageId || undefined }
+            if (prev.length > replyIndex) return prev.map((m, i) => i === replyIndex ? msg : m)
+            return [...prev, msg]
+          })
+          if (event.threadId && isNewThread) {
+            setThreadId(event.threadId)
+            loadThreads()
+            isNewThread = false
+          }
+        } else if (event.type === 'error') {
+          failed = true
+          showError('I had trouble responding. Please try again.')
         }
       }
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        buffer += decoder.decode(value, { stream: true })
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
+
+        for (const line of lines) {
+          if (!line.trim()) continue
+          try {
+            handleEvent(JSON.parse(line))
+          } catch (e) {
+            // Ignore a malformed line rather than dropping the whole reply
+          }
+        }
+        if (failed) break
+      }
+
+      if (!started && !failed) {
+        showError('I had trouble responding. Please try again.')
+      }
     } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
+      showError('Something went wrong. Please try again.')
     } finally {
       setLoading(false)
+      setStreaming(false)
     }
   }
 
@@ -240,7 +319,7 @@ export default function ChatPage() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4">
           {messages.length === 0 && !loading && (
             <div className="flex flex-col items-center justify-center h-full text-center px-4">
               <div className="text-4xl mb-3">🌿</div>
@@ -290,7 +369,7 @@ export default function ChatPage() {
                 }`}>
                   {msg.role === 'assistant' ? renderMessageContent(msg.content) : msg.content}
                 </div>
-                {msg.role === 'assistant' && (
+                {msg.role === 'assistant' && !(streaming && i === messages.length - 1) && (
                   <div className="mt-3 pt-2 border-t border-gray-100">
                     {/* First-time callout - shown once on the first assistant message */}
                     {showSaveTip && i === messages.findIndex(m => m.role === 'assistant') && (
@@ -320,7 +399,7 @@ export default function ChatPage() {
             </div>
           ))}
 
-          {loading && (
+          {loading && !streaming && (
             <div className="flex justify-start">
               <div className="max-w-[85%] sm:max-w-[70%] bg-white border border-gray-100 rounded-2xl px-4 py-3">
                 <p className="text-sm leading-relaxed text-gray-700">
