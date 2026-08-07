@@ -33,7 +33,7 @@ async function authedSuperAdmin(req: NextRequest) {
   const { data: { user } } = await ssr.auth.getUser()
   if (!user) return { error: 'Not authenticated', status: 401 as const }
 
-  const allowed = await isSuperAdmin(ssr, user.id)
+  const allowed = await isSuperAdmin(user.id)
   if (!allowed) return { error: 'Forbidden', status: 403 as const }
 
   return { user }

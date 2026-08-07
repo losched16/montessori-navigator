@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
-import { isSuperAdmin } from '@/lib/super-admin'
 import Logo from '@/components/ui/Logo'
 
 // Super-admin portal layout. Anyone not in the super_admins table is
@@ -19,20 +18,27 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   useEffect(() => {
     const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) {
-        router.push('/auth/login?next=' + encodeURIComponent(pathname))
-        return
-      }
-      const allowed = await isSuperAdmin(supabase, user.id)
-      if (!allowed) {
-        // Not a super admin — silently redirect home rather than show a
-        // "forbidden" page that telegraphs the existence of /admin.
+      // Super-admin status is checked server-side (/api/admin/me) using the
+      // service role, so it never depends on RLS on the super_admins table
+      // (whose self-referential read policy would otherwise break the check).
+      try {
+        const res = await fetch('/api/admin/me')
+        const data = await res.json()
+        if (!data.authenticated) {
+          router.push('/auth/login?next=' + encodeURIComponent(pathname))
+          return
+        }
+        if (!data.isSuperAdmin) {
+          // Not a super admin — silently redirect home rather than show a
+          // "forbidden" page that telegraphs the existence of /admin.
+          router.push('/')
+          return
+        }
+        setAuthed(true)
+        setLoading(false)
+      } catch {
         router.push('/')
-        return
       }
-      setAuthed(true)
-      setLoading(false)
     }
     load()
   }, [])
