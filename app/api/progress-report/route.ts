@@ -173,7 +173,7 @@ Return as JSON:
       messages: [{ role: 'user', content: prompt }],
     })
 
-    const content = response.content[0].type === 'text' ? response.content[0].text : ''
+    const content = ((response.content.find((b) => b.type === 'text') as any)?.text || '')
     const jsonMatch = content.match(/\{[\s\S]*\}/)
 
     if (!jsonMatch) {

@@ -264,7 +264,7 @@ IMPORTANT RULES:
     }],
   })
 
-  const text = response.content[0].type === 'text' ? response.content[0].text : ''
+  const text = ((response.content.find((b) => b.type === 'text') as any)?.text || '')
   const jsonMatch = text.match(/\{[\s\S]*\}/)
   if (!jsonMatch) {
     throw new Error('Failed to parse room analysis from Claude')
