@@ -32,6 +32,8 @@ interface SchoolRow {
   id: string
   name: string
   slug: string
+  state: string | null
+  isComped: boolean
   subscriptionStatus: string
   isActive: boolean
   createdAt: string
@@ -158,7 +160,7 @@ export default function AdminCustomersPage() {
   const filteredSchools = schools.filter(s => {
     if (!search.trim()) return true
     const q = search.toLowerCase()
-    return s.name?.toLowerCase().includes(q) || s.slug?.toLowerCase().includes(q)
+    return s.name?.toLowerCase().includes(q) || s.slug?.toLowerCase().includes(q) || (s.state || '').toLowerCase().includes(q)
   })
 
   const filteredParents = standaloneParents.filter(p => {
@@ -248,8 +250,15 @@ export default function AdminCustomersPage() {
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-baseline gap-2">
-                        <h3 className="text-sm font-semibold text-navy-700 truncate">{school.name}</h3>
+                        <h3 className="text-sm font-semibold text-navy-700 truncate">
+                          {school.name}{school.state ? <span className="text-navy-600/50 font-normal">, {school.state}</span> : null}
+                        </h3>
                         {statusBadge(school.subscriptionStatus)}
+                        {school.isComped && (
+                          <span className="inline-flex text-xs px-2 py-0.5 rounded-full bg-violet-50 text-violet-700 whitespace-nowrap">
+                            🎁 Comped
+                          </span>
+                        )}
                       </div>
                       <div className="text-xs text-navy-600/60 mt-0.5">
                         {school.activeFamilyCount} {school.activeFamilyCount === 1 ? 'family' : 'families'}

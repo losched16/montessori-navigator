@@ -65,7 +65,7 @@ export async function GET(_req: NextRequest) {
     parentsRes,
     observationsRes,
   ] = await Promise.all([
-    service.from('schools').select('id, name, slug, subscription_status, created_at, trial_ends_at, current_period_end, family_count'),
+    service.from('schools').select('id, name, slug, state, is_comped, subscription_status, created_at, trial_ends_at, current_period_end, family_count'),
     service.from('school_staff').select('id, school_id, user_id, created_at'),
     service.from('school_families').select('id, school_id, family_id, status, joined_at'),
     service.from('families').select('id, name'),
@@ -215,6 +215,8 @@ export async function GET(_req: NextRequest) {
       id: s.id,
       name: s.name,
       slug: s.slug,
+      state: s.state || null,
+      isComped: !!s.is_comped,
       subscriptionStatus: s.subscription_status,
       isActive: ACTIVE_STATUSES.has(s.subscription_status),
       createdAt: s.created_at,
