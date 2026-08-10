@@ -97,10 +97,10 @@ export default async function SchoolResourceDetailPage({ params }: { params: { s
         </div>
       )}
 
-      {!pdfUrl && resource.bodyMarkdown && (
+      {!pdfUrl && (resource.bodyHtml || resource.bodyMarkdown) && (
         <article
-          className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 prose prose-navy max-w-none prose-headings:text-navy-700 prose-a:text-warm-600"
-          dangerouslySetInnerHTML={{ __html: renderMarkdown(resource.bodyMarkdown) }}
+          className="mfa-article bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 max-w-none"
+          dangerouslySetInnerHTML={{ __html: resource.bodyHtml || renderMarkdown(resource.bodyMarkdown || '') }}
         />
       )}
     </div>

@@ -138,16 +138,16 @@ export default async function ParentResourceDetailPage({ params }: { params: { s
         </div>
       )}
 
-      {/* ─── Body content ──────────────────────────────────────────── */}
-      {resource.bodyMarkdown && (
+      {/* ─── Body content — prefer sanitized rich-text HTML, else markdown ── */}
+      {(resource.bodyHtml || resource.bodyMarkdown) && (
         <article
           className="mfa-body max-w-[680px] mx-auto px-5 sm:px-6 mt-12 sm:mt-16"
-          dangerouslySetInnerHTML={{ __html: renderMarkdown(resource.bodyMarkdown) }}
+          dangerouslySetInnerHTML={{ __html: resource.bodyHtml || renderMarkdown(resource.bodyMarkdown || '') }}
         />
       )}
 
       {/* ─── Inline PDF preview (if no body content) ───────────────── */}
-      {pdfUrl && !resource.bodyMarkdown && (
+      {pdfUrl && !resource.bodyHtml && !resource.bodyMarkdown && (
         <div className="max-w-[920px] mx-auto px-5 sm:px-6 mt-12 sm:mt-16">
           <div className="rounded-2xl overflow-hidden border border-[color:var(--separator)]">
             <iframe

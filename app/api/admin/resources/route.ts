@@ -3,6 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { isSuperAdmin } from '@/lib/super-admin'
+import { cleanArticleHtml } from '@/lib/sanitize'
 
 export const dynamic = 'force-dynamic'
 
@@ -85,7 +86,8 @@ export async function POST(req: NextRequest) {
   const type = String(form.get('type') || '').trim()
   const audience = String(form.get('audience') || '').trim()
   const highlightsRaw = String(form.get('highlights') || '[]')
-  const bodyMarkdown = String(form.get('body_markdown') || '').trim()
+  const bodyHtmlRaw = String(form.get('body_html') || '').trim()
+  const bodyHtml = bodyHtmlRaw ? cleanArticleHtml(bodyHtmlRaw) : ''
   const inResources = String(form.get('in_resources') || 'true') === 'true'
   const inLibrary = String(form.get('in_library') || 'false') === 'true'
   const isPublished = String(form.get('is_published') || 'false') === 'true'
@@ -96,10 +98,10 @@ export async function POST(req: NextRequest) {
   }
 
   const hasFile = file instanceof File && file.size > 0
-  const hasBody = bodyMarkdown.length > 0
+  const hasBody = bodyHtml.replace(/<[^>]*>/g, '').trim().length > 0
   if (!hasFile && !hasBody) {
     return NextResponse.json(
-      { error: 'Either a PDF file or markdown body content is required.' },
+      { error: 'Either a PDF file or article content is required.' },
       { status: 400 },
     )
   }
@@ -130,7 +132,7 @@ export async function POST(req: NextRequest) {
       audience,
       highlights,
       pdf_path: pdfPath,
-      body_markdown: hasBody ? bodyMarkdown : null,
+      body_html: hasBody ? bodyHtml : null,
       in_resources: inResources,
       in_library: inLibrary,
       is_published: isPublished,

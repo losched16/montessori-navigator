@@ -3,6 +3,8 @@
 import { useState, FormEvent, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import type { Resource, ResourceType, Audience } from '@/lib/resources'
+import { renderMarkdown } from '@/lib/simple-markdown'
+import RichTextEditor from '@/components/admin/RichTextEditor'
 
 // Shared form for creating + editing resources. The "new" page passes
 // no `existing` prop and submits to POST /api/admin/resources. The "edit"
@@ -38,12 +40,15 @@ export default function ResourceForm({ existing }: Props) {
   const [highlightsText, setHighlightsText] = useState(
     (existing?.highlights || []).join('\n'),
   )
-  const [bodyMarkdown, setBodyMarkdown] = useState(existing?.bodyMarkdown || '')
+  // Rich-text body as HTML. When editing an older markdown-only article, seed
+  // the editor with its markdown rendered to HTML so nothing is lost.
+  const [bodyHtml, setBodyHtml] = useState(
+    existing?.bodyHtml || (existing?.bodyMarkdown ? renderMarkdown(existing.bodyMarkdown) : ''),
+  )
   const [inResources, setInResources] = useState(existing?.inResources ?? true)
   const [inLibrary, setInLibrary] = useState(existing?.inLibrary ?? false)
   const [isPublished, setIsPublished] = useState(existing?.isPublished ?? false)
   const [file, setFile] = useState<File | null>(null)
-  const [uploadingImage, setUploadingImage] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
 
@@ -57,27 +62,8 @@ export default function ResourceForm({ existing }: Props) {
     setFile(f)
   }
 
-  // Upload an image and insert its markdown at the end of the body.
-  const onImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const img = e.target.files?.[0]
-    e.target.value = '' // allow re-selecting the same file
-    if (!img) return
-    setUploadingImage(true)
-    setError('')
-    try {
-      const fd = new FormData()
-      fd.append('file', img)
-      const res = await fetch('/api/admin/resources/upload-image', { method: 'POST', body: fd })
-      const data = await res.json()
-      if (!res.ok) { setError(data.error || 'Image upload failed'); return }
-      const alt = (img.name.replace(/\.[a-z0-9]+$/i, '') || 'image')
-      setBodyMarkdown(prev => `${prev}${prev && !prev.endsWith('\n') ? '\n\n' : prev ? '\n' : ''}![${alt}](${data.url})\n`)
-    } catch (err: any) {
-      setError(err.message || 'Image upload failed')
-    } finally {
-      setUploadingImage(false)
-    }
-  }
+  // Strip tags to check whether the rich body actually has content.
+  const bodyText = bodyHtml.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim()
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -87,17 +73,16 @@ export default function ResourceForm({ existing }: Props) {
       setError('Title, slug, and description are required.')
       return
     }
-    // Each resource needs SOMETHING readable — either a PDF file or markdown
-    // body content. The detail page renders whichever is present.
+    // Each resource needs SOMETHING readable — either a PDF file or body text.
     const hasExistingFile = !!existing?.pdfPath
-    const hasExistingBody = !!(existing?.bodyMarkdown || '').trim()
-    const hasBody = bodyMarkdown.trim().length > 0
+    const hasExistingBody = !!((existing?.bodyHtml || existing?.bodyMarkdown || '').trim())
+    const hasBody = bodyText.length > 0
     if (!isEditing && !file && !hasBody) {
-      setError('Please upload a PDF file or paste markdown body content.')
+      setError('Please upload a PDF file or write article content.')
       return
     }
     if (isEditing && !file && !hasExistingFile && !hasBody && !hasExistingBody) {
-      setError('Please upload a PDF file or paste markdown body content.')
+      setError('Please upload a PDF file or write article content.')
       return
     }
 
@@ -116,7 +101,7 @@ export default function ResourceForm({ existing }: Props) {
         highlightsText.split('\n').map(l => l.trim()).filter(Boolean),
       ))
       fd.append('is_published', String(isPublished))
-      fd.append('body_markdown', bodyMarkdown)
+      fd.append('body_html', hasBody ? bodyHtml : '')
       if (file) fd.append('file', file)
 
       const url = isEditing
@@ -294,23 +279,10 @@ export default function ResourceForm({ existing }: Props) {
       </Field>
 
       <Field
-        label="Body content (markdown, optional)"
-        hint="For articles and guides without a PDF. Supports headings, **bold**, *italic*, links, lists, quotes, and images. Leave blank if you uploaded a PDF instead."
+        label="Article content (optional)"
+        hint="For articles and guides without a PDF. Use the toolbar to format, or paste directly from Word, Google Docs, or a web page — the formatting is preserved and cleaned up. Leave blank if you uploaded a PDF instead."
       >
-        <textarea
-          value={bodyMarkdown}
-          onChange={e => setBodyMarkdown(e.target.value)}
-          rows={12}
-          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm font-mono focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none resize-y"
-          placeholder={"# Heading\n\nParagraph text with **bold** and *italic* and [links](https://example.com).\n\n- Bullet 1\n- Bullet 2\n\n![a caption](https://…image…)"}
-        />
-        <div className="mt-2 flex items-center gap-3">
-          <label className="inline-flex items-center gap-2 px-3 py-1.5 bg-warm-50 hover:bg-warm-100 text-warm-700 text-xs font-medium rounded-md cursor-pointer transition">
-            {uploadingImage ? 'Uploading…' : '🖼 Insert image'}
-            <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" onChange={onImageUpload} disabled={uploadingImage} className="hidden" />
-          </label>
-          <span className="text-xs text-navy-600/60">Uploads and drops an <code>![](…)</code> tag into the body. Max 8 MB.</span>
-        </div>
+        <RichTextEditor initialHtml={bodyHtml} onChange={setBodyHtml} />
       </Field>
 
       <div className="flex items-center gap-2">

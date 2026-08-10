@@ -3,6 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { isSuperAdmin } from '@/lib/super-admin'
+import { cleanArticleHtml } from '@/lib/sanitize'
 
 export const dynamic = 'force-dynamic'
 
@@ -52,7 +53,8 @@ export async function PATCH(
   const type = String(form.get('type') || '').trim()
   const audience = String(form.get('audience') || '').trim()
   const highlightsRaw = String(form.get('highlights') || '[]')
-  const bodyMarkdown = String(form.get('body_markdown') || '').trim()
+  const bodyHtmlRaw = String(form.get('body_html') || '').trim()
+  const bodyHtml = bodyHtmlRaw ? cleanArticleHtml(bodyHtmlRaw) : ''
   const inResources = String(form.get('in_resources') || 'true') === 'true'
   const inLibrary = String(form.get('in_library') || 'false') === 'true'
   const isPublished = String(form.get('is_published') || 'false') === 'true'
@@ -118,7 +120,7 @@ export async function PATCH(
     type,
     audience,
     highlights,
-    body_markdown: bodyMarkdown.length > 0 ? bodyMarkdown : null,
+    body_html: bodyHtml.replace(/<[^>]*>/g, '').trim().length > 0 ? bodyHtml : null,
     in_resources: inResources,
     in_library: inLibrary,
     is_published: isPublished,

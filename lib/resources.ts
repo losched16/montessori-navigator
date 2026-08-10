@@ -19,7 +19,8 @@ export interface Resource {
   audience: Audience
   pdfPath: string | null      // either /resources/foo.pdf (public/) or storage path
   coverPath: string | null
-  bodyMarkdown: string | null // for articles / guides without a PDF
+  bodyMarkdown: string | null // legacy: articles authored as markdown
+  bodyHtml: string | null     // rich-text article body (sanitized HTML)
   highlights: string[]
   inResources: boolean  // show in the Resources section (parent/school)
   inLibrary: boolean    // also show in the parent article Library
@@ -40,6 +41,7 @@ interface RawResource {
   pdf_path: string | null
   cover_path: string | null
   body_markdown: string | null
+  body_html: string | null
   highlights: string[] | null
   in_resources: boolean | null
   in_library: boolean | null
@@ -61,6 +63,7 @@ function mapResource(r: RawResource): Resource {
     pdfPath: r.pdf_path,
     coverPath: r.cover_path,
     bodyMarkdown: r.body_markdown,
+    bodyHtml: r.body_html,
     highlights: Array.isArray(r.highlights) ? r.highlights : [],
     inResources: r.in_resources !== false, // default true
     inLibrary: r.in_library === true,      // default false

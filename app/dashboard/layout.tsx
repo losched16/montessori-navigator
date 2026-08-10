@@ -240,6 +240,14 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
           border-left: 3px solid var(--accent-warm);
           color: var(--ink);
         }
+        .mfa-body u { text-decoration: underline; }
+        .mfa-body img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 10px;
+          display: block;
+          margin: 1.5em auto;
+        }
       `}</style>
 
       {/* Top bar */}
