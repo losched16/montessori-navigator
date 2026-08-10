@@ -21,6 +21,8 @@ export interface Resource {
   coverPath: string | null
   bodyMarkdown: string | null // for articles / guides without a PDF
   highlights: string[]
+  inResources: boolean  // show in the Resources section (parent/school)
+  inLibrary: boolean    // also show in the parent article Library
   isPublished: boolean
   publishedAt: string | null
   createdBy: string | null
@@ -39,6 +41,8 @@ interface RawResource {
   cover_path: string | null
   body_markdown: string | null
   highlights: string[] | null
+  in_resources: boolean | null
+  in_library: boolean | null
   is_published: boolean
   published_at: string | null
   created_by: string | null
@@ -58,6 +62,8 @@ function mapResource(r: RawResource): Resource {
     coverPath: r.cover_path,
     bodyMarkdown: r.body_markdown,
     highlights: Array.isArray(r.highlights) ? r.highlights : [],
+    inResources: r.in_resources !== false, // default true
+    inLibrary: r.in_library === true,      // default false
     isPublished: r.is_published,
     publishedAt: r.published_at,
     createdBy: r.created_by,
@@ -80,6 +86,24 @@ export async function listPublishedResources(
     .select('*')
     .eq('is_published', true)
     .in('audience', [audience, 'both'])
+    .order('published_at', { ascending: false })
+
+  // Only items flagged to appear in the Resources section (library-only items
+  // are excluded here). in_resources defaults to true via mapResource.
+  return (data || []).map(mapResource).filter((r: Resource) => r.inResources)
+}
+
+/**
+ * List published resources flagged to appear in the parent article Library.
+ * These are merged with the imported Foundation articles on /dashboard/library.
+ */
+export async function listLibraryResources(supabase: any): Promise<Resource[]> {
+  const { data } = await supabase
+    .from('resources')
+    .select('*')
+    .eq('is_published', true)
+    .eq('in_library', true)
+    .in('audience', ['parent', 'both'])
     .order('published_at', { ascending: false })
 
   return (data || []).map(mapResource)

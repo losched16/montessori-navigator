@@ -1,9 +1,15 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { getAllArticles, getAllCategories, getAllTags, type Article } from '@/lib/articles'
 import { getAllNewsletters } from '@/lib/newsletters'
+import { listLibraryResources, resourceTypeLabel } from '@/lib/resources'
+import { createClient } from '@/lib/supabase'
+
+// Article shape plus an optional href — DB-backed library items link to their
+// resource detail page rather than the imported-article reader.
+type LibArticle = Article & { _href?: string }
 
 const ARTICLES = getAllArticles()
 const LATEST_NEWSLETTERS = getAllNewsletters().slice(0, 6)
@@ -31,8 +37,28 @@ export default function LibraryPage() {
   const [page, setPage] = useState(1)
   const perPage = 12
 
+  // DB-backed articles flagged for the Library (added via /admin), merged in
+  // with the imported Foundation articles.
+  const [dbArticles, setDbArticles] = useState<LibArticle[]>([])
+  useEffect(() => {
+    const supabase = createClient()
+    listLibraryResources(supabase)
+      .then(rs => setDbArticles(rs.map(r => ({
+        slug: r.slug,
+        title: r.title,
+        author: 'The Montessori Foundation',
+        date: (r.publishedAt || r.createdAt || '').slice(0, 10),
+        categories: [resourceTypeLabel(r.type)],
+        tags: [],
+        excerpt: r.description,
+        content: '',
+        _href: `/dashboard/resources/${r.slug}`,
+      } as LibArticle))))
+      .catch(() => {})
+  }, [])
+
   const filteredArticles = useMemo(() => {
-    let results = [...ARTICLES]
+    let results: LibArticle[] = [...dbArticles, ...ARTICLES]
 
     // Filter by search
     if (search.trim()) {
@@ -86,7 +112,7 @@ export default function LibraryPage() {
     }
 
     return results
-  }, [search, selectedCategory, selectedTag, sort])
+  }, [search, selectedCategory, selectedTag, sort, dbArticles])
 
   const totalPages = Math.ceil(filteredArticles.length / perPage)
   const paginatedArticles = filteredArticles.slice((page - 1) * perPage, page * perPage)
@@ -237,7 +263,7 @@ export default function LibraryPage() {
           {paginatedArticles.map(article => (
             <Link
               key={article.slug}
-              href={`/dashboard/library/${article.slug}`}
+              href={(article as LibArticle)._href || `/dashboard/library/${article.slug}`}
               className="bg-white border border-gray-100 rounded-xl p-5 hover:border-gray-200 hover:shadow-sm transition group"
             >
               {/* Categories */}

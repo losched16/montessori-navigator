@@ -39,8 +39,11 @@ export default function ResourceForm({ existing }: Props) {
     (existing?.highlights || []).join('\n'),
   )
   const [bodyMarkdown, setBodyMarkdown] = useState(existing?.bodyMarkdown || '')
+  const [inResources, setInResources] = useState(existing?.inResources ?? true)
+  const [inLibrary, setInLibrary] = useState(existing?.inLibrary ?? false)
   const [isPublished, setIsPublished] = useState(existing?.isPublished ?? false)
   const [file, setFile] = useState<File | null>(null)
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
 
@@ -52,6 +55,28 @@ export default function ResourceForm({ existing }: Props) {
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0] || null
     setFile(f)
+  }
+
+  // Upload an image and insert its markdown at the end of the body.
+  const onImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const img = e.target.files?.[0]
+    e.target.value = '' // allow re-selecting the same file
+    if (!img) return
+    setUploadingImage(true)
+    setError('')
+    try {
+      const fd = new FormData()
+      fd.append('file', img)
+      const res = await fetch('/api/admin/resources/upload-image', { method: 'POST', body: fd })
+      const data = await res.json()
+      if (!res.ok) { setError(data.error || 'Image upload failed'); return }
+      const alt = (img.name.replace(/\.[a-z0-9]+$/i, '') || 'image')
+      setBodyMarkdown(prev => `${prev}${prev && !prev.endsWith('\n') ? '\n\n' : prev ? '\n' : ''}![${alt}](${data.url})\n`)
+    } catch (err: any) {
+      setError(err.message || 'Image upload failed')
+    } finally {
+      setUploadingImage(false)
+    }
   }
 
   const onSubmit = async (e: FormEvent) => {
@@ -85,6 +110,8 @@ export default function ResourceForm({ existing }: Props) {
       fd.append('description', description.trim())
       fd.append('type', type)
       fd.append('audience', audience)
+      fd.append('in_resources', String(inResources))
+      fd.append('in_library', String(inLibrary))
       fd.append('highlights', JSON.stringify(
         highlightsText.split('\n').map(l => l.trim()).filter(Boolean),
       ))
@@ -193,7 +220,7 @@ export default function ResourceForm({ existing }: Props) {
           </select>
         </Field>
 
-        <Field label="Audience" hint="Who sees this in their resource library">
+        <Field label="Audience" hint="Who sees it in the Resources section">
           <select
             value={audience}
             onChange={e => setAudience(e.target.value as Audience)}
@@ -205,6 +232,39 @@ export default function ResourceForm({ existing }: Props) {
           </select>
         </Field>
       </div>
+
+      <Field
+        label="Where it appears"
+        hint="Content can go in the Resources section, the parent article Library, or both."
+      >
+        <div className="space-y-2">
+          <label className="flex items-start gap-2.5 text-sm text-navy-700">
+            <input
+              type="checkbox"
+              checked={inResources}
+              onChange={e => setInResources(e.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-warm-500 focus:ring-warm-500"
+            />
+            <span>
+              <strong>Resources</strong> — the Resources section (shown per the Audience above).
+            </span>
+          </label>
+          <label className="flex items-start gap-2.5 text-sm text-navy-700">
+            <input
+              type="checkbox"
+              checked={inLibrary}
+              onChange={e => setInLibrary(e.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-gray-300 text-warm-500 focus:ring-warm-500"
+            />
+            <span>
+              <strong>Parent Library</strong> — the article archive at <code className="text-warm-700">/dashboard/library</code>, alongside the imported Foundation articles.
+            </span>
+          </label>
+          {!inResources && !inLibrary && (
+            <p className="text-xs text-amber-600">Pick at least one — otherwise this content won&apos;t appear anywhere.</p>
+          )}
+        </div>
+      </Field>
 
       <Field
         label="Highlights"
@@ -235,15 +295,22 @@ export default function ResourceForm({ existing }: Props) {
 
       <Field
         label="Body content (markdown, optional)"
-        hint="For articles and guides without a PDF. Supports basic markdown (headings, **bold**, *italic*, links, lists). Leave blank if you uploaded a PDF instead."
+        hint="For articles and guides without a PDF. Supports headings, **bold**, *italic*, links, lists, quotes, and images. Leave blank if you uploaded a PDF instead."
       >
         <textarea
           value={bodyMarkdown}
           onChange={e => setBodyMarkdown(e.target.value)}
           rows={12}
           className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm font-mono focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none resize-y"
-          placeholder={"# Heading\n\nParagraph text with **bold** and *italic* and [links](https://example.com).\n\n- Bullet 1\n- Bullet 2"}
+          placeholder={"# Heading\n\nParagraph text with **bold** and *italic* and [links](https://example.com).\n\n- Bullet 1\n- Bullet 2\n\n![a caption](https://…image…)"}
         />
+        <div className="mt-2 flex items-center gap-3">
+          <label className="inline-flex items-center gap-2 px-3 py-1.5 bg-warm-50 hover:bg-warm-100 text-warm-700 text-xs font-medium rounded-md cursor-pointer transition">
+            {uploadingImage ? 'Uploading…' : '🖼 Insert image'}
+            <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" onChange={onImageUpload} disabled={uploadingImage} className="hidden" />
+          </label>
+          <span className="text-xs text-navy-600/60">Uploads and drops an <code>![](…)</code> tag into the body. Max 8 MB.</span>
+        </div>
       </Field>
 
       <div className="flex items-center gap-2">

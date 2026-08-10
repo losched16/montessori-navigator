@@ -22,6 +22,12 @@ function escapeHtml(s: string): string {
 
 function inline(s: string): string {
   let out = s
+  // Images: ![alt](url) — MUST run before links so the "!" prefix isn't lost.
+  // url must be http/https or a site-relative path.
+  out = out.replace(
+    /!\[([^\]]*?)\]\((https?:\/\/[^\s)]+|\/[^\s)]*)\)/g,
+    '<img src="$2" alt="$1" loading="lazy" style="max-width:100%;height:auto;border-radius:10px;display:block;margin:1.5em auto;" />',
+  )
   // Bold: **text**
   out = out.replace(/\*\*([^\n*]+?)\*\*/g, '<strong>$1</strong>')
   // Italic: *text* (single asterisk, not surrounded by other asterisks)
