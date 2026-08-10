@@ -101,6 +101,13 @@ function DashboardInner({ children }: { children: React.ReactNode }) {
       }
 
       setParent(parentData)
+
+      // Sync this parent into GHL for marketing segmentation — once per browser
+      // session, fire-and-forget. The endpoint derives tags from the DB.
+      if (typeof window !== 'undefined' && !sessionStorage.getItem('ghl_synced')) {
+        sessionStorage.setItem('ghl_synced', '1')
+        fetch('/api/ghl/sync', { method: 'POST' }).catch(() => {})
+      }
     }
     loadParent()
     setShowStartHere(!isStartHereHidden())
