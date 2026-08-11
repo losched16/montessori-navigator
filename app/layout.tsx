@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,19 +14,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Rewardful affiliate tracking. The stub queue must load before the
-            main script (beforeInteractive → head). The main script sets
-            window.Rewardful.referral, which we pass into Stripe Checkout as
-            client_reference_id so Rewardful can attribute conversions. */}
-        <Script id="rewardful-queue" strategy="beforeInteractive">
-          {`(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');`}
-        </Script>
-        <Script
-          id="rewardful-main"
-          src="https://r.wdfl.co/rw.js"
-          data-rewardful="46e3d0"
-          strategy="afterInteractive"
+        {/* Rewardful affiliate tracking — the exact snippet, rendered as raw
+            tags in <head> so Rewardful's install detector recognizes it
+            (their setup checks for the snippet in the document head). The stub
+            queue must precede the async loader. rw.js reads the API key from
+            data-rewardful and sets window.Rewardful.referral, which the
+            checkout flow passes to Stripe as client_reference_id. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');",
+          }}
         />
+        <script async src="https://r.wdfl.co/rw.js" data-rewardful="46e3d0"></script>
       </head>
       <body>{children}</body>
     </html>
