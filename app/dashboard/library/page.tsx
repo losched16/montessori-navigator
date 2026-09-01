@@ -40,6 +40,15 @@ export default function LibraryPage() {
   // DB-backed articles flagged for the Library (added via /admin), merged in
   // with the imported Foundation articles.
   const [dbArticles, setDbArticles] = useState<LibArticle[]>([])
+
+  // Allow deep links from Explore/More (?category=Montessori Parenting)
+  useEffect(() => {
+    const cat = new URLSearchParams(window.location.search).get('category')
+    if (cat && (cat === "Tomorrow's Child" || CATEGORY_GROUPS[cat] || CATEGORIES.includes(cat))) {
+      setSelectedCategory(cat)
+    }
+  }, [])
+
   useEffect(() => {
     const supabase = createClient()
     listLibraryResources(supabase)

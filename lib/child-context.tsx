@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from '
 import { createClient } from '@/lib/supabase'
 import type { Child } from '@/lib/supabase'
 
-interface ChildContextValue {
+export interface ChildContextValue {
   children: Child[]
   selectedChildId: string | null
   setSelectedChildId: (id: string) => void
@@ -14,7 +14,9 @@ interface ChildContextValue {
   permissions: 'full' | 'read_only' | null
 }
 
-const ChildContext = createContext<ChildContextValue>({
+// Exported so dev/preview tooling can provide a mock value; app code should
+// use ChildProvider + useChild.
+export const ChildContext = createContext<ChildContextValue>({
   children: [],
   selectedChildId: null,
   setSelectedChildId: () => {},

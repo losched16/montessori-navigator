@@ -29,6 +29,12 @@ export default function ChatPage() {
     if (!localStorage.getItem('montessori_save_tip_dismissed')) {
       setShowSaveTip(true)
     }
+    // Prefill from Home's Abigail card / hero links (?q=...)
+    const q = new URLSearchParams(window.location.search).get('q')
+    if (q) {
+      setInput(q)
+      inputRef.current?.focus()
+    }
   }, [])
 
   useEffect(() => {

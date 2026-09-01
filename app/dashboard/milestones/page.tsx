@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
-import type { Child } from '@/lib/supabase'
-import { formatAge, getAgePlane, getAgePlaneLabel, getCurriculumAreaLabel } from '@/lib/utils'
+import { getCurriculumAreaLabel } from '@/lib/utils'
+import { useChild } from '@/lib/child-context'
 
 interface Milestone {
   id: string
@@ -22,30 +22,15 @@ const AREA_ORDER = [
 ]
 
 export default function MilestonesPage() {
-  const [children, setChildren] = useState<Child[]>([])
-  const [selectedChildId, setSelectedChildId] = useState<string | null>(null)
+  // Shared child context (Phase 2): one selected child everywhere.
+  // This page previously fetched its own children and picked the first one.
+  const { children, selectedChildId, setSelectedChildId, selectedChild } = useChild()
   const [milestones, setMilestones] = useState<Milestone[]>([])
   const [filterArea, setFilterArea] = useState<string>('all')
   const [loading, setLoading] = useState(true)
   const [initializing, setInitializing] = useState(false)
 
   const supabase = createClient()
-
-  useEffect(() => {
-    const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
-      const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
-      if (!parent) return
-
-      const { data: kids } = await supabase.from('children').select('*').eq('parent_id', parent.id).order('created_at')
-      if (kids && kids.length > 0) {
-        setChildren(kids)
-        setSelectedChildId(kids[0].id)
-      }
-    }
-    load()
-  }, [])
 
   useEffect(() => {
     if (!selectedChildId) return
@@ -93,8 +78,6 @@ export default function MilestonesPage() {
       body: JSON.stringify({ action: 'toggle', milestoneId, achieved: !currentAchieved }),
     })
   }
-
-  const selectedChild = children.find(c => c.id === selectedChildId)
 
   // Group milestones by area
   const areas = AREA_ORDER.filter(a => milestones.some(m => m.curriculum_area === a))

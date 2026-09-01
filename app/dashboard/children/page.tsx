@@ -1,382 +1,206 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
+import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/lib/supabase'
-import type { ChildDevelopmentLevel, Observation } from '@/lib/supabase'
-import { formatAge, getAgePlane, getAgePlaneLabel, getDevelopmentLevelLabel, getCurriculumAreaLabel, getObservationTypeLabel } from '@/lib/utils'
+import type { Observation } from '@/lib/supabase'
 import { useChild } from '@/lib/child-context'
-import PageBanner from '@/components/ui/PageBanner'
+import { getSkillByIndex } from '@/lib/scope-sequence'
+import { buildJourneyEvents, type MilestoneRow, type SkillRow, type DevLevelRow } from '@/lib/child-story'
+import ChildProfileHeader from '@/components/child/ChildProfileHeader'
+import ChildTabs, { type ChildTab } from '@/components/child/ChildTabs'
+import OverviewTab from '@/components/child/OverviewTab'
+import MomentsTab from '@/components/child/MomentsTab'
+import JourneyTab from '@/components/child/JourneyTab'
+import GrowthTab from '@/components/child/GrowthTab'
+import MomentComposer from '@/components/child/MomentComposer'
+import Toast from '@/components/ui/Toast'
+import Button from '@/components/ui/Button'
+import Skeleton from '@/components/ui/Skeleton'
 
-const CURRICULUM_AREAS = [
-  'practical_life', 'sensorial', 'language', 'mathematics',
-  'cultural_studies', 'social_emotional', 'executive_function',
-  'gross_motor', 'fine_motor', 'art_music'
-]
+const VALID_TABS: ChildTab[] = ['overview', 'journey', 'moments', 'growth']
 
-const OBSERVATION_TYPES = [
-  { value: 'home_activity', label: 'Home Activity' },
-  { value: 'school_observation', label: 'School Observation' },
-  { value: 'milestone_reached', label: 'Milestone Reached' },
-  { value: 'challenge_noted', label: 'Challenge Noted' },
-  { value: 'interest_spark', label: 'Interest Spark' },
-  { value: 'conference_notes', label: 'Conference Notes' },
-  { value: 'general', label: 'General Note' },
-]
-
-export default function ChildrenPage() {
-  const { children, selectedChildId, setSelectedChildId, selectedChild } = useChild()
-  const [devLevels, setDevLevels] = useState<ChildDevelopmentLevel[]>([])
-  const [observations, setObservations] = useState<Observation[]>([])
+// My Child — one destination for the whole child experience, in four tabs.
+// All data comes from the existing tables; the selected child comes from the
+// shared ChildProvider so it stays consistent everywhere.
+export default function MyChildPage() {
+  const { children, selectedChild, loading: childLoading } = useChild()
+  const [tab, setTab] = useState<ChildTab>('overview')
   const [parentId, setParentId] = useState<string | null>(null)
-
-  // Observation form
-  const [showObsForm, setShowObsForm] = useState(false)
-  const [obsType, setObsType] = useState('home_activity')
-  const [obsArea, setObsArea] = useState('general')
-  const [obsDescription, setObsDescription] = useState('')
-  const [obsWentWell, setObsWentWell] = useState('')
-  const [obsNeedsSupport, setObsNeedsSupport] = useState('')
-  const [saving, setSaving] = useState(false)
-  const [uploadingPhoto, setUploadingPhoto] = useState(false)
-  const photoInputRef = useRef<HTMLInputElement>(null)
-
+  const [devLevels, setDevLevels] = useState<DevLevelRow[]>([])
+  const [observations, setObservations] = useState<Observation[]>([])
+  const [milestones, setMilestones] = useState<MilestoneRow[]>([])
+  const [skills, setSkills] = useState<Array<SkillRow & { name?: string }>>([])
+  const [dataLoading, setDataLoading] = useState(true)
+  const [composerOpen, setComposerOpen] = useState(false)
+  const [toast, setToast] = useState<{ message: string; detail?: string } | null>(null)
   const supabase = createClient()
+
+  const first = selectedChild?.name.trim().split(/\s+/)[0] || ''
+
+  // Initial tab (and composer) from the URL: ?tab=moments&log=1
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const urlTab = params.get('tab') as ChildTab | null
+    if (urlTab && VALID_TABS.includes(urlTab)) setTab(urlTab)
+    if (params.get('log') === '1') setComposerOpen(true)
+  }, [])
+
+  const changeTab = useCallback((next: ChildTab) => {
+    setTab(next)
+    const url = new URL(window.location.href)
+    url.searchParams.set('tab', next)
+    url.searchParams.delete('log')
+    window.history.replaceState(null, '', url.toString())
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     const loadParentId = async () => {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
-      const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
-      if (!parent) return
-      setParentId(parent.id)
+      const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).maybeSingle()
+      setParentId(parent?.id || null)
     }
     loadParentId()
   }, [])
 
+  // Load all child data whenever the selected child changes.
   useEffect(() => {
-    if (!selectedChildId) return
-    const loadChild = async () => {
-      const [levels, obs] = await Promise.all([
-        supabase.from('child_development_levels').select('*').eq('child_id', selectedChildId),
-        supabase.from('observations').select('*').eq('child_id', selectedChildId).order('date', { ascending: false }).limit(20),
+    if (!selectedChild) { if (!childLoading) setDataLoading(false); return }
+    let cancelled = false
+    setDataLoading(true)
+    const load = async () => {
+      const [levels, obs, ms, sk] = await Promise.all([
+        supabase.from('child_development_levels').select('area, level').eq('child_id', selectedChild.id),
+        supabase.from('observations').select('*').eq('child_id', selectedChild.id)
+          .order('date', { ascending: false }).limit(100),
+        supabase.from('milestones').select('id, curriculum_area, milestone_name, description, age_plane, achieved, achieved_date')
+          .eq('child_id', selectedChild.id),
+        supabase.from('child_skill_progress').select('skill_index, skill_area, status, date_mastered')
+          .eq('child_id', selectedChild.id).neq('status', 'not_started'),
       ])
+      if (cancelled) return
       setDevLevels(levels.data || [])
       setObservations(obs.data || [])
+      setMilestones(ms.data || [])
+      setSkills((sk.data || []).map(s => ({
+        ...s,
+        name: getSkillByIndex(s.skill_index)?.skill,
+      })))
+      setDataLoading(false)
     }
-    loadChild()
-  }, [selectedChildId])
+    load()
+    return () => { cancelled = true }
+  }, [selectedChild?.id, childLoading])
 
-  const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file || !selectedChildId) return
-    setUploadingPhoto(true)
-    try {
-      const ext = file.name.split('.').pop()
-      const path = `child-photos/${selectedChildId}.${ext}`
-      await supabase.storage.from('uploads').upload(path, file, { upsert: true })
-      const { data: { publicUrl } } = supabase.storage.from('uploads').getPublicUrl(path)
-      await supabase.from('children').update({ profile_photo_url: publicUrl }).eq('id', selectedChildId)
-      // Update local state through child context refresh
-      window.location.reload()
-    } catch (err) {
-      console.error('Photo upload failed:', err)
-    } finally {
-      setUploadingPhoto(false)
-    }
+  const openComposer = () => setComposerOpen(true)
+
+  const handleMomentSaved = (obs: Observation) => {
+    setObservations(prev => [obs, ...prev])
+    setToast({ message: 'Moment saved', detail: `${first}'s journey has been updated.` })
   }
 
-  const updateLevel = async (area: string, level: number) => {
-    if (!selectedChildId) return
-    await supabase.from('child_development_levels').upsert({
-      child_id: selectedChildId,
-      area,
-      level,
+  const handleLevelSaved = (area: string, level: number) => {
+    setDevLevels(prev => {
+      const existing = prev.find(l => l.area === area)
+      return existing
+        ? prev.map(l => l.area === area ? { ...l, level } : l)
+        : [...prev, { area, level }]
     })
-    setDevLevels(prev => prev.map(d => d.area === area ? { ...d, level } : d))
+    setToast({ message: 'Growth updated' })
   }
 
-  const saveObservation = async () => {
-    if (!selectedChildId || !parentId || !obsDescription.trim()) return
-    setSaving(true)
+  const loading = childLoading || (selectedChild && dataLoading)
 
-    await supabase.from('observations').insert({
-      child_id: selectedChildId,
-      parent_id: parentId,
-      type: obsType,
-      curriculum_area: obsArea,
-      description: obsDescription.trim(),
-      went_well: obsWentWell.trim() || null,
-      needs_support: obsNeedsSupport.trim() || null,
-    })
-
-    // Reload observations
-    const { data } = await supabase
-      .from('observations')
-      .select('*')
-      .eq('child_id', selectedChildId)
-      .order('date', { ascending: false })
-      .limit(20)
-
-    setObservations(data || [])
-    setShowObsForm(false)
-    setObsDescription('')
-    setObsWentWell('')
-    setObsNeedsSupport('')
-    setSaving(false)
+  // No children yet
+  if (!childLoading && children.length === 0) {
+    return (
+      <div className="max-w-[900px] mx-auto pb-24 sm:pb-10">
+        <div className="rounded-[24px] bg-white border border-[color:var(--mfa-border)] p-6 sm:p-8 mt-2">
+          <h1 className="font-[family-name:var(--mfa-serif)] text-[27px] sm:text-[32px] leading-[1.1] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2.5">
+            Let&apos;s meet your child.
+          </h1>
+          <p className="text-[16px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl mb-6">
+            Add your child so Family Alliance can build a living picture of who they&apos;re becoming.
+          </p>
+          <Button size="lg" href="/onboarding">Add My Child</Button>
+        </div>
+      </div>
+    )
   }
-
-  const levelColors = ['', 'bg-gray-200', 'bg-warm-300', 'bg-sage-400', 'bg-warm-400', 'bg-warm-600']
 
   return (
-    <div className="max-w-3xl pb-20 sm:pb-0">
-      <PageBanner
-        image="/images/environment/girl-painting.jpg"
-        title={selectedChild?.name || 'Children'}
-        subtitle={selectedChild ? `${formatAge(selectedChild.date_of_birth)} · ${getAgePlaneLabel(getAgePlane(selectedChild.date_of_birth))}` : undefined}
-        objectPosition="center top"
-      />
-
-      {/* Child selector tabs */}
-      {children.length > 1 && (
-        <div className="flex gap-2 sm:gap-1 mb-6">
-          {children.map(child => (
-            <button
-              key={child.id}
-              onClick={() => setSelectedChildId(child.id)}
-              className={`tap-scale px-4 py-3 sm:px-3 sm:py-1.5 text-sm rounded-[16px] sm:rounded-lg min-h-[48px] sm:min-h-0 transition ${
-                selectedChildId === child.id
-                  ? 'bg-warm-500 text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              {child.name}
-            </button>
-          ))}
+    <div className="max-w-[900px] mx-auto pb-24 sm:pb-10">
+      {loading ? (
+        <div className="space-y-5 pt-2" aria-hidden="true">
+          <div className="flex items-center gap-4">
+            <Skeleton className="w-16 h-16 rounded-full" />
+            <div className="space-y-2 flex-1">
+              <Skeleton className="h-7 w-40" />
+              <Skeleton className="h-4 w-56" />
+            </div>
+          </div>
+          <Skeleton className="h-12 w-full rounded-none" />
+          <Skeleton className="h-[120px] rounded-[20px]" />
+          <Skeleton className="h-[180px] rounded-[20px]" />
         </div>
-      )}
-
-      {selectedChild && (
+      ) : selectedChild && (
         <>
-          {/* Child header with profile photo */}
-          <div className="bg-white border border-gray-100 rounded-[22px] sm:rounded-xl p-5 sm:p-4 mb-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                {/* Profile photo */}
-                <button
-                  onClick={() => photoInputRef.current?.click()}
-                  className="relative w-12 h-12 rounded-full overflow-hidden bg-warm-100 border-2 border-warm-200 hover:border-warm-400 transition shrink-0 group"
-                  title="Upload photo"
-                >
-                  {selectedChild.profile_photo_url ? (
-                    <Image src={selectedChild.profile_photo_url} alt={selectedChild.name} fill className="object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-warm-500 text-lg font-bold">
-                      {selectedChild.name.charAt(0).toUpperCase()}
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition flex items-center justify-center">
-                    <span className="text-white text-xs opacity-0 group-hover:opacity-100 transition">+</span>
-                  </div>
-                  {uploadingPhoto && (
-                    <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
-                      <div className="w-5 h-5 border-2 border-warm-500 border-t-transparent rounded-full animate-spin" />
-                    </div>
-                  )}
-                </button>
-                <input
-                  ref={photoInputRef}
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handlePhotoUpload}
-                />
-                <div>
-                  <h2 className="text-lg font-semibold text-navy-600">{selectedChild.name}</h2>
-                  <p className="text-sm text-gray-500">
-                    {formatAge(selectedChild.date_of_birth)} · {getAgePlaneLabel(getAgePlane(selectedChild.date_of_birth))}
-                    {selectedChild.current_environment && (
-                      <span> · {selectedChild.current_environment.replace(/_/g, ' ')}</span>
-                    )}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ChildProfileHeader onLogMoment={openComposer} />
+          <ChildTabs active={tab} onChange={changeTab} />
 
-          {/* Development levels */}
-          <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Development Overview</h3>
-            <div className="bg-white border border-gray-100 rounded-xl divide-y divide-gray-50">
-              {CURRICULUM_AREAS.map(area => {
-                const level = devLevels.find(d => d.area === area)?.level || 0
-                return (
-                  <div key={area} className="flex items-center justify-between p-3">
-                    <span className="text-sm text-navy-600 font-medium">{getCurriculumAreaLabel(area)}</span>
-                    <div className="flex items-center gap-1.5">
-                      {[1, 2, 3, 4, 5].map(l => (
-                        <button
-                          key={l}
-                          onClick={() => updateLevel(area, l)}
-                          title={getDevelopmentLevelLabel(l)}
-                          className={`w-7 h-7 rounded-full text-xs font-medium transition ${
-                            l <= level
-                              ? `${levelColors[l]} text-white`
-                              : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
-                          }`}
-                        >
-                          {l}
-                        </button>
-                      ))}
-                      <span className="text-xs text-gray-400 ml-2 w-20 hidden sm:inline">
-                        {getDevelopmentLevelLabel(level)}
-                      </span>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-            <p className="text-xs text-gray-400 mt-2">
-              1 = Emerging · 2 = Developing · 3 = Practicing · 4 = Proficient · 5 = Mastered
-            </p>
-          </div>
+          {tab === 'overview' && (
+            <OverviewTab
+              child={selectedChild}
+              devLevels={devLevels}
+              observations={observations}
+              milestones={milestones}
+              skills={skills}
+              onGoToTab={changeTab}
+              onLogMoment={openComposer}
+            />
+          )}
+          {tab === 'journey' && (
+            <JourneyTab
+              child={selectedChild}
+              events={buildJourneyEvents(observations, milestones, skills)}
+              devLevels={devLevels}
+              onLogMoment={openComposer}
+            />
+          )}
+          {tab === 'moments' && (
+            <MomentsTab
+              observations={observations}
+              childName={first}
+              onLogMoment={openComposer}
+            />
+          )}
+          {tab === 'growth' && (
+            <GrowthTab
+              child={selectedChild}
+              devLevels={devLevels}
+              milestones={milestones}
+              skills={skills}
+              onLevelSaved={handleLevelSaved}
+            />
+          )}
 
-          {/* Observations */}
-          <div>
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">Observations</h3>
-              <button
-                onClick={() => setShowObsForm(true)}
-                className="text-sm text-warm-600 hover:text-warm-600 font-medium"
-              >
-                + Add Observation
-              </button>
-            </div>
-
-            {/* Observation form */}
-            {showObsForm && (
-              <div className="bg-white border border-warm-300 rounded-xl p-4 mb-4">
-                <div className="grid grid-cols-2 gap-3 mb-3">
-                  <div>
-                    <label className="block text-xs text-gray-500 mb-1">Type</label>
-                    <select
-                      value={obsType}
-                      onChange={e => setObsType(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
-                    >
-                      {OBSERVATION_TYPES.map(t => (
-                        <option key={t.value} value={t.value}>{t.label}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs text-gray-500 mb-1">Curriculum Area</label>
-                    <select
-                      value={obsArea}
-                      onChange={e => setObsArea(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
-                    >
-                      <option value="general">General</option>
-                      {CURRICULUM_AREAS.map(a => (
-                        <option key={a} value={a}>{getCurriculumAreaLabel(a)}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="mb-3">
-                  <label className="block text-xs text-gray-500 mb-1">What did you observe?</label>
-                  <textarea
-                    value={obsDescription}
-                    onChange={e => setObsDescription(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
-                    rows={3}
-                    placeholder="Describe what you noticed..."
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-3 mb-3">
-                  <div>
-                    <label className="block text-xs text-gray-500 mb-1">What went well? (optional)</label>
-                    <input
-                      type="text"
-                      value={obsWentWell}
-                      onChange={e => setObsWentWell(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
-                      placeholder="Strengths, progress..."
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs text-gray-500 mb-1">Needs support? (optional)</label>
-                    <input
-                      type="text"
-                      value={obsNeedsSupport}
-                      onChange={e => setObsNeedsSupport(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
-                      placeholder="Challenges, areas to watch..."
-                    />
-                  </div>
-                </div>
-
-                <div className="flex justify-end gap-2">
-                  <button
-                    onClick={() => setShowObsForm(false)}
-                    className="px-3 py-1.5 text-sm text-gray-500 hover:text-gray-700"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={saveObservation}
-                    disabled={!obsDescription.trim() || saving}
-                    className="px-4 py-1.5 bg-warm-500 hover:bg-warm-600 text-white text-sm rounded-lg transition disabled:opacity-40"
-                  >
-                    {saving ? 'Saving...' : 'Save Observation'}
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Observation list */}
-            <div className="space-y-2">
-              {observations.map(obs => (
-                <div key={obs.id} className="bg-white border border-gray-100 rounded-xl p-4">
-                  <div className="flex items-start justify-between gap-3 mb-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-warm-700 bg-warm-50 px-2 py-0.5 rounded-full">
-                        {getObservationTypeLabel(obs.type)}
-                      </span>
-                      {obs.curriculum_area && obs.curriculum_area !== 'general' && (
-                        <span className="text-xs text-gray-400">
-                          {getCurriculumAreaLabel(obs.curriculum_area)}
-                        </span>
-                      )}
-                    </div>
-                    <span className="text-xs text-gray-400">
-                      {new Date(obs.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-700">{obs.description}</p>
-                  {(obs.went_well || obs.needs_support) && (
-                    <div className="mt-2 flex gap-4 text-xs">
-                      {obs.went_well && (
-                        <span className="text-sage-600">✓ {obs.went_well}</span>
-                      )}
-                      {obs.needs_support && (
-                        <span className="text-warm-600">△ {obs.needs_support}</span>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ))}
-              {observations.length === 0 && (
-                <div className="text-center py-8 text-gray-400 text-sm">
-                  No observations yet. Start by adding one above.
-                </div>
-              )}
-            </div>
-          </div>
+          <MomentComposer
+            open={composerOpen}
+            onClose={() => setComposerOpen(false)}
+            childId={selectedChild.id}
+            childName={first}
+            parentId={parentId}
+            onSaved={handleMomentSaved}
+          />
         </>
       )}
+
+      <Toast
+        message={toast?.message || null}
+        detail={toast?.detail}
+        onDismiss={() => setToast(null)}
+      />
     </div>
   )
 }
