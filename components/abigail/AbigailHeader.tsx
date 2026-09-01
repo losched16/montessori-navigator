@@ -9,6 +9,8 @@ import Avatar from '@/components/ui/Avatar'
 import BottomSheet from '@/components/ui/BottomSheet'
 import Button from '@/components/ui/Button'
 import AbigailMark from './AbigailMark'
+import { trackEvent } from '@/lib/analytics'
+import { getAgePlane } from '@/lib/utils'
 
 // Abigail context header: mark + name + quiet child context, with history and
 // new-conversation controls. Child switching mid-thread asks first — context
@@ -24,24 +26,31 @@ export default function AbigailHeader({ hasMessages, onHistory, onNewConversatio
 
   const multi = children.length > 1
 
+  const trackSwitch = (next: Child) => trackEvent('child_switched', {
+    source_screen: 'abigail',
+    previous_age_plane: selectedChild ? getAgePlane(selectedChild.date_of_birth) : undefined,
+    new_age_plane: getAgePlane(next.date_of_birth),
+  })
+
   const pickChild = (child: Child) => {
     if (child.id === selectedChild?.id) { setSheetOpen(false); return }
     if (hasMessages) {
       setPendingChild(child)
     } else {
+      trackSwitch(child)
       setSelectedChildId(child.id)
       setSheetOpen(false)
     }
   }
 
   const confirmSwitch = () => {
-    if (pendingChild) setSelectedChildId(pendingChild.id)
+    if (pendingChild) { trackSwitch(pendingChild); setSelectedChildId(pendingChild.id) }
     setPendingChild(null)
     setSheetOpen(false)
   }
 
   const switchAndStartNew = () => {
-    if (pendingChild) setSelectedChildId(pendingChild.id)
+    if (pendingChild) { trackSwitch(pendingChild); setSelectedChildId(pendingChild.id) }
     setPendingChild(null)
     setSheetOpen(false)
     onNewConversation()

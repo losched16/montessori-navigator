@@ -2,9 +2,14 @@
 
 import Link from 'next/link'
 import { Sparkles } from 'lucide-react'
+import { useChild } from '@/lib/child-context'
+import { trackEvent, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 // Prominent purple entry point into the existing chat experience.
 export default function AbigailCard({ childName }: { childName?: string }) {
+  const { selectedChild } = useChild()
+  const trackClick = (source: 'card' | 'chip') =>
+    trackEvent('home_abigail_clicked', { source, ...getSafeChildAnalyticsContext(selectedChild) })
   const n = childName || 'your child'
   const chips = [
     { label: 'Behavior', prompt: `I need help with a behavior challenge with ${n}.` },
@@ -32,6 +37,7 @@ export default function AbigailCard({ childName }: { childName?: string }) {
 
       <Link
         href="/dashboard/chat"
+        onClick={() => trackClick('card')}
         className="tap-scale flex items-center min-h-[56px] px-5 rounded-2xl bg-white border border-[color:var(--mfa-border)] text-[15px] text-[color:var(--mfa-ink-muted)] hover:border-[color:var(--mfa-purple)] transition mb-3.5"
       >
         Ask about behavior, learning, routines...
@@ -42,6 +48,7 @@ export default function AbigailCard({ childName }: { childName?: string }) {
           <Link
             key={chip.label}
             href={`/dashboard/chat?q=${encodeURIComponent(chip.prompt)}`}
+            onClick={() => trackClick('chip')}
             className="tap-scale inline-flex items-center min-h-[44px] px-4 rounded-full bg-white/70 text-[14px] font-medium text-[color:var(--mfa-purple)] hover:bg-white transition"
           >
             {chip.label}

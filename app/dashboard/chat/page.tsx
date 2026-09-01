@@ -12,6 +12,7 @@ import ConversationRail from '@/components/abigail/ConversationRail'
 import ConversationHistorySheet, { type ThreadSummary } from '@/components/abigail/ConversationHistorySheet'
 import AbigailMark from '@/components/abigail/AbigailMark'
 import Toast from '@/components/ui/Toast'
+import { trackEvent, useTrackView, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -30,6 +31,7 @@ export default function ChatPage() {
   const [historyOpen, setHistoryOpen] = useState(false)
   const [failedMessage, setFailedMessage] = useState<string | null>(null)
   const [toast, setToast] = useState<string | null>(null)
+  const [threadsLoaded, setThreadsLoaded] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   // 'auto' for thread loads (no jarring animated scroll through history),
@@ -89,6 +91,7 @@ export default function ChatPage() {
       .limit(20)
 
     setThreads(data || [])
+    setThreadsLoaded(true)
   }
 
   const loadThread = async (id: string) => {
@@ -126,6 +129,11 @@ export default function ChatPage() {
     }
   }
 
+  useTrackView('abigail_viewed', {
+    ...getSafeChildAnalyticsContext(selectedChild),
+    has_existing_thread: threads.length > 0,
+  }, { ready: threadsLoaded })
+
   const startNewChat = useCallback(() => {
     setMessages([])
     setThreadId(null)
@@ -143,6 +151,15 @@ export default function ChatPage() {
       setMessages(prev => [...prev, { role: 'user', content: userMessage }])
     }
     setLoading(true)
+    // Behavior only — never the prompt text. Topic is the deterministic
+    // client-side classifier already used for follow-up chips.
+    if (opts.echo !== false) {
+      trackEvent('abigail_message_sent', {
+        ...getSafeChildAnalyticsContext(selectedChild),
+        thread_state: threadId ? 'existing' : 'new',
+        topic: classifyTopic(userMessage),
+      })
+    }
 
     try {
       const res = await fetch('/api/chat', {
@@ -207,6 +224,11 @@ export default function ChatPage() {
       })
       setMessages(prev => prev.map((m, i) => i === msgIndex ? { ...m, saved: true } : m))
       setToast('Guidance saved')
+      const question = [...messages.slice(0, msgIndex)].reverse().find(x => x.role === 'user')?.content
+      trackEvent('guidance_saved', {
+        ...getSafeChildAnalyticsContext(selectedChild),
+        topic: question ? classifyTopic(question) : undefined,
+      })
     }
   }
 
@@ -220,6 +242,15 @@ export default function ChatPage() {
       return getAttachments(question, selectedChild)
     })
   }, [messages, selectedChild?.id])
+
+  // Coarse per-message topic (analytics only — never the question text)
+  const topicByIndex = useMemo(() => {
+    return messages.map((m, i) => {
+      if (m.role !== 'assistant') return undefined
+      const question = [...messages.slice(0, i)].reverse().find(x => x.role === 'user')?.content
+      return question ? classifyTopic(question) : undefined
+    })
+  }, [messages])
 
   const lastAssistantIndex = messages.map(m => m.role).lastIndexOf('assistant')
   const lastUserMessage = [...messages].reverse().find(m => m.role === 'user')?.content
@@ -274,6 +305,7 @@ export default function ChatPage() {
                     attachments={attachmentsByIndex[i]}
                     followUps={i === lastAssistantIndex ? followUps : undefined}
                     onSendFollowUp={(text) => send(text)}
+                    topic={topicByIndex[i]}
                   />
                 )
               ))}

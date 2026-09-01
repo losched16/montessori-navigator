@@ -18,6 +18,7 @@ import ObservationPromptCard from '@/components/family/ObservationPromptCard'
 import SectionHeader from '@/components/ui/SectionHeader'
 import Button from '@/components/ui/Button'
 import Skeleton from '@/components/ui/Skeleton'
+import { useTrackView, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 function firstName(name: string | null | undefined): string {
   return (name || '').trim().split(/\s+/)[0]
@@ -61,6 +62,8 @@ export default function DashboardHome() {
     load()
     return () => { cancelled = true }
   }, [selectedChild?.id])
+
+  useTrackView('home_viewed', getSafeChildAnalyticsContext(selectedChild), { ready: !childLoading })
 
   const hourGreeting = () => {
     const h = new Date().getHours()
@@ -141,7 +144,7 @@ export default function DashboardHome() {
           {/* 2. Activity carousel */}
           <section aria-label={`For ${childFirst} today`}>
             <SectionHeader title={`For ${childFirst} Today`} />
-            <ActivityCarousel activities={getHomeActivities(selectedChild)} childName={childFirst} />
+            <ActivityCarousel activities={getHomeActivities(selectedChild)} childName={childFirst} analyticsSource="home" />
           </section>
 
           {/* 3. Ask Abigail */}
@@ -160,7 +163,7 @@ export default function DashboardHome() {
                 <p className="text-[14.5px] leading-relaxed text-[color:var(--mfa-ink-secondary)] mb-4 max-w-md">
                   Start with a few simple observations and Family Alliance will begin building {childFirst}&apos;s developmental picture.
                 </p>
-                <Button href="/dashboard/children?tab=moments&log=1" variant="secondary" size="md">
+                <Button href="/dashboard/children?tab=moments&log=1&src=home" variant="secondary" size="md">
                   Log a Moment
                 </Button>
               </div>

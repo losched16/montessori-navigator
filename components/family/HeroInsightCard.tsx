@@ -6,11 +6,16 @@ import { ChevronRight } from 'lucide-react'
 import type { HeroInsight } from '@/lib/family-home'
 import Button from '@/components/ui/Button'
 import BottomSheet from '@/components/ui/BottomSheet'
+import { useChild } from '@/lib/child-context'
+import { trackEvent, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 // The dominant Home component: exactly ONE insight about the selected child.
 export default function HeroInsightCard({ insight }: { insight: HeroInsight }) {
   const [showHow, setShowHow] = useState(false)
+  const { selectedChild } = useChild()
   const chatHref = `/dashboard/chat?q=${encodeURIComponent(insight.abigailPrompt)}`
+  const trackHeroChat = () =>
+    trackEvent('home_abigail_clicked', { source: 'hero', ...getSafeChildAnalyticsContext(selectedChild) })
 
   return (
     <section
@@ -46,6 +51,7 @@ export default function HeroInsightCard({ insight }: { insight: HeroInsight }) {
         </Button>
         <Link
           href={chatHref}
+          onClick={trackHeroChat}
           className="tap-scale inline-flex items-center justify-center gap-1 min-h-[48px] px-2 text-[15px] font-medium text-[color:var(--mfa-purple)]"
         >
           Ask Abigail about this

@@ -8,6 +8,7 @@ import { listLibraryResources, resourceTypeLabel } from '@/lib/resources'
 import { createClient } from '@/lib/supabase'
 import BottomSheet from '@/components/ui/BottomSheet'
 import Button from '@/components/ui/Button'
+import { trackEvent } from '@/lib/analytics'
 
 // Full Library — the advanced browse/search layer beneath Explore.
 // All power-user behavior (search, category/tag filters, sorting,
@@ -287,6 +288,9 @@ export default function LibraryPage() {
             <Link
               key={article.slug}
               href={article._href || `/dashboard/library/${article.slug}`}
+              onClick={() => article._href
+                ? trackEvent('resource_opened', { resource_type: article.categories[0], source: 'library' })
+                : trackEvent('article_opened', { source: 'library', category: article.categories.filter(c => c !== 'MFA')[0] || 'Montessori' })}
               className="tap-scale bg-white border border-[color:var(--mfa-border)] rounded-[16px] p-5 hover:shadow-md transition group"
             >
               <div className="flex flex-wrap gap-1.5 mb-2.5">

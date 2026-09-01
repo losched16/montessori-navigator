@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, Suspense } from 'react'
+import { useState, useEffect, useMemo, useRef, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ArrowLeft, ChevronRight, Sparkles, BookOpen } from 'lucide-react'
@@ -24,6 +24,7 @@ import VideoCard from '@/components/explore/VideoCard'
 import ActivityCarousel from '@/components/family/ActivityCarousel'
 import ActivityDetailSheet from '@/components/family/ActivityDetailSheet'
 import Button from '@/components/ui/Button'
+import { trackEvent, useTrackView, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 const SEARCH_FILTERS: Array<{ key: SearchFilter; label: string }> = [
   { key: 'all', label: 'All' },
@@ -56,6 +57,13 @@ function ExploreInner() {
   const topicKey = params.get('topic')
   const collection = params.get('collection')
   const childFirst = selectedChild?.name.trim().split(/\s+/)[0]
+  const safeCtx = getSafeChildAnalyticsContext(selectedChild)
+
+  useTrackView('explore_viewed', safeCtx)
+  useTrackView('explore_topic_opened', { topic: topicKey || '', age_plane: safeCtx.age_plane }, {
+    key: topicKey || 'none',
+    ready: !!topicKey,
+  })
 
   // DB-backed resources — Explore degrades gracefully if this fails:
   // static articles, newsletters and activities still render.
@@ -118,8 +126,56 @@ function ExploreInner() {
     return getAllHomeActivities().filter(a => /3|4/.test(a.ages)).slice(0, 6)
   }, [selectedChild?.id])
 
+  const sourceState = searching ? 'search' : topicKey ? 'topic' : collection ? 'collection' : 'home'
+
+  // Track a settled search (never the query text) — waits for typing to
+  // pause, dedupes repeat queries.
+  const lastTrackedSearch = useRef<string | null>(null)
+  useEffect(() => {
+    if (!searching) return
+    const q = searchInput.trim().toLowerCase()
+    const t = setTimeout(() => {
+      if (lastTrackedSearch.current === q) return
+      lastTrackedSearch.current = q
+      trackEvent('explore_search_used', {
+        result_count: results.length,
+        has_results: results.length > 0,
+        filter,
+      })
+    }, 1200)
+    return () => clearTimeout(t)
+  }, [searching, searchInput, results.length, filter])
+
   const openActivityItem = (item: ExploreItem) => {
-    if (item.activity) setOpenActivity(item.activity)
+    if (item.activity) {
+      setOpenActivity(item.activity)
+      trackEvent('activity_opened', {
+        source: `explore_${sourceState}`,
+        activity_category: item.activity.category,
+        age_plane: safeCtx.age_plane,
+      })
+    }
+  }
+
+  // One handler for every discovery open: the funnel event plus the matching
+  // generic content event. Activities are covered by openActivityItem above.
+  const handleItemOpen = (item: ExploreItem) => {
+    trackEvent('explore_result_opened', {
+      item_kind: item.kind,
+      item_category: item.category,
+      source_state: sourceState,
+      age_plane: safeCtx.age_plane,
+    })
+    if (item.kind === 'article') {
+      trackEvent('article_opened', { source: 'explore', category: item.category, age_plane: safeCtx.age_plane })
+    } else if (item.kind === 'resource') {
+      trackEvent('resource_opened', { resource_type: item.category, source: 'explore' })
+    } else if (item.kind === 'newsletter') {
+      trackEvent('tomorrows_child_opened', {
+        issue_year: item.publishedAt ? Number(item.publishedAt.slice(0, 4)) : undefined,
+        source: sourceState,
+      })
+    }
   }
 
   const carouselRow = 'flex gap-3.5 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 snap-x snap-mandatory scrollbar-hide'
@@ -186,7 +242,7 @@ function ExploreInner() {
           ) : (
             <div className="space-y-2.5">
               {filteredResults.map(item => (
-                <ExploreItemCard key={item.id} item={item} onOpenActivity={openActivityItem} />
+                <ExploreItemCard key={item.id} item={item} onOpenActivity={openActivityItem} onOpen={handleItemOpen} />
               ))}
             </div>
           )}
@@ -214,7 +270,7 @@ function ExploreInner() {
               <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] mb-3">{year}</h2>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-3.5">
                 {NEWSLETTERS.filter(n => n.year === year).map(n => (
-                  <NewsletterCard key={n.slug} newsletter={n} width="full" />
+                  <NewsletterCard key={n.slug} newsletter={n} width="full" onOpen={nl => trackEvent('tomorrows_child_opened', { issue_year: nl.year, source: 'collection' })} />
                 ))}
               </div>
             </section>
@@ -235,13 +291,13 @@ function ExploreInner() {
 
           {topicContent.startHere && (
             <ExploreSection title="Start Here">
-              <ExploreItemCard item={topicContent.startHere} onOpenActivity={openActivityItem} />
+              <ExploreItemCard item={topicContent.startHere} onOpenActivity={openActivityItem} onOpen={handleItemOpen} />
             </ExploreSection>
           )}
 
           {topicContent.tryActivities.length > 0 && (
             <ExploreSection title="What You Can Try">
-              <ActivityCarousel activities={topicContent.tryActivities} childName={childFirst || 'your child'} />
+              <ActivityCarousel activities={topicContent.tryActivities} childName={childFirst || 'your child'} analyticsSource="explore_topic" />
             </ExploreSection>
           )}
 
@@ -249,7 +305,7 @@ function ExploreInner() {
             <ExploreSection title="Learn More">
               <div className="space-y-2.5">
                 {topicContent.learn.map(item => (
-                  <ExploreItemCard key={item.id} item={item} onOpenActivity={openActivityItem} />
+                  <ExploreItemCard key={item.id} item={item} onOpenActivity={openActivityItem} onOpen={handleItemOpen} />
                 ))}
               </div>
             </ExploreSection>
@@ -258,7 +314,7 @@ function ExploreInner() {
           {topicContent.watch.length > 0 && (
             <ExploreSection title="Watch">
               <div className={carouselRow} role="list" aria-label="Videos">
-                {topicContent.watch.map(item => <VideoCard key={item.id} item={item} />)}
+                {topicContent.watch.map(item => <VideoCard key={item.id} item={item} onOpen={handleItemOpen} />)}
               </div>
             </ExploreSection>
           )}
@@ -324,7 +380,7 @@ function ExploreInner() {
               <div className={carouselRow} role="list" aria-label={`Recommended for ${childFirst}`}>
                 {forChild.map(item => (
                   <div key={item.id} role="listitem" className="w-[290px] shrink-0 snap-start">
-                    <ExploreItemCard item={item} onOpenActivity={openActivityItem} />
+                    <ExploreItemCard item={item} onOpenActivity={openActivityItem} onOpen={handleItemOpen} />
                   </div>
                 ))}
               </div>
@@ -332,14 +388,14 @@ function ExploreInner() {
           )}
 
           <ExploreSection title="Things to Try">
-            <ActivityCarousel activities={tryActivities} childName={childFirst || 'your child'} />
+            <ActivityCarousel activities={tryActivities} childName={childFirst || 'your child'} analyticsSource="explore" />
           </ExploreSection>
 
           {newItems.length > 0 && (
             <ExploreSection title="New from the Foundation">
               <div className="space-y-2.5">
                 {newItems.map(item => (
-                  <ExploreItemCard key={item.id} item={item} onOpenActivity={openActivityItem} />
+                  <ExploreItemCard key={item.id} item={item} onOpenActivity={openActivityItem} onOpen={handleItemOpen} />
                 ))}
               </div>
             </ExploreSection>
@@ -348,7 +404,7 @@ function ExploreInner() {
           {watchItems.length > 0 && (
             <ExploreSection title="Watch">
               <div className={carouselRow} role="list" aria-label="Videos">
-                {watchItems.map(item => <VideoCard key={item.id} item={item} />)}
+                {watchItems.map(item => <VideoCard key={item.id} item={item} onOpen={handleItemOpen} />)}
               </div>
             </ExploreSection>
           )}
@@ -361,7 +417,7 @@ function ExploreInner() {
           >
             <div className={carouselRow} role="list" aria-label="Tomorrow's Child issues">
               {NEWSLETTERS.slice(0, 6).map(n => (
-                <NewsletterCard key={n.slug} newsletter={n} />
+                <NewsletterCard key={n.slug} newsletter={n} onOpen={nl => trackEvent('tomorrows_child_opened', { issue_year: nl.year, source: 'explore_home' })} />
               ))}
             </div>
           </ExploreSection>

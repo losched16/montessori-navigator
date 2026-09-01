@@ -5,14 +5,28 @@ import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
 import type { HomeActivity } from '@/lib/family-home'
 import ActivityDetailSheet from '@/components/family/ActivityDetailSheet'
+import { useChild } from '@/lib/child-context'
+import { trackEvent, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 // Horizontal snap carousel of 3–5 activity cards. Tapping a card opens the
 // full presentation in a bottom sheet — no new routes needed in Phase 1.
-export default function ActivityCarousel({ activities, childName }: {
+export default function ActivityCarousel({ activities, childName, analyticsSource }: {
   activities: HomeActivity[]
   childName: string
+  /** Where this carousel lives, for the generic activity_opened event */
+  analyticsSource?: string
 }) {
   const [openActivity, setOpenActivity] = useState<HomeActivity | null>(null)
+  const { selectedChild } = useChild()
+
+  const openWithTracking = (activity: HomeActivity) => {
+    setOpenActivity(activity)
+    trackEvent('activity_opened', {
+      source: analyticsSource || 'unknown',
+      activity_category: activity.category,
+      age_plane: getSafeChildAnalyticsContext(selectedChild).age_plane,
+    })
+  }
 
   return (
     <>
@@ -25,7 +39,7 @@ export default function ActivityCarousel({ activities, childName }: {
           <button
             key={activity.id}
             role="listitem"
-            onClick={() => setOpenActivity(activity)}
+            onClick={() => openWithTracking(activity)}
             className="tap-scale snap-start shrink-0 w-[240px] sm:w-[256px] text-left rounded-[20px] bg-white border border-[color:var(--mfa-border)] overflow-hidden hover:shadow-md transition"
           >
             <div className="relative aspect-[4/3] bg-[color:var(--mfa-surface-warm)]">

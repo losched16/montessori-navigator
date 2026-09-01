@@ -6,10 +6,15 @@ import type { ExploreItem } from '@/lib/explore'
 
 // Watch-row card: real video thumbnail when derivable, warm placeholder
 // otherwise. No invented durations.
-export default function VideoCard({ item }: { item: ExploreItem }) {
+export default function VideoCard({ item, onOpen }: {
+  item: ExploreItem
+  /** Analytics hook — fired on open, alongside navigation */
+  onOpen?: (item: ExploreItem) => void
+}) {
   return (
     <Link
       href={item.href || '#'}
+      onClick={() => onOpen?.(item)}
       className="tap-scale shrink-0 snap-start w-[240px] group"
       aria-label={`Watch: ${item.title}`}
     >

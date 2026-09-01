@@ -17,6 +17,8 @@ import ActivityDetailSheet from '@/components/family/ActivityDetailSheet'
 import Button from '@/components/ui/Button'
 import Chip from '@/components/ui/Chip'
 import type { ChildTab } from './ChildTabs'
+import { trackEvent } from '@/lib/analytics'
+import { getAgePlane } from '@/lib/utils'
 
 const HIGHLIGHT_ICONS: Record<GrowthHighlight['kind'], typeof Star> = {
   milestone: Star,
@@ -102,7 +104,14 @@ export default function OverviewTab({ child, devLevels, observations, milestones
             <div className="text-[13px] text-[color:var(--mfa-ink-muted)] mb-4">
               {nextActivity.category} · {nextActivity.duration}{nextActivity.ages ? ` · ${nextActivity.ages}` : ''}
             </div>
-            <Button size="md" onClick={() => setOpenActivity(nextActivity)}>
+            <Button size="md" onClick={() => {
+              setOpenActivity(nextActivity)
+              trackEvent('activity_opened', {
+                source: 'my_child_overview',
+                activity_category: nextActivity.category,
+                age_plane: getAgePlane(child.date_of_birth),
+              })
+            }}>
               Try This Activity
             </Button>
           </div>

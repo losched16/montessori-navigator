@@ -13,6 +13,8 @@ import {
 } from '@/lib/child-story'
 import BottomSheet from '@/components/ui/BottomSheet'
 import Button from '@/components/ui/Button'
+import { trackEvent } from '@/lib/analytics'
+import { getAgePlane } from '@/lib/utils'
 
 const LEVELS = [1, 2, 3, 4, 5]
 const CURRICULUM_LABELS: Record<string, string> = Object.fromEntries(
@@ -42,6 +44,13 @@ export default function GrowthTab({ child, devLevels, milestones, skills, onLeve
   const saveLevel = async (area: string, level: number) => {
     if (saving) return
     setSaving(true)
+    const previous = levelFor(area)
+    trackEvent('growth_level_updated', {
+      area,
+      previous_label: previous ? getParentLevelLabel(previous) : 'not_set',
+      new_label: getParentLevelLabel(level),
+      age_plane: getAgePlane(child.date_of_birth),
+    })
     // Same upsert the legacy Children page used — no schema changes.
     await supabase.from('child_development_levels').upsert({
       child_id: child.id, area, level,
@@ -104,7 +113,10 @@ export default function GrowthTab({ child, devLevels, milestones, skills, onLeve
             return (
               <button
                 key={area}
-                onClick={() => setEditingArea(area)}
+                onClick={() => {
+                  setEditingArea(area)
+                  trackEvent('growth_area_opened', { area, age_plane: getAgePlane(child.date_of_birth) })
+                }}
                 className="tap-scale text-left rounded-[20px] bg-white border border-[color:var(--mfa-border)] p-5 hover:shadow-md transition"
               >
                 <div className="flex items-center justify-between gap-3 mb-1">

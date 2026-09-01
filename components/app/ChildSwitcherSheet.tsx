@@ -1,11 +1,20 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Check, Plus } from 'lucide-react'
 import { useChild } from '@/lib/child-context'
-import { formatAge } from '@/lib/utils'
+import { formatAge, getAgePlane } from '@/lib/utils'
 import Avatar from '@/components/ui/Avatar'
 import BottomSheet from '@/components/ui/BottomSheet'
+import { trackEvent } from '@/lib/analytics'
+
+// Screen names for analytics — never the path with any IDs in it.
+function screenFromPath(pathname: string): string {
+  if (pathname === '/dashboard') return 'home'
+  const seg = pathname.split('/')[2] || 'unknown'
+  return seg === 'children' ? 'my_child' : seg
+}
 
 // The child-selection sheet, shared by the Home ChildSwitcher pill and the
 // My Child profile header. Backed entirely by ChildProvider state.
@@ -14,6 +23,21 @@ export default function ChildSwitcherSheet({ open, onClose }: {
   onClose: () => void
 }) {
   const { children, selectedChildId, setSelectedChildId } = useChild()
+  const pathname = usePathname()
+
+  const pick = (childId: string) => {
+    if (childId !== selectedChildId) {
+      const prev = children.find(c => c.id === selectedChildId)
+      const next = children.find(c => c.id === childId)
+      trackEvent('child_switched', {
+        source_screen: screenFromPath(pathname),
+        previous_age_plane: prev ? getAgePlane(prev.date_of_birth) : undefined,
+        new_age_plane: next ? getAgePlane(next.date_of_birth) : undefined,
+      })
+    }
+    setSelectedChildId(childId)
+    onClose()
+  }
 
   return (
     <BottomSheet open={open} onClose={onClose} title="Who are we focusing on?">
@@ -23,7 +47,7 @@ export default function ChildSwitcherSheet({ open, onClose }: {
           return (
             <button
               key={child.id}
-              onClick={() => { setSelectedChildId(child.id); onClose() }}
+              onClick={() => pick(child.id)}
               className={`tap-scale w-full flex items-center gap-3 p-3 min-h-[56px] rounded-2xl text-left ${
                 selected ? 'bg-[color:var(--mfa-purple-soft)]' : 'hover:bg-[color:var(--mfa-surface-warm)]'
               }`}

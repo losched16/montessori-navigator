@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Pencil, Trash2, MessageCircle, ChevronRight } from 'lucide-react'
 import type { SavedMemory } from '@/lib/supabase'
+import { trackEvent } from '@/lib/analytics'
 
 // One piece of saved Abigail guidance. Label editing is inline (display by
 // default, field on demand); deletion is a visible two-step action so mobile
@@ -76,6 +77,7 @@ export default function SavedGuidanceCard({ memory, threadId, onSaveLabel, onDel
           {threadId && (
             <Link
               href={`/dashboard/chat?thread=${threadId}`}
+              onClick={() => trackEvent('guidance_open_conversation_clicked')}
               className="tap-scale inline-flex items-center gap-1.5 min-h-[44px] px-3 rounded-full text-[13.5px] font-semibold text-[color:var(--mfa-purple)] hover:bg-[color:var(--mfa-purple-soft)] transition"
             >
               <MessageCircle size={15} aria-hidden="true" />

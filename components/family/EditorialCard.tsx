@@ -3,15 +3,24 @@
 import Link from 'next/link'
 import { BookOpen, ChevronRight } from 'lucide-react'
 import type { ArticleMeta } from '@/lib/articles-metadata'
+import { useChild } from '@/lib/child-context'
+import { trackEvent, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 // One learning recommendation — a single Foundation article, not a grid.
 export default function EditorialCard({ article }: { article: ArticleMeta }) {
+  const { selectedChild } = useChild()
   const category = article.categories.filter(c => c !== 'MFA' && !c.startsWith('TC '))[0] || 'Montessori'
   const minutes = article.readMinutes
+  const track = () => trackEvent('article_opened', {
+    source: 'home',
+    category,
+    age_plane: getSafeChildAnalyticsContext(selectedChild).age_plane,
+  })
 
   return (
     <Link
       href={`/dashboard/library/${article.slug}`}
+      onClick={track}
       className="tap-scale block rounded-[20px] bg-[color:var(--mfa-surface-warm)] border border-[color:var(--mfa-border)] p-6 hover:shadow-md transition group"
     >
       <div className="flex items-center gap-2 text-[11px] font-bold tracking-[0.15em] uppercase text-[color:var(--mfa-clay)] mb-2.5">

@@ -7,6 +7,7 @@ import type { SavedMemory } from '@/lib/supabase'
 import SavedGuidanceCard from '@/components/abigail/SavedGuidanceCard'
 import Button from '@/components/ui/Button'
 import Skeleton from '@/components/ui/Skeleton'
+import { useTrackView, countBucket } from '@/lib/analytics'
 
 // Saved Guidance — advice from Abigail the parent chose to keep.
 // Backed by the existing saved_memories table (route and schema unchanged).
@@ -51,6 +52,8 @@ export default function SavedGuidancePage() {
       setThreadByMessage(map)
     }
   }
+
+  useTrackView('saved_guidance_viewed', { item_count: countBucket(memories.length) }, { ready: !loading })
 
   const handleSaveLabel = async (id: string, label: string) => {
     await supabase.from('saved_memories').update({ label: label || null }).eq('id', id)

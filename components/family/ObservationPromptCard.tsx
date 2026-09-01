@@ -18,7 +18,7 @@ export default function ObservationPromptCard({ prompt }: { prompt: string }) {
       <p className="font-[family-name:var(--mfa-serif)] text-[20px] leading-snug font-medium text-[color:var(--mfa-ink)] mb-4">
         {prompt}
       </p>
-      <Button href="/dashboard/children?tab=moments&log=1" variant="secondary" size="md">
+      <Button href="/dashboard/children?tab=moments&log=1&src=home" variant="secondary" size="md">
         Log a Moment
       </Button>
     </section>

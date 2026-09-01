@@ -10,6 +10,9 @@ import type { HomeActivity } from '@/lib/family-home'
 import YouTubeEmbed from '@/components/youtube-embed'
 import ActivityDetailSheet from '@/components/family/ActivityDetailSheet'
 import AbigailMark from './AbigailMark'
+import { useChild } from '@/lib/child-context'
+import { trackEvent, getSafeChildAnalyticsContext } from '@/lib/analytics'
+import type { AbigailTopic } from '@/lib/abigail'
 
 interface AssistantMessageProps {
   content: string
@@ -20,15 +23,19 @@ interface AssistantMessageProps {
   attachments?: AbigailAttachments
   followUps?: string[]
   onSendFollowUp?: (text: string) => void
+  /** Coarse deterministic topic of the paired question (analytics only) */
+  topic?: AbigailTopic
 }
 
 // Abigail's response as a guidance document, not a chat bubble: mark on top,
 // structured markdown beneath, then connection cards and a quiet action row.
 export default function AssistantMessage({
   content, saved, onToggleSave, onAskFollowUp, childFirstName,
-  attachments, followUps, onSendFollowUp,
+  attachments, followUps, onSendFollowUp, topic,
 }: AssistantMessageProps) {
   const [openActivity, setOpenActivity] = useState<HomeActivity | null>(null)
+  const { selectedChild } = useChild()
+  const safeCtx = getSafeChildAnalyticsContext(selectedChild)
 
   // Split out [VIDEO:id] markers; text parts render as safe markdown.
   const parts = content.split(/\[VIDEO:([a-zA-Z0-9_-]+)\]/)
@@ -65,7 +72,14 @@ export default function AssistantMessage({
         {/* Something to try — activity connection */}
         {attachments?.activity && (
           <button
-            onClick={() => setOpenActivity(attachments.activity!)}
+            onClick={() => {
+              setOpenActivity(attachments.activity!)
+              trackEvent('activity_opened', {
+                source: 'abigail',
+                activity_category: attachments.activity!.category,
+                age_plane: safeCtx.age_plane,
+              })
+            }}
             className="tap-scale w-full text-left mt-4 rounded-[16px] bg-white border border-[color:var(--mfa-border)] p-3 flex items-center gap-3 hover:shadow-md transition"
           >
             <div className="relative w-[72px] h-[54px] rounded-xl overflow-hidden bg-[color:var(--mfa-surface-warm)] shrink-0">
@@ -93,6 +107,11 @@ export default function AssistantMessage({
         {attachments?.article && (
           <Link
             href={`/dashboard/library/${attachments.article.slug}`}
+            onClick={() => trackEvent('article_opened', {
+              source: 'abigail',
+              category: attachments.article!.categories.filter(c => c !== 'MFA')[0] || 'Montessori',
+              age_plane: safeCtx.age_plane,
+            })}
             className="tap-scale block mt-3 rounded-[16px] bg-[color:var(--mfa-surface-warm)] border border-[color:var(--mfa-border)] p-3.5 hover:shadow-md transition"
           >
             <span className="flex items-center gap-1.5 text-[10.5px] font-bold tracking-[0.14em] uppercase text-[color:var(--mfa-clay)] mb-1">
@@ -119,7 +138,8 @@ export default function AssistantMessage({
               {attachments.observePrompt}
             </p>
             <Link
-              href="/dashboard/children?tab=moments&log=1"
+              href="/dashboard/children?tab=moments&log=1&src=abigail"
+              onClick={() => trackEvent('abigail_log_moment_clicked', { age_plane: safeCtx.age_plane, topic })}
               className="tap-scale inline-flex items-center gap-0.5 min-h-[40px] text-[13.5px] font-semibold text-[color:var(--mfa-forest)]"
             >
               Log a Moment
@@ -145,7 +165,8 @@ export default function AssistantMessage({
           </button>
           {childFirstName && (
             <Link
-              href="/dashboard/children?tab=moments&log=1"
+              href="/dashboard/children?tab=moments&log=1&src=abigail"
+              onClick={() => trackEvent('abigail_log_moment_clicked', { age_plane: safeCtx.age_plane, topic })}
               className={`${actionButton} text-[color:var(--mfa-ink-secondary)] hover:bg-[color:var(--mfa-surface-warm)]`}
             >
               <NotebookPen size={15} aria-hidden="true" />
@@ -168,7 +189,10 @@ export default function AssistantMessage({
             {followUps.map(text => (
               <button
                 key={text}
-                onClick={() => onSendFollowUp(text)}
+                onClick={() => {
+                  trackEvent('abigail_followup_clicked', { topic, has_child: safeCtx.has_child })
+                  onSendFollowUp(text)
+                }}
                 className="tap-scale inline-flex items-center min-h-[40px] px-3.5 rounded-full border border-[color:var(--mfa-border)] bg-white text-[13.5px] font-medium text-[color:var(--mfa-purple)] hover:bg-[color:var(--mfa-purple-soft)] transition"
               >
                 {text}

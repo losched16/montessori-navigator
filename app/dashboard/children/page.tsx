@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { createClient } from '@/lib/supabase'
 import type { Observation } from '@/lib/supabase'
 import { useChild } from '@/lib/child-context'
@@ -16,6 +16,7 @@ import MomentComposer from '@/components/child/MomentComposer'
 import Toast from '@/components/ui/Toast'
 import Button from '@/components/ui/Button'
 import Skeleton from '@/components/ui/Skeleton'
+import { trackEvent, useTrackView, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 const VALID_TABS: ChildTab[] = ['overview', 'journey', 'moments', 'growth']
 
@@ -37,13 +38,26 @@ export default function MyChildPage() {
 
   const first = selectedChild?.name.trim().split(/\s+/)[0] || ''
 
-  // Initial tab (and composer) from the URL: ?tab=moments&log=1
+  // Where the composer was opened from ('home' | 'abigail' | 'my_child')
+  const composerSourceRef = useRef('my_child')
+
+  // Initial tab (and composer) from the URL: ?tab=moments&log=1&src=home
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const urlTab = params.get('tab') as ChildTab | null
     if (urlTab && VALID_TABS.includes(urlTab)) setTab(urlTab)
-    if (params.get('log') === '1') setComposerOpen(true)
+    if (params.get('log') === '1') {
+      const src = params.get('src')
+      composerSourceRef.current = src === 'home' || src === 'abigail' ? src : 'my_child'
+      setComposerOpen(true)
+      trackEvent('moment_composer_opened', { source: composerSourceRef.current })
+    }
   }, [])
+
+  useTrackView('my_child_viewed', {
+    tab,
+    ...getSafeChildAnalyticsContext(selectedChild),
+  }, { ready: !childLoading, key: tab })
 
   const changeTab = useCallback((next: ChildTab) => {
     setTab(next)
@@ -93,11 +107,22 @@ export default function MyChildPage() {
     return () => { cancelled = true }
   }, [selectedChild?.id, childLoading])
 
-  const openComposer = () => setComposerOpen(true)
+  const openComposer = () => {
+    composerSourceRef.current = 'my_child'
+    setComposerOpen(true)
+    trackEvent('moment_composer_opened', { source: 'my_child' })
+  }
 
   const handleMomentSaved = (obs: Observation) => {
     setObservations(prev => [obs, ...prev])
     setToast({ message: 'Moment saved', detail: `${first}'s journey has been updated.` })
+    // Behavior only — never the observation text
+    trackEvent('moment_logged', {
+      has_type: obs.type !== 'home_activity',
+      has_curriculum_area: !!obs.curriculum_area && obs.curriculum_area !== 'general',
+      source: composerSourceRef.current,
+      age_plane: getSafeChildAnalyticsContext(selectedChild).age_plane,
+    })
   }
 
   const handleLevelSaved = (area: string, level: number) => {

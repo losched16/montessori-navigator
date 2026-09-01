@@ -26,9 +26,11 @@ function toneFor(id: string) {
   return FALLBACK_TONES[Math.abs(h) % FALLBACK_TONES.length]
 }
 
-export default function ExploreItemCard({ item, onOpenActivity }: {
+export default function ExploreItemCard({ item, onOpenActivity, onOpen }: {
   item: ExploreItem
   onOpenActivity?: (item: ExploreItem) => void
+  /** Analytics hook — fired on any open, alongside navigation */
+  onOpen?: (item: ExploreItem) => void
 }) {
   const Icon = item.isVideo ? Play : (KIND_ICONS[item.kind] || BookOpen)
   const tone = toneFor(item.id)
@@ -80,20 +82,20 @@ export default function ExploreItemCard({ item, onOpenActivity }: {
 
   if (item.kind === 'activity') {
     return (
-      <button onClick={() => onOpenActivity?.(item)} className={classes}>
+      <button onClick={() => { onOpen?.(item); onOpenActivity?.(item) }} className={classes}>
         {inner}
       </button>
     )
   }
   if (item.external) {
     return (
-      <a href={item.href} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a href={item.href} target="_blank" rel="noopener noreferrer" onClick={() => onOpen?.(item)} className={classes}>
         {inner}
       </a>
     )
   }
   return (
-    <Link href={item.href || '#'} className={classes}>
+    <Link href={item.href || '#'} onClick={() => onOpen?.(item)} className={classes}>
       {inner}
     </Link>
   )

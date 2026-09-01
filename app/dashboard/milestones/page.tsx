@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase'
 import { getCurriculumAreaLabel } from '@/lib/utils'
 import { useChild } from '@/lib/child-context'
 import ChildSwitcher from '@/components/app/ChildSwitcher'
+import { trackEvent, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
 interface Milestone {
   id: string
@@ -68,6 +69,12 @@ export default function MilestonesPage() {
   }
 
   const toggleMilestone = async (milestoneId: string, currentAchieved: boolean) => {
+    const ms = milestones.find(m => m.id === milestoneId)
+    trackEvent('milestone_updated', {
+      achieved: !currentAchieved,
+      curriculum_area: ms?.curriculum_area,
+      age_plane: getSafeChildAnalyticsContext(selectedChild).age_plane,
+    })
     // Optimistic update
     setMilestones(prev => prev.map(m =>
       m.id === milestoneId

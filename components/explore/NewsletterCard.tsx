@@ -4,16 +4,19 @@ import type { Newsletter } from '@/lib/newsletters'
 
 // Tomorrow's Child cover card — 3:4 real cover art, issue label beneath.
 // Opens the PDF exactly as the existing newsletters system does.
-export default function NewsletterCard({ newsletter, width = 128 }: {
+export default function NewsletterCard({ newsletter, width = 128, onOpen }: {
   newsletter: Newsletter
   /** Fixed px width for carousels; 'full' fills its grid cell */
   width?: number | 'full'
+  /** Analytics hook — fired on open, alongside navigation */
+  onOpen?: (newsletter: Newsletter) => void
 }) {
   return (
     <a
       href={newsletter.pdfPath}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => onOpen?.(newsletter)}
       aria-label={`Tomorrow's Child — ${newsletter.issueLabel} (opens PDF)`}
       className={`tap-scale group ${width === 'full' ? 'block w-full' : 'shrink-0 snap-start'}`}
       style={width === 'full' ? undefined : { width }}

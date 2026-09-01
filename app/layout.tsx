@@ -27,6 +27,24 @@ export default function RootLayout({
           }}
         />
         <script async src="https://r.wdfl.co/rw.js" data-rewardful="46e3d0"></script>
+
+        {/* GA4 product analytics — loaded ONLY when a measurement ID is
+            configured. lib/analytics.ts routes all product events through
+            gtag; with no ID set, the app ships no analytics script and
+            trackEvent() is a silent no-op. */}
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+            ></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');`,
+              }}
+            />
+          </>
+        )}
       </head>
       <body>{children}</body>
     </html>
