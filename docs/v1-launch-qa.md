@@ -116,10 +116,19 @@ observation text, saved guidance content, search queries, or emails.
 
 ---
 
-## 6. Setup notes
+## 6. Setup notes (verified operational details)
 
-- Analytics is **off by default**. To enable: set `NEXT_PUBLIC_GA_MEASUREMENT_ID`
-  (a GA4 web stream ID, `G-XXXXXXXXXX`) in the production environment and
-  redeploy. Without it the app ships no analytics script and events no-op.
-- `NEXT_PUBLIC_ANALYTICS_DEBUG=1` adds console logging of every event (safe to
-  use in a staging deploy; remove for production).
+- **Production:** https://familyalliance.montessori.org — Vercel project
+  `montessori-navigator`; pushing `main` auto-deploys to Production.
+- Analytics is **off by default**. To enable:
+  1. `vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID production` (a GA4 web
+     stream ID, `G-XXXXXXXXXX`) — or add it in the Vercel dashboard
+  2. **Redeploy** (required: it's a build-time `NEXT_PUBLIC_*` var — the GA
+     script only ships on a fresh build; verify with
+     `curl -s https://familyalliance.montessori.org/ | grep googletagmanager`)
+  3. Then run the event table in §5 via GA4 DebugView
+- `NEXT_PUBLIC_ANALYTICS_DEBUG=1` adds console logging of every event (use on
+  a Preview deploy for verification; do not leave enabled in production).
+- Current state at last automated check: production runs `c718c0c`, GA4 var
+  absent, script correctly absent from served HTML — see
+  `docs/v1-launch-status.md`.
