@@ -22,6 +22,11 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
     rows: [
       { label: 'School', href: '/dashboard/schools', icon: School },
       { label: 'Notes', href: '/dashboard/notes', icon: FileText },
+    ],
+  },
+  {
+    title: 'Saved',
+    rows: [
       { label: 'Saved Guidance', href: '/dashboard/memories', icon: Bookmark },
     ],
   },
@@ -30,15 +35,15 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
     rows: [
       { label: 'At-Home Plans', href: '/dashboard/plans', icon: ClipboardList },
       { label: 'Reports', href: '/dashboard/reports', icon: BarChart3 },
-      { label: 'Home Environment', href: '/dashboard/environment', icon: HomeIcon },
+      { label: 'Montessori at Home', href: '/dashboard/environment', icon: HomeIcon },
     ],
   },
   {
     title: 'Learn',
     rows: [
-      { label: 'Library', href: '/dashboard/library', icon: BookOpen },
-      { label: "Tomorrow's Child", href: "/dashboard/library?category=Tomorrow's%20Child", icon: Newspaper },
-      { label: 'Montessori Learning Journey', href: '/dashboard/curriculum', icon: Route },
+      { label: 'Full Library', href: '/dashboard/library', icon: BookOpen },
+      { label: "Tomorrow's Child", href: '/dashboard/explore?collection=tomorrows-child', icon: Newspaper },
+      { label: 'Montessori Learning', href: '/dashboard/curriculum', icon: Route },
     ],
   },
 ]

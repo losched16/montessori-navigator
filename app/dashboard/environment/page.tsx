@@ -1,11 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { DoorOpen, Bed, UtensilsCrossed, Bath, BookOpen, TreePine, type LucideIcon } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import { useChild } from '@/lib/child-context'
 import { getAgePlane, getAgePlaneLabel } from '@/lib/utils'
-import PageBanner from '@/components/ui/PageBanner'
+import ChildSwitcher from '@/components/app/ChildSwitcher'
 import { ROOM_GUIDES, getRoomGuidesForAge, type RoomType, type RoomGuide } from '@/lib/environment-guide'
+
+// Room icons are stored as lucide names in environment-guide data; render
+// them as actual icons (previously the raw name string appeared in the tab).
+const ROOM_ICONS: Record<string, LucideIcon> = {
+  DoorOpen, Bed, UtensilsCrossed, Bath, BookOpen, TreePine,
+}
 
 import RoomHero from '@/components/environment/RoomHero'
 import QuickWins from '@/components/environment/QuickWins'
@@ -47,22 +54,23 @@ export default function EnvironmentPage() {
   const currentGuide = guides.find(g => g.room === selectedRoom) || guides[0]
 
   return (
-    <div className="max-w-3xl mx-auto pb-20 sm:pb-0">
-      <PageBanner
-        image="/images/environment/living-room-setup.jpg"
-        title="Home Environment"
-        subtitle="Design spaces that inspire independence and curiosity"
-      />
-
-      {/* Age filter badge */}
-      {selectedChild && agePlane && (
-        <div className="flex items-center gap-2 px-3 py-2 bg-warm-50 border border-warm-200 rounded-lg mb-4">
-          <span className="text-sm">👶</span>
-          <span className="text-sm text-warm-700">
-            Showing tips for <strong>{selectedChild.name}</strong> ({getAgePlaneLabel(agePlane as any)})
-          </span>
+    <div className="max-w-3xl mx-auto pb-24 sm:pb-10">
+      <div className="pt-2 mb-6">
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-1.5">
+          Montessori at Home
+        </h1>
+        <p className="text-[15px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl mb-4">
+          Prepare spaces that invite independence and concentration, room by room.
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <ChildSwitcher />
+          {selectedChild && agePlane && (
+            <span className="text-[13px] text-[color:var(--mfa-ink-muted)]">
+              Tips for {getAgePlaneLabel(agePlane as any)}
+            </span>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Room tabs - horizontal scrollable */}
       <div className="flex gap-2 overflow-x-auto pb-2 mb-6 -mx-4 px-4 scrollbar-hide snap-x snap-mandatory sm:snap-none">
@@ -70,13 +78,14 @@ export default function EnvironmentPage() {
           <button
             key={room.room}
             onClick={() => setSelectedRoom(room.room)}
-            className={`tap-scale flex items-center gap-2 px-5 py-3.5 sm:px-4 sm:py-2.5 rounded-[18px] sm:rounded-xl text-sm font-medium whitespace-nowrap min-h-[54px] sm:min-h-0 transition shrink-0 snap-start ${
+            aria-pressed={selectedRoom === room.room}
+            className={`tap-scale flex items-center gap-2 px-5 py-3.5 sm:px-4 sm:py-2.5 rounded-[16px] text-sm font-medium whitespace-nowrap min-h-[48px] transition shrink-0 snap-start ${
               selectedRoom === room.room
-                ? 'bg-warm-500 text-white shadow-sm'
-                : 'bg-white border border-gray-200 text-gray-600 hover:border-warm-300 hover:text-warm-600'
+                ? 'bg-[color:var(--mfa-purple)] text-white shadow-sm'
+                : 'bg-white border border-[color:var(--mfa-border)] text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-purple)]'
             }`}
           >
-            <span className="text-xl sm:text-lg">{room.icon}</span>
+            {(() => { const RoomIcon = ROOM_ICONS[room.icon]; return RoomIcon ? <RoomIcon size={18} aria-hidden="true" /> : null })()}
             {room.label}
           </button>
         ))}

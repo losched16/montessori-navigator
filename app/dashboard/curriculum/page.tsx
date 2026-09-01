@@ -2,24 +2,25 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { ArrowLeft, Search, Hand, Eye, BookOpen, Calculator, FlaskConical, Globe, Landmark, Sparkles, Baby, Footprints, type LucideIcon } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
-import { formatAge } from '@/lib/utils'
 import { getAllAreas, getStrandsByArea } from '@/lib/scope-sequence'
 import { useChild } from '@/lib/child-context'
+import ChildSwitcher from '@/components/app/ChildSwitcher'
 
 const AREAS = getAllAreas()
 
-const AREA_ICONS: Record<string, string> = {
-  practical_life: '🤲',
-  sensorial: '👁️',
-  language: '📖',
-  mathematics: '🔢',
-  science: '🔬',
-  geography: '🌍',
-  history: '📜',
-  cosmic_studies: '🌌',
-  infants: '👶',
-  toddlers: '🧒',
+const AREA_ICONS: Record<string, LucideIcon> = {
+  practical_life: Hand,
+  sensorial: Eye,
+  language: BookOpen,
+  mathematics: Calculator,
+  science: FlaskConical,
+  geography: Globe,
+  history: Landmark,
+  cosmic_studies: Sparkles,
+  infants: Baby,
+  toddlers: Footprints,
 }
 
 const AREA_COLORS: Record<string, string> = {
@@ -95,46 +96,33 @@ export default function CurriculumPage() {
   const totalInProgress = Object.values(areaProgress).reduce((sum, p) => sum + p.inProgress, 0)
   const totalSkills = AREAS.reduce((sum, a) => sum + a.count, 0)
 
-  return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-navy-600">Curriculum Guide</h1>
-        <p className="text-gray-500 text-sm mt-1">
-          {totalSkills} skills across {AREAS.length} curriculum areas — from the Montessori Foundation&apos;s official Scope &amp; Sequence
-        </p>
-      </div>
+  const first = children.find(c => c.id === selectedChildId)?.name.trim().split(/\s+/)[0]
 
-      {/* Child Selector */}
-      {children.length > 0 && (
-        <div className="bg-white border border-gray-100 rounded-xl p-4 mb-4">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-            <div>
-              <div className="text-xs text-gray-400 uppercase tracking-wide mb-2 sm:mb-0">Tracking progress for</div>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {children.map(child => (
-                <button
-                  key={child.id}
-                  onClick={() => setSelectedChildId(child.id)}
-                  className={`px-3 py-1.5 rounded-lg text-sm transition ${
-                    selectedChildId === child.id
-                      ? 'bg-warm-50 text-warm-700 font-medium border border-warm-300'
-                      : 'bg-gray-50 text-gray-500 border border-gray-100 hover:bg-gray-100'
-                  }`}
-                >
-                  {child.name}
-                  {child.date_of_birth && <span className="text-gray-400 ml-1">· {formatAge(child.date_of_birth)}</span>}
-                </button>
-              ))}
-            </div>
-            {selectedChildId && totalMastered > 0 && (
-              <div className="sm:ml-auto text-xs text-gray-500">
-                {totalMastered} of {totalSkills} skills mastered
-              </div>
-            )}
-          </div>
+  return (
+    <div className="max-w-[900px] mx-auto pb-24 sm:pb-10">
+      <div className="pt-2 mb-6">
+        <Link
+          href="/dashboard/children?tab=growth"
+          className="tap-scale inline-flex items-center gap-1.5 min-h-[44px] text-[14px] font-medium text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-ink)]"
+        >
+          <ArrowLeft size={16} aria-hidden="true" />
+          {first ? `${first}'s Growth` : 'Growth'}
+        </Link>
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-1.5 mt-1">
+          Montessori Learning
+        </h1>
+        <p className="text-[15px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl mb-4">
+          Explore the skills and experiences that support {first ? `${first}'s` : 'your child\'s'} development — {totalSkills.toLocaleString()} skills across {AREAS.length} areas from the Foundation&apos;s Scope &amp; Sequence.
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <ChildSwitcher />
+          {selectedChildId && totalMastered > 0 && (
+            <span className="text-[13px] text-[color:var(--mfa-ink-muted)]">
+              {totalMastered + totalInProgress} skills in motion · {totalMastered} confident
+            </span>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Info card */}
       <div className="bg-gradient-to-br from-[#f8f5ff] to-white border border-[#ede7f6] rounded-xl p-5 mb-6">
@@ -146,13 +134,14 @@ export default function CurriculumPage() {
 
       {/* Search */}
       <div className="relative mb-6">
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
+        <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[color:var(--mfa-ink-muted)] pointer-events-none" aria-hidden="true" />
         <input
-          type="text"
+          type="search"
           placeholder="Search curriculum areas..."
+          aria-label="Search curriculum areas"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+          className="w-full h-[52px] pl-11 pr-4 rounded-[16px] bg-white border border-[color:var(--mfa-border)] text-[15px] text-[color:var(--mfa-ink)] placeholder:text-[color:var(--mfa-ink-muted)] focus:ring-2 focus:ring-[color:var(--mfa-purple)] focus:border-transparent outline-none [&::-webkit-search-cancel-button]:hidden"
         />
       </div>
 
@@ -162,18 +151,21 @@ export default function CurriculumPage() {
           const strands = getStrandsByArea(area.key)
           const prog = areaProgress[area.key]
           const hasProg = prog && (prog.mastered > 0 || prog.inProgress > 0)
+          const AreaIcon = AREA_ICONS[area.key] || BookOpen
           return (
             <Link
               key={area.key}
               href={`/dashboard/curriculum/${area.key}`}
-              className="bg-white border border-gray-100 rounded-xl overflow-hidden hover:border-gray-200 hover:shadow-sm transition group"
+              className="tap-scale bg-white border border-[color:var(--mfa-border)] rounded-[16px] overflow-hidden hover:shadow-md transition group"
             >
               {/* Color bar */}
               <div className={`h-1.5 bg-gradient-to-r ${AREA_COLORS[area.key] || 'from-gray-400 to-gray-500'}`} />
 
               <div className="p-5">
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl">{AREA_ICONS[area.key] || '📋'}</span>
+                  <span className="w-10 h-10 rounded-xl bg-[color:var(--mfa-surface-sage)] text-[color:var(--mfa-forest)] inline-flex items-center justify-center shrink-0" aria-hidden="true">
+                    <AreaIcon size={20} />
+                  </span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <h3 className="text-sm font-semibold text-navy-600 group-hover:text-warm-600 transition">

@@ -1,16 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { getArticleBySlug } from '@/lib/articles'
+import { getArticleMetaBySlug, type ArticleMeta } from '@/lib/articles-metadata'
 import type { RelatedArticleRef } from '@/lib/environment-guide'
 
 export default function RelatedArticles({ articleRefs }: { articleRefs: RelatedArticleRef[] }) {
   const articles = articleRefs
     .map(ref => {
-      const article = getArticleBySlug(ref.slug)
+      const article = getArticleMetaBySlug(ref.slug)
       return article ? { article, relevance: ref.relevance } : null
     })
-    .filter(Boolean) as Array<{ article: ReturnType<typeof getArticleBySlug> & {}; relevance: string }>
+    .filter(Boolean) as Array<{ article: ArticleMeta; relevance: string }>
 
   if (articles.length === 0) return null
 

@@ -1,15 +1,12 @@
-'use client'
-
-import { useParams, useRouter } from 'next/navigation'
+// Server component: the full article corpus (lib/articles.ts) is imported
+// only here, so ~500 article bodies render server-side and never ship in
+// client bundles. Discovery surfaces use lib/articles-metadata.ts instead.
 import Link from 'next/link'
 import { getArticleBySlug, getArticlesByCategory, type Article } from '@/lib/articles'
 import YouTubeEmbed from '@/components/youtube-embed'
 
-export default function ArticlePage() {
-  const params = useParams()
-  const router = useRouter()
-  const slug = params.slug as string
-  const article = getArticleBySlug(slug)
+export default function ArticlePage({ params }: { params: { slug: string } }) {
+  const article = getArticleBySlug(params.slug)
 
   if (!article) {
     return (

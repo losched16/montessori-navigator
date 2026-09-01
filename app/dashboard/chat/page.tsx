@@ -41,11 +41,32 @@ export default function ChatPage() {
 
   useEffect(() => {
     loadThreads()
+    const params = new URLSearchParams(window.location.search)
     // Prefill from Home's Abigail card / hero links (?q=...) — never auto-send.
-    const q = new URLSearchParams(window.location.search).get('q')
+    const q = params.get('q')
     if (q) {
       setInput(q)
       inputRef.current?.focus()
+    }
+    // Deep link from Saved Guidance (?thread=...). Never trust the URL:
+    // explicitly verify the thread belongs to the authenticated parent
+    // before loading it (RLS is the backstop, this is the guarantee).
+    const threadParam = params.get('thread')
+    if (threadParam) {
+      const openOwnThread = async () => {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) return
+        const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
+        if (!parent) return
+        const { data: owned } = await supabase
+          .from('chat_threads')
+          .select('id')
+          .eq('id', threadParam)
+          .eq('parent_id', parent.id)
+          .maybeSingle()
+        if (owned) loadThread(owned.id)
+      }
+      openOwnThread()
     }
   }, [])
 

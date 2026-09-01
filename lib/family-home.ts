@@ -9,7 +9,7 @@ import type { Child } from '@/lib/supabase'
 import { getAgePlane } from '@/lib/utils'
 import { getGuideForChildAge } from '@/lib/monthly-development'
 import { ACTIVITY_PAGES } from '@/lib/seo-content'
-import { getAllArticles, type Article } from '@/lib/articles'
+import { getAllArticleMeta, type ArticleMeta } from '@/lib/articles-metadata'
 
 // ── Sensitive periods (moved unchanged from the old dashboard page) ──
 export const SENSITIVE_PERIODS: Array<{
@@ -524,8 +524,8 @@ const PLANE_ARTICLE_CATEGORIES: Record<string, string[]> = {
   '12+': ['Early Adolescence (12-15)', 'Montessori Middle School', 'Montessori Secondary / High School'],
 }
 
-export function getLearningRecommendation(child: Child | undefined): Article {
-  const sorted = getAllArticles()
+export function getLearningRecommendation(child: Child | undefined): ArticleMeta {
+  const sorted = getAllArticleMeta()
     .slice()
     .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
 

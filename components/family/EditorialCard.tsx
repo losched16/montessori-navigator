@@ -2,12 +2,12 @@
 
 import Link from 'next/link'
 import { BookOpen, ChevronRight } from 'lucide-react'
-import type { Article } from '@/lib/articles'
+import type { ArticleMeta } from '@/lib/articles-metadata'
 
 // One learning recommendation — a single Foundation article, not a grid.
-export default function EditorialCard({ article }: { article: Article }) {
+export default function EditorialCard({ article }: { article: ArticleMeta }) {
   const category = article.categories.filter(c => c !== 'MFA' && !c.startsWith('TC '))[0] || 'Montessori'
-  const minutes = Math.max(2, Math.round((article.content || '').split(/\s+/).length / 220))
+  const minutes = article.readMinutes
 
   return (
     <Link

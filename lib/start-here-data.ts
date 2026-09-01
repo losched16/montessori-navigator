@@ -135,12 +135,12 @@ export const START_HERE_FEATURES: StartHereFeature[] = [
     id: 'journey',
     icon: '✨',
     label: 'Journey',
-    href: '/dashboard/journey',
-    tagline: 'Track your family\'s progress and celebrate growth.',
+    href: '/dashboard/children?tab=journey',
+    tagline: 'Your child\'s story over time — moments, milestones and growth.',
     whatYouCanDo: [
-      'See your observation streaks, milestone counts, and curriculum progress at a glance',
+      'See meaningful events grouped by month: moments you noticed, milestones reached, skills grown confident',
       'For babies (0-36 months): access a month-by-month development guide with milestones and activities',
-      'Reflect on growth with seasonal prompts and visual activity charts',
+      'Add seasonal reflections as the year turns',
     ],
     proTip: 'This page becomes more meaningful over time. After a month of observations, you\'ll start seeing patterns you never noticed before.',
     priority: 'recommended',
@@ -353,9 +353,9 @@ export const RHYTHM_CATEGORIES: RhythmCategory[] = [
     color: 'amber',
     items: [
       {
-        action: 'Review the Journey page',
+        action: 'Review your child\'s Journey',
         feature: 'Journey',
-        href: '/dashboard/journey',
+        href: '/dashboard/children?tab=journey',
         icon: '✨',
         whyItMatters: 'Step back and see the bigger picture — how far your family has come on this path.',
       },

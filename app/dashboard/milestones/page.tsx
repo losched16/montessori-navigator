@@ -1,9 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { ArrowLeft, Star } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import { getCurriculumAreaLabel } from '@/lib/utils'
 import { useChild } from '@/lib/child-context'
+import ChildSwitcher from '@/components/app/ChildSwitcher'
 
 interface Milestone {
   id: string
@@ -23,8 +26,7 @@ const AREA_ORDER = [
 
 export default function MilestonesPage() {
   // Shared child context (Phase 2): one selected child everywhere.
-  // This page previously fetched its own children and picked the first one.
-  const { children, selectedChildId, setSelectedChildId, selectedChild } = useChild()
+  const { selectedChildId, selectedChild } = useChild()
   const [milestones, setMilestones] = useState<Milestone[]>([])
   const [filterArea, setFilterArea] = useState<string>('all')
   const [loading, setLoading] = useState(true)
@@ -34,6 +36,7 @@ export default function MilestonesPage() {
 
   useEffect(() => {
     if (!selectedChildId) return
+    setFilterArea('all')
     loadMilestones()
   }, [selectedChildId])
 
@@ -94,7 +97,6 @@ export default function MilestonesPage() {
   // Progress stats
   const totalMilestones = milestones.length
   const achievedCount = milestones.filter(m => m.achieved).length
-  const progressPct = totalMilestones > 0 ? Math.round((achievedCount / totalMilestones) * 100) : 0
 
   // Per-area progress
   const areaProgress = areas.map(area => {
@@ -108,96 +110,81 @@ export default function MilestonesPage() {
     }
   })
 
+  const first = selectedChild?.name.trim().split(/\s+/)[0]
+
   return (
-    <div className="max-w-3xl pb-20 sm:pb-0">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-xl font-bold text-navy-600">Milestones</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Track developmental achievements</p>
-        </div>
-        {children.length > 1 && (
-          <div className="flex gap-1">
-            {children.map(child => (
-              <button
-                key={child.id}
-                onClick={() => { setSelectedChildId(child.id); setFilterArea('all') }}
-                className={`px-3 py-1.5 text-sm rounded-lg transition ${
-                  selectedChildId === child.id ? 'bg-warm-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                {child.name}
-              </button>
-            ))}
-          </div>
-        )}
+    <div className="max-w-3xl mx-auto pb-24 sm:pb-10">
+      <div className="pt-2 mb-6">
+        <Link
+          href="/dashboard/children?tab=growth"
+          className="tap-scale inline-flex items-center gap-1.5 min-h-[44px] text-[14px] font-medium text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-ink)]"
+        >
+          <ArrowLeft size={16} aria-hidden="true" />
+          {first ? `${first}'s Growth` : 'Growth'}
+        </Link>
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-1.5 mt-1">
+          Milestones
+        </h1>
+        <p className="text-[15px] text-[color:var(--mfa-ink-secondary)] mb-4">
+          Developmental achievements you&apos;re noticing over time.
+        </p>
+        <ChildSwitcher />
       </div>
 
       {loading ? (
         <div className="text-center py-16 text-gray-400">Loading milestones...</div>
       ) : milestones.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="text-4xl mb-3">⭐</div>
-          <h3 className="text-lg font-semibold text-navy-600 mb-2">Set Up Milestones</h3>
-          <p className="text-sm text-gray-500 mb-4 max-w-md mx-auto">
-            Load age-appropriate Montessori milestones for {selectedChild?.name || 'your child'} to start tracking developmental progress.
+        <div className="rounded-[20px] bg-white border border-[color:var(--mfa-border)] p-10 text-center">
+          <span className="w-11 h-11 rounded-full bg-[#F8EFD9] text-[color:var(--mfa-ochre)] inline-flex items-center justify-center mb-3" aria-hidden="true">
+            <Star size={20} />
+          </span>
+          <h3 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] mb-2">Set Up Milestones</h3>
+          <p className="text-[14.5px] leading-relaxed text-[color:var(--mfa-ink-secondary)] mb-5 max-w-md mx-auto">
+            Load age-appropriate Montessori milestones for {first || 'your child'} to start celebrating developmental achievements.
           </p>
           <button
             onClick={initializeMilestones}
             disabled={initializing}
-            className="px-6 py-2.5 bg-warm-500 hover:bg-warm-600 text-white font-medium rounded-lg transition disabled:opacity-50"
+            className="tap-scale min-h-[48px] px-6 rounded-2xl bg-[color:var(--mfa-purple)] text-white text-[15px] font-semibold transition disabled:opacity-50"
           >
             {initializing ? 'Loading milestones...' : 'Load Milestones'}
           </button>
         </div>
       ) : (
         <>
-          {/* Progress overview */}
-          <div className="bg-white border border-gray-100 rounded-xl p-5 mb-6">
-            <div className="flex items-center justify-between mb-4">
+          {/* Overview — plain-language, not a completion score */}
+          <div className="bg-white border border-[color:var(--mfa-border)] rounded-[20px] p-5 mb-6">
+            <div className="flex items-center gap-2.5 mb-4">
+              <span className="w-9 h-9 rounded-full bg-[#F8EFD9] text-[color:var(--mfa-ochre)] inline-flex items-center justify-center shrink-0" aria-hidden="true">
+                <Star size={17} />
+              </span>
               <div>
-                <div className="text-2xl font-bold text-navy-600">{achievedCount}<span className="text-gray-300 text-lg">/{totalMilestones}</span></div>
-                <div className="text-xs text-gray-400">milestones achieved</div>
-              </div>
-
-              {/* Progress ring */}
-              <div className="relative w-16 h-16">
-                <svg className="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
-                  <circle cx="18" cy="18" r="15.5" fill="none" stroke="#f0f0f0" strokeWidth="3" />
-                  <circle
-                    cx="18" cy="18" r="15.5" fill="none"
-                    stroke="url(#progressGradient)"
-                    strokeWidth="3"
-                    strokeDasharray={`${progressPct} ${100 - progressPct}`}
-                    strokeLinecap="round"
-                  />
-                  <defs>
-                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#d4a843" />
-                      <stop offset="100%" stopColor="#b8922e" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-sm font-bold text-warm-700">{progressPct}%</span>
+                <div className="text-[17px] font-semibold text-[color:var(--mfa-ink)]">
+                  {achievedCount} milestone{achievedCount === 1 ? '' : 's'} reached
+                </div>
+                <div className="text-[12.5px] text-[color:var(--mfa-ink-muted)]">
+                  {totalMilestones} tracked · every child moves at their own pace
                 </div>
               </div>
             </div>
 
-            {/* Per-area mini bars */}
+            {/* Per-area mini bars (double as filters) */}
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
               {areaProgress.map(ap => (
                 <button
                   key={ap.area}
                   onClick={() => setFilterArea(filterArea === ap.area ? 'all' : ap.area)}
-                  className={`p-2 rounded-lg text-center transition ${
-                    filterArea === ap.area ? 'bg-warm-50 ring-1 ring-warm-300' : 'bg-gray-50 hover:bg-gray-100'
+                  aria-pressed={filterArea === ap.area}
+                  className={`p-2.5 rounded-xl text-center transition min-h-[56px] ${
+                    filterArea === ap.area
+                      ? 'bg-[color:var(--mfa-sage-soft)] ring-1 ring-[color:var(--mfa-sage)]'
+                      : 'bg-[color:var(--mfa-surface-warm)] hover:bg-[color:var(--mfa-surface-sage)]'
                   }`}
                 >
-                  <div className="text-xs text-gray-500 truncate mb-1">{getCurriculumAreaLabel(ap.area)}</div>
-                  <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="h-full bg-warm-400 rounded-full" style={{ width: `${ap.pct}%` }} />
+                  <div className="text-[11.5px] font-medium text-[color:var(--mfa-ink-secondary)] truncate mb-1.5">{getCurriculumAreaLabel(ap.area)}</div>
+                  <div className="h-1.5 bg-white rounded-full overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: `${ap.pct}%`, background: 'var(--mfa-sage)' }} />
                   </div>
-                  <div className="text-[10px] text-gray-400 mt-0.5">{ap.achieved}/{ap.total}</div>
                 </button>
               ))}
             </div>

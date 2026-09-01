@@ -57,23 +57,26 @@ h1, h2, h3, h4 {
   letter-spacing: -0.01em;
 }
 
-/* Bump up small text sizes for readability */
-.text-xs {
+/* Legacy readability overrides — bumped sizes and darkened grays.
+   Scoped AWAY from the parent app (.mfa-app): the MFA design system uses a
+   real semantic text hierarchy (--mfa-ink / -secondary / -muted) that these
+   rules used to flatten. School, admin and marketing surfaces keep the
+   legacy behavior unchanged. */
+.text-xs:not(.mfa-app *) {
   font-size: 0.8125rem !important;
   line-height: 1.4 !important;
 }
-.text-sm {
+.text-sm:not(.mfa-app *) {
   font-size: 0.9375rem !important;
   line-height: 1.5 !important;
 }
-.text-base {
+.text-base:not(.mfa-app *) {
   font-size: 1.0625rem !important;
   line-height: 1.6 !important;
 }
-/* Make gray text black for readability */
-.text-gray-400 { color: #1B3A4B !important; }
-.text-gray-500 { color: #1B3A4B !important; }
-.text-gray-600 { color: #1B3A4B !important; }
+.text-gray-400:not(.mfa-app *) { color: #1B3A4B !important; }
+.text-gray-500:not(.mfa-app *) { color: #1B3A4B !important; }
+.text-gray-600:not(.mfa-app *) { color: #1B3A4B !important; }
 .text-white\/60 { color: rgba(255,255,255,0.75) !important; }
 .text-white\/40 { color: rgba(255,255,255,0.6) !important; }
 

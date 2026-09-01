@@ -5,7 +5,7 @@
 import type { Child } from '@/lib/supabase'
 import { getAgePlane } from '@/lib/utils'
 import { getHomeActivities, type HomeActivity } from '@/lib/family-home'
-import { getAllArticles, type Article } from '@/lib/articles'
+import { getAllArticleMeta, type ArticleMeta } from '@/lib/articles-metadata'
 
 function firstName(name: string): string {
   return (name || '').trim().split(/\s+/)[0] || name
@@ -97,7 +97,7 @@ export interface AbigailAttachments {
   activity?: HomeActivity
   /** true when the activity is an age-plane fallback, not a keyword match */
   activityIsFallback?: boolean
-  article?: Article
+  article?: ArticleMeta
   observePrompt?: string
 }
 
@@ -134,7 +134,7 @@ export function getAttachments(question: string, child: Child | undefined): Abig
   const words = question.toLowerCase().match(/[a-z]{4,}/g) || []
   const meaningful = words.filter(w => !['what', 'should', 'about', 'with', 'that', 'this', 'have', 'does', 'when', 'they', 'their', 'from', 'your', 'some', 'much', 'every', 'time'].includes(w))
   if (meaningful.length > 0) {
-    const scored = getAllArticles()
+    const scored = getAllArticleMeta()
       .map(a => {
         const haystack = (a.title + ' ' + a.categories.join(' ')).toLowerCase()
         const score = meaningful.reduce((s, w) => s + (haystack.includes(w) ? 1 : 0), 0)

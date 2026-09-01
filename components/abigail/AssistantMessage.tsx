@@ -103,7 +103,7 @@ export default function AssistantMessage({
               {attachments.article.title}
             </span>
             <span className="text-[12px] text-[color:var(--mfa-ink-muted)]">
-              {attachments.article.author} · {Math.max(2, Math.round((attachments.article.content || '').split(/\s+/).length / 220))} min read
+              {attachments.article.author} · {attachments.article.readMinutes} min read
             </span>
           </Link>
         )}

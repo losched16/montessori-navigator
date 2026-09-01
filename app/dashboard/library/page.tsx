@@ -2,17 +2,22 @@
 
 import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
-import { getAllArticles, getAllCategories, getAllTags, type Article } from '@/lib/articles'
-import { getAllNewsletters } from '@/lib/newsletters'
+import { Search, SlidersHorizontal, Play, ChevronLeft, ChevronRight, ArrowLeft, Newspaper } from 'lucide-react'
+import { getAllArticleMeta, getAllCategories, getAllTags, type ArticleMeta } from '@/lib/articles-metadata'
 import { listLibraryResources, resourceTypeLabel } from '@/lib/resources'
 import { createClient } from '@/lib/supabase'
+import BottomSheet from '@/components/ui/BottomSheet'
+import Button from '@/components/ui/Button'
 
-// Article shape plus an optional href — DB-backed library items link to their
-// resource detail page rather than the imported-article reader.
-type LibArticle = Article & { _href?: string }
+// Full Library — the advanced browse/search layer beneath Explore.
+// All power-user behavior (search, category/tag filters, sorting,
+// pagination, DB-backed resources, ?category= deep links) is preserved.
 
-const ARTICLES = getAllArticles()
-const LATEST_NEWSLETTERS = getAllNewsletters().slice(0, 6)
+// Article-shaped row plus an optional href — DB-backed library items link to
+// their resource detail page rather than the imported-article reader.
+type LibArticle = ArticleMeta & { _href?: string }
+
+const ARTICLES = getAllArticleMeta()
 const CATEGORIES = getAllCategories()
 const TAGS = getAllTags()
 
@@ -29,12 +34,19 @@ const CATEGORY_GROUPS: Record<string, string[]> = {
 
 type SortOption = 'newest' | 'oldest' | 'title_asc' | 'title_desc'
 
+const SORT_LABELS: Record<SortOption, string> = {
+  newest: 'Newest First', oldest: 'Oldest First', title_asc: 'Title A–Z', title_desc: 'Title Z–A',
+}
+
+const selectClasses = 'w-full px-3.5 py-2.5 min-h-[48px] border border-[color:var(--mfa-border)] rounded-xl text-[15px] bg-white text-[color:var(--mfa-ink)] focus:ring-2 focus:ring-[color:var(--mfa-purple)] focus:border-transparent outline-none'
+
 export default function LibraryPage() {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [selectedTag, setSelectedTag] = useState<string>('all')
   const [sort, setSort] = useState<SortOption>('newest')
   const [page, setPage] = useState(1)
+  const [filtersOpen, setFiltersOpen] = useState(false)
   const perPage = 12
 
   // DB-backed articles flagged for the Library (added via /admin), merged in
@@ -60,7 +72,7 @@ export default function LibraryPage() {
         categories: [resourceTypeLabel(r.type)],
         tags: [],
         excerpt: r.description,
-        content: '',
+        readMinutes: 3,
         _href: `/dashboard/resources/${r.slug}`,
       } as LibArticle))))
       .catch(() => {})
@@ -85,14 +97,12 @@ export default function LibraryPage() {
     if (selectedCategory !== 'all') {
       if (selectedCategory === "Tomorrow's Child") {
         results = results.filter(a =>
-          a.categories.some(c => c === "Tomorrow's Child" || c.startsWith("TC "))
+          a.categories.some(c => c === "Tomorrow's Child" || c.startsWith('TC '))
         )
       } else {
         const groupCats = CATEGORY_GROUPS[selectedCategory]
         if (groupCats) {
-          results = results.filter(a =>
-            a.categories.some(c => groupCats.includes(c))
-          )
+          results = results.filter(a => a.categories.some(c => groupCats.includes(c)))
         } else {
           results = results.filter(a => a.categories.includes(selectedCategory))
         }
@@ -132,217 +142,213 @@ export default function LibraryPage() {
     setPage(1)
   }
 
+  const activeFilterCount = (selectedCategory !== 'all' ? 1 : 0) + (selectedTag !== 'all' ? 1 : 0) + (sort !== 'newest' ? 1 : 0)
+
+  const clearFilters = () => {
+    setSelectedCategory('all'); setSelectedTag('all'); setSort('newest'); setPage(1)
+  }
+
   const formatDate = (dateStr: string) => {
     if (!dateStr) return ''
-    const d = new Date(dateStr)
-    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+    return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
   }
 
-  const getCategoryColor = (category: string): string => {
-    if (category.includes('Parenting') || category.includes('Family Life')) return 'bg-purple-50 text-purple-600'
-    if (category.includes('Education') || category.includes('Curriculum')) return 'bg-blue-50 text-blue-600'
-    if (category.includes('Book')) return 'bg-amber-50 text-amber-600'
-    if (category.includes('Video') || category.includes('Webinar')) return 'bg-red-50 text-red-600'
-    if (category.includes('Tomorrow')) return 'bg-warm-50 text-warm-700'
-    if (category.includes('Grandparent')) return 'bg-pink-50 text-pink-600'
-    return 'bg-gray-50 text-gray-600'
-  }
+  const filterControls = (
+    <>
+      <label className="block">
+        <span className="block text-[12px] font-medium text-[color:var(--mfa-ink-secondary)] mb-1">Category</span>
+        <select
+          value={selectedCategory}
+          onChange={e => handleFilterChange(setSelectedCategory, e.target.value)}
+          className={selectClasses}
+        >
+          <option value="all">All Categories</option>
+          {Object.keys(CATEGORY_GROUPS).map(group => (
+            <option key={group} value={group}>{group}</option>
+          ))}
+        </select>
+      </label>
+      <label className="block">
+        <span className="block text-[12px] font-medium text-[color:var(--mfa-ink-secondary)] mb-1">Tag</span>
+        <select
+          value={selectedTag}
+          onChange={e => handleFilterChange(setSelectedTag, e.target.value)}
+          className={selectClasses}
+        >
+          <option value="all">All Tags</option>
+          {TAGS.map(tag => <option key={tag} value={tag}>{tag}</option>)}
+        </select>
+      </label>
+      <label className="block">
+        <span className="block text-[12px] font-medium text-[color:var(--mfa-ink-secondary)] mb-1">Sort</span>
+        <select
+          value={sort}
+          onChange={e => handleFilterChange(setSort, e.target.value as SortOption)}
+          className={selectClasses}
+        >
+          {(Object.keys(SORT_LABELS) as SortOption[]).map(s => (
+            <option key={s} value={s}>{SORT_LABELS[s]}</option>
+          ))}
+        </select>
+      </label>
+    </>
+  )
 
   return (
-    <div className="mfa-editorial">
-      {/* Header — editorial scale, true black, with serif headline */}
-      <div className="mb-8 sm:mb-10">
-        <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[color:var(--accent-warm)] mb-3">
+    <div className="max-w-[1000px] mx-auto pb-24 sm:pb-10">
+      {/* ── Header ── */}
+      <div className="pt-2 mb-6">
+        <Link
+          href="/dashboard/explore"
+          className="tap-scale inline-flex items-center gap-1.5 min-h-[44px] text-[14px] font-medium text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-ink)]"
+        >
+          <ArrowLeft size={16} aria-hidden="true" />
+          Explore
+        </Link>
+        <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[color:var(--mfa-clay)] mb-2 mt-1">
           The Montessori Foundation
         </div>
-        <h1 className="serif text-[40px] sm:text-[56px] leading-[0.95] font-bold text-[color:var(--ink)] tracking-tight">
-          Library
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[44px] leading-[1.02] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2">
+          Full Library
         </h1>
-        <p className="text-[17px] sm:text-[19px] leading-[1.45] text-[color:var(--ink-secondary)] mt-3 max-w-[560px]">
-          {ARTICLES.length.toLocaleString()} articles from the Montessori Foundation and Family Alliance.
+        <p className="text-[15.5px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-lg">
+          Search and browse the complete Montessori Foundation collection — {ARTICLES.length.toLocaleString()} articles and resources.
         </p>
       </div>
 
-      {/* Tomorrow's Child Featured Section */}
-      {selectedCategory === 'all' && !search.trim() && (
-        <div className="mb-6">
-          {/* TC Banner */}
-          <div className="bg-gradient-to-r from-navy-700 to-navy-500 rounded-[22px] sm:rounded-xl p-5 sm:p-6 mb-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-white/60 text-xs uppercase tracking-wide mb-1">Newsletter</p>
-                <h2 className="text-lg sm:text-xl font-bold text-white">Tomorrow&apos;s Child</h2>
-                <p className="text-white/70 text-sm mt-1">The Montessori Foundation&apos;s newsletter for parents &amp; educators</p>
-              </div>
-              <button
-                onClick={() => handleFilterChange(setSelectedCategory, "Tomorrow's Child")}
-                className="tap-scale hidden sm:inline-flex px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-lg transition"
-              >
-                Browse All Issues
-              </button>
-            </div>
-          </div>
-
-          {/* Newsletter Cards */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
-            {LATEST_NEWSLETTERS.map(nl => (
-              <a
-                key={nl.slug}
-                href={nl.pdfPath}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tap-scale group"
-              >
-                <div className="rounded-[14px] sm:rounded-xl overflow-hidden border border-gray-100 hover:shadow-md transition bg-white">
-                  <img
-                    src={nl.coverImage}
-                    alt={nl.title}
-                    className="w-full aspect-[3/4] object-cover object-top"
-                  />
-                </div>
-                <p className="text-xs text-gray-500 mt-1.5 text-center font-medium group-hover:text-warm-600 transition">{nl.issueLabel}</p>
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Search & Filters */}
-      <div className="bg-white border border-gray-100 rounded-xl p-4 mb-6">
-        <div className="flex flex-col sm:flex-row gap-3">
-          {/* Search */}
-          <div className="flex-1 relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
+      {/* ── Search + filters ── */}
+      <div className="mb-6 space-y-3">
+        <div className="flex gap-2.5">
+          <div className="relative flex-1">
+            <Search size={19} className="absolute left-4 top-1/2 -translate-y-1/2 text-[color:var(--mfa-ink-muted)] pointer-events-none" aria-hidden="true" />
             <input
-              type="text"
+              type="search"
               placeholder="Search articles..."
+              aria-label="Search the Library"
               value={search}
               onChange={e => handleFilterChange(setSearch, e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+              className="w-full h-[52px] pl-11 pr-4 rounded-[16px] bg-white border border-[color:var(--mfa-border)] text-[15.5px] text-[color:var(--mfa-ink)] placeholder:text-[color:var(--mfa-ink-muted)] focus:ring-2 focus:ring-[color:var(--mfa-purple)] focus:border-transparent outline-none [&::-webkit-search-cancel-button]:hidden"
             />
           </div>
-
-          {/* Category filter */}
-          <select
-            value={selectedCategory}
-            onChange={e => handleFilterChange(setSelectedCategory, e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
+          {/* Mobile: filters live in a sheet */}
+          <button
+            onClick={() => setFiltersOpen(true)}
+            aria-label={`Filters${activeFilterCount > 0 ? `, ${activeFilterCount} active` : ''}`}
+            className="tap-scale sm:hidden shrink-0 h-[52px] px-4 inline-flex items-center gap-2 rounded-[16px] bg-white border border-[color:var(--mfa-border)] text-[14px] font-medium text-[color:var(--mfa-ink-secondary)]"
           >
-            <option value="all">All Categories</option>
-            {Object.keys(CATEGORY_GROUPS).map(group => (
-              <option key={group} value={group}>{group}</option>
-            ))}
-          </select>
-
-          {/* Tag filter */}
-          <select
-            value={selectedTag}
-            onChange={e => handleFilterChange(setSelectedTag, e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
-          >
-            <option value="all">All Tags</option>
-            {TAGS.map(tag => (
-              <option key={tag} value={tag}>{tag}</option>
-            ))}
-          </select>
-
-          {/* Sort */}
-          <select
-            value={sort}
-            onChange={e => handleFilterChange(setSort, e.target.value as SortOption)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none"
-          >
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="title_asc">Title A–Z</option>
-            <option value="title_desc">Title Z–A</option>
-          </select>
+            <SlidersHorizontal size={17} aria-hidden="true" />
+            {activeFilterCount > 0 && (
+              <span className="w-5 h-5 rounded-full bg-[color:var(--mfa-purple)] text-white text-[11px] font-bold inline-flex items-center justify-center">
+                {activeFilterCount}
+              </span>
+            )}
+          </button>
         </div>
 
-        {/* Results count */}
-        <div className="mt-3 text-xs text-gray-400">
-          Showing {paginatedArticles.length} of {filteredArticles.length} articles
-          {search && <span> matching &ldquo;{search}&rdquo;</span>}
+        {/* Desktop: inline filter controls */}
+        <div className="hidden sm:grid grid-cols-3 gap-3">
+          {filterControls}
+        </div>
+
+        <div className="flex items-center justify-between text-[13px] text-[color:var(--mfa-ink-muted)]">
+          <span>
+            Showing {paginatedArticles.length} of {filteredArticles.length} articles
+            {search && <span> matching &ldquo;{search}&rdquo;</span>}
+          </span>
+          {activeFilterCount > 0 && (
+            <button onClick={clearFilters} className="tap-scale min-h-[44px] text-[13px] font-medium text-[color:var(--mfa-purple)]">
+              Clear filters
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Article Grid */}
+      {/* ── Tomorrow's Child compact shortcut (Explore has the premium row) ── */}
+      {selectedCategory === 'all' && !search.trim() && (
+        <Link
+          href="/dashboard/explore?collection=tomorrows-child"
+          className="tap-scale flex items-center gap-3.5 rounded-[16px] bg-[color:var(--mfa-surface-warm)] border border-[color:var(--mfa-border)] p-4 mb-6 hover:shadow-md transition"
+        >
+          <span className="w-9 h-9 rounded-full bg-white text-[color:var(--mfa-clay)] inline-flex items-center justify-center shrink-0" aria-hidden="true">
+            <Newspaper size={17} />
+          </span>
+          <span className="flex-1 min-w-0">
+            <span className="block text-[14.5px] font-semibold text-[color:var(--mfa-ink)]">Tomorrow&apos;s Child magazine</span>
+            <span className="block text-[12.5px] text-[color:var(--mfa-ink-secondary)]">Browse every issue in Explore</span>
+          </span>
+          <ChevronRight size={16} className="text-[color:var(--mfa-purple)] shrink-0" aria-hidden="true" />
+        </Link>
+      )}
+
+      {/* ── Article grid ── */}
       {paginatedArticles.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 mb-8">
           {paginatedArticles.map(article => (
             <Link
               key={article.slug}
-              href={(article as LibArticle)._href || `/dashboard/library/${article.slug}`}
-              className="bg-white border border-gray-100 rounded-xl p-5 hover:border-gray-200 hover:shadow-sm transition group"
+              href={article._href || `/dashboard/library/${article.slug}`}
+              className="tap-scale bg-white border border-[color:var(--mfa-border)] rounded-[16px] p-5 hover:shadow-md transition group"
             >
-              {/* Categories */}
-              <div className="flex flex-wrap gap-1.5 mb-3">
+              <div className="flex flex-wrap gap-1.5 mb-2.5">
                 {article.categories.filter(c => c !== 'MFA').slice(0, 2).map(cat => (
-                  <span key={cat} className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${getCategoryColor(cat)}`}>
+                  <span key={cat} className="px-2 py-0.5 rounded-full text-[10.5px] font-semibold bg-[color:var(--mfa-surface-sage)] text-[color:var(--mfa-forest)]">
                     {cat}
                   </span>
                 ))}
               </div>
-
-              {/* Title — serif, true black, big */}
-              <h3 className="serif text-[18px] sm:text-[20px] font-bold text-[color:var(--ink)] leading-[1.15] mb-2 group-hover:opacity-70 transition line-clamp-3 tracking-tight">
+              <h3 className="font-[family-name:var(--mfa-serif)] text-[19px] font-semibold text-[color:var(--mfa-ink)] leading-[1.18] mb-2 group-hover:opacity-75 transition line-clamp-3 tracking-tight">
                 {article.videoIds && article.videoIds.length > 0 && (
-                  <span className="inline-block mr-1.5 text-red-500 align-middle text-[12px]">▶</span>
+                  <Play size={13} className="inline-block mr-1.5 text-[color:var(--mfa-clay)] align-baseline" aria-label="Video" />
                 )}
                 {article.title}
               </h3>
-
-              {/* Excerpt */}
-              <p className="text-[14px] text-[color:var(--ink-secondary)] leading-[1.45] line-clamp-3 mb-3">
+              <p className="text-[13.5px] text-[color:var(--mfa-ink-secondary)] leading-[1.5] line-clamp-3 mb-3">
                 {article.excerpt}
               </p>
-
-              {/* Meta */}
-              <div className="flex items-center justify-between text-[11px] text-[color:var(--ink-muted)] font-medium">
-                <span>{article.author}</span>
-                <span>{formatDate(article.date)}</span>
+              <div className="flex items-center justify-between text-[11.5px] text-[color:var(--mfa-ink-muted)] font-medium">
+                <span className="truncate">{article.author}</span>
+                <span className="shrink-0 ml-2">{formatDate(article.date)}</span>
               </div>
             </Link>
           ))}
         </div>
       ) : (
-        <div className="bg-white border border-[color:var(--separator)] rounded-2xl p-16 text-center">
-          <div className="text-5xl mb-4 opacity-30">📚</div>
-          <h3 className="serif text-[24px] font-bold text-[color:var(--ink)] mb-2 tracking-tight">No articles found</h3>
-          <p className="text-[15px] text-[color:var(--ink-secondary)]">Try adjusting your search or filters</p>
+        <div className="bg-white border border-[color:var(--mfa-border)] rounded-[20px] p-12 text-center mb-8">
+          <h3 className="font-[family-name:var(--mfa-serif)] text-[22px] font-semibold text-[color:var(--mfa-ink)] mb-2">
+            No articles found
+          </h3>
+          <p className="text-[14.5px] text-[color:var(--mfa-ink-secondary)] mb-4">Try adjusting your search or filters.</p>
+          <Button variant="secondary" size="md" onClick={clearFilters}>Clear filters</Button>
         </div>
       )}
 
-      {/* Pagination */}
+      {/* ── Pagination ── */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2">
+        <nav className="flex items-center justify-center gap-2" aria-label="Pagination">
           <button
             onClick={() => setPage(p => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="Previous page"
+            className="tap-scale min-h-[44px] px-3.5 inline-flex items-center gap-1 text-[14px] font-medium border border-[color:var(--mfa-border)] rounded-xl bg-white text-[color:var(--mfa-ink-secondary)] hover:bg-[color:var(--mfa-surface-warm)] disabled:opacity-30 disabled:pointer-events-none"
           >
-            ← Prev
+            <ChevronLeft size={15} aria-hidden="true" /> Prev
           </button>
           <div className="flex gap-1">
             {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
               let pageNum: number
-              if (totalPages <= 7) {
-                pageNum = i + 1
-              } else if (page <= 4) {
-                pageNum = i + 1
-              } else if (page >= totalPages - 3) {
-                pageNum = totalPages - 6 + i
-              } else {
-                pageNum = page - 3 + i
-              }
+              if (totalPages <= 7) pageNum = i + 1
+              else if (page <= 4) pageNum = i + 1
+              else if (page >= totalPages - 3) pageNum = totalPages - 6 + i
+              else pageNum = page - 3 + i
               return (
                 <button
                   key={pageNum}
                   onClick={() => setPage(pageNum)}
-                  className={`w-8 h-8 text-sm rounded-lg transition ${
+                  aria-current={page === pageNum ? 'page' : undefined}
+                  className={`tap-scale w-11 h-11 text-[14px] rounded-xl transition ${
                     page === pageNum
-                      ? 'bg-warm-500 text-white font-medium'
-                      : 'text-gray-500 hover:bg-gray-50'
+                      ? 'bg-[color:var(--mfa-purple)] text-white font-semibold'
+                      : 'text-[color:var(--mfa-ink-secondary)] hover:bg-[color:var(--mfa-surface-warm)]'
                   }`}
                 >
                   {pageNum}
@@ -353,12 +359,26 @@ export default function LibraryPage() {
           <button
             onClick={() => setPage(p => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
-            className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="Next page"
+            className="tap-scale min-h-[44px] px-3.5 inline-flex items-center gap-1 text-[14px] font-medium border border-[color:var(--mfa-border)] rounded-xl bg-white text-[color:var(--mfa-ink-secondary)] hover:bg-[color:var(--mfa-surface-warm)] disabled:opacity-30 disabled:pointer-events-none"
           >
-            Next →
+            Next <ChevronRight size={15} aria-hidden="true" />
           </button>
-        </div>
+        </nav>
       )}
+
+      {/* Mobile filter sheet */}
+      <BottomSheet open={filtersOpen} onClose={() => setFiltersOpen(false)} title="Filters">
+        <div className="pb-4 space-y-4">
+          {filterControls}
+          <div className="flex gap-2.5 pt-1">
+            {activeFilterCount > 0 && (
+              <Button variant="secondary" size="md" onClick={clearFilters} className="flex-1">Clear</Button>
+            )}
+            <Button size="md" onClick={() => setFiltersOpen(false)} className="flex-1">Done</Button>
+          </div>
+        </div>
+      </BottomSheet>
     </div>
   )
 }

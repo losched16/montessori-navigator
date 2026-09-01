@@ -8,7 +8,7 @@
 
 import type { Child } from '@/lib/supabase'
 import { getAgePlane } from '@/lib/utils'
-import { getAllArticles, type Article } from '@/lib/articles'
+import { getAllArticleMeta, type ArticleMeta } from '@/lib/articles-metadata'
 import { getAllNewsletters, type Newsletter } from '@/lib/newsletters'
 import type { Resource } from '@/lib/resources'
 import { resourceTypeLabel } from '@/lib/resources'
@@ -57,19 +57,15 @@ const AGE_GROUP_PLANES: Array<{ cat: string; plane: string }> = [
   { cat: 'Montessori Secondary / High School', plane: '12+' },
 ]
 
-function articlePlane(a: Article): string | undefined {
+function articlePlane(a: ArticleMeta): string | undefined {
   return AGE_GROUP_PLANES.find(m => a.categories.includes(m.cat))?.plane
 }
 
-function articleCategory(a: Article): string {
+function articleCategory(a: ArticleMeta): string {
   return a.categories.filter(c => c !== 'MFA' && !c.startsWith('TC '))[0] || 'Montessori'
 }
 
-function readMinutes(a: Article): number {
-  return Math.max(2, Math.round((a.content || '').split(/\s+/).length / 220))
-}
-
-function articleToItem(a: Article): ExploreItem {
+function articleToItem(a: ArticleMeta): ExploreItem {
   const isVideo = !!a.videoIds?.length || a.categories.some(c => c === 'Video' || c === 'Webinars / MFA')
   return {
     id: `article-${a.slug}`,
@@ -80,7 +76,7 @@ function articleToItem(a: Article): ExploreItem {
     category: articleCategory(a),
     agePlane: articlePlane(a),
     publishedAt: a.date || undefined,
-    metadata: isVideo ? 'Video' : `${readMinutes(a)} min read`,
+    metadata: isVideo ? 'Video' : `${a.readMinutes} min read`,
     isVideo,
     videoThumb: a.videoIds?.length ? `https://i.ytimg.com/vi/${a.videoIds[0]}/hqdefault.jpg` : undefined,
     _search: {
@@ -163,7 +159,7 @@ function activityToItem(a: HomeActivity): ExploreItem {
  *  merged in by the page when/if they load — Explore works without them. */
 export function getStaticItems(): ExploreItem[] {
   return [
-    ...getAllArticles().map(articleToItem),
+    ...getAllArticleMeta().map(articleToItem),
     ...getAllNewsletters().map(newsletterToItem),
     ...getAllHomeActivities().map(activityToItem),
   ]
