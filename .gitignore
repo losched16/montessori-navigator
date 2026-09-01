@@ -35,4 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# generated article exports (regenerate with: npx tsx scripts/export-articles.ts)
+/exported-articles/
+
 .vercel
