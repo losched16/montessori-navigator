@@ -385,6 +385,33 @@ const OLDER_ACTIVITIES: Record<string, HomeActivity[]> = {
   ],
 }
 
+// Full flattened activity pool across every age band — used by Explore for
+// browsing/search. Same data as getHomeActivities, without the child filter.
+export function getAllHomeActivities(): HomeActivity[] {
+  const all: HomeActivity[] = []
+  ACTIVITY_PAGES.forEach(page => {
+    page.categories.forEach(cat => {
+      cat.activities.forEach((a, i) => {
+        all.push({
+          id: `${page.slug}-${cat.area}-${i}`,
+          name: a.name,
+          category: cat.areaLabel,
+          duration: DURATIONS[all.length % DURATIONS.length],
+          ages: SLUG_AGES[page.slug] || '',
+          image: AREA_IMAGES[cat.area] || AREA_IMAGES.practical_life,
+          description: a.description,
+          materials: a.materials,
+          presentation: a.presentation,
+          whyItMatters: a.whyItMatters,
+          diyTip: a.diyTip,
+        })
+      })
+    })
+  })
+  Object.values(OLDER_ACTIVITIES).forEach(set => all.push(...set))
+  return all
+}
+
 export function getHomeActivities(child: Child): HomeActivity[] {
   const ageMonths = getAgeMonths(child.date_of_birth)
   if (ageMonths === null) return OLDER_ACTIVITIES['6-9']
