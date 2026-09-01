@@ -43,19 +43,31 @@ function inline(s: string): string {
 export function renderMarkdown(input: string): string {
   if (!input) return ''
   const escaped = escapeHtml(input)
-  // Normalize Windows line endings to LF before splitting on blank lines
-  const blocks = escaped.replace(/\r\n/g, '\n').split(/\n{2,}/)
+  // Normalize Windows line endings to LF, force a block break before any
+  // heading line, then split on blank lines.
+  const blocks = escaped
+    .replace(/\r\n/g, '\n')
+    .replace(/\n(#{1,6}\s)/g, '\n\n$1')
+    .split(/\n{2,}/)
   const html: string[] = []
 
-  for (const rawBlock of blocks) {
+  // Queue instead of plain loop: a heading on the first line of a multi-line
+  // block (common in LLM output — "## Try this\nDo the thing") is emitted as
+  // a heading and the remainder re-queued for normal block processing.
+  const queue = [...blocks]
+  while (queue.length > 0) {
+    const rawBlock = queue.shift()!
     const block = rawBlock.trim()
     if (!block) continue
 
     // Headings: # / ## / ### / #### / ##### / ######
-    const headingMatch = block.match(/^(#{1,6})\s+(.+)$/)
-    if (headingMatch && !block.includes('\n')) {
+    const firstLine = block.split('\n', 1)[0]
+    const headingMatch = firstLine.match(/^(#{1,6})\s+(.+)$/)
+    if (headingMatch) {
       const level = headingMatch[1].length
       html.push(`<h${level}>${inline(headingMatch[2])}</h${level}>`)
+      const rest = block.slice(firstLine.length).trim()
+      if (rest) queue.unshift(rest)
       continue
     }
 

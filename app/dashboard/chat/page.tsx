@@ -1,8 +1,17 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { createClient } from '@/lib/supabase'
-import YouTubeEmbed from '@/components/youtube-embed'
+import { useChild } from '@/lib/child-context'
+import { getAttachments, getFollowUps, classifyTopic } from '@/lib/abigail'
+import AbigailHeader from '@/components/abigail/AbigailHeader'
+import AbigailEmptyState from '@/components/abigail/AbigailEmptyState'
+import AssistantMessage from '@/components/abigail/AssistantMessage'
+import ChatComposer from '@/components/abigail/ChatComposer'
+import ConversationRail from '@/components/abigail/ConversationRail'
+import ConversationHistorySheet, { type ThreadSummary } from '@/components/abigail/ConversationHistorySheet'
+import AbigailMark from '@/components/abigail/AbigailMark'
+import Toast from '@/components/ui/Toast'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -12,24 +21,27 @@ interface Message {
 }
 
 export default function ChatPage() {
+  const { selectedChild, selectedChildId } = useChild()
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [threadId, setThreadId] = useState<string | null>(null)
-  const [threads, setThreads] = useState<Array<{ id: string; title: string; created_at: string }>>([])
-  const [showThreads, setShowThreads] = useState(false)
-  const [showSaveTip, setShowSaveTip] = useState(false)
+  const [threads, setThreads] = useState<ThreadSummary[]>([])
+  const [historyOpen, setHistoryOpen] = useState(false)
+  const [failedMessage, setFailedMessage] = useState<string | null>(null)
+  const [toast, setToast] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
+  // 'auto' for thread loads (no jarring animated scroll through history),
+  // 'smooth' for new messages.
+  const scrollBehaviorRef = useRef<ScrollBehavior>('auto')
   const supabase = createClient()
+
+  const childFirst = selectedChild?.name.trim().split(/\s+/)[0]
 
   useEffect(() => {
     loadThreads()
-    // Show save tip for first-time users
-    if (!localStorage.getItem('montessori_save_tip_dismissed')) {
-      setShowSaveTip(true)
-    }
-    // Prefill from Home's Abigail card / hero links (?q=...)
+    // Prefill from Home's Abigail card / hero links (?q=...) — never auto-send.
     const q = new URLSearchParams(window.location.search).get('q')
     if (q) {
       setInput(q)
@@ -38,8 +50,9 @@ export default function ChatPage() {
   }, [])
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+    messagesEndRef.current?.scrollIntoView({ behavior: scrollBehaviorRef.current })
+    scrollBehaviorRef.current = 'smooth'
+  }, [messages, loading])
 
   const loadThreads = async () => {
     const { data: { user } } = await supabase.auth.getUser()
@@ -85,74 +98,73 @@ export default function ChatPage() {
         }
       }
 
+      scrollBehaviorRef.current = 'auto'
       setMessages(msgs)
       setThreadId(id)
-      setShowThreads(false)
+      setFailedMessage(null)
     }
   }
 
-  const startNewChat = () => {
+  const startNewChat = useCallback(() => {
     setMessages([])
     setThreadId(null)
-    setShowThreads(false)
+    setFailedMessage(null)
     inputRef.current?.focus()
-  }
+  }, [])
 
-  const handleSend = async () => {
-    if (!input.trim() || loading) return
+  const send = async (text: string, opts: { echo?: boolean } = {}) => {
+    const userMessage = text.trim()
+    if (!userMessage || loading) return
 
-    const userMessage = input.trim()
-    setInput('')
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }])
+    setFailedMessage(null)
+    const history = messages.slice(-6).map(m => ({ role: m.role, content: m.content }))
+    if (opts.echo !== false) {
+      setMessages(prev => [...prev, { role: 'user', content: userMessage }])
+    }
     setLoading(true)
 
     try {
-      const conversationHistory = messages.slice(-6).map(m => ({
-        role: m.role,
-        content: m.content,
-      }))
-
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: userMessage,
           threadId,
-          conversationHistory,
+          conversationHistory: history,
+          childId: selectedChildId || undefined,
         }),
       })
-
       const data = await res.json()
 
       if (data.error) {
-        setMessages(prev => [...prev, { role: 'assistant', content: 'I had trouble responding. Please try again.' }])
+        setFailedMessage(userMessage)
       } else {
         setMessages(prev => [...prev, { role: 'assistant', content: data.message, id: data.messageId || undefined }])
         if (data.threadId && !threadId) {
           setThreadId(data.threadId)
           loadThreads()
         }
+        // One-time gentle save tip after the first answer
+        if (!localStorage.getItem('montessori_save_tip_dismissed')) {
+          localStorage.setItem('montessori_save_tip_dismissed', 'true')
+          setToast('Helpful? Save guidance you want to return to.')
+        }
       }
-    } catch (error) {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }])
+    } catch {
+      setFailedMessage(userMessage)
     } finally {
       setLoading(false)
     }
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSend()
-    }
+  const handleSend = () => {
+    const text = input
+    setInput('')
+    if (inputRef.current) inputRef.current.style.height = 'auto'
+    send(text)
   }
 
-  const dismissSaveTip = () => {
-    setShowSaveTip(false)
-    localStorage.setItem('montessori_save_tip_dismissed', 'true')
-  }
-
-  const toggleSaveMemory = async (msgIndex: number) => {
+  const toggleSaveGuidance = async (msgIndex: number) => {
     const msg = messages[msgIndex]
     if (!msg || msg.role !== 'assistant') return
 
@@ -162,213 +174,140 @@ export default function ChatPage() {
     if (!parent) return
 
     if (msg.saved) {
-      // Unsave
       if (msg.id) {
         await supabase.from('saved_memories').delete().eq('parent_id', parent.id).eq('message_id', msg.id)
       }
       setMessages(prev => prev.map((m, i) => i === msgIndex ? { ...m, saved: false } : m))
     } else {
-      // Save
       await supabase.from('saved_memories').insert({
         parent_id: parent.id,
         message_id: msg.id || null,
         content: msg.content,
       })
       setMessages(prev => prev.map((m, i) => i === msgIndex ? { ...m, saved: true } : m))
+      setToast('Guidance saved')
     }
   }
 
-  const renderMessageContent = (content: string) => {
-    const parts = content.split(/\[VIDEO:([a-zA-Z0-9_-]+)\]/)
-    if (parts.length === 1) return content
-    return parts.map((part, i) => {
-      if (i % 2 === 1) {
-        return <div key={i} className="my-3"><YouTubeEmbed videoId={part} /></div>
-      }
-      return part ? <span key={i}>{part}</span> : null
+  // Deterministic attachments per assistant message, keyed off the paired
+  // user question. Recomputed only when the conversation or child changes.
+  const attachmentsByIndex = useMemo(() => {
+    return messages.map((m, i) => {
+      if (m.role !== 'assistant') return undefined
+      const question = [...messages.slice(0, i)].reverse().find(x => x.role === 'user')?.content
+      if (!question) return undefined
+      return getAttachments(question, selectedChild)
     })
-  }
+  }, [messages, selectedChild?.id])
 
-  const suggestedQuestions = [
-    "What activities should we try this week?",
-    "How do I handle tantrums the Montessori way?",
-    "What practical life activities work for a 3-year-old?",
-    "How do I set up a reading corner at home?",
-    "My child won't focus on activities. What should I do?",
-    "How do I explain Montessori to my partner?",
-  ]
+  const lastAssistantIndex = messages.map(m => m.role).lastIndexOf('assistant')
+  const lastUserMessage = [...messages].reverse().find(m => m.role === 'user')?.content
+  const followUps = lastUserMessage && !loading
+    ? getFollowUps(classifyTopic(lastUserMessage), childFirst)
+    : []
+
+  const focusComposer = () => inputRef.current?.focus()
 
   return (
     <div className="flex h-[calc(100vh-3.5rem-4rem)] sm:h-[calc(100vh-3.5rem)] -m-4 sm:-m-6">
-      {/* Thread sidebar - desktop */}
-      <div className={`${showThreads ? 'block' : 'hidden'} sm:block w-64 border-r border-gray-100 bg-white flex-shrink-0 overflow-y-auto`}>
-        <div className="p-3">
-          <button
-            onClick={startNewChat}
-            className="w-full py-2 px-3 bg-warm-500 hover:bg-warm-600 text-white text-sm font-medium rounded-lg transition"
-          >
-            + New Conversation
-          </button>
-        </div>
-        <div className="px-3 pb-3 space-y-0.5">
-          {threads.map(thread => (
-            <button
-              key={thread.id}
-              onClick={() => loadThread(thread.id)}
-              className={`w-full text-left px-3 py-2 rounded-lg text-sm truncate transition ${
-                threadId === thread.id
-                  ? 'bg-warm-50 text-warm-700'
-                  : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              {thread.title || 'Untitled'}
-            </button>
-          ))}
-          {threads.length === 0 && (
-            <p className="text-xs text-gray-400 px-3 py-2">No conversations yet</p>
-          )}
-        </div>
-      </div>
+      <ConversationRail
+        threads={threads}
+        activeThreadId={threadId}
+        onSelect={loadThread}
+        onNew={startNewChat}
+      />
 
-      {/* Chat area */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Mobile thread toggle */}
-        <div className="sm:hidden flex items-center gap-2 p-3 border-b border-gray-100 bg-white">
-          <button
-            onClick={() => setShowThreads(!showThreads)}
-            className="text-sm text-gray-500 hover:text-gray-700"
-          >
-            ☰ Chats
-          </button>
-          <button onClick={startNewChat} className="ml-auto text-sm text-warm-600 font-medium">
-            + New
-          </button>
-        </div>
+      <div className="flex-1 flex flex-col min-w-0 bg-[color:var(--mfa-canvas)]">
+        <AbigailHeader
+          hasMessages={messages.length > 0}
+          onHistory={() => setHistoryOpen(true)}
+          onNewConversation={startNewChat}
+        />
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-          {messages.length === 0 && !loading && (
-            <div className="flex flex-col items-center justify-center h-full text-center px-4">
-              <div className="text-4xl mb-3">🌿</div>
-              <h2 className="text-lg font-semibold text-navy-600 mb-1">Abigail</h2>
-              <p className="text-sm text-gray-500 mb-6 max-w-md">
-                Your AI-powered Montessori guide. Ask me anything about parenting, curriculum, child development, or setting up your home environment.
-              </p>
-              {/* Mobile: 3×2 grid of big colored tiles */}
-              <div className="grid grid-cols-2 gap-3 w-full max-w-lg sm:hidden">
-                {suggestedQuestions.slice(0, 6).map((q, i) => {
-                  const bgColors = ['bg-warm-50', 'bg-teal-50', 'bg-amber-50', 'bg-violet-50', 'bg-emerald-50', 'bg-sky-50']
-                  return (
-                    <button
-                      key={i}
-                      onClick={() => { setInput(q); inputRef.current?.focus() }}
-                      className={`tap-scale text-left p-4 text-sm text-gray-600 ${bgColors[i % bgColors.length]} border border-gray-100 rounded-[22px] min-h-[100px] flex items-center hover:border-warm-300 hover:text-warm-600 transition`}
-                    >
-                      {q}
-                    </button>
-                  )
-                })}
-              </div>
-              {/* Desktop: 2-col compact grid */}
-              <div className="hidden sm:grid grid-cols-2 gap-2 w-full max-w-lg">
-                {suggestedQuestions.map((q, i) => (
-                  <button
+        {/* Conversation */}
+        <div className="flex-1 overflow-y-auto">
+          {messages.length === 0 && !loading ? (
+            <AbigailEmptyState
+              child={selectedChild}
+              onPickPrompt={(text) => { setInput(text); inputRef.current?.focus() }}
+              onHistory={() => setHistoryOpen(true)}
+              hasThreads={threads.length > 0}
+            />
+          ) : (
+            <div className="max-w-[800px] mx-auto px-4 sm:px-6 py-5 space-y-6">
+              {messages.map((msg, i) => (
+                msg.role === 'user' ? (
+                  <div key={i} className="flex justify-end">
+                    <div className="max-w-[78%] rounded-[20px] rounded-br-md bg-[color:var(--mfa-purple)] text-white px-4 py-3 text-[15px] leading-relaxed whitespace-pre-wrap">
+                      {msg.content}
+                    </div>
+                  </div>
+                ) : (
+                  <AssistantMessage
                     key={i}
-                    onClick={() => { setInput(q); inputRef.current?.focus() }}
-                    className="text-left p-3 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg hover:border-warm-300 hover:text-warm-600 transition"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+                    content={msg.content}
+                    saved={!!msg.saved}
+                    onToggleSave={() => toggleSaveGuidance(i)}
+                    onAskFollowUp={focusComposer}
+                    childFirstName={childFirst}
+                    attachments={attachmentsByIndex[i]}
+                    followUps={i === lastAssistantIndex ? followUps : undefined}
+                    onSendFollowUp={(text) => send(text)}
+                  />
+                )
+              ))}
 
-          {messages.map((msg, i) => (
-            <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[85%] sm:max-w-[70%] rounded-2xl px-4 py-3 ${
-                msg.role === 'user'
-                  ? 'bg-warm-500 text-white'
-                  : 'bg-white border border-gray-100 text-gray-700'
-              }`}>
-                <div className={`text-sm leading-relaxed whitespace-pre-wrap ${
-                  msg.role === 'assistant' ? 'prose-navigator' : ''
-                }`}>
-                  {msg.role === 'assistant' ? renderMessageContent(msg.content) : msg.content}
+              {loading && (
+                <div className="flex items-center gap-3">
+                  <AbigailMark size={28} />
+                  <span className="text-[14px] text-[color:var(--mfa-ink-muted)] animate-pulse">
+                    Abigail is thinking...
+                  </span>
                 </div>
-                {msg.role === 'assistant' && (
-                  <div className="mt-3 pt-2 border-t border-gray-100">
-                    {/* First-time callout - shown once on the first assistant message */}
-                    {showSaveTip && i === messages.findIndex(m => m.role === 'assistant') && (
-                      <div className="mb-2 p-2.5 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2">
-                        <span className="text-amber-500 mt-0.5 shrink-0">💡</span>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs text-amber-800 leading-relaxed">
-                            <span className="font-semibold">Tip:</span> Found something helpful? Tap <span className="font-semibold">Save to Memories</span> below any response to keep it. Your saved memories appear in the Memories section and help your Guide give better advice over time.
-                          </p>
-                        </div>
-                        <button onClick={dismissSaveTip} className="text-amber-400 hover:text-amber-600 text-sm shrink-0 leading-none mt-0.5">✕</button>
-                      </div>
-                    )}
+              )}
+
+              {failedMessage && !loading && (
+                <div className="flex gap-3">
+                  <AbigailMark size={28} className="mt-0.5 opacity-50" />
+                  <div className="rounded-[16px] bg-white border border-[color:var(--mfa-border)] p-4">
+                    <p className="text-[14.5px] text-[color:var(--mfa-ink)] mb-2.5">
+                      I couldn&apos;t answer that just now. Please try again.
+                    </p>
                     <button
-                      onClick={() => toggleSaveMemory(i)}
-                      className={`w-full flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-medium transition ${
-                        msg.saved
-                          ? 'text-amber-700 bg-amber-50 border border-amber-200 hover:bg-amber-100'
-                          : 'text-gray-500 bg-gray-50 border border-gray-150 hover:bg-warm-50 hover:text-warm-600 hover:border-warm-300'
-                      }`}
+                      onClick={() => send(failedMessage, { echo: false })}
+                      className="tap-scale inline-flex items-center min-h-[44px] px-4 rounded-full bg-[color:var(--mfa-purple-soft)] text-[14px] font-semibold text-[color:var(--mfa-purple)]"
                     >
-                      {msg.saved ? '★ Saved to Memories' : '☆ Save to Memories'}
+                      Try Again
                     </button>
                   </div>
-                )}
-              </div>
-            </div>
-          ))}
-
-          {loading && (
-            <div className="flex justify-start">
-              <div className="bg-white border border-gray-100 rounded-2xl px-4 py-3">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <div className="w-2 h-2 bg-warm-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
-              </div>
+              )}
+
+              <div ref={messagesEndRef} />
             </div>
           )}
-
-          <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <div className="border-t border-gray-100 bg-white p-3">
-          <div className="flex items-end gap-2 max-w-3xl mx-auto">
-            <textarea
-              ref={inputRef}
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Ask about Montessori parenting, curriculum, activities..."
-              rows={1}
-              className="flex-1 resize-none px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none max-h-32"
-              style={{ minHeight: '42px' }}
-              onInput={(e) => {
-                const target = e.target as HTMLTextAreaElement
-                target.style.height = 'auto'
-                target.style.height = Math.min(target.scrollHeight, 128) + 'px'
-              }}
-            />
-            <button
-              onClick={handleSend}
-              disabled={!input.trim() || loading}
-              className="tap-scale px-5 py-3.5 sm:px-4 sm:py-2.5 bg-warm-500 hover:bg-warm-600 text-white rounded-[18px] sm:rounded-xl transition disabled:opacity-40 disabled:hover:bg-warm-500 min-h-[54px] sm:min-h-0"
-            >
-              <span className="text-sm font-medium">Send</span>
-            </button>
-          </div>
-        </div>
+        <ChatComposer
+          ref={inputRef}
+          value={input}
+          onChange={setInput}
+          onSend={handleSend}
+          disabled={loading}
+          childName={childFirst}
+        />
       </div>
+
+      <ConversationHistorySheet
+        open={historyOpen}
+        onClose={() => setHistoryOpen(false)}
+        threads={threads}
+        activeThreadId={threadId}
+        onSelect={loadThread}
+        onNew={startNewChat}
+      />
+
+      <Toast message={toast} onDismiss={() => setToast(null)} />
     </div>
   )
 }

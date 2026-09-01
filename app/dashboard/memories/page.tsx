@@ -59,16 +59,16 @@ export default function MemoriesPage() {
     <div className="max-w-3xl mx-auto pb-20 sm:pb-0">
       <PageBanner
         image="/images/environment/reading-nook.jpg"
-        title="Saved Memories"
-        subtitle="Guidance from Abigail, saved for reference"
+        title="Saved Guidance"
+        subtitle="Advice from Abigail you've chosen to keep."
       />
 
       {memories.length === 0 ? (
         <div className="bg-white border border-gray-100 rounded-[22px] sm:rounded-xl p-12 text-center">
           <div className="text-3xl mb-3">💭</div>
-          <h3 className="font-medium text-navy-600 mb-1">No saved memories yet</h3>
+          <h3 className="font-medium text-navy-600 mb-1">No saved guidance yet</h3>
           <p className="text-sm text-gray-500 max-w-sm mx-auto">
-            When Abigail gives you advice you want to keep, tap the star icon on the message to save it here.
+            When Abigail gives you advice you want to keep, tap Save Guidance under the response to keep it here.
           </p>
         </div>
       ) : (

@@ -22,7 +22,7 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
     rows: [
       { label: 'School', href: '/dashboard/schools', icon: School },
       { label: 'Notes', href: '/dashboard/notes', icon: FileText },
-      { label: 'Memories', href: '/dashboard/memories', icon: Bookmark },
+      { label: 'Saved Guidance', href: '/dashboard/memories', icon: Bookmark },
     ],
   },
   {

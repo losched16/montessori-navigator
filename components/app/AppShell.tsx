@@ -49,6 +49,52 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
+        /* Abigail assistant responses — safe markdown from renderMarkdown().
+           "## Try this"-style headings become quiet section eyebrows so the
+           guidance reads as a structured card, not a wall of chat text. */
+        .abigail-md {
+          font-size: 15.5px;
+          line-height: 1.65;
+          color: var(--mfa-ink);
+          overflow-wrap: break-word;
+        }
+        .abigail-md p { margin: 0 0 0.85em; }
+        .abigail-md p:last-child { margin-bottom: 0; }
+        .abigail-md h1, .abigail-md h2, .abigail-md h3, .abigail-md h4 {
+          font-size: 11.5px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: var(--mfa-clay);
+          margin: 1.5em 0 0.5em;
+        }
+        .abigail-md strong { font-weight: 650; color: var(--mfa-ink); }
+        .abigail-md em { font-style: italic; }
+        .abigail-md ul, .abigail-md ol { margin: 0 0 0.85em; padding-left: 1.3em; }
+        .abigail-md ul { list-style: disc; }
+        .abigail-md ol { list-style: decimal; }
+        .abigail-md li { margin-bottom: 0.35em; }
+        .abigail-md a {
+          color: var(--mfa-purple);
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+        .abigail-md blockquote {
+          margin: 0.85em 0;
+          padding-left: 0.9em;
+          border-left: 3px solid var(--mfa-sage);
+          color: var(--mfa-ink-secondary);
+          font-style: italic;
+        }
+        .abigail-md code {
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 0.88em;
+          background: var(--mfa-surface-warm);
+          padding: 0.1em 0.35em;
+          border-radius: 4px;
+        }
+
         .mfa-parent {
           --ink: #1d1d1f;
           --ink-secondary: #6e6e73;

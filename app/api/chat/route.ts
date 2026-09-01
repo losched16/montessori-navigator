@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { message, threadId, conversationHistory } = await request.json()
+    const { message, threadId, conversationHistory, childId } = await request.json()
 
     // Get parent
     const { data: parent } = await supabase
@@ -43,8 +43,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Could not load family context' }, { status: 500 })
     }
 
+    // Selected child: childId is only a lookup key — honor it solely when it
+    // matches a child already loaded in this parent's own family context.
+    const selectedChildId = childId && (context.children || []).some((c: any) => c.id === childId)
+      ? childId
+      : null
+
     // Generate AI response
-    const response = await generateChatResponse(message, context, conversationHistory || [])
+    const response = await generateChatResponse(message, context, conversationHistory || [], selectedChildId)
 
     // Save messages to thread
     let currentThreadId = threadId

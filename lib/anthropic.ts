@@ -175,7 +175,7 @@ function formatObservation(obs: any): string {
   return parts.join('\n')
 }
 
-function buildSystemPrompt(context: FamilyContext): string {
+function buildSystemPrompt(context: FamilyContext, selectedChildId?: string | null): string {
   let childrenSection = ''
   if (context.children && context.children.length > 0) {
     childrenSection = `\nCHILDREN IN THIS FAMILY (${context.children.length}):\n` +
@@ -237,6 +237,17 @@ function buildSystemPrompt(context: FamilyContext): string {
   else if (expLevel === 'experienced') adaptationGuide = `This parent is EXPERIENCED. Speak as a peer. Reference specific materials and progressions. Discuss nuances. Offer fresh perspectives.`
   else if (expLevel === 'trained') adaptationGuide = `This parent is TRAINED (certified guide). Speak as a colleague. Focus on their specific situation. Analyze observation patterns. Acknowledge expertise.`
 
+  // Selected child: the app passes the currently selected child's id so
+  // Abigail knows who "he/she/they" most likely refers to. Validated against
+  // this parent's own children server-side — never trusted client metadata.
+  let selectedChildSection = ''
+  const selectedChild = selectedChildId
+    ? (context.children || []).find((c: any) => c.id === selectedChildId)
+    : undefined
+  if (selectedChild) {
+    selectedChildSection = `\nCURRENTLY SELECTED CHILD: ${selectedChild.name} (${formatAge(selectedChild.date_of_birth)}). Unless the parent clearly refers to a different child, assume questions are about ${selectedChild.name} and tailor guidance to their age and context.`
+  }
+
   const commStyle = context.parent.communication_style || ''
   let styleGuide = ''
   if (commStyle === 'gentle') styleGuide = `Style: GENTLE. Lead with validation. Frame suggestions as invitations. "You might try" rather than "you should."`
@@ -261,6 +272,7 @@ Experience: ${expLevel || 'Not specified'} | Context: ${context.parent.education
 ${adaptationGuide}
 ${styleGuide}
 ${Object.keys(context.parentPreferences).length > 0 ? `\nLEARNED PREFERENCES:\n${Object.entries(context.parentPreferences).map(([k,v])=>`- ${k}: ${v}`).join('\n')}` : ''}
+${selectedChildSection}
 ${context.memorySummary ? `\nFAMILY CONTEXT (previous conversations):\n${context.memorySummary}` : ''}
 ${context.savedMemories?.length ? `\nPARENT'S SAVED MEMORIES (${context.savedMemories.length} items the parent chose to save — these are important to them):\n${context.savedMemories.map(m => `- ${m.label ? `[${m.label}] ` : ''}${m.content.substring(0, 200)}`).join('\n')}\n\nThese saved memories reflect what the parent found most valuable. Reference them naturally when relevant.` : ''}
 ${childrenSection}
@@ -321,7 +333,24 @@ NEVER:
 - Give medical advice
 
 RESPONSE FORMAT:
-Warm prose. Conversational, not clinical. Simple questions get simple answers. Complex questions get structured responses (but no headers/bullets unless asked).
+Lead with a direct answer to the question in 1-3 short paragraphs — the parent should know what to do before they scroll. Don't repeat the question back, don't open with generic disclaimers, and don't give an academic Montessori lecture unless asked.
+
+Default target length is roughly 150-350 words. Simple questions get shorter answers; genuinely complex ones may run longer.
+
+Use markdown for structure: short paragraphs, **bold** for key phrases, bullets only where they genuinely help (max 3-5 recommendations). When your answer includes a concrete action, use these section headings so the app can present them clearly:
+
+## Try this
+One concrete action the parent can take today.
+
+## Why it helps
+A brief, plain-language Montessori explanation.
+
+## What to notice
+One observation cue for what to watch next.
+
+Not every answer needs these sections — a simple factual question deserves a simple answer, and conversational follow-ups should stay conversational. Never force the template.
+
+Speak with appropriate uncertainty about a child you cannot see: prefer "may," "could," "one possibility," "you might notice" over definitive diagnoses like "this means" or "the cause is." Plain language first, Montessori terminology second (e.g. "At this age, children are often especially sensitive to order — Montessori calls this a sensitive period for order").
 
 End EVERY response with:
 MEMORY_SUGGESTIONS:
@@ -333,10 +362,11 @@ Only include suggestions with confidence > 0.65. Keep minimal and high-signal.`
 export async function generateChatResponse(
   userMessage: string,
   context: FamilyContext,
-  conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }> = []
+  conversationHistory: Array<{ role: 'user' | 'assistant'; content: string }> = [],
+  selectedChildId?: string | null
 ): Promise<ChatResponse> {
   try {
-    const systemPrompt = buildSystemPrompt(context)
+    const systemPrompt = buildSystemPrompt(context, selectedChildId)
     const messages = [
       ...conversationHistory.slice(-6),
       { role: 'user' as const, content: userMessage }
