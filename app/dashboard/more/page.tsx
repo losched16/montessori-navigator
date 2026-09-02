@@ -85,7 +85,7 @@ export default function MorePage() {
   return (
     <div className="max-w-[640px] mx-auto pb-24 sm:pb-10">
       <div className="pt-2 pb-6">
-        <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[42px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[42px] leading-[1.05] font-semibold text-[color:var(--mfa-navy)] tracking-tight">
           Menu
         </h1>
         <p className="text-[15px] text-[color:var(--mfa-ink-secondary)] mt-1.5">

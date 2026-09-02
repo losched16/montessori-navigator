@@ -39,7 +39,7 @@ const SORT_LABELS: Record<SortOption, string> = {
   newest: 'Newest First', oldest: 'Oldest First', title_asc: 'Title A–Z', title_desc: 'Title Z–A',
 }
 
-const selectClasses = 'w-full px-3.5 py-2.5 min-h-[48px] border border-[color:var(--mfa-border)] rounded-xl text-[15px] bg-white text-[color:var(--mfa-ink)] focus:ring-2 focus:ring-[color:var(--mfa-purple)] focus:border-transparent outline-none'
+const selectClasses = 'w-full px-3.5 py-2.5 min-h-[48px] border border-[color:var(--mfa-border)] rounded-xl text-[15px] bg-white text-[color:var(--mfa-ink)] focus:ring-2 focus:ring-[color:var(--mfa-navy)] focus:border-transparent outline-none'
 
 export default function LibraryPage() {
   const [search, setSearch] = useState('')
@@ -209,7 +209,7 @@ export default function LibraryPage() {
         <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[color:var(--mfa-clay)] mb-2 mt-1">
           The Montessori Foundation
         </div>
-        <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[44px] leading-[1.02] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[44px] leading-[1.02] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-2">
           Full Library
         </h1>
         <p className="text-[15.5px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-lg">
@@ -228,7 +228,7 @@ export default function LibraryPage() {
               aria-label="Search the Library"
               value={search}
               onChange={e => handleFilterChange(setSearch, e.target.value)}
-              className="w-full h-[52px] pl-11 pr-4 rounded-[16px] bg-white border border-[color:var(--mfa-border)] text-[15.5px] text-[color:var(--mfa-ink)] placeholder:text-[color:var(--mfa-ink-muted)] focus:ring-2 focus:ring-[color:var(--mfa-purple)] focus:border-transparent outline-none [&::-webkit-search-cancel-button]:hidden"
+              className="w-full h-[52px] pl-11 pr-4 rounded-[16px] bg-white border border-[color:var(--mfa-border)] text-[15.5px] text-[color:var(--mfa-ink)] placeholder:text-[color:var(--mfa-ink-muted)] focus:ring-2 focus:ring-[color:var(--mfa-navy)] focus:border-transparent outline-none [&::-webkit-search-cancel-button]:hidden"
             />
           </div>
           {/* Mobile: filters live in a sheet */}
@@ -239,7 +239,7 @@ export default function LibraryPage() {
           >
             <SlidersHorizontal size={17} aria-hidden="true" />
             {activeFilterCount > 0 && (
-              <span className="w-5 h-5 rounded-full bg-[color:var(--mfa-purple)] text-white text-[11px] font-bold inline-flex items-center justify-center">
+              <span className="w-5 h-5 rounded-full bg-[color:var(--mfa-navy)] text-white text-[11px] font-bold inline-flex items-center justify-center">
                 {activeFilterCount}
               </span>
             )}
@@ -257,7 +257,7 @@ export default function LibraryPage() {
             {search && <span> matching &ldquo;{search}&rdquo;</span>}
           </span>
           {activeFilterCount > 0 && (
-            <button onClick={clearFilters} className="tap-scale min-h-[44px] text-[13px] font-medium text-[color:var(--mfa-purple)]">
+            <button onClick={clearFilters} className="tap-scale min-h-[44px] text-[13px] font-medium text-[color:var(--mfa-navy)]">
               Clear filters
             </button>
           )}
@@ -277,7 +277,7 @@ export default function LibraryPage() {
             <span className="block text-[14.5px] font-semibold text-[color:var(--mfa-ink)]">Tomorrow&apos;s Child magazine</span>
             <span className="block text-[12.5px] text-[color:var(--mfa-ink-secondary)]">Browse every issue in Explore</span>
           </span>
-          <ChevronRight size={16} className="text-[color:var(--mfa-purple)] shrink-0" aria-hidden="true" />
+          <ChevronRight size={16} className="text-[color:var(--mfa-navy)] shrink-0" aria-hidden="true" />
         </Link>
       )}
 
@@ -351,7 +351,7 @@ export default function LibraryPage() {
                   aria-current={page === pageNum ? 'page' : undefined}
                   className={`tap-scale w-11 h-11 text-[14px] rounded-xl transition ${
                     page === pageNum
-                      ? 'bg-[color:var(--mfa-purple)] text-white font-semibold'
+                      ? 'bg-[color:var(--mfa-navy)] text-white font-semibold'
                       : 'text-[color:var(--mfa-ink-secondary)] hover:bg-[color:var(--mfa-surface-warm)]'
                   }`}
                 >

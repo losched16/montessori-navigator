@@ -129,7 +129,7 @@ export default function MilestonesPage() {
           <ArrowLeft size={16} aria-hidden="true" />
           {first ? `${first}'s Growth` : 'Growth'}
         </Link>
-        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-1.5 mt-1">
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-1.5 mt-1">
           Milestones
         </h1>
         <p className="text-[15px] text-[color:var(--mfa-ink-secondary)] mb-4">
@@ -142,7 +142,7 @@ export default function MilestonesPage() {
         <div className="text-center py-16 text-gray-400">Loading milestones...</div>
       ) : milestones.length === 0 ? (
         <div className="rounded-[20px] bg-white border border-[color:var(--mfa-border)] p-10 text-center">
-          <span className="w-11 h-11 rounded-full bg-[#F8EFD9] text-[color:var(--mfa-ochre)] inline-flex items-center justify-center mb-3" aria-hidden="true">
+          <span className="w-11 h-11 rounded-full bg-[var(--mfa-gold-soft)] text-[color:var(--mfa-ochre)] inline-flex items-center justify-center mb-3" aria-hidden="true">
             <Star size={20} />
           </span>
           <h3 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] mb-2">Set Up Milestones</h3>
@@ -162,7 +162,7 @@ export default function MilestonesPage() {
           {/* Overview — plain-language, not a completion score */}
           <div className="bg-white border border-[color:var(--mfa-border)] rounded-[20px] p-5 mb-6">
             <div className="flex items-center gap-2.5 mb-4">
-              <span className="w-9 h-9 rounded-full bg-[#F8EFD9] text-[color:var(--mfa-ochre)] inline-flex items-center justify-center shrink-0" aria-hidden="true">
+              <span className="w-9 h-9 rounded-full bg-[var(--mfa-gold-soft)] text-[color:var(--mfa-ochre)] inline-flex items-center justify-center shrink-0" aria-hidden="true">
                 <Star size={17} />
               </span>
               <div>

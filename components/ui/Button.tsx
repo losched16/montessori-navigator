@@ -19,10 +19,10 @@ interface ButtonProps {
 }
 
 const VARIANTS: Record<Variant, string> = {
-  primary: 'bg-[color:var(--mfa-purple)] text-white hover:opacity-90 active:opacity-80',
-  secondary: 'bg-white text-[color:var(--mfa-ink)] border border-[color:var(--mfa-border)] hover:bg-[color:var(--mfa-surface-warm)]',
+  primary: 'bg-[color:var(--mfa-navy)] text-white hover:bg-[color:var(--mfa-navy-deep)] active:opacity-90',
+  secondary: 'bg-white text-[color:var(--mfa-navy)] border border-[color:var(--mfa-navy)]/30 hover:border-[color:var(--mfa-navy)] hover:bg-[color:var(--mfa-navy-soft)]',
   soft: 'bg-[color:var(--mfa-purple-soft)] text-[color:var(--mfa-purple)] hover:opacity-90',
-  ghost: 'bg-transparent text-[color:var(--mfa-purple)] hover:bg-[color:var(--mfa-purple-soft)]',
+  ghost: 'bg-transparent text-[color:var(--mfa-navy)] hover:bg-[color:var(--mfa-navy-soft)]',
 }
 
 const SIZES: Record<Size, string> = {

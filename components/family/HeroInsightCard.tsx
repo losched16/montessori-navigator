@@ -20,39 +20,39 @@ export default function HeroInsightCard({ insight }: { insight: HeroInsight }) {
   return (
     <section
       aria-label="Today's insight"
-      className="rounded-[24px] bg-white border border-[color:var(--mfa-border)] p-6 sm:p-8 shadow-[0_1px_3px_rgba(45,40,30,0.04)]"
+      className="rounded-[24px] bg-[color:var(--mfa-navy)] p-6 sm:p-8 shadow-[0_10px_30px_rgba(16,36,59,0.18)]"
     >
-      <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-[color:var(--mfa-clay)] mb-3">
+      <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-[color:var(--mfa-gold)] mb-3">
         {insight.eyebrow}
       </div>
-      <h2 className="font-[family-name:var(--mfa-serif)] text-[28px] sm:text-[35px] leading-[1.1] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2.5">
+      <h2 className="font-[family-name:var(--mfa-serif)] text-[28px] sm:text-[35px] leading-[1.1] font-semibold text-white tracking-tight mb-2.5">
         {insight.title}
       </h2>
-      <p className="text-[16px] sm:text-[17px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl mb-5">
+      <p className="text-[16px] sm:text-[17px] leading-relaxed text-white/80 max-w-xl mb-5">
         {insight.description}
       </p>
 
-      <div className="rounded-[16px] bg-[color:var(--mfa-surface-sage)] p-5 mb-5">
-        <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-[color:var(--mfa-forest)] mb-2">
+      <div className="rounded-[16px] bg-white/10 p-5 mb-5">
+        <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-[color:var(--mfa-gold)] mb-2">
           Try this today
         </div>
-        <div className="font-[family-name:var(--mfa-serif)] text-[19px] font-semibold text-[color:var(--mfa-ink)] leading-snug mb-1">
+        <div className="font-[family-name:var(--mfa-serif)] text-[19px] font-semibold text-white leading-snug mb-1">
           {insight.tryTitle}
         </div>
-        <p className="text-[14.5px] leading-relaxed text-[color:var(--mfa-ink-secondary)] mb-2.5">
+        <p className="text-[14.5px] leading-relaxed text-white/75 mb-2.5">
           {insight.tryDetail}
         </p>
-        <div className="text-[12px] font-medium text-[color:var(--mfa-ink-muted)]">{insight.meta}</div>
+        <div className="text-[12px] font-medium text-white/60">{insight.meta}</div>
       </div>
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-        <Button size="lg" onClick={() => setShowHow(true)} className="w-full sm:w-auto">
+        <Button size="lg" onClick={() => setShowHow(true)} className="w-full sm:w-auto !bg-[color:var(--mfa-gold)] !text-[color:var(--mfa-navy-deep)] hover:!bg-[color:var(--mfa-gold-warm)]">
           Show Me How
         </Button>
         <Link
           href={chatHref}
           onClick={trackHeroChat}
-          className="tap-scale inline-flex items-center justify-center gap-1 min-h-[48px] px-2 text-[15px] font-medium text-[color:var(--mfa-purple)]"
+          className="tap-scale inline-flex items-center justify-center gap-1 min-h-[48px] px-2 text-[15px] font-medium text-white/90 hover:text-white"
         >
           Ask Abigail about this
           <ChevronRight size={17} aria-hidden="true" />

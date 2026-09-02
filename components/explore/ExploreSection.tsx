@@ -12,12 +12,12 @@ export default function ExploreSection({ title, subtitle, actionLabel, actionHre
 }) {
   const action = actionLabel && (
     actionHref ? (
-      <Link href={actionHref} className="tap-scale inline-flex items-center gap-0.5 shrink-0 text-[14px] font-medium text-[color:var(--mfa-purple)] min-h-[44px]">
+      <Link href={actionHref} className="tap-scale inline-flex items-center gap-0.5 shrink-0 text-[14px] font-medium text-[color:var(--mfa-navy)] min-h-[44px]">
         {actionLabel}
         <ChevronRight size={16} aria-hidden="true" />
       </Link>
     ) : (
-      <button onClick={onAction} className="tap-scale inline-flex items-center gap-0.5 shrink-0 text-[14px] font-medium text-[color:var(--mfa-purple)] min-h-[44px]">
+      <button onClick={onAction} className="tap-scale inline-flex items-center gap-0.5 shrink-0 text-[14px] font-medium text-[color:var(--mfa-navy)] min-h-[44px]">
         {actionLabel}
         <ChevronRight size={16} aria-hidden="true" />
       </button>
@@ -27,7 +27,7 @@ export default function ExploreSection({ title, subtitle, actionLabel, actionHre
   return (
     <section aria-label={title}>
       <div className="flex items-baseline justify-between gap-3 mb-1">
-        <h2 className="font-[family-name:var(--mfa-serif)] text-[23px] sm:text-[27px] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
+        <h2 className="font-[family-name:var(--mfa-serif)] text-[23px] sm:text-[27px] font-semibold text-[color:var(--mfa-navy)] tracking-tight">
           {title}
         </h2>
         {action}

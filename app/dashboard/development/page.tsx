@@ -40,7 +40,7 @@ export default function DevelopmentPage() {
   return (
     <div className="max-w-3xl mx-auto pb-24 sm:pb-10">
       <div className="pt-2 mb-6">
-        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-1.5">
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-1.5">
           Development Guide
         </h1>
         <p className="text-[15px] text-[color:var(--mfa-ink-secondary)] mb-4">

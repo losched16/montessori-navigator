@@ -38,7 +38,7 @@ export default function MomentCard({ observation, childName }: {
         </div>
         <Link
           href="/dashboard/children?tab=moments"
-          className="tap-scale inline-flex items-center gap-0.5 min-h-[44px] shrink-0 text-[14px] font-semibold text-[color:var(--mfa-purple)]"
+          className="tap-scale inline-flex items-center gap-0.5 min-h-[44px] shrink-0 text-[14px] font-semibold text-[color:var(--mfa-navy)]"
         >
           See Moments
           <ChevronRight size={15} aria-hidden="true" />

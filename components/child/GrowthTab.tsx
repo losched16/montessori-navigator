@@ -104,7 +104,7 @@ export default function GrowthTab({ child, devLevels, milestones, skills, onLeve
 
       {/* Development areas */}
       <section aria-label="Development areas">
-        <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-3">
+        <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] sm:text-[24px] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-3">
           Development Areas
         </h2>
         <div className="grid sm:grid-cols-2 gap-3">
@@ -145,7 +145,7 @@ export default function GrowthTab({ child, devLevels, milestones, skills, onLeve
 
       {/* Milestones */}
       <section aria-label="Milestones">
-        <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-3">
+        <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] sm:text-[24px] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-3">
           Milestones
         </h2>
         <div className="rounded-[20px] bg-white border border-[color:var(--mfa-border)] p-5">
@@ -159,7 +159,7 @@ export default function GrowthTab({ child, devLevels, milestones, skills, onLeve
           ) : (
             <>
               <div className="flex items-center gap-2.5 mb-4">
-                <span className="w-9 h-9 rounded-full bg-[#F8EFD9] text-[color:var(--mfa-ochre)] inline-flex items-center justify-center" aria-hidden="true">
+                <span className="w-9 h-9 rounded-full bg-[var(--mfa-gold-soft)] text-[color:var(--mfa-ochre)] inline-flex items-center justify-center" aria-hidden="true">
                   <Star size={17} />
                 </span>
                 <span className="text-[16px] font-semibold text-[color:var(--mfa-ink)]">
@@ -191,7 +191,7 @@ export default function GrowthTab({ child, devLevels, milestones, skills, onLeve
 
       {/* Montessori learning (curriculum skill progress) */}
       <section aria-label="Montessori learning">
-        <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-3">
+        <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] sm:text-[24px] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-3">
           Montessori Learning
         </h2>
         <div className="rounded-[20px] bg-white border border-[color:var(--mfa-border)] p-5">

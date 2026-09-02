@@ -20,7 +20,7 @@ export default function ExploreSearch({ value, onChange }: {
         onChange={e => onChange(e.target.value)}
         placeholder="What do you need help with?"
         aria-label="Search Montessori articles, activities, guides and videos"
-        className="w-full h-[56px] pl-12 pr-12 rounded-[20px] bg-white border border-[color:var(--mfa-border)] text-[16px] text-[color:var(--mfa-ink)] placeholder:text-[color:var(--mfa-ink-muted)] focus:ring-2 focus:ring-[color:var(--mfa-purple)] focus:border-transparent outline-none [&::-webkit-search-cancel-button]:hidden"
+        className="w-full h-[56px] pl-12 pr-12 rounded-[20px] bg-white border border-[color:var(--mfa-border)] text-[16px] text-[color:var(--mfa-ink)] placeholder:text-[color:var(--mfa-ink-muted)] focus:ring-2 focus:ring-[color:var(--mfa-navy)] focus:border-transparent outline-none [&::-webkit-search-cancel-button]:hidden"
       />
       {value && (
         <button

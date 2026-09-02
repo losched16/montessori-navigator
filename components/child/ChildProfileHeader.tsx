@@ -63,7 +63,7 @@ export default function ChildProfileHeader({ onLogMoment }: { onLogMoment: () =>
           aria-haspopup={multi ? 'dialog' : undefined}
           className={`tap-scale inline-flex items-center gap-1.5 max-w-full min-h-[44px] -my-1 ${multi ? '' : 'cursor-default'}`}
         >
-          <span className="font-[family-name:var(--mfa-serif)] text-[26px] sm:text-[30px] leading-tight font-semibold text-[color:var(--mfa-ink)] tracking-tight truncate">
+          <span className="font-[family-name:var(--mfa-serif)] text-[26px] sm:text-[30px] leading-tight font-semibold text-[color:var(--mfa-navy)] tracking-tight truncate">
             {selectedChild.name}
           </span>
           {multi && <ChevronDown size={20} className="text-[color:var(--mfa-ink-muted)] shrink-0" aria-hidden="true" />}
@@ -80,7 +80,7 @@ export default function ChildProfileHeader({ onLogMoment }: { onLogMoment: () =>
       <button
         onClick={onLogMoment}
         aria-label="Log a Moment"
-        className="tap-scale min-[430px]:hidden shrink-0 w-11 h-11 rounded-full bg-[color:var(--mfa-purple)] text-white inline-flex items-center justify-center"
+        className="tap-scale min-[430px]:hidden shrink-0 w-11 h-11 rounded-full bg-[color:var(--mfa-navy)] text-white inline-flex items-center justify-center"
       >
         <Plus size={20} aria-hidden="true" />
       </button>

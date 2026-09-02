@@ -13,7 +13,7 @@ import Button from '@/components/ui/Button'
 const EVENT_ICONS = { moment: NotebookPen, milestone: Star, skill: Sprout }
 const EVENT_COLORS = {
   moment: 'bg-[color:var(--mfa-clay-soft)] text-[color:var(--mfa-clay)]',
-  milestone: 'bg-[#F8EFD9] text-[color:var(--mfa-ochre)]',
+  milestone: 'bg-[var(--mfa-gold-soft)] text-[color:var(--mfa-ochre)]',
   skill: 'bg-[color:var(--mfa-sage-soft)] text-[color:var(--mfa-sage)]',
 }
 
@@ -39,7 +39,7 @@ export default function JourneyTab({ child, events, devLevels, onLogMoment }: {
       {/* This Month — plain-language summary */}
       {summary.length > 0 && (
         <section aria-label="This month">
-          <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-3">
+          <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] sm:text-[24px] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-3">
             This Month
           </h2>
           <div className="rounded-[20px] bg-white border border-[color:var(--mfa-border)] p-5">
@@ -84,7 +84,7 @@ export default function JourneyTab({ child, events, devLevels, onLogMoment }: {
       ) : (
         months.map(month => (
           <section key={month.key} aria-label={month.label}>
-            <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-3">
+            <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] sm:text-[24px] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-3">
               {month.label}
             </h2>
             <div className="rounded-[20px] bg-white border border-[color:var(--mfa-border)] divide-y divide-[color:var(--mfa-border)]">

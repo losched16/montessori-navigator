@@ -27,7 +27,7 @@ const HIGHLIGHT_ICONS: Record<GrowthHighlight['kind'], typeof Star> = {
   level: TrendingUp,
 }
 const HIGHLIGHT_COLORS: Record<GrowthHighlight['kind'], string> = {
-  milestone: 'bg-[#F8EFD9] text-[color:var(--mfa-ochre)]',
+  milestone: 'bg-[var(--mfa-gold-soft)] text-[color:var(--mfa-ochre)]',
   skill: 'bg-[color:var(--mfa-sage-soft)] text-[color:var(--mfa-sage)]',
   moment: 'bg-[color:var(--mfa-clay-soft)] text-[color:var(--mfa-clay)]',
   level: 'bg-[color:var(--mfa-sage-soft)] text-[color:var(--mfa-forest)]',
@@ -35,7 +35,7 @@ const HIGHLIGHT_COLORS: Record<GrowthHighlight['kind'], string> = {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-3">
+    <h2 className="font-[family-name:var(--mfa-serif)] text-[21px] sm:text-[24px] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-3">
       {children}
     </h2>
   )
@@ -155,7 +155,7 @@ export default function OverviewTab({ child, devLevels, observations, milestones
               </div>
               <button
                 onClick={() => onGoToTab('moments')}
-                className="tap-scale inline-flex items-center gap-0.5 min-h-[44px] shrink-0 text-[14px] font-semibold text-[color:var(--mfa-purple)]"
+                className="tap-scale inline-flex items-center gap-0.5 min-h-[44px] shrink-0 text-[14px] font-semibold text-[color:var(--mfa-navy)]"
               >
                 See All Moments
                 <ChevronRight size={15} aria-hidden="true" />

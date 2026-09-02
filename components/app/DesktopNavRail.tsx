@@ -21,8 +21,8 @@ export default function DesktopNavRail() {
   const itemClasses = (active: boolean) =>
     `tap-scale flex flex-col items-center justify-center gap-1 w-16 h-16 rounded-2xl transition ${
       active
-        ? 'bg-[color:var(--mfa-purple)] text-white shadow-sm'
-        : 'text-[color:var(--mfa-ink-secondary)] hover:bg-[color:var(--mfa-surface-warm)] hover:text-[color:var(--mfa-ink)]'
+        ? 'bg-white/10 text-[color:var(--mfa-gold)]'
+        : 'text-white/65 hover:bg-white/10 hover:text-white'
     }`
 
   const renderItem = (item: typeof PRIMARY_NAV[number]) => {
@@ -50,7 +50,7 @@ export default function DesktopNavRail() {
     <>
       <nav
         aria-label="Primary"
-        className="hidden sm:flex fixed left-0 top-14 bottom-0 z-30 w-20 flex-col items-center justify-between py-4 bg-white border-r border-[color:var(--mfa-border)]"
+        className="hidden sm:flex fixed left-0 top-14 bottom-0 z-30 w-20 flex-col items-center justify-between py-4 bg-[color:var(--mfa-navy-deep)]"
       >
         <div className="flex flex-col items-center gap-1.5">
           {primary.map(renderItem)}

@@ -195,7 +195,7 @@ function ExploreInner() {
           </Link>
         ) : (
           <>
-            <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[44px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2">
+            <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[44px] leading-[1.05] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-2">
               Explore Montessori
             </h1>
             <p className="text-[15.5px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-lg mb-5">
@@ -222,7 +222,7 @@ function ExploreInner() {
                 aria-pressed={filter === f.key}
                 className={`tap-scale shrink-0 min-h-[44px] px-4 rounded-full text-[14px] font-medium transition ${
                   filter === f.key
-                    ? 'bg-[color:var(--mfa-purple-soft)] text-[color:var(--mfa-purple)]'
+                    ? 'bg-[color:var(--mfa-navy)] text-white'
                     : 'bg-white border border-[color:var(--mfa-border)] text-[color:var(--mfa-ink-secondary)]'
                 }`}
               >
@@ -248,7 +248,7 @@ function ExploreInner() {
             </div>
           )}
           <div className="pt-2">
-            <Link href="/dashboard/library" className="tap-scale inline-flex items-center gap-1 min-h-[44px] text-[14px] font-medium text-[color:var(--mfa-purple)]">
+            <Link href="/dashboard/library" className="tap-scale inline-flex items-center gap-1 min-h-[44px] text-[14px] font-medium text-[color:var(--mfa-navy)]">
               Search the full Library
               <ChevronRight size={15} aria-hidden="true" />
             </Link>
@@ -259,7 +259,7 @@ function ExploreInner() {
       ) : collection === 'tomorrows-child' ? (
         <div className="space-y-8">
           <div>
-            <h1 className="font-[family-name:var(--mfa-serif)] text-[30px] sm:text-[36px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-1.5">
+            <h1 className="font-[family-name:var(--mfa-serif)] text-[30px] sm:text-[36px] leading-[1.05] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-1.5">
               Tomorrow&apos;s Child
             </h1>
             <p className="text-[15px] text-[color:var(--mfa-ink-secondary)]">
@@ -282,7 +282,7 @@ function ExploreInner() {
       ) : topic && topicContent ? (
         <div className="space-y-8">
           <div>
-            <h1 className="font-[family-name:var(--mfa-serif)] text-[30px] sm:text-[36px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2">
+            <h1 className="font-[family-name:var(--mfa-serif)] text-[30px] sm:text-[36px] leading-[1.05] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-2">
               {topic.title}
             </h1>
             <p className="text-[15px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl">
@@ -347,7 +347,7 @@ function ExploreInner() {
               <span className="text-[15px] font-medium text-[color:var(--mfa-ink)]">
                 {topic.childLink.label.replace('your child', childFirst || 'your child')}
               </span>
-              <ChevronRight size={17} className="text-[color:var(--mfa-purple)]" aria-hidden="true" />
+              <ChevronRight size={17} className="text-[color:var(--mfa-navy)]" aria-hidden="true" />
             </Link>
           )}
 
@@ -358,7 +358,7 @@ function ExploreInner() {
                 <Link
                   key={t.key}
                   href={`/dashboard/explore?topic=${t.key}`}
-                  className="tap-scale inline-flex items-center min-h-[44px] px-4 rounded-full bg-white border border-[color:var(--mfa-border)] text-[14px] font-medium text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-purple)] hover:border-[color:var(--mfa-purple)] transition"
+                  className="tap-scale inline-flex items-center min-h-[44px] px-4 rounded-full bg-white border border-[color:var(--mfa-border)] text-[14px] font-medium text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-navy)] hover:border-[color:var(--mfa-navy)] transition"
                 >
                   {t.title}
                 </Link>
@@ -440,7 +440,7 @@ function ExploreInner() {
               <span className="block text-[15px] font-semibold text-[color:var(--mfa-ink)]">Open the Full Library</span>
               <span className="block text-[13px] text-[color:var(--mfa-ink-secondary)]">Every article and resource, with filters, tags and sorting.</span>
             </span>
-            <ChevronRight size={17} className="text-[color:var(--mfa-purple)] shrink-0" aria-hidden="true" />
+            <ChevronRight size={17} className="text-[color:var(--mfa-navy)] shrink-0" aria-hidden="true" />
           </Link>
         </div>
       )}

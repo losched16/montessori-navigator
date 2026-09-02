@@ -66,7 +66,7 @@ export default function EditorialCard({ article }: { article: ArticleMeta }) {
           <span className="text-[13px] text-[color:var(--mfa-ink-muted)] truncate">
             {article.author} · {isVideo ? 'Video' : `${minutes} min read`}
           </span>
-          <span className="inline-flex items-center gap-0.5 text-[14px] font-semibold text-[color:var(--mfa-purple)] shrink-0">
+          <span className="inline-flex items-center gap-0.5 text-[14px] font-semibold text-[color:var(--mfa-navy)] shrink-0">
             {isVideo ? 'Watch' : 'Read'}
             <ChevronRight size={15} aria-hidden="true" />
           </span>

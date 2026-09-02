@@ -30,7 +30,7 @@ export default function NewsletterCard({ newsletter, width = 128, onOpen }: {
           loading="lazy"
         />
       </span>
-      <span className="block text-[12px] font-medium text-[color:var(--mfa-ink-secondary)] text-center mt-1.5 group-hover:text-[color:var(--mfa-purple)] transition">
+      <span className="block text-[12px] font-medium text-[color:var(--mfa-ink-secondary)] text-center mt-1.5 group-hover:text-[color:var(--mfa-navy)] transition">
         {newsletter.issueLabel}
       </span>
     </a>

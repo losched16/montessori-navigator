@@ -30,13 +30,13 @@ export default function ChildTabs({ active, onChange }: {
             onClick={() => onChange(tab.key)}
             className={`tap-scale relative shrink-0 px-3 min-h-[48px] text-[14.5px] transition ${
               selected
-                ? 'font-semibold text-[color:var(--mfa-purple)]'
-                : 'font-medium text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-ink)]'
+                ? 'font-semibold text-[color:var(--mfa-navy)]'
+                : 'font-medium text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-navy)]'
             }`}
           >
             {tab.label}
             {selected && (
-              <span className="absolute left-2 right-2 bottom-0 h-[3px] rounded-t-full bg-[color:var(--mfa-purple)]" aria-hidden="true" />
+              <span className="absolute left-2 right-2 bottom-0 h-[3px] rounded-t-full bg-[color:var(--mfa-gold)]" aria-hidden="true" />
             )}
           </button>
         )

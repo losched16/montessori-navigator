@@ -108,7 +108,7 @@ export default function CurriculumPage() {
           <ArrowLeft size={16} aria-hidden="true" />
           {first ? `${first}'s Growth` : 'Growth'}
         </Link>
-        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-1.5 mt-1">
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-1.5 mt-1">
           Montessori Learning
         </h1>
         <p className="text-[15px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl mb-4">
@@ -141,7 +141,7 @@ export default function CurriculumPage() {
           aria-label="Search curriculum areas"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full h-[52px] pl-11 pr-4 rounded-[16px] bg-white border border-[color:var(--mfa-border)] text-[15px] text-[color:var(--mfa-ink)] placeholder:text-[color:var(--mfa-ink-muted)] focus:ring-2 focus:ring-[color:var(--mfa-purple)] focus:border-transparent outline-none [&::-webkit-search-cancel-button]:hidden"
+          className="w-full h-[52px] pl-11 pr-4 rounded-[16px] bg-white border border-[color:var(--mfa-border)] text-[15px] text-[color:var(--mfa-ink)] placeholder:text-[color:var(--mfa-ink-muted)] focus:ring-2 focus:ring-[color:var(--mfa-navy)] focus:border-transparent outline-none [&::-webkit-search-cancel-button]:hidden"
         />
       </div>
 

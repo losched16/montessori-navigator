@@ -25,12 +25,12 @@ export default function MobileBottomNav() {
               aria-current={active ? 'page' : undefined}
               className={`tap-scale flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[48px] px-2 rounded-xl ${
                 active
-                  ? 'text-[color:var(--mfa-purple)] bg-[color:var(--mfa-purple-soft)]'
+                  ? 'bg-[color:var(--mfa-navy)] text-[color:var(--mfa-gold)]'
                   : 'text-[color:var(--mfa-ink-muted)]'
               }`}
             >
               <Icon size={23} strokeWidth={active ? 2.2 : 1.8} aria-hidden="true" />
-              <span className={`text-[12px] leading-none ${active ? 'font-semibold' : 'font-medium'}`}>
+              <span className={`text-[12px] leading-none ${active ? 'font-semibold text-white' : 'font-medium'}`}>
                 {item.label}
               </span>
             </Link>

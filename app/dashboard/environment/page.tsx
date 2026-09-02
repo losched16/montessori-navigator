@@ -56,7 +56,7 @@ export default function EnvironmentPage() {
   return (
     <div className="max-w-3xl mx-auto pb-24 sm:pb-10">
       <div className="pt-2 mb-6">
-        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-1.5">
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[38px] leading-[1.05] font-semibold text-[color:var(--mfa-navy)] tracking-tight mb-1.5">
           Montessori at Home
         </h1>
         <p className="text-[15px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl mb-4">
@@ -81,8 +81,8 @@ export default function EnvironmentPage() {
             aria-pressed={selectedRoom === room.room}
             className={`tap-scale flex items-center gap-2 px-5 py-3.5 sm:px-4 sm:py-2.5 rounded-[16px] text-sm font-medium whitespace-nowrap min-h-[48px] transition shrink-0 snap-start ${
               selectedRoom === room.room
-                ? 'bg-[color:var(--mfa-purple)] text-white shadow-sm'
-                : 'bg-white border border-[color:var(--mfa-border)] text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-purple)]'
+                ? 'bg-[color:var(--mfa-navy)] text-white shadow-sm'
+                : 'bg-white border border-[color:var(--mfa-border)] text-[color:var(--mfa-ink-secondary)] hover:text-[color:var(--mfa-navy)]'
             }`}
           >
             {(() => { const RoomIcon = ROOM_ICONS[room.icon]; return RoomIcon ? <RoomIcon size={18} aria-hidden="true" /> : null })()}

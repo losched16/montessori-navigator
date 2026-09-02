@@ -19,28 +19,42 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700;6..72,800&display=swap');
         .mfa-app {
-          --mfa-canvas: #F8F6F1;
+          /* Navy + gold primary system: white canvas, navy structure, gold
+             energy, purple reserved for Abigail and supporting accents. */
+          --mfa-canvas: #FFFFFF;
           --mfa-surface: #FFFFFF;
-          --mfa-surface-warm: #F1ECE3;
-          --mfa-surface-sage: #E9EEE5;
+          --mfa-surface-warm: #F7F2E7;
+          --mfa-surface-sage: #EAEFE6;
 
-          --mfa-ink: #22221F;
-          --mfa-ink-secondary: #68665F;
-          --mfa-ink-muted: #918F88;
+          --mfa-navy: #17324D;
+          --mfa-navy-deep: #10243B;
+          --mfa-navy-soft: #EAF0F6;
+
+          --mfa-gold: #E6B84A;
+          --mfa-gold-warm: #F2C75C;
+          --mfa-gold-deep: #8F6B14;   /* text-safe gold on white */
+          --mfa-gold-soft: #FAF1D8;
+
+          --mfa-ink: #161616;
+          --mfa-ink-secondary: #3F4A58;
+          --mfa-ink-muted: #7C8694;
 
           --mfa-purple: #4A2C82;
           --mfa-purple-soft: #EEE8F6;
 
-          --mfa-clay: #B96943;
-          --mfa-clay-soft: #F5E8E0;
+          /* Legacy accent slots remapped into the navy/gold system so every
+             existing eyebrow, chip and icon updates without markup churn:
+             clay = navy accents, ochre = deep gold accents. */
+          --mfa-clay: #17324D;
+          --mfa-clay-soft: #EAF0F6;
 
           --mfa-sage: #6C8A5C;
-          --mfa-sage-soft: #E9EEE5;
+          --mfa-sage-soft: #EAEFE6;
 
           --mfa-forest: #344A3A;
-          --mfa-ochre: #C79543;
+          --mfa-ochre: #8F6B14;
 
-          --mfa-border: rgba(45, 40, 30, .10);
+          --mfa-border: rgba(23, 50, 77, .12);
 
           --mfa-serif: 'Newsreader', 'Cormorant Garamond', Georgia, serif;
           --mfa-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

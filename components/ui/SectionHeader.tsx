@@ -11,13 +11,13 @@ interface SectionHeaderProps {
 export default function SectionHeader({ title, actionLabel, actionHref }: SectionHeaderProps) {
   return (
     <div className="flex items-baseline justify-between mb-3">
-      <h2 className="font-[family-name:var(--mfa-serif)] text-[23px] sm:text-[27px] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
+      <h2 className="font-[family-name:var(--mfa-serif)] text-[23px] sm:text-[27px] font-semibold text-[color:var(--mfa-navy)] tracking-tight">
         {title}
       </h2>
       {actionLabel && actionHref && (
         <Link
           href={actionHref}
-          className="tap-scale inline-flex items-center gap-0.5 text-[14px] font-medium text-[color:var(--mfa-purple)] min-h-[44px]"
+          className="tap-scale inline-flex items-center gap-0.5 text-[14px] font-medium text-[color:var(--mfa-navy)] min-h-[44px]"
         >
           {actionLabel}
           <ChevronRight size={16} aria-hidden="true" />

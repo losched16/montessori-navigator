@@ -20,7 +20,7 @@ export default function ExploreTopicCard({ topic }: { topic: ExploreTopic }) {
         className="object-cover transition group-hover:scale-[1.03]"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#10243B]/90 via-[#17324D]/25 to-transparent" aria-hidden="true" />
       <span className="absolute bottom-0 left-0 right-0 p-3.5 text-white font-semibold text-[15px] leading-snug drop-shadow">
         {topic.title}
       </span>

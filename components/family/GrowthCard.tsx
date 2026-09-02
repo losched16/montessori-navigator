@@ -38,7 +38,7 @@ export default function GrowthCard({ childName, areas }: GrowthCardProps) {
       </div>
       <Link
         href="/dashboard/children?tab=journey"
-        className="tap-scale inline-flex items-center gap-1 min-h-[44px] text-[15px] font-semibold text-[color:var(--mfa-purple)]"
+        className="tap-scale inline-flex items-center gap-1 min-h-[44px] text-[15px] font-semibold text-[color:var(--mfa-navy)]"
       >
         See {childName}&apos;s Journey
         <ChevronRight size={17} aria-hidden="true" />

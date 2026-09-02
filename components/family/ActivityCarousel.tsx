@@ -62,7 +62,7 @@ export default function ActivityCarousel({ activities, childName, analyticsSourc
               <div className="text-[12.5px] text-[color:var(--mfa-ink-muted)] mb-2.5">
                 {activity.duration}{activity.ages ? ` · ${activity.ages}` : ''}
               </div>
-              <span className="inline-flex items-center gap-0.5 text-[14px] font-semibold text-[color:var(--mfa-purple)]">
+              <span className="inline-flex items-center gap-0.5 text-[14px] font-semibold text-[color:var(--mfa-navy)]">
                 Try Activity
                 <ChevronRight size={15} aria-hidden="true" />
               </span>

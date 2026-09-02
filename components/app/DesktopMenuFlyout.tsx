@@ -98,7 +98,7 @@ export default function DesktopMenuFlyout({ open, onClose }: {
   const rowClasses = (active: boolean) =>
     `flex items-center gap-3 px-3.5 min-h-[46px] rounded-xl text-[15px] font-medium transition ${
       active
-        ? 'bg-[color:var(--mfa-purple-soft)] text-[color:var(--mfa-purple)]'
+        ? 'bg-[color:var(--mfa-navy-soft)] text-[color:var(--mfa-navy)]'
         : 'text-[color:var(--mfa-ink)] hover:bg-[color:var(--mfa-surface-warm)]'
     }`
 
@@ -116,7 +116,7 @@ export default function DesktopMenuFlyout({ open, onClose }: {
         <div className="p-4 space-y-5">
           {GROUPS.map(group => (
             <div key={group.title}>
-              <div className="px-3.5 mb-1.5 text-[11.5px] font-bold tracking-[0.14em] uppercase text-[color:var(--mfa-ink-muted)]">
+              <div className="px-3.5 mb-1.5 text-[11.5px] font-bold tracking-[0.14em] uppercase text-[color:var(--mfa-gold-deep)]">
                 {group.title}
               </div>
               <div className="space-y-0.5">
@@ -135,7 +135,7 @@ export default function DesktopMenuFlyout({ open, onClose }: {
           ))}
 
           <div>
-            <div className="px-3.5 mb-1.5 text-[11.5px] font-bold tracking-[0.14em] uppercase text-[color:var(--mfa-ink-muted)]">
+            <div className="px-3.5 mb-1.5 text-[11.5px] font-bold tracking-[0.14em] uppercase text-[color:var(--mfa-gold-deep)]">
               Account
             </div>
             <div className="space-y-0.5">
