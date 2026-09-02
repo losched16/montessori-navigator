@@ -27,7 +27,7 @@ export default function ExploreSection({ title, subtitle, actionLabel, actionHre
   return (
     <section aria-label={title}>
       <div className="flex items-baseline justify-between gap-3 mb-1">
-        <h2 className="font-[family-name:var(--mfa-serif)] text-[22px] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
+        <h2 className="font-[family-name:var(--mfa-serif)] text-[23px] sm:text-[27px] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
           {title}
         </h2>
         {action}

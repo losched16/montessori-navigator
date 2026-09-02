@@ -180,13 +180,10 @@ export default function GrowthTab({ child, devLevels, milestones, skills, onLeve
                   </li>
                 ))}
               </ul>
-              <a
-                href="/dashboard/milestones"
-                className="tap-scale inline-flex items-center gap-0.5 min-h-[44px] text-[14px] font-semibold text-[color:var(--mfa-purple)]"
-              >
+              <Button href="/dashboard/milestones" variant="soft" size="md">
                 See All Milestones
-                <ChevronRight size={15} aria-hidden="true" />
-              </a>
+                <ChevronRight size={16} aria-hidden="true" />
+              </Button>
             </>
           )}
         </div>
@@ -219,13 +216,10 @@ export default function GrowthTab({ child, devLevels, milestones, skills, onLeve
               ))}
             </ul>
           )}
-          <a
-            href="/dashboard/curriculum"
-            className="tap-scale inline-flex items-center gap-0.5 min-h-[44px] text-[14px] font-semibold text-[color:var(--mfa-purple)]"
-          >
-            Explore Full Curriculum
-            <ChevronRight size={15} aria-hidden="true" />
-          </a>
+          <Button href="/dashboard/curriculum" variant="soft" size="md">
+            Explore Montessori Learning
+            <ChevronRight size={16} aria-hidden="true" />
+          </Button>
         </div>
       </section>
 

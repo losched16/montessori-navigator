@@ -62,15 +62,15 @@ export default function ExploreItemCard({ item, onOpenActivity, onOpen }: {
       </div>
       <div className="flex-1 min-w-0">
         {item.category && (
-          <div className="text-[10.5px] font-bold tracking-[0.14em] uppercase text-[color:var(--mfa-clay)] mb-0.5 truncate">
+          <div className="text-[11px] font-bold tracking-[0.14em] uppercase text-[color:var(--mfa-clay)] mb-0.5 truncate">
             {item.category}
           </div>
         )}
-        <div className="text-[15px] font-semibold text-[color:var(--mfa-ink)] leading-snug line-clamp-2">
+        <div className="text-[16px] font-semibold text-[color:var(--mfa-ink)] leading-snug line-clamp-2">
           {item.title}
         </div>
         {item.metadata && (
-          <div className="text-[12px] text-[color:var(--mfa-ink-muted)] mt-0.5">
+          <div className="text-[12.5px] text-[color:var(--mfa-ink-muted)] mt-0.5">
             {item.metadata}{item.agePlane ? ` · Ages ${item.agePlane}` : ''}
           </div>
         )}

@@ -11,7 +11,7 @@ interface SectionHeaderProps {
 export default function SectionHeader({ title, actionLabel, actionHref }: SectionHeaderProps) {
   return (
     <div className="flex items-baseline justify-between mb-3">
-      <h2 className="font-[family-name:var(--mfa-serif)] text-[22px] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
+      <h2 className="font-[family-name:var(--mfa-serif)] text-[23px] sm:text-[27px] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
         {title}
       </h2>
       {actionLabel && actionHref && (

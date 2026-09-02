@@ -356,7 +356,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "the-courage-to-be-a-montessori-parent-2",
     title: "The Courage To Be a Montessori Parent",
-    author: "stgiermain@aol.com",
+    author: "The Montessori Foundation",
     date: "2025-08-18",
     categories: [
       "MFA",
@@ -388,7 +388,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "a-montessori-approach-to-toilet-training",
     title: "A Montessori Approach to Toilet Training",
-    author: "simonedavis@montessori.org",
+    author: "The Montessori Foundation",
     date: "2025-03-05",
     categories: [
       "MFA",
@@ -492,7 +492,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "montessori-materials-at-home",
     title: "Montessori Materials at Home?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2025-03-05",
     categories: [
       "MFA",
@@ -505,7 +505,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-reviews-4",
     title: "Book Reviews",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2025-03-05",
     categories: [
       "MFA",
@@ -531,7 +531,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-tales-of-a-traveling-nurse-is-this-my-home",
     title: "Book Review: Tales of a Traveling Nurse: Is This my Home?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2025-01-13",
     categories: [
       "Book Reviews",
@@ -621,7 +621,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "from-montessori-to-traditional-how-elementary-montessori-prepares-children-for-lifes-next-steps",
     title: "From Montessori to Traditional How Elementary Montessori Prepares Children for Life's Next Steps",
-    author: "stgiermain@aol.com",
+    author: "The Montessori Foundation",
     date: "2024-12-01",
     categories: [
       "MFA",
@@ -647,7 +647,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-reviews-december-2024",
     title: "Book Reviews - December 2024",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-12-01",
     categories: [
       "MFA",
@@ -660,7 +660,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-reviews-december-2024-2",
     title: "Book Reviews - December 2024",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-12-01",
     categories: [
       "MFA",
@@ -673,7 +673,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "recommended-diy-projects-with-children-yarn-mache",
     title: "Recommended & DIY Projects With Children: Yarn Mache",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-12-01",
     categories: [
       "MFA",
@@ -796,7 +796,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "grab-a-book-book-reviews",
     title: "Grab A Book - Book Reviews",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-09-01",
     categories: [
       "MFA",
@@ -857,7 +857,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "wit-and-wisdom-a-family-chat-raising-your-child-the-montessori-way-with-lorna-mcgrath",
     title: "Wit and Wisdom: A Family Chat: \"Raising Your Child the Montessori Way\" with Lorna McGrath",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-07-31",
     categories: [
       "Family Resources",
@@ -899,7 +899,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-evelyn-del-rey-is-moving-away",
     title: "Book Review: Evelyn Del Rey Is Moving Away",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-05-22",
     categories: [
       "Book Reviews",
@@ -913,7 +913,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-reviews-by-lorna-mcgrath-2",
     title: "Book Reviews by Lorna McGrath",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-04-18",
     categories: [
       "Book Reviews",
@@ -1008,7 +1008,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "embracing-change-transitioning-to-a-traditional-middle-school",
     title: "Embracing Change - Transitioning to a Traditional Middle School",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2024-04-18",
     categories: [
       "Lower Elementary (6-9)",
@@ -1036,7 +1036,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "a-note-from-the-program-director-3",
     title: "A Note from the Program Director",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-04-18",
     categories: [
       "MFA",
@@ -1063,7 +1063,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-intentional-connections-building-parent-teacher-partnerships",
     title: "Book Review: Intentional Connections - Building Parent Teacher Partnerships",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-04-18",
     categories: [
       "Book Reviews",
@@ -1077,7 +1077,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-just-a-worm",
     title: "Book Review: Just a Worm",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-04-18",
     categories: [
       "Book Reviews",
@@ -1091,7 +1091,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "what-montessori-means-to-us",
     title: "What Montessori Means to Us",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-03-26",
     categories: [
       "MFA",
@@ -1168,7 +1168,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-water-land",
     title: "Book Review: Water Land",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-16",
     categories: [
       "Book Reviews",
@@ -1182,7 +1182,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-the-six-stages-of-parenthood",
     title: "Book Review: The Six Stages of Parenthood",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-16",
     categories: [
       "Book Reviews",
@@ -1196,7 +1196,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-once-in-a-full-moon",
     title: "Book Review: Once in a Full Moon",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-16",
     categories: [
       "Book Reviews",
@@ -1210,7 +1210,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-all-the-colors-we-are-the-story-of-how-we-got-our-skin-color",
     title: "Book Review: All the Colors We Are: The Story of How We Got Our Skin Color",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-16",
     categories: [
       "Book Reviews",
@@ -1224,7 +1224,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-amy-wu-and-the-patchwork-dragon",
     title: "Book Review: Amy Wu and the Patchwork Dragon",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-16",
     categories: [
       "Book Reviews",
@@ -1238,7 +1238,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-be-you",
     title: "Book Review: Be You!",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-16",
     categories: [
       "Book Reviews",
@@ -1252,7 +1252,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "what-to-look-for-in-montessori-schools",
     title: "What to Look for in Montessori Schools",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2024-02-15",
     categories: [
       "Family Resources",
@@ -1269,7 +1269,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-reviews-by-lorna-mcgrath",
     title: "Book Reviews by Lorna McGrath",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-14",
     categories: [
       "Book Reviews",
@@ -1336,7 +1336,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "what-does-the-laundry-have-to-do-with-it",
     title: "What Does the Laundry Have to Do with it?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-14",
     categories: [
       "MFA",
@@ -1391,7 +1391,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "a-note-from-the-program-director-2",
     title: "A Note from The Program Director",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-02-14",
     categories: [
       "MFA",
@@ -1404,7 +1404,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "what-to-look-for-in-montessori-schools-2",
     title: "What to Look for in Montessori Schools",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2024-02-13",
     categories: [
       "Family Resources",
@@ -1443,7 +1443,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-the-hug-who-got-stuck",
     title: "Book Review: The Hug Who Got Stuck",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-23",
     categories: [
       "Book Reviews",
@@ -1457,7 +1457,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-a-handwashing-story",
     title: "Book Review: A Handwashing Story",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-23",
     categories: [
       "Book Reviews",
@@ -1471,7 +1471,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-welcome-to-montessori-a-dictionary-for-families",
     title: "Book Review: Welcome to Montessori - A Dictionary for Families",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-23",
     categories: [
       "Book Reviews",
@@ -1505,7 +1505,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-here-and-there",
     title: "Book Review: Here and There",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-22",
     categories: [
       "Book Reviews",
@@ -1519,7 +1519,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-amazing-bees",
     title: "Book Review: Amazing Bees",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-22",
     categories: [
       "Book Reviews",
@@ -1533,7 +1533,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-the-potential-in-every-child",
     title: "Book Review: The Potential in Every Child",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-22",
     categories: [
       "Book Reviews",
@@ -1547,7 +1547,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-big-and-small",
     title: "Book Review: Big and Small",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-22",
     categories: [
       "Book Reviews",
@@ -1561,7 +1561,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-think-circles",
     title: "Book Review: Think Circles",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-22",
     categories: [
       "Book Reviews",
@@ -1575,7 +1575,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-think-farm-animals",
     title: "Book Review: Think Farm Animals",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-22",
     categories: [
       "Book Reviews",
@@ -1589,7 +1589,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-animals-reviewed",
     title: "Book Review: Animals Reviewed",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1603,7 +1603,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-make-music",
     title: "Book Review: Make Music",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1617,7 +1617,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-the-memory-box",
     title: "Book Review: The Memory Box",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1631,7 +1631,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-treasure-basket-explorations",
     title: "Book Review: The Montessori Toddler",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1645,7 +1645,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-treasure-basket-exploration",
     title: "Book Review: Treasure Basket Exploration",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1659,7 +1659,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-blackwater-sometimes-a-lie-is-harder-than-the-truth",
     title: "Book Review: Blackwater - Sometimes a lie is harder than the truth",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1673,7 +1673,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-little-humans",
     title: "Book Review: Little Humans",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1687,7 +1687,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-those-shoes",
     title: "Book Review: Those Shoes",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1701,7 +1701,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-your-baby-is-speaking-to-you",
     title: "Book Review: Your Baby is Speaking to You",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-19",
     categories: [
       "Book Reviews",
@@ -1715,7 +1715,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-be-who-you-were-meant-to-be",
     title: "Book Review: Be Who You Were Meant to Be",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-16",
     categories: [
       "Book Reviews",
@@ -1729,7 +1729,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "book-review-everyone-feels",
     title: "Book Review: Everyone Feels",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-16",
     categories: [
       "Book Reviews",
@@ -1763,7 +1763,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "where-are-you-on-your-montessori-parent-journey",
     title: "Where Are You on Your Montessori Parent Journey?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-01-09",
     categories: [
       "Family Resources",
@@ -1990,7 +1990,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "video-interview-with-soon-to-be-montessori-grads",
     title: "Video Interview with Soon-to-Be Montessori Grads",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-18",
     categories: [
       "Adolescence",
@@ -2078,7 +2078,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-how-to-raise-an-amazing-child",
     title: "Webinar:  How to Raise an Amazing Child",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-18",
     categories: [
       "Book Reviews",
@@ -2109,7 +2109,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "what-do-we-know-about-children-and-learning",
     title: "What do we know about children and learning?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Montessori Education",
@@ -2285,7 +2285,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-fun-with-meals",
     title: "Webinar:  Fun with Meals",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Montessori Family Life",
@@ -2485,7 +2485,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-transformation-of-the-elementary-child",
     title: "Webinar:  Transformation of the Elementary Child",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Lower Elementary (6-9)",
@@ -2590,7 +2590,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-language-ii-sandpaper-letters",
     title: "Webinar:  Language II / Sandpaper Letters",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Language",
@@ -2693,7 +2693,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-all-day-montessori",
     title: "Webinar:  All-Day Montessori",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Infant-Toddler (0 to 3)",
@@ -2771,7 +2771,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-keeping-parent-relationships-happy-healthy",
     title: "Webinar:  Keeping Parent Relationships Happy & Healthy",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Family Resources",
@@ -2828,7 +2828,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-separation-anxiety",
     title: "Webinar:  Separation Anxiety",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Infant-Toddler (0 to 3)",
@@ -2859,7 +2859,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-magda-gerber-and-maria-montessori",
     title: "Webinar:  Magda Gerber and Maria Montessori",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Maria Montessori",
@@ -2882,7 +2882,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-why-screen-toddlers",
     title: "Webinar:  Why screen toddlers?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-19",
     categories: [
       "Infant-Toddler (0 to 3)",
@@ -3015,7 +3015,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-anticipate-participate-cooperate",
     title: "Webinar:  Anticipate, Participate, Cooperate",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-20",
     categories: [
       "Family Resources",
@@ -3129,7 +3129,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-helping-your-child-get-organized-part-2",
     title: "Webinar:  Helping Your Child Get Organized / Part 2",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-20",
     categories: [
       "Family Resources",
@@ -3160,7 +3160,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-celebrating-birthdays",
     title: "Webinar:  Celebrating Birthdays",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-20",
     categories: [
       "Birthdays",
@@ -3294,7 +3294,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-newcomers-in-the-family",
     title: "Webinar:  Newcomers in the Family",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-20",
     categories: [
       "Family Resources",
@@ -3486,7 +3486,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-montessori-children-with-learning-disabilities",
     title: "Webinar: Montessori & Children with Learning Disabilities",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-23",
     categories: [
       "Brain Development",
@@ -3549,7 +3549,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-the-role-of-the-montessori-materials",
     title: "Webinar:  The Role of the Montessori Materials",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-05-23",
     categories: [
       "Montessori Education",
@@ -3816,7 +3816,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-do-i-have-to-buy-something-every-time-i-go-into-a-store",
     title: "Webinar: Do I Have to Buy Something Every Time I Go Into a Store?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-09-05",
     categories: [
       "Discipline",
@@ -3836,7 +3836,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-we-can-t-get-out-of-the-house-on-time",
     title: "Webinar: We Can't Get Out of the House on Time!#!#!#",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-09-05",
     categories: [
       "Discipline",
@@ -4045,7 +4045,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-good-gifts-and-other-holiday-dilemmas",
     title: "Webinar: \"Good Gifts\" and Other Holiday Dilemmas",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-12-07",
     categories: [
       "Infant-Toddler (0 to 3)",
@@ -4267,7 +4267,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webinar-toddlers-in-the-garden-a-grandparent-s-perspective",
     title: "Webinar: Toddlers in the Garden: a Grandparent's Perspective",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2018-03-01",
     categories: [
       "Infant",
@@ -4418,7 +4418,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "2018-an-interview-with-alex-a-newgate-senior",
     title: "2018 An Interview with Alex - a NewGate Senior",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2018-05-11",
     categories: [
       "Adolescence",
@@ -4501,7 +4501,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "cultivating-your-child-s-true-nature",
     title: "Cultivating Your Child's True Nature",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2018-06-06",
     categories: [
       "Infant",
@@ -4570,7 +4570,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "having-fun-traveling-with-your-kids",
     title: "Having Fun Traveling with Your Kids!",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2018-06-27",
     categories: [
       "Adolescence",
@@ -4853,7 +4853,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "work-or-play-what-s-the-difference",
     title: "Work or Play? What's the Difference?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2019-02-13",
     categories: [
       "Child's Work",
@@ -4894,7 +4894,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "grandparenting-terrific-teens",
     title: "Grandparenting Terrific Teens!",
-    author: "kathyleitch@montessori.org",
+    author: "The Montessori Foundation",
     date: "2019-03-06",
     categories: [
       "Adolescence",
@@ -5120,7 +5120,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "why-can-t-i-bring-toys",
     title: "Why Can't I Bring Toys?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2019-09-10",
     categories: [
       "Discipline",
@@ -5213,7 +5213,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "clutter-and-anxiety-go-hand-in-hand",
     title: "Clutter and Anxiety Go Hand-in-Hand",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-01-22",
     categories: [
       "Adolescence",
@@ -5280,7 +5280,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "what-to-say-instead-of-be-careful",
     title: "What to Say Instead of \"Be Careful\"",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-02-18",
     categories: [
       "Adolescence",
@@ -5309,7 +5309,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "thoughts-on-your-child-s-living-space",
     title: "Thoughts on Your Child's Living Space",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-03-12",
     categories: [
       "Montessori Family Life",
@@ -5350,7 +5350,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "marching-on-montessori-at-home",
     title: "Marching On...Montessori at Home",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2020-05-13",
     categories: [
       "Emotionally Healthy Children",
@@ -5368,7 +5368,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "families-that-play-together-weather-tough-times-together",
     title: "Families that Play Together...Weather Tough Times Together",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-06-12",
     categories: [
       "Brain Development",
@@ -5391,7 +5391,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "an-overview-of-adjusting-to-life-in-2020-2021",
     title: "An Overview of \"Adjusting to Life in 2020-2021\"",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-07-28",
     categories: [
       "Emotionally Healthy Children",
@@ -5431,7 +5431,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "adjusting-to-life-2020-2021-social-connections-outside-the-home",
     title: "Adjusting to Life 2020-2021: Social Connections Outside the Home",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-09-01",
     categories: [
       "Covid",
@@ -5451,7 +5451,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "adjusting-to-life-in-2020-2021-one-adult-voice-healthy-practice-during-covid19",
     title: "Adjusting to Life in 2020-2021: One Adult Voice - Healthy Practice During Covid19",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-09-08",
     categories: [
       "Covid",
@@ -5506,7 +5506,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "adjusting-to-life-2020-2021-what-s-in-the-silver-lining",
     title: "Adjusting to Life 2020-2021: What's in the Silver Lining?",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-09-29",
     categories: [
       "Covid",
@@ -5546,7 +5546,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "boundaries-making-them-work-at-home-for-your-child-s-learning-and-development",
     title: "Boundaries Making Them Work at Home for Your Child’s Learning and Development",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-10-13",
     categories: [
       "Covid",
@@ -5601,7 +5601,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "exploring-our-core-values-keeping-the-holidays-joyful-and-meaningful",
     title: "Exploring Our Core Values  Keeping the Holidays Joyful and Meaningful",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-11-17",
     categories: [
       "Family Resources",
@@ -5620,7 +5620,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "part-1-from-life-s-moments-to-resolutions-starting-the-new-year-with-positivity-",
     title: "Part 1 - From Life's Moments to Resolutions| Starting the New Year with Positivity and Hope",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2020-12-15",
     categories: [
       "Family Resources",
@@ -5639,7 +5639,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "part-2-from-life-s-moments-to-resolutions-putting-resolutions-into-practice",
     title: "Part 2 - From Life's Moments to Resolutions, Putting Resolutions Into Practice",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-01-05",
     categories: [
       "Family Resources",
@@ -5676,7 +5676,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "part-3-from-life-s-moments-to-resolutions-building-character-along-the-way",
     title: "Part 3 -  From Life's Moments to Resolutions: Building Character Along the Way!",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-01-19",
     categories: [
       "Montessori Parenting",
@@ -5693,7 +5693,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "optimism-a-cornerstone-to-resilience",
     title: "Optimism| A Cornerstone to Resilience",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-01-26",
     categories: [
       "Montessori Parenting",
@@ -5733,7 +5733,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "part-1-all-we-need-is-love-giving-and-receiving-love",
     title: "Part 1: All We Need Is Love Giving and Receiving Love",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-02-09",
     categories: [
       "Family Resources",
@@ -5832,7 +5832,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "the-seasons-of-childhood-understanding-your-child-s-growth-and-learning",
     title: "The Seasons of Childhood  Understanding Your Child’s Growth and Learning",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-03-30",
     categories: [
       "Family Resources",
@@ -5850,7 +5850,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "bless-them-change-me-impact-of-attitudes-on-relationships-with-dorothy-harman",
     title: "\"Bless Them, Change Me - Impact of Attitudes on Relationships\" with Dorothy Harman",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-04-06",
     categories: [
       "Emotionally Healthy Children",
@@ -5913,7 +5913,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "montessori-or-montessori-ish-how-to-choose-an-authentic-montessori-school",
     title: "Montessori or Montessori-ish, How to Choose an Authentic Montessori School",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-04-27",
     categories: [
       "Family Resources",
@@ -5977,7 +5977,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "summer-slides-to-summer-strides-looking-through-a-montessori-lens-at-summer",
     title: "Summer Slides to Summer Strides  Looking Through a Montessori Lens at Summer",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-06-01",
     categories: [
       "Brain Development",
@@ -6064,7 +6064,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "as-your-child-begins-a-new-school-year-transitioning-from-one-level-to-another",
     title: "As Your Child Begins a New School Year, Transitioning from One Level to Another",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-07-13",
     categories: [
       "Family Resources",
@@ -6133,7 +6133,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "your-child-s-first-experience-from-home-to-school-infants-toddlers-and-three-yea",
     title: "Your Child's First Experience from Home to School: Infants, Toddlers, and Three Year Olds",
-    author: "kathyleitch@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-07-27",
     categories: [
       "Family Resources",
@@ -6182,7 +6182,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "journey-into-the-montessori-learning-experiencei-what-to-expect-in-early-childho",
     title: "Journey Into the Montessori Learning ExperienceI  What to Expect in Early Childhood Classrooms",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-08-17",
     categories: [
       "Family Resources",
@@ -6206,7 +6206,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "journey-into-the-montessori-learning-experience",
     title: "Journey Into the Montessori Learning Experience",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2021-08-24",
     categories: [
       "Child's Work",
@@ -6458,7 +6458,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "my-child-s-learning-experiences-in-their-school-and-classroom-parent-involvement",
     title: "My Child’s Learning Experiences in Their School and Classroom: Parent Involvement and Support",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-09-14",
     categories: [
       "Family Resources",
@@ -6552,7 +6552,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "three-period-lesson-vocabulary",
     title: "Three Period Lesson - Vocabulary",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2017-01-17",
     categories: [
       "Child's Work",
@@ -6648,7 +6648,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "encouraging-kindness-and-empathy",
     title: "Encouraging Kindness and Empathy",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-10-18",
     categories: [
       "Emotional Intelligence (EQ)",
@@ -6670,7 +6670,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "encouraging-your-child-s-independence",
     title: "Encouraging Your Child's Independence",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-10-27",
     categories: [
       "Emotional Intelligence (EQ)",
@@ -6693,7 +6693,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "celebrating-winter-holidays-global-traditions",
     title: "Celebrating Winter Holidays: Global Traditions",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2021-11-30",
     categories: [
       "Family Resources",
@@ -6737,7 +6737,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "a-cup-of-calm-recipe-to-relaxation",
     title: "A Cup of Calm: Recipe to Relaxation",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2021-12-21",
     categories: [
       "Grace and Courtesy",
@@ -6762,7 +6762,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "setting-the-tone-for-2022-family-fun-is-more-than-fluff",
     title: "Setting the Tone for 2022: Family Fun Is More Than Fluff",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2022-01-18",
     categories: [
       "Family Resources",
@@ -6781,7 +6781,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "out-of-balance-cultivating-equilibrium",
     title: "“Out of Balance?” Cultivating Equilibrium",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2022-01-25",
     categories: [
       "Emotionally Healthy Children",
@@ -6803,7 +6803,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "environmental-science-and-montessori",
     title: "Environmental Science and Montessori",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2022-02-01",
     categories: [
       "Family Resources",
@@ -6860,7 +6860,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "the-how-to-s-of-family-meetings-watch-our-panelists-role-play-a-family-meeting",
     title: "The 'How To's' of Family Meetings: Watch Our Panelists Role Play a Family Meeting",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2022-02-22",
     categories: [
       "Family Resources",
@@ -6882,7 +6882,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "what-is-typical-development-in-montessori-family-life",
     title: "What Is \"Typical\" Development? in Montessori Family Life",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2022-03-01",
     categories: [
       "Brain Development",
@@ -6944,7 +6944,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "a-montessori-adult-is-with-cassi-mackey",
     title: "A Montessori Adult Is... with Cassi Mackey",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2022-04-05",
     categories: [
       "Family Resources",
@@ -6968,7 +6968,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "stewards-of-the-earth-preparing-for-earth-day-with-our-families",
     title: "Stewards of the Earth  Preparing for Earth Day with Our Families",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2022-04-12",
     categories: [
       "Family Resources",
@@ -7010,7 +7010,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "turn-i-can-t-wait-for-school-to-start-again-to-i-don-t-want-summer-to-end",
     title: "Turn 'I Can’t Wait for School to Start Again!' to 'I Don’t Want Summer to End!'",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2022-05-24",
     categories: [
       "Family Resources",
@@ -7034,7 +7034,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "interview-with-the-2022-newgate-school-graduates",
     title: "Interview with the 2022 NewGate School Graduates",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2022-06-07",
     categories: [
       "Family Resources",
@@ -7435,7 +7435,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "what-we-believe-our-children-receive-living-out-our-family-values",
     title: "What We Believe Our Children Receive:  Living Out Our Family Values",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2022-10-18",
     categories: [
       "Discipline",
@@ -7800,7 +7800,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "physical-wellness-part-2-the-sleep-we-need",
     title: "Physical Wellness: Part 2 - The Sleep We Need",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2023-04-18",
     categories: [
       "Family Resources",
@@ -7866,7 +7866,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "downtime-is-essential-time-how-to-be-a-cool-cat",
     title: "Downtime Is Essential Time: How To Be A Cool Cat",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2023-05-16",
     categories: [
       "Family Resources",
@@ -8037,7 +8037,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "one-family-s-way-to-help-children-who-are-anxious",
     title: "One Family's Way to Help Children Who Are Anxious",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2023-08-01",
     categories: [
       "Family Resources",
@@ -8126,7 +8126,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "transforming-your-parent-caregiver-teacher-relationship-courageous-conversations",
     title: "Transforming Your Parent/Caregiver-Teacher Relationship: Courageous Conversations",
-    author: "cassimackey11@gmail.com",
+    author: "The Montessori Foundation",
     date: "2023-09-12",
     categories: [
       "Family Resources",
@@ -8274,7 +8274,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "finding-ways-for-families-to-center-themselves-during-the-holidays",
     title: "Finding Ways for Families to Center Themselves During the Holidays",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2023-12-19",
     categories: [
       "Family Resources",
@@ -8340,7 +8340,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "wit-and-wisdom-a-family-chat-raising-your-child-the-montessori-way-with-lorna-mc",
     title: "Wit and Wisdom: A Family Chat:  \"Raising Your Child the Montessori Way\" with Lorna McGrath",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2024-07-31",
     categories: [
       "Family Resources",
@@ -9231,7 +9231,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "webcast-driven-to-abstraction-the-impact-of-imposing-academics-on-toddlers",
     title: "Webcast: Driven To Abstraction The Impact Of Imposing Academics On Toddlers",
-    author: "kathyleitch@montessori.org",
+    author: "The Montessori Foundation",
     date: "2019-06-25",
     categories: [
       "Child's Work",
@@ -9895,7 +9895,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "montessori-for-every-family-with-tim-seldin-and-lorna-mcgrath",
     title: "Montessori for Every Family with Tim Seldin and Lorna McGrath",
-    author: "lornamcgrath@montessori.org",
+    author: "The Montessori Foundation",
     date: "2021-12-08",
     categories: [
       "Video"
@@ -10006,7 +10006,7 @@ export const ARTICLE_META: ArticleMeta[] = [
   {
     slug: "the-child-is-the-teacher-a-life-of-maria-montessori-2",
     title: "The Child Is the Teacher: A Life of Maria Montessori",
-    author: "cridestefano@gmail.com",
+    author: "The Montessori Foundation",
     date: "2022-07-20",
     categories: [
       "Maria Montessori",

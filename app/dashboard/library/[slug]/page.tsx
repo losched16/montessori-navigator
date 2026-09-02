@@ -119,7 +119,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         </h1>
 
         <div className="flex items-center gap-3 text-[14px] font-medium text-[color:var(--ink-secondary)] border-t border-[color:var(--separator)] pt-5">
-          <span className="text-[color:var(--ink)]">{article.author}</span>
+          <span className="text-[color:var(--ink)]">{article.author.includes('@') ? 'The Montessori Foundation' : article.author}</span>
           {article.date && (
             <>
               <span className="text-[color:var(--separator)]">·</span>

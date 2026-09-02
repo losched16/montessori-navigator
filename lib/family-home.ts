@@ -271,6 +271,30 @@ export function getHeroInsight(
 
 // ── Activities for the Home carousel ──
 
+/**
+ * Home-suitability curation layer (real-user feedback):
+ * - 'home_ready'             — household materials, do it today
+ * - 'common_purchase'        — inexpensive common items (magnetic letters, paint)
+ * - 'specialized_montessori' — classroom apparatus (Golden Beads, Pink Tower…)
+ *
+ * Recommendations (Home, Explore "Things to Try", My Child, Abigail) default
+ * to home_ready + common_purchase. Specialized lessons stay in the corpus for
+ * curriculum pages and explicit search — they are never deleted, only kept
+ * out of default "try this at home" suggestions.
+ */
+export type HomeActivitySuitability = 'home_ready' | 'common_purchase' | 'specialized_montessori'
+
+const SPECIALIZED_MATERIALS = /golden bead|pink tower|brown stair|moveable alphabet|sandpaper (letter|numeral)|number rod|spindle box|knobbed cylinder|binomial|trinomial|bead (chain|frame|bar|square|cube)|stamp game|geometric cabinet|colou?r tablet|sound cylinder|red rod|hundred board|teen board|cards and counters|object permanence box|constructive triangle|metal inset/i
+
+const COMMON_PURCHASE = /magnetic letter|watercolou?r|paint|modeling clay|play ?dough|yarn|craft|glue|child-safe scissors|seed(s| packet)|word card/i
+
+export function classifySuitability(name: string, materials: string[], description: string): HomeActivitySuitability {
+  const haystack = `${name} ${materials.join(' ')} ${description}`
+  if (SPECIALIZED_MATERIALS.test(haystack)) return 'specialized_montessori'
+  if (COMMON_PURCHASE.test(haystack)) return 'common_purchase'
+  return 'home_ready'
+}
+
 export interface HomeActivity {
   id: string
   name: string
@@ -283,6 +307,7 @@ export interface HomeActivity {
   presentation: string[]
   whyItMatters: string
   diyTip?: string
+  suitability: HomeActivitySuitability
 }
 
 const AREA_IMAGES: Record<string, string> = {
@@ -315,8 +340,78 @@ const SLUG_AGES: Record<string, string> = {
   '3-years': 'Age 3–4', '4-years': 'Age 4–5', '5-years': 'Age 5–6',
 }
 
+type CuratedActivity = Omit<HomeActivity, 'suitability'>
+const asHomeReady = (a: CuratedActivity): HomeActivity => ({ ...a, suitability: 'home_ready' })
+
+// Curated home-ready activities for the 3–6 band. Added after real-user
+// feedback: once classroom-material lessons (Golden Beads, Moveable Alphabet,
+// Pink Tower…) are excluded from default recommendations, the imported
+// 3–5-year pools run thin. These use only household materials.
+const HOME_EXTRAS: Record<string, CuratedActivity[]> = {
+  '3-years': [
+    { id: 'extra-plants', name: 'Watering the Plants', category: 'Practical Life', duration: '10 min', ages: 'Age 3–4',
+      image: '/images/environment/living-room-setup.jpg',
+      description: 'One small watering can (or cup), and the plants become their responsibility.',
+      materials: ['A small watering can or cup', 'A cloth for drips'],
+      presentation: ['Show how to fill the can a little at a time', 'Water one plant slowly, watching the soil', 'Hand it over — their job now', 'Wipe drips together'],
+      whyItMatters: 'Caring for living things builds responsibility, gentle movement and the pride of real contribution — no equipment needed.' },
+    { id: 'extra-socks', name: 'Sock Matching', category: 'Sensorial', duration: '10 min', ages: 'Age 3–4',
+      image: '/images/environment/playroom.jpg',
+      description: 'The laundry basket is a matching game: find the pairs, fold them together.',
+      materials: ['A pile of clean socks'],
+      presentation: ['Tip the socks into a pile', 'Pick one: "Can you find its partner?"', 'Match, then fold the pair together', 'Deliver them to the drawer'],
+      whyItMatters: 'Visual discrimination and sorting — the same skills classroom materials train — inside a genuinely useful family job.' },
+  ],
+  '4-years': [
+    { id: 'extra-table', name: 'Setting the Table', category: 'Practical Life', duration: '10 min', ages: 'Age 4–5',
+      image: '/images/environment/living-room-setup.jpg',
+      description: 'Their own real job before every meal: plates, cups, forks, napkins — placed with care.',
+      materials: ['Everyday dishes and cutlery', 'Napkins'],
+      presentation: ['Walk through one place setting slowly', 'Let them carry one item at a time', 'Step back — the table is theirs', 'Thank them at the meal, not with praise but with use'],
+      whyItMatters: 'Sequencing, counting, care of movement and real contribution — practical life at its purest, with things you already own.' },
+    { id: 'extra-fruit', name: 'Preparing a Fruit Snack', category: 'Practical Life', duration: '15 min', ages: 'Age 4–5',
+      image: '/images/environment/play-area.jpg',
+      description: 'Washing, peeling and slicing soft fruit with a child-safe knife, then serving it.',
+      materials: ['A banana or soft fruit', 'A butter knife or child-safe knife', 'A small cutting board and plate'],
+      presentation: ['Wash hands and fruit together', 'Show one slow slice, then hand over the knife', 'Arrange the slices on a plate', 'They serve — everyone says thank you'],
+      whyItMatters: 'Knife work builds concentration and fine motor control, and serving others builds belonging. Kitchen, not classroom.' },
+    { id: 'extra-soundhunt', name: 'Letter Sound Hunt', category: 'Language & Writing', duration: '10 min', ages: 'Age 4–5',
+      image: '/images/environment/girl-reading.jpg',
+      description: 'Pick one sound — /s/ — and hunt the house for things that start with it.',
+      materials: ['Nothing — just the house'],
+      presentation: ['Choose one letter SOUND (say /s/, not "ess")', 'Hunt room by room: sock, spoon, soap...', 'Collect finds in a basket', 'Count the treasure at the end'],
+      whyItMatters: 'Phonemic awareness — hearing the sounds inside words — is the real preparation for reading, and it needs no materials at all.' },
+    { id: 'extra-baking', name: 'Baking: Count and Measure', category: 'Mathematics', duration: '30 min', ages: 'Age 4–5',
+      image: '/images/environment/play-area.jpg',
+      description: 'A simple recipe where the child does the counting, scooping and measuring.',
+      materials: ['Any simple recipe', 'Measuring cups and spoons', 'A bowl and spoon'],
+      presentation: ['Read the recipe aloud together', 'They count every scoop and cup', 'Let them pour, stir and check', 'Eat the math'],
+      whyItMatters: 'Quantities you can hold, pour and taste — real measurement builds number sense far better than drilling.' },
+    { id: 'extra-nature', name: 'Nature Treasure Sort', category: 'Sensorial', duration: '20 min', ages: 'Age 4–5',
+      image: '/images/environment/boy-outdoor.jpg',
+      description: 'Collect leaves, stones and seeds on a walk, then sort them by size, color or kind.',
+      materials: ['A small bag or basket', 'A tray or towel to sort on'],
+      presentation: ['Collect anything interesting (that may be taken)', 'Back home, tip out the treasure', '"How could we sort these?" — follow their idea', 'Display the favorites on a shelf'],
+      whyItMatters: 'Classification is the sensorial work of this age — and nature offers infinite free material.' },
+  ],
+  '5-years': [
+    { id: 'extra-list', name: 'Write the Shopping List', category: 'Language & Writing', duration: '15 min', ages: 'Age 5–6',
+      image: '/images/environment/girl-reading.jpg',
+      description: 'They write (phonetically!) what the family needs, then check items off at the store.',
+      materials: ['Paper and pencil'],
+      presentation: ['Walk the kitchen together: "What are we out of?"', 'They write each word by its sounds — "milc" is perfect', 'At the store, they read and check off the list', 'Celebrate the job, not the spelling'],
+      whyItMatters: 'Real writing with a real purpose. Phonetic spelling shows strong sound awareness — the path to reading.' },
+    { id: 'extra-measure', name: 'Kitchen Math: Halves and Doubles', category: 'Mathematics', duration: '20 min', ages: 'Age 5–6',
+      image: '/images/environment/play-area.jpg',
+      description: 'Double a recipe or halve a snack — real fractions with cups and spoons.',
+      materials: ['Measuring cups and spoons', 'Any ingredient to portion'],
+      presentation: ['"The recipe says one cup — we need double. How many?"', 'Let them measure and check', 'Try halves: "How do we share this fairly?"', 'Talk about what happened, briefly'],
+      whyItMatters: 'Doubling and halving with real quantities plants the ideas behind multiplication and fractions — no apparatus required.' },
+  ],
+}
+
 // Hand-curated activities for children older than the seo-content pages cover.
-const OLDER_ACTIVITIES: Record<string, HomeActivity[]> = {
+const OLDER_ACTIVITIES: Record<string, CuratedActivity[]> = {
   '6-9': [
     { id: 'older-cooking', name: 'Cook One Dish Solo', category: 'Practical Life', duration: '30 min', ages: 'Ages 6–9',
       image: AREA_IMAGES.practical_life,
@@ -385,64 +480,60 @@ const OLDER_ACTIVITIES: Record<string, HomeActivity[]> = {
   ],
 }
 
-// Full flattened activity pool across every age band — used by Explore for
-// browsing/search. Same data as getHomeActivities, without the child filter.
-export function getAllHomeActivities(): HomeActivity[] {
-  const all: HomeActivity[] = []
-  ACTIVITY_PAGES.forEach(page => {
-    page.categories.forEach(cat => {
-      cat.activities.forEach((a, i) => {
-        all.push({
-          id: `${page.slug}-${cat.area}-${i}`,
-          name: a.name,
-          category: cat.areaLabel,
-          duration: DURATIONS[all.length % DURATIONS.length],
-          ages: SLUG_AGES[page.slug] || '',
-          image: AREA_IMAGES[cat.area] || AREA_IMAGES.practical_life,
-          description: a.description,
-          materials: a.materials,
-          presentation: a.presentation,
-          whyItMatters: a.whyItMatters,
-          diyTip: a.diyTip,
-        })
-      })
-    })
-  })
-  Object.values(OLDER_ACTIVITIES).forEach(set => all.push(...set))
-  return all
-}
-
-export function getHomeActivities(child: Child): HomeActivity[] {
-  const ageMonths = getAgeMonths(child.date_of_birth)
-  if (ageMonths === null) return OLDER_ACTIVITIES['6-9']
-
-  const slug = activitySlugForAge(ageMonths)
-  if (!slug) {
-    const plane = getAgePlane(child.date_of_birth)
-    return OLDER_ACTIVITIES[plane] || OLDER_ACTIVITIES['12+']
-  }
-
+function pageActivities(slug: string): HomeActivity[] {
   const page = ACTIVITY_PAGES.find(p => p.slug === slug)
-  if (!page) return OLDER_ACTIVITIES['6-9']
-
-  const flat: HomeActivity[] = []
+  if (!page) return []
+  const out: HomeActivity[] = []
   page.categories.forEach(cat => {
     cat.activities.forEach((a, i) => {
-      flat.push({
+      out.push({
         id: `${slug}-${cat.area}-${i}`,
         name: a.name,
         category: cat.areaLabel,
-        duration: DURATIONS[flat.length % DURATIONS.length],
+        duration: DURATIONS[out.length % DURATIONS.length],
         ages: SLUG_AGES[slug] || '',
-        image: AREA_IMAGES[cat.area] || (ageMonths < 15 ? AREA_IMAGES.baby : AREA_IMAGES.practical_life),
+        image: AREA_IMAGES[cat.area] || AREA_IMAGES.practical_life,
         description: a.description,
         materials: a.materials,
         presentation: a.presentation,
         whyItMatters: a.whyItMatters,
         diyTip: a.diyTip,
+        suitability: classifySuitability(a.name, a.materials, a.description),
       })
     })
   })
+  return [...out, ...(HOME_EXTRAS[slug] || []).map(asHomeReady)]
+}
+
+/**
+ * Full flattened activity pool across every age band.
+ * By default EXCLUDES specialized classroom-material lessons — they should
+ * never surface in generic recommendations. Pass includeSpecialized for the
+ * search corpus, where a parent explicitly looking for "golden beads" should
+ * still find the lesson.
+ */
+export function getAllHomeActivities(opts: { includeSpecialized?: boolean } = {}): HomeActivity[] {
+  const all: HomeActivity[] = []
+  ACTIVITY_PAGES.forEach(page => all.push(...pageActivities(page.slug)))
+  Object.values(OLDER_ACTIVITIES).forEach(set => all.push(...set.map(asHomeReady)))
+  return opts.includeSpecialized
+    ? all
+    : all.filter(a => a.suitability !== 'specialized_montessori')
+}
+
+export function getHomeActivities(child: Child): HomeActivity[] {
+  const ageMonths = getAgeMonths(child.date_of_birth)
+  if (ageMonths === null) return OLDER_ACTIVITIES['6-9'].map(asHomeReady)
+
+  const slug = activitySlugForAge(ageMonths)
+  if (!slug) {
+    const plane = getAgePlane(child.date_of_birth)
+    return (OLDER_ACTIVITIES[plane] || OLDER_ACTIVITIES['12+']).map(asHomeReady)
+  }
+
+  // Default recommendations are things a parent can actually do at home —
+  // classroom-material lessons stay out unless explicitly sought.
+  const flat = pageActivities(slug).filter(a => a.suitability !== 'specialized_montessori')
   // Rotate the starting point daily so the shelf feels alive, cap at 5.
   const start = flat.length > 0 ? dayOfYear() % flat.length : 0
   const rotated = [...flat.slice(start), ...flat.slice(0, start)]

@@ -24,11 +24,13 @@ export default function MobileBottomNav() {
               href={item.href}
               aria-current={active ? 'page' : undefined}
               className={`tap-scale flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[48px] px-2 rounded-xl ${
-                active ? 'text-[color:var(--mfa-purple)]' : 'text-[color:var(--mfa-ink-muted)]'
+                active
+                  ? 'text-[color:var(--mfa-purple)] bg-[color:var(--mfa-purple-soft)]'
+                  : 'text-[color:var(--mfa-ink-muted)]'
               }`}
             >
               <Icon size={23} strokeWidth={active ? 2.2 : 1.8} aria-hidden="true" />
-              <span className={`text-[11px] leading-none ${active ? 'font-semibold' : 'font-medium'}`}>
+              <span className={`text-[12px] leading-none ${active ? 'font-semibold' : 'font-medium'}`}>
                 {item.label}
               </span>
             </Link>

@@ -34,7 +34,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           --mfa-clay: #B96943;
           --mfa-clay-soft: #F5E8E0;
 
-          --mfa-sage: #768A69;
+          --mfa-sage: #6C8A5C;
           --mfa-sage-soft: #E9EEE5;
 
           --mfa-forest: #344A3A;
@@ -53,7 +53,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
            "## Try this"-style headings become quiet section eyebrows so the
            guidance reads as a structured card, not a wall of chat text. */
         .abigail-md {
-          font-size: 15.5px;
+          font-size: 16px;
           line-height: 1.65;
           color: var(--mfa-ink);
           overflow-wrap: break-word;

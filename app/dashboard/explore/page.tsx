@@ -23,6 +23,7 @@ import NewsletterCard from '@/components/explore/NewsletterCard'
 import VideoCard from '@/components/explore/VideoCard'
 import ActivityCarousel from '@/components/family/ActivityCarousel'
 import ActivityDetailSheet from '@/components/family/ActivityDetailSheet'
+import ChildSwitcher from '@/components/app/ChildSwitcher'
 import Button from '@/components/ui/Button'
 import { trackEvent, useTrackView, getSafeChildAnalyticsContext } from '@/lib/analytics'
 
@@ -194,7 +195,7 @@ function ExploreInner() {
           </Link>
         ) : (
           <>
-            <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[40px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2">
+            <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[44px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2">
               Explore Montessori
             </h1>
             <p className="text-[15.5px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-lg mb-5">
@@ -376,7 +377,13 @@ function ExploreInner() {
           </ExploreSection>
 
           {selectedChild && forChild.length > 0 && (
-            <ExploreSection title={`For ${childFirst}`}>
+            <section aria-label={`Recommended for ${childFirst}`}>
+              <div className="flex items-center justify-between gap-3 flex-wrap mb-3">
+                <h2 className="font-[family-name:var(--mfa-serif)] text-[23px] sm:text-[27px] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
+                  For {childFirst}
+                </h2>
+                <ChildSwitcher />
+              </div>
               <div className={carouselRow} role="list" aria-label={`Recommended for ${childFirst}`}>
                 {forChild.map(item => (
                   <div key={item.id} role="listitem" className="w-[290px] shrink-0 snap-start">
@@ -384,7 +391,7 @@ function ExploreInner() {
                   </div>
                 ))}
               </div>
-            </ExploreSection>
+            </section>
           )}
 
           <ExploreSection title="Things to Try">

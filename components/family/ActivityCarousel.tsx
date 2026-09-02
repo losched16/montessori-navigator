@@ -56,7 +56,7 @@ export default function ActivityCarousel({ activities, childName, analyticsSourc
               <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[color:var(--mfa-sage)] mb-1">
                 {activity.category}
               </div>
-              <div className="text-[16px] font-semibold text-[color:var(--mfa-ink)] leading-snug mb-1 line-clamp-2">
+              <div className="text-[17px] font-semibold text-[color:var(--mfa-ink)] leading-snug mb-1 line-clamp-2">
                 {activity.name}
               </div>
               <div className="text-[12.5px] text-[color:var(--mfa-ink-muted)] mb-2.5">

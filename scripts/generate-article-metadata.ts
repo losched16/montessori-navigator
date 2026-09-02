@@ -17,7 +17,9 @@ import { ARTICLES } from '../lib/articles'
 const meta = ARTICLES.map(a => ({
   slug: a.slug,
   title: a.title,
-  author: a.author,
+  // Some WordPress-exported authors are raw email addresses — never show
+  // an email as a byline in discovery cards.
+  author: a.author.includes('@') ? 'The Montessori Foundation' : a.author,
   date: a.date,
   categories: a.categories,
   tags: a.tags,

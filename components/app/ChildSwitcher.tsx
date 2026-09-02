@@ -26,16 +26,16 @@ export default function ChildSwitcher() {
         onClick={() => !single && setOpen(true)}
         aria-label={`Selected child: ${selectedChild.name}, ${formatAge(selectedChild.date_of_birth)}${single ? '' : '. Change child'}`}
         aria-haspopup={single ? undefined : 'dialog'}
-        className={`tap-scale inline-flex items-center gap-3 h-[52px] pl-2 pr-4 rounded-2xl bg-white border border-[color:var(--mfa-border)] ${
-          single ? 'cursor-default' : 'hover:border-[color:var(--mfa-ink-muted)]'
+        className={`tap-scale inline-flex items-center gap-3 h-[54px] pl-2 pr-4 rounded-2xl bg-[color:var(--mfa-purple-soft)] border-2 border-[rgba(74,44,130,0.25)] shadow-sm ${
+          single ? 'cursor-default' : 'hover:border-[color:var(--mfa-purple)]'
         }`}
       >
         <Avatar name={selectedChild.name} src={selectedChild.profile_photo_url} size={36} />
-        <span className="text-[15px] font-semibold text-[color:var(--mfa-ink)]">
+        <span className="text-[16px] font-semibold text-[color:var(--mfa-ink)]">
           {selectedChild.name}
           <span className="font-normal text-[color:var(--mfa-ink-secondary)]"> · {formatAge(selectedChild.date_of_birth)}</span>
         </span>
-        {!single && <ChevronDown size={18} className="text-[color:var(--mfa-ink-muted)]" aria-hidden="true" />}
+        {!single && <ChevronDown size={19} className="text-[color:var(--mfa-purple)]" aria-hidden="true" />}
       </button>
 
       <ChildSwitcherSheet open={open} onClose={() => setOpen(false)} />

@@ -144,7 +144,10 @@ function activityToItem(a: HomeActivity): ExploreItem {
     description: a.description,
     image: a.image,
     category: a.category,
-    metadata: [a.duration, a.ages].filter(Boolean).join(' · '),
+    metadata: [
+      a.duration, a.ages,
+      a.suitability === 'specialized_montessori' ? 'Classroom material' : null,
+    ].filter(Boolean).join(' · '),
     activity: a,
     _search: {
       title: a.name.toLowerCase(),
@@ -156,12 +159,15 @@ function activityToItem(a: HomeActivity): ExploreItem {
 }
 
 /** Static corpus (articles + newsletters + activities). DB resources are
- *  merged in by the page when/if they load — Explore works without them. */
+ *  merged in by the page when/if they load — Explore works without them.
+ *  The SEARCH corpus includes specialized classroom lessons (a parent
+ *  explicitly searching "golden beads" should find the explanation) — but
+ *  every recommendation row filters to home-suitable activities. */
 export function getStaticItems(): ExploreItem[] {
   return [
     ...getAllArticleMeta().map(articleToItem),
     ...getAllNewsletters().map(newsletterToItem),
-    ...getAllHomeActivities().map(activityToItem),
+    ...getAllHomeActivities({ includeSpecialized: true }).map(activityToItem),
   ]
 }
 

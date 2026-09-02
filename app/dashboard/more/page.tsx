@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
   School, FileText, Bookmark, ClipboardList, BarChart3, Home as HomeIcon,
-  BookOpen, Newspaper, Route, Settings, LogOut, ChevronRight, ArrowLeftRight,
+  BookOpen, Newspaper, Route, Star, Baby, Settings, LogOut, ChevronRight, ArrowLeftRight,
   type LucideIcon,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
@@ -22,6 +22,14 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
     rows: [
       { label: 'School', href: '/dashboard/schools', icon: School },
       { label: 'Notes', href: '/dashboard/notes', icon: FileText },
+    ],
+  },
+  {
+    title: 'Child & Learning',
+    rows: [
+      { label: 'Milestones', href: '/dashboard/milestones', icon: Star },
+      { label: 'Montessori Learning', href: '/dashboard/curriculum', icon: Route },
+      { label: 'Development Guide', href: '/dashboard/development', icon: Baby },
     ],
   },
   {
@@ -43,7 +51,6 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
     rows: [
       { label: 'Full Library', href: '/dashboard/library', icon: BookOpen },
       { label: "Tomorrow's Child", href: '/dashboard/explore?collection=tomorrows-child', icon: Newspaper },
-      { label: 'Montessori Learning', href: '/dashboard/curriculum', icon: Route },
     ],
   },
 ]
@@ -73,20 +80,23 @@ export default function MorePage() {
     router.push('/auth/login')
   }
 
-  const rowClasses = 'tap-scale flex items-center gap-3.5 px-4 min-h-[56px] text-[15px] font-medium text-[color:var(--mfa-ink)] hover:bg-[color:var(--mfa-surface-warm)] transition'
+  const rowClasses = 'tap-scale flex items-center gap-3.5 px-4 min-h-[60px] text-[16px] font-medium text-[color:var(--mfa-ink)] hover:bg-[color:var(--mfa-surface-warm)] transition'
 
   return (
     <div className="max-w-[640px] mx-auto pb-24 sm:pb-10">
       <div className="pt-2 pb-6">
-        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[36px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
-          More
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[34px] sm:text-[42px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
+          Menu
         </h1>
+        <p className="text-[15px] text-[color:var(--mfa-ink-secondary)] mt-1.5">
+          Everything else in Family Alliance.
+        </p>
       </div>
 
       <div className="space-y-6">
         {GROUPS.map(group => (
           <section key={group.title} aria-label={group.title}>
-            <h2 className="text-[11px] font-bold tracking-[0.18em] uppercase text-[color:var(--mfa-ink-muted)] mb-2 px-1">
+            <h2 className="text-[12.5px] font-bold tracking-[0.16em] uppercase text-[color:var(--mfa-clay)] mb-2 px-1">
               {group.title}
             </h2>
             <div className="rounded-[20px] bg-white border border-[color:var(--mfa-border)] overflow-hidden divide-y divide-[color:var(--mfa-border)]">
@@ -94,7 +104,7 @@ export default function MorePage() {
                 const Icon = row.icon
                 return (
                   <Link key={row.label} href={row.href} className={rowClasses}>
-                    <Icon size={20} className="text-[color:var(--mfa-ink-secondary)]" aria-hidden="true" />
+                    <Icon size={21} className="text-[color:var(--mfa-ink-secondary)]" aria-hidden="true" />
                     <span className="flex-1">{row.label}</span>
                     <ChevronRight size={18} className="text-[color:var(--mfa-ink-muted)]" aria-hidden="true" />
                   </Link>
@@ -105,7 +115,7 @@ export default function MorePage() {
         ))}
 
         <section aria-label="Account">
-          <h2 className="text-[11px] font-bold tracking-[0.18em] uppercase text-[color:var(--mfa-ink-muted)] mb-2 px-1">
+          <h2 className="text-[12.5px] font-bold tracking-[0.16em] uppercase text-[color:var(--mfa-clay)] mb-2 px-1">
             Account
           </h2>
           <div className="rounded-[20px] bg-white border border-[color:var(--mfa-border)] overflow-hidden divide-y divide-[color:var(--mfa-border)]">

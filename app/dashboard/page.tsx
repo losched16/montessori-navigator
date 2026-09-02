@@ -92,7 +92,7 @@ export default function DashboardHome() {
         <div className="text-[11px] font-bold tracking-[0.2em] uppercase text-[color:var(--mfa-clay)] mb-2">
           {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
         </div>
-        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[40px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
+        <h1 className="font-[family-name:var(--mfa-serif)] text-[32px] sm:text-[44px] leading-[1.05] font-semibold text-[color:var(--mfa-ink)] tracking-tight">
           {hourGreeting()}{parentName ? `, ${parentName}` : ''}.
         </h1>
       </div>

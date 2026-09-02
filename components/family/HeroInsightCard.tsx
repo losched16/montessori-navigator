@@ -25,10 +25,10 @@ export default function HeroInsightCard({ insight }: { insight: HeroInsight }) {
       <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-[color:var(--mfa-clay)] mb-3">
         {insight.eyebrow}
       </div>
-      <h2 className="font-[family-name:var(--mfa-serif)] text-[27px] sm:text-[32px] leading-[1.1] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2.5">
+      <h2 className="font-[family-name:var(--mfa-serif)] text-[28px] sm:text-[35px] leading-[1.1] font-semibold text-[color:var(--mfa-ink)] tracking-tight mb-2.5">
         {insight.title}
       </h2>
-      <p className="text-[16px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl mb-5">
+      <p className="text-[16px] sm:text-[17px] leading-relaxed text-[color:var(--mfa-ink-secondary)] max-w-xl mb-5">
         {insight.description}
       </p>
 
@@ -72,7 +72,7 @@ export default function HeroInsightCard({ insight }: { insight: HeroInsight }) {
           )}
           <div className="text-[12px] font-medium text-[color:var(--mfa-ink-muted)]">{insight.meta}</div>
           <Button href={`/dashboard/chat?q=${encodeURIComponent(insight.abigailPrompt)}`} variant="soft" size="md" className="w-full">
-            Ask Abigail for more ideas
+            Ask Abigail about this
           </Button>
         </div>
       </BottomSheet>

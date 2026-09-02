@@ -1,4 +1,4 @@
-import { Home as House, Sparkles, Sprout, Compass, LayoutGrid, type LucideIcon } from 'lucide-react'
+import { Home as House, Sparkles, Sprout, Compass, Menu, type LucideIcon } from 'lucide-react'
 
 export interface NavItem {
   key: string
@@ -23,7 +23,9 @@ export const PRIMARY_NAV: NavItem[] = [
     activePrefixes: ['/dashboard/explore', '/dashboard/resources', '/dashboard/library', '/dashboard/environment'],
   },
   {
-    key: 'more', label: 'More', href: '/dashboard/more', icon: LayoutGrid,
+    // "Menu" (was "More") — real-user testing showed a generic More icon was
+    // too easy to overlook as the home of secondary destinations.
+    key: 'more', label: 'Menu', href: '/dashboard/more', icon: Menu,
     activePrefixes: ['/dashboard/more', '/dashboard/settings', '/dashboard/reports', '/dashboard/notes', '/dashboard/plans', '/dashboard/schools'],
   },
 ]
