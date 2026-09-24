@@ -1,0 +1,647 @@
+<title>Navigator Partner Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Karla:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#f5f2eb; --surface:#fffdf8; --surface-2:#f0ece2; --line:#e3ddcf; --line-2:#d3cbb9;
+  --ink:#18203a; --ink-2:#4a5167; --muted:#7a7f90;
+  --navy:#1f3a68; --navy-2:#3a5a92; --navy-soft:#e4e9f2; --gold:#b98522;
+  --good:#2e7a4d; --good-bg:#e3f1e7; --warn:#a86b12; --warn-bg:#faeed7; --crit:#b53d33; --crit-bg:#f8e2df; --info:#3a5a92; --info-bg:#e4e9f2;
+  --p1:#d0807f; --p2:#d09a2e; --p3:#5f9150; --p4:#4f8fc0; --p5:#7465bd;
+  --heat:31,58,104;
+  --shadow:0 1px 2px rgba(24,32,58,.05),0 4px 16px rgba(24,32,58,.05);
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Karla",-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#11141c; --surface:#191d28; --surface-2:#212636; --line:#2a3041; --line-2:#394055;
+  --ink:#eef0f6; --ink-2:#b9bfcf; --muted:#8a90a3;
+  --navy:#8fb0e8; --navy-2:#6c90cf; --navy-soft:#253050; --gold:#e0ad4a;
+  --good:#6cc690; --good-bg:#1d3327; --warn:#e7ad52; --warn-bg:#3a2c16; --crit:#ef8a80; --crit-bg:#3d2020; --info:#8fb0e8; --info-bg:#253050;
+  --p1:#e39a99; --p2:#e2b04c; --p3:#7fb26f; --p4:#6eaade; --p5:#9a8ee0;
+  --heat:143,176,232;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#11141c; --surface:#191d28; --surface-2:#212636; --line:#2a3041; --line-2:#394055;
+  --ink:#eef0f6; --ink-2:#b9bfcf; --muted:#8a90a3;
+  --navy:#8fb0e8; --navy-2:#6c90cf; --navy-soft:#253050; --gold:#e0ad4a;
+  --good:#6cc690; --good-bg:#1d3327; --warn:#e7ad52; --warn-bg:#3a2c16; --crit:#ef8a80; --crit-bg:#3d2020; --info:#8fb0e8; --info-bg:#253050;
+  --p1:#e39a99; --p2:#e2b04c; --p3:#7fb26f; --p4:#6eaade; --p5:#9a8ee0;
+  --heat:143,176,232;
+  --shadow:0 1px 2px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;padding-inline:clamp(16px,3vw,40px);padding-block:0 48px}
+.wrap{max-width:1240px;margin:0 auto}
+.tnum{font-variant-numeric:tabular-nums}
+/* header */
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-block:28px 18px}
+.brand{display:flex;flex-direction:column;gap:2px}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(26px,3.4vw,36px);line-height:1.1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--ink-2);font-size:13px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--line-2);background:var(--surface);white-space:nowrap}
+.pill.sample{background:var(--warn-bg);color:var(--warn);border-color:transparent}
+/* tabs */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none;margin-bottom:24px}
+nav.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;padding:12px 14px 11px;font:600 14px var(--sans);color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--navy)}
+.tab .for{font-weight:500;color:var(--muted);font-size:12px;margin-left:6px}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--navy);outline-offset:2px;border-radius:6px}
+/* layout */
+section.panel{display:flex;flex-direction:column;gap:20px}
+.grid{display:grid;gap:20px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g32{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+@media (max-width:980px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g32,.g2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.g4{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);min-width:0}
+.card h2{font-family:var(--serif);font-weight:500;font-size:19px;margin:0;line-height:1.25;text-wrap:balance}
+.card .sub{color:var(--muted);font-size:13px;margin:2px 0 14px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.summary{font-family:var(--serif);font-size:clamp(18px,2vw,22px);line-height:1.4;color:var(--ink);max-width:62ch;margin:0;font-weight:400}
+.summary b{font-weight:600}
+.up{color:var(--good)} .down{color:var(--crit)}
+/* KPI */
+.kpi{display:flex;flex-direction:column;gap:6px}
+.kpi .label{font-size:13px;color:var(--ink-2);font-weight:600}
+.kpi .val{font-family:var(--serif);font-size:34px;font-weight:500;line-height:1;letter-spacing:-.01em}
+.kpi .delta{font-size:13px;color:var(--muted)}
+.kpi .delta b{font-weight:700}
+.kpi svg{width:100%;height:42px;display:block;margin-top:6px}
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:12px}
+.fstep{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:14px;align-items:center}
+.fstep .fl{font-size:14px;font-weight:600;line-height:1.25}
+.fstep .fl small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.fbar{position:relative;height:34px;border-radius:0 6px 6px 0;background:var(--surface-2)}
+.fbar i{position:absolute;inset:0 auto 0 0;background:var(--navy);border-radius:0 6px 6px 0;display:block}
+.fbar span{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-weight:700;font-size:14px;color:#fff;font-variant-numeric:tabular-nums}
+:root[data-theme="dark"] .fbar span{color:#11141c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .fbar span{color:#11141c}}
+.fbar span.out{color:var(--ink)}
+.fconv{font-size:12px;color:var(--ink-2);padding-left:calc(min(190px,40%) + 14px);margin-top:-6px}
+.fconv b{color:var(--ink)}
+@media (max-width:560px){.fstep{grid-template-columns:1fr;gap:4px}.fconv{padding-left:0}}
+/* lists */
+.alist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.alist li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+.alist li:first-child{border-top:0;padding-top:4px}
+.alist .t{font-weight:600;font-size:14px}
+.alist .d{font-size:13px;color:var(--ink-2)}
+.alist .n{font-family:var(--serif);font-size:20px;font-weight:500;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.chip.good{background:var(--good-bg);color:var(--good)}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.chip.crit{background:var(--crit-bg);color:var(--crit)}
+.chip.info{background:var(--info-bg);color:var(--info)}
+/* opportunities */
+.opp{display:flex;flex-direction:column;gap:8px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.opp .big{font-family:var(--serif);font-size:30px;font-weight:500;line-height:1}
+.opp .t{font-weight:700;font-size:14px}
+.opp .d{font-size:13px;color:var(--ink-2)}
+.opp .act{margin-top:auto;font-size:13px;font-weight:600;color:var(--navy)}
+/* charts */
+.chart{position:relative;width:100%}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.axis text{fill:var(--muted);font:12px var(--sans);font-variant-numeric:tabular-nums}
+.grid-line{stroke:var(--line);stroke-width:1}
+.base-line{stroke:var(--line-2);stroke-width:1}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink-2);margin-bottom:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.tip{position:fixed;pointer-events:none;z-index:50;background:var(--ink);color:var(--bg);padding:8px 10px;border-radius:8px;font-size:12.5px;line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.18);max-width:240px;opacity:0;transition:opacity .08s}
+.tip b{font-weight:700}
+.tip .row{display:flex;justify-content:space-between;gap:14px;font-variant-numeric:tabular-nums}
+/* hbar */
+.hbars{display:flex;flex-direction:column;gap:10px}
+.hb{display:grid;grid-template-columns:minmax(110px,170px) 1fr 44px;gap:10px;align-items:center;font-size:14px}
+.hb .track{height:14px;background:var(--surface-2);border-radius:0 4px 4px 0}
+.hb .fill{height:100%;border-radius:0 4px 4px 0}
+.hb .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+/* table */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.toolbar input,.toolbar select{font:14px var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:8px;padding:8px 10px}
+.toolbar input{flex:1 1 220px;min-width:0}
+.seg{display:inline-flex;border:1px solid var(--line-2);border-radius:8px;overflow:hidden;flex-wrap:wrap}
+.seg button{appearance:none;border:0;background:var(--surface);color:var(--ink-2);font:600 13px var(--sans);padding:8px 12px;cursor:pointer;border-left:1px solid var(--line)}
+.seg button:first-child{border-left:0}
+.seg button[aria-pressed="true"]{background:var(--navy);color:var(--surface)}
+.tscroll{overflow-x:auto;margin-inline:-20px;padding-inline:20px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:860px}
+th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--line-2);white-space:nowrap;cursor:pointer;user-select:none}
+th.num,td.num{text-align:right}
+th[aria-sort="ascending"]::after{content:" ↑"} th[aria-sort="descending"]::after{content:" ↓"}
+td{padding:10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;vertical-align:middle}
+td .nm{font-weight:600} td .loc{font-size:12px;color:var(--muted)}
+tr:hover td{background:var(--surface-2)}
+.minibar{display:inline-block;width:56px;height:6px;background:var(--surface-2);border-radius:3px;vertical-align:middle;margin-left:8px;overflow:hidden}
+.minibar i{display:block;height:100%;background:var(--navy)}
+.plan{font-size:12px;font-weight:600;color:var(--ink-2)}
+/* heatmap */
+.heat{border-collapse:separate;border-spacing:3px;min-width:560px;font-size:13px}
+.heat th{cursor:default;text-transform:none;letter-spacing:0;font-size:12px;border:0;padding:4px 6px;text-align:center}
+.heat th.rowh{text-align:left}
+.heat td{border:0;text-align:center;padding:8px 4px;border-radius:4px;font-weight:600;font-size:12.5px}
+/* defs */
+.defs{min-width:720px}
+.defs td{vertical-align:top;font-size:14px}
+.defs td:first-child{font-weight:700;white-space:nowrap}
+.defs code{font-size:12.5px;background:var(--surface-2);padding:1px 5px;border-radius:4px;color:var(--ink)}
+.note{font-size:13px;color:var(--ink-2);max-width:72ch}
+.section-title{font-family:var(--serif);font-size:22px;font-weight:500;margin:8px 0 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">Montessori Foundation · Montessori Navigator</span>
+      <h1>Partner Dashboard</h1>
+    </div>
+    <div class="meta">
+      <span class="pill sample" title="All figures on this page are illustrative sample data">Sample data</span>
+      <span class="pill">Through Sep 24, 2026</span>
+      <span class="pill">Last 12 months</span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Dashboard sections">
+    <button class="tab" role="tab" id="t-overview" aria-controls="overview" aria-selected="true">Overview<span class="for">Partners</span></button>
+    <button class="tab" role="tab" id="t-schools" aria-controls="schools" aria-selected="false">Schools<span class="for">Ops</span></button>
+    <button class="tab" role="tab" id="t-engagement" aria-controls="engagement" aria-selected="false">Parent engagement</button>
+    <button class="tab" role="tab" id="t-revenue" aria-controls="revenue" aria-selected="false">Revenue</button>
+    <button class="tab" role="tab" id="t-definitions" aria-controls="definitions" aria-selected="false">Metric definitions</button>
+  </nav>
+
+  <!-- OVERVIEW -->
+  <section class="panel" id="overview" role="tabpanel" aria-labelledby="t-overview">
+    <p class="summary" id="summary"></p>
+    <div class="grid g4" id="kpis"></div>
+    <div class="grid g32">
+      <div class="card">
+        <h2>Adoption funnel</h2>
+        <p class="sub">Families at partner schools, from enrollment to weekly use</p>
+        <div class="funnel" id="funnel"></div>
+      </div>
+      <div class="card">
+        <h2>Needs attention</h2>
+        <p class="sub">Schools the team should reach out to this week</p>
+        <ul class="alist" id="attention"></ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div><h2>Growth over time</h2><p class="sub">Cumulative parents invited and activated, and parents active in the last 30 days</p></div>
+      </div>
+      <div class="legend" id="growth-legend"></div>
+      <div class="chart" id="growth-chart"></div>
+    </div>
+    <h3 class="section-title">Growth opportunities</h3>
+    <div class="grid g4" id="opps"></div>
+  </section>
+
+  <!-- SCHOOLS -->
+  <section class="panel" id="schools" role="tabpanel" aria-labelledby="t-schools" hidden>
+    <div class="grid g4" id="school-kpis"></div>
+    <div class="card">
+      <div class="card-head"><div><h2>Partner schools</h2><p class="sub">Click a column to sort. Rates are share of the prior step.</p></div></div>
+      <div class="toolbar">
+        <input id="school-search" type="search" placeholder="Search schools or cities" aria-label="Search schools">
+        <div class="seg" id="health-filter" role="group" aria-label="Filter by health"></div>
+      </div>
+      <div class="tscroll"><table id="school-table"><thead></thead><tbody></tbody></table></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h2>New schools per month</h2>
+        <p class="sub">Licenses signed, by month</p>
+        <div class="chart" id="school-bars"></div>
+      </div>
+      <div class="card">
+        <h2>Renewals in the next 90 days</h2>
+        <p class="sub">Sorted by renewal date, with current usage</p>
+        <ul class="alist" id="renewals"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENT -->
+  <section class="panel" id="engagement" role="tabpanel" aria-labelledby="t-engagement" hidden>
+    <div class="grid g4" id="eng-kpis"></div>
+    <div class="card">
+      <h2>Weekly active parents</h2>
+      <p class="sub">Parents who opened Navigator at least once in the week</p>
+      <div class="chart" id="wau-chart"></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h2>What parents use</h2>
+        <p class="sub">Share of parents active in the last 30 days who used each feature</p>
+        <div class="hbars" id="features"></div>
+      </div>
+      <div class="card">
+        <h2>Active parents by plane of development</h2>
+        <p class="sub">Grouped by the age of the child on the parent's profile</p>
+        <div class="hbars" id="planes"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Parent retention by activation month</h2>
+      <p class="sub">Share of each month's newly activated parents still active N months later</p>
+      <div class="tscroll"><table class="heat" id="cohorts"></table></div>
+    </div>
+  </section>
+
+  <!-- REVENUE -->
+  <section class="panel" id="revenue" role="tabpanel" aria-labelledby="t-revenue" hidden>
+    <div class="grid g4" id="rev-kpis"></div>
+    <div class="card">
+      <h2>Monthly recurring revenue</h2>
+      <p class="sub">School licenses and direct parent subscriptions, end of month</p>
+      <div class="legend" id="mrr-legend"></div>
+      <div class="chart" id="mrr-chart"></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h2>School licenses by plan</h2>
+        <p class="sub">Schools and MRR per plan</p>
+        <div class="hbars" id="plans"></div>
+      </div>
+      <div class="card">
+        <h2>Revenue notes</h2>
+        <p class="sub">How the numbers are counted</p>
+        <ul class="alist">
+          <li><span class="chip info">Scope</span><div><div class="t">Parents invited by a school are free</div><div class="d">Their access is covered by the school license, so they count toward adoption, not parent subscription revenue.</div></div><span></span></li>
+          <li><span class="chip info">Scope</span><div><div class="t">Direct parents pay monthly</div><div class="d">Parents who find Navigator on their own subscribe at $12 per month. Annual plans are normalized to a monthly amount.</div></div><span></span></li>
+          <li><span class="chip warn">Later</span><div><div class="t">Marketplace and affiliate revenue</div><div class="d">Add a third series once curated partnerships and PartnerStack payouts are live.</div></div><span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEFINITIONS -->
+  <section class="panel" id="definitions" role="tabpanel" aria-labelledby="t-definitions" hidden>
+    <div class="card">
+      <h2>Metric definitions</h2>
+      <p class="sub">One definition per number, so partners and the team read the dashboard the same way</p>
+      <div class="tscroll"><table class="defs" id="defs"><thead><tr><th>Metric</th><th>Definition</th><th>Source</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="card">
+      <h2>School health rules</h2>
+      <p class="sub">Applied in this order; a school gets the first status that matches</p>
+      <ul class="alist" id="health-rules"></ul>
+    </div>
+  </section>
+</div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+/* ---------- sample data (seeded so it is stable) ---------- */
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var R=rng(20260924);
+var MONTHS=["Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"];
+var MLONG=["Oct 2025","Nov 2025","Dec 2025","Jan 2026","Feb 2026","Mar 2026","Apr 2026","May 2026","Jun 2026","Jul 2026","Aug 2026","Sep 2026"];
+var NAMES=["Willow Creek","Cedar Hill","Brookside","Maple Grove","Riverstone","Lakeview","Oak Hollow","Sunrise","Juniper","Meadowbrook","Harbor Light","Aspen Ridge","Stonebridge","Birchwood","Fox Run","Clearwater","Hillcrest","Pinecrest","Magnolia","Heritage Oaks","Wildflower","Evergreen","Blue Heron","Laurel","Sandpiper","Golden Valley","Quarry Lane","Tall Pines","Fernwood","North Star","Kestrel","Hawthorn","Seaside","Prairie Wind","Elm Street","Red Bud","Silver Lake","Morning Glory"];
+var SUF=["Montessori School","Montessori Academy","Children's House","Montessori","Montessori School","Montessori Community School"];
+var CITIES=["Austin, TX","Asheville, NC","Boulder, CO","Portland, OR","Sarasota, FL","Madison, WI","Ann Arbor, MI","Charlotte, NC","Denver, CO","Raleigh, NC","Minneapolis, MN","Nashville, TN","Phoenix, AZ","Richmond, VA","Seattle, WA","Columbus, OH","Pittsburgh, PA","Sacramento, CA","Atlanta, GA","Tampa, FL","Burlington, VT","Kansas City, MO","Omaha, NE","Tucson, AZ","Savannah, GA","Boise, ID","Durham, NC","Louisville, KY","Albany, NY","Spokane, WA","Lancaster, PA","Santa Fe, NM","Charleston, SC","Des Moines, IA","Hartford, CT","Birmingham, AL","Reno, NV","Eugene, OR"];
+var PLANS={Essentials:149,Growth:249,Campus:399};
+// signing month distribution across 12 months (index), 38 schools total, earlier cohort from before window
+var SIGN=[ -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 0,0,1,1,2,3,3,4,4,5,5,6,6,6,7,7,8,8,9,9,9,10,10,11,11,11];
+var today=new Date(2026,8,24);
+var schools=NAMES.map(function(n,i){
+  var s=SIGN[i]; var monthsLive=s<0?12+Math.floor(R()*10):11-s;
+  var enrolled=Math.round(55+R()*180);
+  var plan=enrolled>170?"Campus":enrolled>100?(R()>.35?"Growth":"Essentials"):(R()>.7?"Growth":"Essentials");
+  var launched=!(i===35||i===36||i===37&&false)&&!(i===36||i===37);
+  var mat=Math.min(1,0.45+monthsLive*0.06);
+  var invPct=launched?Math.min(.97,(0.3+R()*0.55)*mat+0.12):0;
+  if(i===9||i===21) invPct=0.31;
+  var actPct=launched?0.5+R()*0.36:0; if(i===4||i===17) actPct=0.33;
+  var activePct=launched?0.42+R()*0.36:0;
+  var invited=Math.round(enrolled*invPct), activated=Math.round(invited*actPct), active30=Math.round(activated*activePct);
+  var trend=launched?Math.round(-10+R()*38):0; if(i===12) trend=-22;
+  var signDate=s<0?new Date(2024+(R()>.5?1:0),Math.floor(R()*12),1+Math.floor(R()*27)):new Date(2025,9+s,3+Math.floor(R()*24));
+  var renew=new Date(signDate); while(renew<today) renew.setFullYear(renew.getFullYear()+1);
+  return {id:i,name:n+" "+SUF[i%SUF.length],city:CITIES[i],plan:plan,mrr:PLANS[plan],sign:s,signDate:signDate,renew:renew,
+    enrolled:enrolled,invited:invited,activated:activated,active30:active30,trend:trend,launched:launched,
+    invRate:invited/enrolled,actRate:invited?activated/invited:0,useRate:activated?active30/activated:0};
+});
+schools.forEach(function(s){
+  var h;
+  if(!s.launched) h={k:"Not launched",c:"info",r:"Licensed, no parents invited yet"};
+  else if(s.actRate<0.45) h={k:"At risk",c:"crit",r:"Under 45% of invited parents activated"};
+  else if(s.trend<=-15) h={k:"At risk",c:"crit",r:"Active parents down "+Math.abs(s.trend)+"% vs prior 30 days"};
+  else if(s.invRate<0.5) h={k:"Under-invited",c:"warn",r:"Fewer than half of families invited"};
+  else h={k:"Healthy",c:"good",r:"Invites, activation and use on track"};
+  s.health=h;
+});
+function sum(a,f){return a.reduce(function(t,x){return t+f(x)},0)}
+var T={schools:schools.length,enrolled:sum(schools,function(s){return s.enrolled}),invited:sum(schools,function(s){return s.invited}),
+  activated:sum(schools,function(s){return s.activated}),active30:sum(schools,function(s){return s.active30})};
+T.weekly=Math.round(T.active30*0.61);
+var DIRECT=[38,52,71,90,112,139,162,188,219,248,281,312];
+var directNow=DIRECT[11];
+T.active30All=T.active30+Math.round(directNow*0.74);
+// cumulative shapes for parent metrics
+var SHAPE=[.14,.2,.26,.33,.4,.48,.56,.64,.73,.82,.91,1];
+var ACT30SHAPE=[.17,.22,.27,.33,.4,.47,.54,.62,.7,.79,.9,1];
+var S_inv=SHAPE.map(function(x){return Math.round(x*T.invited)});
+var S_actd=SHAPE.map(function(x,i){return Math.round(x*T.activated*(0.97+i*0.0025))});S_actd[11]=T.activated;
+var S_a30=ACT30SHAPE.map(function(x){return Math.round(x*T.active30)});
+var S_schools=MONTHS.map(function(_,m){return schools.filter(function(s){return s.sign<=m}).length});
+var S_new=MONTHS.map(function(_,m){return schools.filter(function(s){return s.sign===m}).length});
+var S_schoolMRR=MONTHS.map(function(_,m){return sum(schools.filter(function(s){return s.sign<=m}),function(s){return s.mrr})});
+var S_parentMRR=DIRECT.map(function(d){return d*12});
+var MRR=S_schoolMRR[11]+S_parentMRR[11], MRRprev=S_schoolMRR[10]+S_parentMRR[10];
+// weekly actives, 26 weeks
+var WAU=[];(function(){var base=T.weekly*0.46;for(var w=0;w<26;w++){var g=base*Math.pow(T.weekly/base,w/25);var seas=(w>=12&&w<=18)?0.9:1;WAU.push(Math.round(g*seas*(0.96+R()*0.08)))}WAU[25]=T.weekly})();
+var WLAB=[];(function(){var d=new Date(2026,8,21);for(var w=25;w>=0;w--){var x=new Date(d);x.setDate(d.getDate()-7*w);WLAB.push(x.toLocaleDateString("en-US",{month:"short",day:"numeric"}))}})();
+
+/* ---------- helpers ---------- */
+var fmt=function(n){return Math.round(n).toLocaleString("en-US")};
+var money=function(n){return "$"+Math.round(n).toLocaleString("en-US")};
+var pct=function(n,d){return Math.round(n*100)+"%"};
+var $=function(id){return document.getElementById(id)};
+var NS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+var tip=$("tip");
+function showTip(html,x,y){tip.innerHTML=html;tip.style.opacity=1;var w=tip.offsetWidth,h=tip.offsetHeight;var left=Math.min(window.innerWidth-w-8,x+14),top=y-h-12;if(top<8)top=y+16;tip.style.left=Math.max(8,left)+"px";tip.style.top=top+"px"}
+function hideTip(){tip.style.opacity=0}
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function niceMax(v){var p=Math.pow(10,Math.floor(Math.log10(v)));var n=v/p;var s=n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10;return s*p}
+function ticks(max,count){var step=niceMax(max/count);var top=Math.ceil(max/step)*step;var t=[];for(var v=0;v<=top+1e-9;v+=step)t.push(v);return t}
+function short(n){return n>=1000?(n/1000).toFixed(n%1000===0?0:1)+"k":String(n)}
+
+function sparkline(svg,vals,color){
+  var W=200,H=42,p=3,max=Math.max.apply(null,vals),min=Math.min.apply(null,vals)*0.9;
+  svg.setAttribute("viewBox","0 0 "+W+" "+H);svg.setAttribute("preserveAspectRatio","none");
+  var pts=vals.map(function(v,i){return[p+i*(W-2*p)/(vals.length-1),H-p-(v-min)/(max-min||1)*(H-2*p)]});
+  var d=pts.map(function(q,i){return(i?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)}).join(" ");
+  el("path",{d:d+" L"+pts[pts.length-1][0]+" "+H+" L"+pts[0][0]+" "+H+" Z",fill:color,"fill-opacity":.1,stroke:"none"},svg);
+  el("path",{d:d,fill:"none",stroke:color,"stroke-width":2,"vector-effect":"non-scaling-stroke","stroke-linejoin":"round"},svg);
+}
+function kpiRow(target,items){
+  target.innerHTML="";
+  items.forEach(function(k){
+    var c=document.createElement("div");c.className="card kpi";
+    var cls=k.good===undefined?"":(k.good?"up":"down");
+    c.innerHTML='<span class="label">'+k.label+'</span><span class="val tnum">'+k.value+'</span><span class="delta">'+(k.delta?'<b class="'+cls+'">'+k.delta+'</b> ':"")+k.note+'</span>';
+    if(k.spark){var s=el("svg",{"aria-hidden":"true"});c.appendChild(s);sparkline(s,k.spark,css("--navy"))}
+    target.appendChild(c);
+  });
+}
+
+function lineChart(target,opts){
+  target.innerHTML="";
+  var W=760,H=280,m={t:14,r:16,b:30,l:48};
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":opts.label},target);
+  var all=[].concat.apply([],opts.series.map(function(s){return s.values}));
+  var tk=ticks(Math.max.apply(null,all),4),ymax=tk[tk.length-1];
+  var n=opts.labels.length,x=function(i){return m.l+i*(W-m.l-m.r)/(n-1)},y=function(v){return H-m.b-v/ymax*(H-m.t-m.b)};
+  var ax=el("g",{"class":"axis"},svg);
+  tk.forEach(function(t){el("line",{x1:m.l,x2:W-m.r,y1:y(t),y2:y(t),"class":t?"grid-line":"base-line"},ax);var tx=el("text",{x:m.l-8,y:y(t)+4,"text-anchor":"end"},ax);tx.textContent=opts.yFmt?opts.yFmt(t):short(t)});
+  var every=opts.every||1;
+  opts.labels.forEach(function(l,i){if((i%every&&i!==n-1)||(i!==n-1&&n-1-i<every*0.6))return;var tx=el("text",{x:x(i),y:H-8,"text-anchor":i===0?"start":i===n-1?"end":"middle"},ax);tx.textContent=l});
+  opts.series.forEach(function(s){
+    var d=s.values.map(function(v,i){return(i?"L":"M")+x(i).toFixed(1)+" "+y(v).toFixed(1)}).join(" ");
+    if(s.area)el("path",{d:d+" L"+x(n-1)+" "+y(0)+" L"+x(0)+" "+y(0)+" Z",fill:s.color,"fill-opacity":.1},svg);
+    el("path",{d:d,fill:"none",stroke:s.color,"stroke-width":2,"stroke-linejoin":"round","stroke-dasharray":s.dash||"none"},svg);
+    el("circle",{cx:x(n-1),cy:y(s.values[n-1]),r:4.5,fill:s.color,stroke:css("--surface"),"stroke-width":2},svg);
+    if(s.endLabel){var t=el("text",{x:x(n-1)-8,y:y(s.values[n-1])-10,"text-anchor":"end",fill:css("--ink"),"font-size":12,"font-weight":700,"font-family":"Karla, sans-serif"},svg);t.textContent=fmt(s.values[n-1])}
+  });
+  var cross=el("line",{y1:m.t,y2:H-m.b,stroke:css("--line-2"),"stroke-width":1,opacity:0},svg);
+  var dots=opts.series.map(function(s){return el("circle",{r:4,fill:s.color,stroke:css("--surface"),"stroke-width":2,opacity:0},svg)});
+  var hit=el("rect",{x:m.l,y:m.t,width:W-m.l-m.r,height:H-m.t-m.b,fill:"transparent"},svg);
+  function move(ev){
+    var r=svg.getBoundingClientRect(),px=(ev.clientX-r.left)/r.width*W;
+    var i=Math.max(0,Math.min(n-1,Math.round((px-m.l)/((W-m.l-m.r)/(n-1)))));
+    cross.setAttribute("x1",x(i));cross.setAttribute("x2",x(i));cross.setAttribute("opacity",1);
+    dots.forEach(function(d,j){d.setAttribute("cx",x(i));d.setAttribute("cy",y(opts.series[j].values[i]));d.setAttribute("opacity",1)});
+    var html="<b>"+(opts.tipLabels||opts.labels)[i]+"</b>"+opts.series.map(function(s){return'<div class="row"><span>'+s.name+"</span><span>"+(opts.yFmt?opts.yFmt(s.values[i]):fmt(s.values[i]))+"</span></div>"}).join("");
+    showTip(html,ev.clientX,ev.clientY);
+  }
+  hit.addEventListener("pointermove",move);hit.addEventListener("pointerdown",move);
+  hit.addEventListener("pointerleave",function(){cross.setAttribute("opacity",0);dots.forEach(function(d){d.setAttribute("opacity",0)});hideTip()});
+}
+
+function barChart(target,opts){
+  target.innerHTML="";
+  var W=760,H=opts.h||260,m={t:14,r:12,b:30,l:opts.l||48};
+  var svg=el("svg",{viewBox:"0 0 "+W+" "+H,role:"img","aria-label":opts.label},target);
+  var totals=opts.labels.map(function(_,i){return sum(opts.series,function(s){return s.values[i]})});
+  var tk=ticks(Math.max.apply(null,totals),4),ymax=tk[tk.length-1];
+  var n=opts.labels.length,band=(W-m.l-m.r)/n,bw=Math.min(40,band*0.56),y=function(v){return H-m.b-v/ymax*(H-m.t-m.b)};
+  var ax=el("g",{"class":"axis"},svg);
+  tk.forEach(function(t){el("line",{x1:m.l,x2:W-m.r,y1:y(t),y2:y(t),"class":t?"grid-line":"base-line"},ax);var tx=el("text",{x:m.l-8,y:y(t)+4,"text-anchor":"end"},ax);tx.textContent=opts.yFmt?opts.yFmt(t):short(t)});
+  opts.labels.forEach(function(l,i){
+    var cx=m.l+band*i+band/2;var tx=el("text",{x:cx,y:H-8,"text-anchor":"middle"},ax);tx.textContent=l;
+    var acc=0,g=el("g",{},svg);
+    opts.series.forEach(function(s,j){
+      var v=s.values[i];if(!v)return;var y0=y(acc),y1=y(acc+v);acc+=v;
+      var top=j===opts.series.length-1||opts.series.slice(j+1).every(function(q){return!q.values[i]});
+      var h=Math.max(0,y0-y1-(j?2:0));
+      if(top){var r=Math.min(4,h);el("path",{d:"M"+(cx-bw/2)+" "+(y1+h+ (j?0:0))+" V"+(y1+r)+" Q"+(cx-bw/2)+" "+y1+" "+(cx-bw/2+r)+" "+y1+" H"+(cx+bw/2-r)+" Q"+(cx+bw/2)+" "+y1+" "+(cx+bw/2)+" "+(y1+r)+" V"+(y1+h)+" Z",fill:s.color},g)}
+      else el("rect",{x:cx-bw/2,y:y1,width:bw,height:h,fill:s.color},g);
+    });
+    var hit=el("rect",{x:m.l+band*i,y:m.t,width:band,height:H-m.t-m.b,fill:"transparent"},svg);
+    var f=function(ev){g.setAttribute("opacity",1);svg.querySelectorAll("g.dim").forEach(function(){});showTip("<b>"+(opts.tipLabels||opts.labels)[i]+"</b>"+opts.series.map(function(s){return'<div class="row"><span>'+s.name+"</span><span>"+(opts.yFmt?opts.yFmt(s.values[i]):fmt(s.values[i]))+"</span></div>"}).join("")+(opts.series.length>1?'<div class="row"><span><b>Total</b></span><span><b>'+(opts.yFmt?opts.yFmt(totals[i]):fmt(totals[i]))+"</b></span></div>":""),ev.clientX,ev.clientY)};
+    hit.addEventListener("pointermove",f);hit.addEventListener("pointerdown",f);hit.addEventListener("pointerleave",hideTip);
+  });
+}
+function legend(target,items){target.innerHTML=items.map(function(s){return'<span><i style="background:'+s.color+'"></i>'+s.name+"</span>"}).join("")}
+function hbars(target,items,max,fmtV){
+  target.innerHTML="";max=max||Math.max.apply(null,items.map(function(i){return i.v}));
+  items.forEach(function(it){var d=document.createElement("div");d.className="hb";
+    d.innerHTML='<span>'+it.k+(it.s?'<br><span style="font-size:12px;color:var(--muted)">'+it.s+'</span>':'')+'</span><div class="track"><div class="fill" style="width:'+(it.v/max*100)+'%;background:'+(it.c||"var(--navy)")+'"></div></div><span class="v">'+(fmtV?fmtV(it.v):it.v+"%")+"</span>";
+    if(it.tip){d.addEventListener("pointermove",function(ev){showTip(it.tip,ev.clientX,ev.clientY)});d.addEventListener("pointerleave",hideTip)}
+    target.appendChild(d)});
+}
+
+/* ---------- OVERVIEW ---------- */
+var newThisMonth=S_new[11];
+var a30Prev=S_a30[10],a30Chg=(T.active30-a30Prev)/a30Prev;
+var notLaunched=schools.filter(function(s){return s.health.k==="Not launched"});
+var atRisk=schools.filter(function(s){return s.health.k==="At risk"});
+var under=schools.filter(function(s){return s.health.k==="Under-invited"});
+$("summary").innerHTML="Navigator is licensed by <b>"+T.schools+" schools</b> reaching "+fmt(T.enrolled)+" families. <b>"+pct(T.activated/T.invited)+"</b> of invited parents have activated, and active parents grew <b class='up'>"+Math.round(a30Chg*100)+"%</b> this month. The biggest lever right now is invites: "+fmt(T.enrolled-T.invited)+" families at partner schools haven't been invited yet.";
+kpiRow($("kpis"),[
+  {label:"Partner schools",value:T.schools,delta:"+"+newThisMonth,good:true,note:"signed this month",spark:S_schools},
+  {label:"Parents invited",value:fmt(T.invited),delta:pct(T.invited/T.enrolled),note:"of enrolled families",spark:S_inv},
+  {label:"Active parents (30 days)",value:fmt(T.active30All),delta:"+"+Math.round(a30Chg*100)+"%",good:true,note:"vs last month, incl. "+fmt(T.active30All-T.active30)+" direct",spark:S_a30},
+  {label:"Monthly recurring revenue",value:money(MRR),delta:"+"+Math.round((MRR-MRRprev)/MRRprev*100)+"%",good:true,note:"vs last month",spark:S_schoolMRR.map(function(v,i){return v+S_parentMRR[i]})}
+]);
+(function(){
+  var steps=[{k:"Enrolled families",s:"at partner schools",v:T.enrolled},{k:"Invited",s:"school sent an invite",v:T.invited},{k:"Activated",s:"created an account",v:T.activated},{k:"Active monthly",s:"used it in last 30 days",v:T.active30},{k:"Active weekly",s:"used it in last 7 days",v:T.weekly}];
+  var f=$("funnel");
+  steps.forEach(function(st,i){
+    var w=st.v/steps[0].v*100;
+    var d=document.createElement("div");d.className="fstep";
+    d.innerHTML='<div class="fl">'+st.k+'<small>'+st.s+'</small></div><div class="fbar"><i style="width:'+w+'%;opacity:'+(1-i*0.13)+'"></i><span class="'+(w<14?"out":"")+'" style="'+(w<14?"left:calc("+w+"% + 8px)":"")+'">'+fmt(st.v)+'</span></div>';
+    f.appendChild(d);
+    if(i<steps.length-1){var c=document.createElement("div");c.className="fconv";c.innerHTML="<b>"+pct(steps[i+1].v/st.v)+"</b> move to next step";f.appendChild(c)}
+  });
+})();
+(function(){
+  var soon=schools.filter(function(s){var d=(s.renew-today)/864e5;return d<=60&&(s.health.k!=="Healthy")});
+  var items=[];
+  notLaunched.forEach(function(s){items.push({c:"info",k:"Not launched",t:s.name,d:"Signed "+s.signDate.toLocaleDateString("en-US",{month:"short",day:"numeric"})+". No parents invited yet.",n:""})});
+  atRisk.slice(0,4).forEach(function(s){items.push({c:"crit",k:"At risk",t:s.name,d:s.health.r+".",n:pct(s.actRate)})});
+  soon.slice(0,2).forEach(function(s){if(items.some(function(x){return x.t===s.name}))return;items.push({c:"warn",k:"Renewal",t:s.name,d:"Renews "+s.renew.toLocaleDateString("en-US",{month:"short",day:"numeric"})+" · "+s.health.k.toLowerCase()+".",n:""})});
+  $("attention").innerHTML=items.slice(0,7).map(function(it){return'<li><span class="chip '+it.c+'">'+it.k+'</span><div><div class="t">'+it.t+'</div><div class="d">'+it.d+'</div></div><span class="n tnum">'+it.n+"</span></li>"}).join("");
+})();
+var GS=[{name:"Invited",values:S_inv,color:css("--line-2")==""?"#aaa":css("--navy-2"),dash:"5 4"},{name:"Activated",values:S_actd,color:css("--navy"),endLabel:true},{name:"Active in last 30 days",values:S_a30,color:css("--gold"),area:true,endLabel:true}];
+function drawGrowth(){GS[0].color=css("--navy-2");GS[1].color=css("--navy");GS[2].color=css("--gold");legend($("growth-legend"),GS);lineChart($("growth-chart"),{labels:MONTHS,tipLabels:MLONG,series:GS,label:"Parents invited, activated and active by month"})}
+(function(){
+  var uninvited=T.enrolled-T.invited;
+  var dormant=T.invited-T.activated;
+  var leads=118,leadSchools=74;
+  var upgrade=schools.filter(function(s){return s.plan==="Essentials"&&s.enrolled>=100});
+  var upgradeMRR=upgrade.length*(PLANS.Growth-PLANS.Essentials);
+  var opps=[
+    {big:fmt(uninvited),t:"Families not yet invited",d:"At current activation rates this is about "+fmt(uninvited*T.activated/T.invited)+" more active accounts, with no new schools needed.",a:"Run an invite drive with "+under.length+" under-invited schools"},
+    {big:fmt(dormant),t:"Invited, never activated",d:"Parents who got an invite but never created an account. A three-touch reminder sequence usually recovers a share.",a:"Send the reminder sequence"},
+    {big:leads,t:"School leads from direct parents",d:"Direct subscribers who named their child's school. They span "+leadSchools+" schools that don't license Navigator yet.",a:"Hand the list to school sales"},
+    {big:money(upgradeMRR),t:"Plan upgrade potential",d:upgrade.length+" schools on Essentials enroll 100+ families. Moving them to Growth adds this much MRR.",a:"Review at renewal"}
+  ];
+  $("opps").innerHTML=opps.map(function(o){return'<div class="opp"><span class="big tnum">'+o.big+'</span><span class="t">'+o.t+'</span><span class="d">'+o.d+'</span><span class="act">'+o.a+" →</span></div>"}).join("");
+})();
+
+/* ---------- SCHOOLS ---------- */
+var counts={};schools.forEach(function(s){counts[s.health.k]=(counts[s.health.k]||0)+1});
+kpiRow($("school-kpis"),[
+  {label:"Healthy",value:counts["Healthy"]||0,note:"on track"},
+  {label:"Under-invited",value:counts["Under-invited"]||0,note:"fewer than half of families invited"},
+  {label:"At risk",value:counts["At risk"]||0,note:"low activation or falling use"},
+  {label:"Not launched",value:counts["Not launched"]||0,note:"licensed, no invites sent"}
+]);
+var COLS=[
+  {k:"name",l:"School",f:function(s){return'<div class="nm">'+s.name+'</div><div class="loc">'+s.city+"</div>"}},
+  {k:"health",l:"Health",sv:function(s){return["Not launched","At risk","Under-invited","Healthy"].indexOf(s.health.k)},f:function(s){return'<span class="chip '+s.health.c+'" title="'+s.health.r+'">'+s.health.k+"</span>"}},
+  {k:"plan",l:"Plan",f:function(s){return'<span class="plan">'+s.plan+"</span>"}},
+  {k:"enrolled",l:"Families",num:1,f:function(s){return fmt(s.enrolled)}},
+  {k:"invRate",l:"Invited",num:1,f:function(s){return fmt(s.invited)+' <span class="minibar"><i style="width:'+s.invRate*100+'%"></i></span>'}},
+  {k:"actRate",l:"Activated",num:1,f:function(s){return s.launched?pct(s.actRate):"–"}},
+  {k:"active30",l:"Active 30d",num:1,f:function(s){return fmt(s.active30)}},
+  {k:"trend",l:"Trend",num:1,f:function(s){return s.launched?'<span class="'+(s.trend>=0?"up":"down")+'">'+(s.trend>0?"+":"")+s.trend+"%</span>":"–"}},
+  {k:"renew",l:"Renews",num:1,f:function(s){return s.renew.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"2-digit"})}}
+];
+var sortK="health",sortDir=1,filterH="All",q="";
+$("school-table").querySelector("thead").innerHTML="<tr>"+COLS.map(function(c){return'<th data-k="'+c.k+'" class="'+(c.num?"num":"")+'" tabindex="0">'+c.l+"</th>"}).join("")+"</tr>";
+$("school-table").querySelectorAll("th").forEach(function(th){
+  var go=function(){var k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=COLS.find(function(c){return c.k===k}).num?-1:1}renderTable()};
+  th.addEventListener("click",go);th.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});
+});
+["All","Healthy","Under-invited","At risk","Not launched"].forEach(function(h){
+  var b=document.createElement("button");b.textContent=h+(h==="All"?"":" "+(counts[h]||0));b.setAttribute("aria-pressed",h==="All");b.id="hf-"+h.replace(/\s/g,"");
+  b.addEventListener("click",function(){filterH=h;$("health-filter").querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});renderTable()});
+  $("health-filter").appendChild(b);
+});
+$("school-search").addEventListener("input",function(e){q=e.target.value.toLowerCase();renderTable()});
+function renderTable(){
+  var col=COLS.find(function(c){return c.k===sortK});
+  var rows=schools.filter(function(s){return(filterH==="All"||s.health.k===filterH)&&(!q||(s.name+" "+s.city).toLowerCase().indexOf(q)>-1)});
+  rows.sort(function(a,b){var va=col.sv?col.sv(a):a[sortK],vb=col.sv?col.sv(b):b[sortK];if(va instanceof Date){va=+va;vb=+vb}return(va>vb?1:va<vb?-1:0)*sortDir});
+  $("school-table").querySelectorAll("th").forEach(function(th){th.removeAttribute("aria-sort");if(th.dataset.k===sortK)th.setAttribute("aria-sort",sortDir>0?"ascending":"descending")});
+  $("school-table").querySelector("tbody").innerHTML=rows.length?rows.map(function(s){return"<tr>"+COLS.map(function(c){return'<td class="'+(c.num?"num":"")+'">'+c.f(s)+"</td>"}).join("")+"</tr>"}).join(""):'<tr><td colspan="9" style="color:var(--muted)">No schools match. Clear the search or pick another filter.</td></tr>';
+}
+renderTable();
+function drawSchoolBars(){barChart($("school-bars"),{labels:MONTHS,tipLabels:MLONG,series:[{name:"New schools",values:S_new,color:css("--navy")}],label:"New schools per month",yFmt:function(v){return String(v)},h:220,l:36})}
+(function(){
+  var r=schools.filter(function(s){return(s.renew-today)/864e5<=90}).sort(function(a,b){return a.renew-b.renew});
+  $("renewals").innerHTML=r.length?r.map(function(s){return'<li><span class="chip '+s.health.c+'">'+s.health.k+'</span><div><div class="t">'+s.name+'</div><div class="d">'+s.plan+" · "+money(s.mrr)+"/mo · "+fmt(s.active30)+" active parents</div></div><span class=\"n tnum\" style=\"font-size:15px;font-family:var(--sans);font-weight:700\">"+s.renew.toLocaleDateString("en-US",{month:"short",day:"numeric"})+"</span></li>"}).join(""):'<li><div></div><div class="d">No renewals in the next 90 days.</div><span></span></li>';
+})();
+
+/* ---------- ENGAGEMENT ---------- */
+var abigail=Math.round(T.active30All*0.71*4.3);
+kpiRow($("eng-kpis"),[
+  {label:"Weekly active parents",value:fmt(T.weekly+Math.round(directNow*0.5)),note:"last 7 days",spark:WAU},
+  {label:"Stickiness",value:pct(T.weekly/T.active30),note:"weekly ÷ monthly actives"},
+  {label:"Questions asked of Abigail",value:fmt(abigail),note:"last 30 days"},
+  {label:"3-month retention",value:"58%",note:"of parents activated in June"}
+]);
+function drawWau(){lineChart($("wau-chart"),{labels:WLAB,series:[{name:"Weekly active parents",values:WAU,color:css("--navy"),area:true,endLabel:true}],label:"Weekly active parents, last 26 weeks",every:4})}
+hbars($("features"),[
+  {k:"Abigail AI guide",v:71},{k:"Milestone tracking",v:54},{k:"Activity library",v:48},{k:"Journey Map",v:33},{k:"Progress reports",v:29},{k:"Home environment",v:21},{k:"School evaluation toolkit",v:12,s:"mostly direct parents"}
+],100);
+function drawPlanes(){hbars($("planes"),[
+  {k:"0–3",s:"Infant & toddler",v:22,c:css("--p1")},{k:"3–6",s:"Primary",v:46,c:css("--p2")},{k:"6–9",s:"Lower elementary",v:19,c:css("--p3")},{k:"9–12",s:"Upper elementary",v:9,c:css("--p4")},{k:"12–18",s:"Adolescent",v:4,c:css("--p5")}
+],50)}
+(function(){
+  var cohorts=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],sizes=[96,112,130,142,160,171,176,188];
+  var h='<tr><th class="rowh">Activated</th><th>Parents</th>'+[1,2,3,4,5,6,7,8].map(function(m){return"<th>Month "+m+"</th>"}).join("")+"</tr>";
+  cohorts.forEach(function(c,i){
+    var avail=8-i,row='<tr><th class="rowh">'+c+" 2026</th><td>"+sizes[i]+"</td>";
+    for(var m=1;m<=8;m++){
+      if(m>avail){row+="<td></td>";continue}
+      var v=Math.round((0.82*Math.pow(0.93,m-1)-0.01*(m>3?m-3:0)+i*0.006)*100);
+      var a=0.12+Math.max(0,(v-35))/55*0.78;
+      row+='<td style="background:rgba(var(--heat),'+a.toFixed(2)+');color:'+(a>0.5?"var(--surface)":"var(--ink)")+'" title="'+c+" cohort, month "+m+": "+v+'% still active">'+v+"%</td>";
+    }
+    h+=row+"</tr>";
+  });
+  $("cohorts").innerHTML=h;
+})();
+
+/* ---------- REVENUE ---------- */
+var arpa=S_schoolMRR[11]/T.schools;
+kpiRow($("rev-kpis"),[
+  {label:"MRR",value:money(MRR),delta:"+"+Math.round((MRR-MRRprev)/MRRprev*100)+"%",good:true,note:"vs last month"},
+  {label:"Annual run rate",value:money(MRR*12),note:"MRR × 12"},
+  {label:"School license revenue",value:money(S_schoolMRR[11]),note:"avg "+money(arpa)+" per school"},
+  {label:"Direct parent subscribers",value:fmt(directNow),delta:"+"+(directNow-DIRECT[10]),good:true,note:"this month · "+money(S_parentMRR[11])+" MRR"}
+]);
+var MS=[{name:"School licenses",values:S_schoolMRR},{name:"Parent subscriptions",values:S_parentMRR}];
+function drawMrr(){MS[0].color=css("--navy");MS[1].color=css("--gold");legend($("mrr-legend"),MS);barChart($("mrr-chart"),{labels:MONTHS,tipLabels:MLONG,series:MS,label:"Monthly recurring revenue by source",yFmt:function(v){return v>=1000?"$"+(v/1000)+"k":"$"+v},l:52})}
+(function(){
+  var p=["Essentials","Growth","Campus"].map(function(k){var n=schools.filter(function(s){return s.plan===k}).length;return{k:k,s:n+" schools · "+money(PLANS[k])+"/mo",v:n*PLANS[k]}});
+  hbars($("plans"),p,null,money);
+})();
+
+/* ---------- DEFINITIONS ---------- */
+var DEFS=[
+  ["Partner schools","Schools with a license that is active today (not cancelled, not expired).","<code>school_licenses</code>"],
+  ["Enrolled families","Family count the school reports at onboarding, updated each term. Denominator for invite rate.","<code>schools.enrolled_families</code>"],
+  ["Parents invited","Unique parent emails a school has sent an invite to. Resends don't count twice.","<code>parent_invites</code>"],
+  ["Activated","Invited parents who created an account and finished the child profile.","<code>parent_invites.accepted_at</code> + <code>children</code>"],
+  ["Active parents (30 days)","Parents with at least one meaningful session in the last 30 days: asked Abigail a question, logged a milestone, opened an activity or report. Logins alone don't count.","<code>activity_events</code>"],
+  ["Weekly active parents","Same rule over the last 7 days.","<code>activity_events</code>"],
+  ["Stickiness","Weekly active ÷ monthly active. Above 50% means parents use it as a habit.","derived"],
+  ["Direct parents","Parents who subscribed on their own, without a school invite.","<code>subscriptions</code> where <code>source = 'direct'</code>"],
+  ["MRR","Sum of active monthly school license fees plus direct parent subscriptions. Annual plans ÷ 12.","Stripe via <code>subscriptions</code>"],
+  ["Retention by month","Of parents activated in a month, the share still active N months later.","<code>activity_events</code>"],
+  ["School leads","Direct parents who named a school that doesn't license Navigator.","<code>children.school_name</code>"]
+];
+$("defs").querySelector("tbody").innerHTML=DEFS.map(function(d){return"<tr><td>"+d[0]+"</td><td>"+d[1]+"</td><td>"+d[2]+"</td></tr>"}).join("");
+$("health-rules").innerHTML=[
+  ["info","Not launched","License is active but no parents have been invited."],
+  ["crit","At risk","Under 45% of invited parents activated, or active parents fell 15% or more versus the prior 30 days."],
+  ["warn","Under-invited","Fewer than half of enrolled families have been invited."],
+  ["good","Healthy","None of the above."]
+].map(function(r){return'<li><span class="chip '+r[0]+'">'+r[1]+'</span><div><div class="d" style="color:var(--ink)">'+r[2]+"</div></div><span></span></li>"}).join("");
+
+/* ---------- tabs + theme redraw ---------- */
+var tabs=[].slice.call(document.querySelectorAll(".tab"));
+function select(id,push){tabs.forEach(function(t){var on=t.getAttribute("aria-controls")===id;t.setAttribute("aria-selected",on);t.tabIndex=on?0:-1;$(t.getAttribute("aria-controls")).hidden=!on});
+  if(push){try{history.replaceState(null,"","#"+id)}catch(e){}try{localStorage.setItem("nav-dash-tab",id)}catch(e){}}drawAll()}
+tabs.forEach(function(t,i){t.addEventListener("click",function(){select(t.getAttribute("aria-controls"),true)});
+  t.addEventListener("keydown",function(e){var d=e.key==="ArrowRight"?1:e.key==="ArrowLeft"?-1:0;if(d){var n=tabs[(i+d+tabs.length)%tabs.length];n.focus();n.click()}})});
+function drawAll(){drawGrowth();drawSchoolBars();drawWau();drawPlanes();drawMrr()}
+var start=(location.hash||"").slice(1);if(!$(start)||!$(start).classList.contains("panel")){try{start=localStorage.getItem("nav-dash-tab")||"overview"}catch(e){start="overview"}}
+if(!$(start))start="overview";
+select(start,false);
+try{window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",drawAll)}catch(e){}
+new MutationObserver(drawAll).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+window.addEventListener("scroll",hideTip,{passive:true});
+})();
+</script>
