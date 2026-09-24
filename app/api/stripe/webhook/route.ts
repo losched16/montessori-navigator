@@ -37,6 +37,41 @@ function planFromPriceId(priceId: string | undefined): 'individual_monthly' | 'i
   return null
 }
 
+// Write a subscription's CURRENT Stripe state onto the row that owns it.
+// Always re-reads from Stripe, so events arriving together or out of order
+// can't leave a stale status behind. Matches by subscription id first; the
+// customer-id fallback only touches rows not already tied to a different
+// subscription (one customer can have several school signups).
+async function syncSubscription(
+  stripe: Stripe,
+  supabase: ReturnType<typeof getSupabase>,
+  subscriptionId: string,
+  customerId: string,
+) {
+  const live = await stripe.subscriptions.retrieve(subscriptionId)
+  const periodEnd = (live as any).current_period_end ?? live.items.data[0]?.current_period_end
+  const patch = {
+    subscription_status: normalizeStatus(live.status),
+    trial_ends_at: live.trial_end ? new Date(live.trial_end * 1000).toISOString() : null,
+    current_period_end: periodEnd ? new Date(periodEnd * 1000).toISOString() : null,
+  }
+
+  for (const table of ['parents', 'schools'] as const) {
+    const { data } = await supabase.from(table).update(patch).eq('stripe_subscription_id', subscriptionId).select('id')
+    if (data && data.length > 0) return
+  }
+  for (const table of ['parents', 'schools'] as const) {
+    const { data } = await supabase
+      .from(table)
+      .update(patch)
+      .eq('stripe_customer_id', customerId)
+      .or(`stripe_subscription_id.is.null,stripe_subscription_id.eq.${subscriptionId}`)
+      .select('id')
+    if (data && data.length > 0) return
+  }
+  console.log(`[webhook] No parent or school owns ${subscriptionId} (${customerId})`)
+}
+
 export async function POST(req: NextRequest) {
   const stripe = getStripe()
   const supabase = getSupabase()
@@ -186,74 +221,23 @@ export async function POST(req: NextRequest) {
       }
 
       case 'customer.subscription.updated':
-      case 'customer.subscription.created': {
-        const subscription = event.data.object as Stripe.Subscription
-        const customerId = subscription.customer as string
-        const status = normalizeStatus(subscription.status)
-        const trialEndsAt = subscription.trial_end ? new Date(subscription.trial_end * 1000).toISOString() : null
-        const currentPeriodEnd = (subscription as any).current_period_end
-          ? new Date((subscription as any).current_period_end * 1000).toISOString()
-          : null
-
-        // Try to update parent first; if no row matches, fall back to school
-        const { data: parentMatch } = await supabase
-          .from('parents')
-          .update({
-            subscription_status: status,
-            trial_ends_at: trialEndsAt,
-            current_period_end: currentPeriodEnd,
-          })
-          .eq('stripe_customer_id', customerId)
-          .select('id')
-
-        if (!parentMatch || parentMatch.length === 0) {
-          await supabase
-            .from('schools')
-            .update({
-              subscription_status: status,
-              trial_ends_at: trialEndsAt,
-              current_period_end: currentPeriodEnd,
-            })
-            .eq('stripe_customer_id', customerId)
-        }
-        break
-      }
-
+      case 'customer.subscription.created':
       case 'customer.subscription.deleted': {
         const subscription = event.data.object as Stripe.Subscription
-        const customerId = subscription.customer as string
-
-        const { data: parentMatch } = await supabase
-          .from('parents')
-          .update({ subscription_status: 'canceled' })
-          .eq('stripe_customer_id', customerId)
-          .select('id')
-
-        if (!parentMatch || parentMatch.length === 0) {
-          await supabase
-            .from('schools')
-            .update({ subscription_status: 'canceled' })
-            .eq('stripe_customer_id', customerId)
-        }
+        await syncSubscription(stripe, supabase, subscription.id, subscription.customer as string)
         break
       }
 
       case 'invoice.payment_failed': {
-        const invoice = event.data.object as Stripe.Invoice
-        const customerId = invoice.customer as string
-
-        const { data: parentMatch } = await supabase
-          .from('parents')
-          .update({ subscription_status: 'past_due' })
-          .eq('stripe_customer_id', customerId)
-          .select('id')
-
-        if (!parentMatch || parentMatch.length === 0) {
-          await supabase
-            .from('schools')
-            .update({ subscription_status: 'past_due' })
-            .eq('stripe_customer_id', customerId)
-        }
+        // Don't blindly write 'past_due': Stripe sends the final failed-payment
+        // event in the same second as subscription.deleted, and processing it
+        // last used to flip canceled subscriptions back to past_due. Re-read
+        // the subscription and store whatever Stripe says it is now.
+        const invoice = event.data.object as any
+        const subId: string | undefined =
+          (typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id) ||
+          invoice.parent?.subscription_details?.subscription
+        if (subId) await syncSubscription(stripe, supabase, subId, invoice.customer as string)
         break
       }
     }
