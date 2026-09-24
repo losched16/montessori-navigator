@@ -17,6 +17,23 @@ Handoff for Claude Code. Pairs with the interactive mockup ("Navigator Partner D
 
 Everyone sees every tab. Order and labels steer partners to Overview first.
 
+## 1a. Revenue model (confirmed — supersedes the plan tiers below)
+
+Revenue comes from exactly two places. There are no Essentials / Growth / Campus plans; ignore those wherever they appear in this spec or the mockup.
+
+| Stream | Who pays | Price (live Stripe) | Billing |
+|---|---|---|---|
+| **School sign-ups** | The school, on behalf of its families | **Digital $12 / family / year** or **Digital + Print $25 / family / year** | Annual; Stripe subscription quantity = number of families |
+| **Direct parent sign-ups** | The parent | **$8 / month** or **$59 / year** | Monthly or annual |
+
+Rules that follow from this:
+
+- A school's revenue = `quantity (families) × tier price`, recognised annually. For MRR, divide by 12.
+- Parents invited by a school pay nothing; they count toward adoption, never toward parent revenue.
+- **Comped schools** (`schools.is_comped = true`) and schools on a 100%-off coupon produce **$0** revenue but are full partner schools for adoption metrics. Show them as a separate count ("Comped / free") so free seats are visible, not hidden inside the paid totals.
+- **Past-due** subscriptions are revenue at risk, not revenue. Show them as their own line.
+- Stripe is the source of truth for amounts, status, and discounts. Read from Stripe (or a webhook-synced mirror table), never from hard-coded prices.
+
 ## 2. Tabs and contents
 
 **Overview (partners)**
@@ -25,7 +42,7 @@ Everyone sees every tab. Order and labels steer partners to Overview first.
 - Adoption funnel: Enrolled families → Invited → Activated → Active monthly → Active weekly, with the conversion rate between each step.
 - Needs attention: Not-launched schools, At-risk schools, renewals within 60 days that aren't healthy.
 - Growth over time: invited, activated, active-30d lines by month.
-- Growth opportunities (4 cards): families not yet invited, invited-never-activated, school leads from direct parents, plan upgrade potential.
+- Growth opportunities (4 cards): families not yet invited, invited-never-activated, school leads from direct parents, free schools due to convert to paid at renewal (comped + 100%-coupon schools × their families × tier price).
 
 **Schools (ops)**
 - Health counts (Healthy / Under-invited / At risk / Not launched).
@@ -41,9 +58,11 @@ Everyone sees every tab. Order and labels steer partners to Overview first.
 - Retention heatmap by activation month.
 
 **Revenue**
-- KPIs: MRR, run rate, school license MRR (with avg per school), direct parent subscribers.
-- MRR by month, stacked: school licenses + parent subscriptions (one axis).
-- Licenses by plan.
+- KPIs: MRR, annual run rate, school revenue (with paid families and avg per paying school), direct parent subscribers (monthly vs annual split).
+- MRR by month, stacked: school sign-ups + direct parents (one axis).
+- School revenue by tier: Digital vs Digital + Print (schools, families, revenue).
+- Free / comped: count of comped and 100%-coupon schools and the families they cover.
+- At risk: past-due subscriptions and their amount, both streams.
 
 **Metric definitions** — the table in §4, rendered in-app so partners and the team read numbers the same way.
 
@@ -75,7 +94,7 @@ If `activity_events` doesn't exist yet, it's the one table worth adding now. Eve
 | Active parents (30d / 7d) | Parents with ≥1 `activity_events` row in the window. Logins alone don't count. |
 | Stickiness | Weekly active ÷ monthly active. |
 | Direct parents | `parents.source = 'direct'` with an active subscription. |
-| MRR | Active license `monthly_amount_cents` + active direct subscriptions; annual ÷ 12. |
+| MRR | (Paying school subscriptions: families × $12 or $25 ÷ 12) + (direct parents: $8 monthly, or $59 ÷ 12 annual). Excludes comped, 100%-coupon, trialing, and past-due. |
 | Retention (month N) | Of parents activated in month M, share with activity in month M+N. |
 | School leads | Direct parents whose `children.school_name` doesn't match a licensed school. |
 
