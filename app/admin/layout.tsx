@@ -62,6 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: '/admin/customers', label: 'Customers', icon: '🏫' },
     { href: '/admin/comp-school', label: 'Comp a School', icon: '🎁' },
     { href: '/admin/resources', label: 'Resources', icon: '📚' },
+    { href: '/content-studio', label: 'Content Studio', icon: '🎬' },
     { href: '/admin/team', label: 'Team', icon: '👥' },
   ]
 
