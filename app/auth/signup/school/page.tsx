@@ -35,7 +35,7 @@ function SchoolSignupPageInner() {
   const supabase = createClient()
 
   // Payment gate: school admin signup requires a Stripe checkout session.
-  // Direct visitors are sent to /for-schools/pricing to start a trial first.
+  // Direct visitors are sent to /for-schools/pricing to subscribe first.
   useEffect(() => {
     if (!sessionId) {
       router.replace('/for-schools/pricing')
@@ -161,7 +161,7 @@ function SchoolSignupPageInner() {
             <div className="text-3xl mb-4">⏳</div>
             <h1 className="text-xl font-semibold text-navy-600 mb-2">Setting up your subscription</h1>
             <p className="text-sm text-gray-600 mb-6">
-              Stripe is finalizing your trial. This usually takes a few seconds. Click refresh to try again.
+              Stripe is finalizing your subscription. This usually takes a few seconds. Click refresh to try again.
             </p>
             <button
               onClick={() => window.location.reload()}

@@ -78,8 +78,8 @@ export async function POST(req: NextRequest) {
           billedQuantity: String(billedQuantity),
           schoolName,
         },
+        // No free trial for schools: the first year is charged at checkout.
         subscription_data: {
-          trial_period_days: 14,
           metadata: {
             plan: 'school',
             schoolTier,
@@ -94,8 +94,8 @@ export async function POST(req: NextRequest) {
         allow_promotion_codes: true,
         // Card collection is "if_required" so a 100%-off-forever coupon
         // (used for fully-comped accounts) lets schools skip card entry.
-        // For any non-100% discount or trial path, Stripe still collects a
-        // card because the subscription will have a non-zero charge later.
+        // Any non-100% discount still requires a card because there's a
+        // charge due at checkout.
         payment_method_collection: 'if_required',
         // Rewardful attribution (school flow uses no parent linking, so this
         // is free to carry the referral ID).

@@ -66,7 +66,7 @@ export default function GetStartedPage() {
                   Get started for our school
                 </h2>
                 <p className="text-[0.95rem] text-[#5c4a7e] leading-relaxed mb-6 flex-1">
-                  $12/family/year (10-family minimum) — 14-day free trial for the whole school.
+                  $12/family/year (10-family minimum), billed annually for the whole school.
                 </p>
                 <div className="inline-flex items-center gap-2 text-[#2e8b8b] font-semibold text-sm">
                   See School Pricing <span className="transition-transform group-hover:translate-x-1">→</span>

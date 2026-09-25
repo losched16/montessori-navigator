@@ -59,7 +59,7 @@ export default function SchoolsPage() {
               <h1 className="serif text-[clamp(2.4rem,5vw,4.2rem)] font-normal text-white leading-[1.08] mb-5" style={{ animation: 'fadeUp 0.8s ease 0.1s both' }}>Your partner in <em className="text-[#c4b1e0]">recruiting, onboarding, and retaining</em> families</h1>
               <p className="text-[clamp(1rem,1.5vw,1.1rem)] text-white/45 max-w-[500px] leading-relaxed mb-7" style={{ animation: 'fadeUp 0.8s ease 0.25s both' }}>Family Alliance helps your families understand Montessori, stay engaged, and become your strongest advocates. Powered by Tim Seldin and the Montessori Foundation.</p>
               <div className="flex flex-col sm:flex-row gap-3" style={{ animation: 'fadeUp 0.8s ease 0.4s both' }}>
-                <Link href="/for-schools/pricing" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-semibold rounded-full text-[0.95rem] transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>Start a Trial →</Link>
+                <Link href="/for-schools/pricing" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-semibold rounded-full text-[0.95rem] transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>Get Started →</Link>
                 <Link href="/for-schools/demo" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-white font-medium rounded-full text-[0.95rem] border border-white/30 hover:bg-white/5 transition">Get a Demo</Link>
               </div>
             </div>
@@ -233,7 +233,7 @@ export default function SchoolsPage() {
           <p className="text-white/40 max-w-[460px] mx-auto mb-7 leading-relaxed relative z-10">We&apos;d love to show you how Family Alliance can support your school&apos;s parent education, onboarding, and retention. Pick a time on the calendar — no pressure, just a walkthrough.</p>
           <div className="relative z-10 inline-flex flex-col sm:flex-row gap-3">
             <Link href="/for-schools/demo" className="inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-semibold rounded-full text-[0.95rem] transition hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4a6cf7 0%, #4a2c82 100%)', boxShadow: '0 4px 24px rgba(74,108,247,0.25)' }}>Get a Demo →</Link>
-            <Link href="/for-schools/pricing" className="inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-medium rounded-full text-[0.95rem] border border-white/30 hover:bg-white/5 transition">Start a Trial</Link>
+            <Link href="/for-schools/pricing" className="inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-medium rounded-full text-[0.95rem] border border-white/30 hover:bg-white/5 transition">Get Started</Link>
           </div>
           <p className="text-white/20 text-xs mt-4 relative z-10">Or email us directly at schools@montessori.org</p>
         </section>
