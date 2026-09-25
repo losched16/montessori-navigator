@@ -83,7 +83,7 @@ export default function DemoPage() {
 
         {/* Footer copy */}
         <div className="text-center mt-10 text-sm text-navy-600/60">
-          Prefer to dive in yourself? <Link href="/for-schools/pricing" className="text-warm-600 hover:text-warm-700 font-medium underline">Start a 14-day free trial →</Link>
+          Prefer to dive in yourself? <Link href="/for-schools/pricing" className="text-warm-600 hover:text-warm-700 font-medium underline">See pricing and sign up →</Link>
         </div>
       </main>
     </div>

@@ -185,7 +185,7 @@ export async function sendParentWelcome({ to, name, trialEndDate, appUrl }: Pare
 }
 
 // -----------------------------------------------------------
-// School admin welcome (after Stripe trial starts + admin signup)
+// School admin welcome (after Stripe checkout + admin signup)
 // -----------------------------------------------------------
 
 interface SchoolWelcomeParams {
@@ -197,12 +197,14 @@ interface SchoolWelcomeParams {
 
 export async function sendSchoolAdminWelcome({ to, schoolName, trialEndDate, appUrl }: SchoolWelcomeParams) {
   const heading = `Welcome to Montessori Family Alliance`
-  const trialLine = trialEndDate
-    ? `<p style="margin:0 0 12px;">Your 14-day free trial for <strong>${schoolName}</strong> runs until <strong>${trialEndDate}</strong>. You won't be charged until then.</p>`
-    : `<p style="margin:0 0 12px;">Your 14-day free trial for <strong>${schoolName}</strong> is now active.</p>`
+  // New schools subscribe without a trial; trialEndDate is only set for
+  // schools still on a legacy trial.
+  const statusLine = trialEndDate
+    ? `<p style="margin:0 0 12px;">Your free trial for <strong>${schoolName}</strong> runs until <strong>${trialEndDate}</strong>. You won't be charged until then.</p>`
+    : `<p style="margin:0 0 12px;">Your subscription for <strong>${schoolName}</strong> is now active.</p>`
   const body = `
-    ${trialLine}
-    <p style="margin:0 0 12px;"><strong>Get the most out of your trial:</strong></p>
+    ${statusLine}
+    <p style="margin:0 0 12px;"><strong>Getting started:</strong></p>
     <ol style="margin:0 0 12px; padding-left:20px; color:#5c4a7e;">
       <li style="margin-bottom:6px;">Invite your families — they get free access while your subscription is active</li>
       <li style="margin-bottom:6px;">Customize your school profile (credentials, address, photo) so families recognize you</li>
@@ -215,7 +217,7 @@ export async function sendSchoolAdminWelcome({ to, schoolName, trialEndDate, app
     to,
     subject: `Welcome to Montessori Family Alliance — ${schoolName}`,
     html: emailLayout({ heading, body, ctaLabel: 'Open School Dashboard', ctaUrl: `${appUrl || 'https://familyalliance.montessori.org'}/school`, footnote }),
-    text: `Welcome to Montessori Family Alliance!\n\nYour 14-day trial for ${schoolName} is active${trialEndDate ? ` until ${trialEndDate}` : ''}.\n\nOpen your school dashboard:\n${appUrl || 'https://familyalliance.montessori.org'}/school\n\nNeed help? Reply to this email.`,
+    text: `Welcome to Montessori Family Alliance!\n\n${trialEndDate ? `Your free trial for ${schoolName} is active until ${trialEndDate}.` : `Your subscription for ${schoolName} is now active.`}\n\nOpen your school dashboard:\n${appUrl || 'https://familyalliance.montessori.org'}/school\n\nNeed help? Reply to this email.`,
   })
 }
 
