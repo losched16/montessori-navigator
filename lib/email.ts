@@ -297,3 +297,81 @@ export async function sendPasswordReset({ to, resetUrl }: PasswordResetParams) {
     text: `Reset your password by visiting this link (expires in 1 hour):\n${resetUrl}\n\nIf you didn't request this, you can ignore the email.`,
   })
 }
+
+// -----------------------------------------------------------
+// Announcement / event blast (from /admin/announcements)
+// -----------------------------------------------------------
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+interface AnnouncementEmailParams {
+  recipients: string[]
+  kindLabel: string        // "News", "Event", …
+  title: string
+  body: string             // plain text; blank lines become paragraphs
+  eventWhen?: string       // pre-formatted date/time line for events
+  location?: string | null
+  ctaLabel: string
+  ctaUrl: string
+}
+
+/**
+ * Sends one announcement to many recipients. Each person gets their own
+ * email (no shared To: line) via Resend's batch API, 100 per request.
+ * Returns how many were accepted and any per-batch errors.
+ */
+export async function sendAnnouncementEmails({
+  recipients, kindLabel, title, body, eventWhen, location, ctaLabel, ctaUrl,
+}: AnnouncementEmailParams): Promise<{ sent: number; errors: string[] }> {
+  const paragraphs = body
+    .split(/\n{2,}/)
+    .map(p => p.trim())
+    .filter(Boolean)
+    .map(p => `<p style="margin:0 0 12px;">${escapeHtml(p).replace(/\n/g, '<br />')}</p>`)
+    .join('')
+  const eventBlock = eventWhen ? `
+    <p style="margin:0 0 12px; padding:12px 16px; background:${COLORS.paleLavender}; border-radius:10px; color:${COLORS.deepPlum};">
+      <strong>${escapeHtml(eventWhen)}</strong>${location ? `<br />${escapeHtml(location)}` : ''}
+    </p>` : ''
+  const html = emailLayout({
+    heading: escapeHtml(title),
+    body: `
+      <p style="margin:0 0 8px; font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:${COLORS.softPurple};">${escapeHtml(kindLabel)}</p>
+      ${eventBlock}${paragraphs}`,
+    ctaLabel,
+    ctaUrl,
+    footnote: `You're receiving this because you're a member of Montessori Family Alliance.`,
+  })
+  const text = [
+    title,
+    eventWhen ? `${eventWhen}${location ? ` — ${location}` : ''}` : '',
+    body,
+    `${ctaLabel}: ${ctaUrl}`,
+  ].filter(Boolean).join('\n\n')
+  const subject = kindLabel === 'Event' ? `You're invited: ${title}` : title
+
+  const unique = Array.from(new Set(recipients.map(r => r.trim().toLowerCase()).filter(Boolean)))
+  let sent = 0
+  const errors: string[] = []
+  for (let i = 0; i < unique.length; i += 100) {
+    const chunk = unique.slice(i, i + 100)
+    const { error } = await getResend().batch.send(chunk.map(to => ({
+      from: FROM,
+      to: [to],
+      subject,
+      html,
+      text,
+      ...(REPLY_TO ? { replyTo: REPLY_TO } : {}),
+    })))
+    if (error) errors.push(error.message)
+    else sent += chunk.length
+  }
+  return { sent, errors }
+}
