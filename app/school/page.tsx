@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import OnboardingChecklist from '@/components/school/OnboardingChecklist'
+import SchoolAnnouncements from '@/components/school/SchoolAnnouncements'
 
 export default function SchoolDashboard() {
   const [stats, setStats] = useState({ totalFamilies: 0, activeFamilies: 0, pendingInvites: 0 })
@@ -84,6 +85,9 @@ export default function SchoolDashboard() {
           <div className="text-sm text-navy-600 mt-1">Pending Invitations</div>
         </div>
       </div>
+
+      {/* News & events from the Foundation */}
+      <SchoolAnnouncements />
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">

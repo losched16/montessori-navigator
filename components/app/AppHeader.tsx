@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { UserRound, Settings, ArrowLeftRight, LogOut } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import Logo from '@/components/ui/Logo'
+import NotificationBell from '@/components/updates/NotificationBell'
 
 // Minimal 56px app header: compact logo left, profile menu right.
 // (Chat page's height math assumes 3.5rem — keep h-14 in sync with it.)
@@ -59,43 +60,46 @@ export default function AppHeader() {
     <header className="sticky top-0 z-40 h-14 bg-white/90 backdrop-blur border-b border-[color:var(--mfa-border)]">
       <div className="h-full px-4 sm:px-6 flex items-center justify-between">
         <Logo href="/dashboard" imgClassName="h-7 w-auto" />
-        <div ref={wrapRef} className="relative">
-          <button
-            onClick={() => setMenuOpen(v => !v)}
-            aria-label="Account menu"
-            aria-expanded={menuOpen}
-            aria-haspopup="menu"
-            className={`tap-scale w-11 h-11 -mr-1 inline-flex items-center justify-center rounded-full transition ${
-              menuOpen
-                ? 'bg-[color:var(--mfa-purple-soft)] text-[color:var(--mfa-purple)]'
-                : 'text-[color:var(--mfa-ink-secondary)] hover:bg-[color:var(--mfa-surface-warm)]'
-            }`}
-          >
-            <UserRound size={22} aria-hidden="true" />
-          </button>
-
-          {menuOpen && (
-            <div
-              role="menu"
-              aria-label="Account"
-              className="absolute right-0 top-12 w-60 bg-white border border-[color:var(--mfa-border)] rounded-2xl shadow-xl overflow-hidden py-1.5"
+        <div className="flex items-center gap-1">
+          <NotificationBell />
+          <div ref={wrapRef} className="relative">
+            <button
+              onClick={() => setMenuOpen(v => !v)}
+              aria-label="Account menu"
+              aria-expanded={menuOpen}
+              aria-haspopup="menu"
+              className={`tap-scale w-11 h-11 -mr-1 inline-flex items-center justify-center rounded-full transition ${
+                menuOpen
+                  ? 'bg-[color:var(--mfa-purple-soft)] text-[color:var(--mfa-purple)]'
+                  : 'text-[color:var(--mfa-ink-secondary)] hover:bg-[color:var(--mfa-surface-warm)]'
+              }`}
             >
-              <Link href="/dashboard/settings" role="menuitem" onClick={() => setMenuOpen(false)} className={itemClasses}>
-                <Settings size={17} className="text-[color:var(--mfa-ink-secondary)]" aria-hidden="true" />
-                Family Settings
-              </Link>
-              {hasSchoolRole && (
-                <Link href="/school" role="menuitem" onClick={() => setMenuOpen(false)} className={itemClasses}>
-                  <ArrowLeftRight size={17} className="text-[color:var(--mfa-ink-secondary)]" aria-hidden="true" />
-                  Switch to School Admin
+              <UserRound size={22} aria-hidden="true" />
+            </button>
+  
+            {menuOpen && (
+              <div
+                role="menu"
+                aria-label="Account"
+                className="absolute right-0 top-12 w-60 bg-white border border-[color:var(--mfa-border)] rounded-2xl shadow-xl overflow-hidden py-1.5"
+              >
+                <Link href="/dashboard/settings" role="menuitem" onClick={() => setMenuOpen(false)} className={itemClasses}>
+                  <Settings size={17} className="text-[color:var(--mfa-ink-secondary)]" aria-hidden="true" />
+                  Family Settings
                 </Link>
-              )}
-              <button role="menuitem" onClick={handleSignOut} className={itemClasses}>
-                <LogOut size={17} className="text-[color:var(--mfa-ink-secondary)]" aria-hidden="true" />
-                Sign Out
-              </button>
-            </div>
-          )}
+                {hasSchoolRole && (
+                  <Link href="/school" role="menuitem" onClick={() => setMenuOpen(false)} className={itemClasses}>
+                    <ArrowLeftRight size={17} className="text-[color:var(--mfa-ink-secondary)]" aria-hidden="true" />
+                    Switch to School Admin
+                  </Link>
+                )}
+                <button role="menuitem" onClick={handleSignOut} className={itemClasses}>
+                  <LogOut size={17} className="text-[color:var(--mfa-ink-secondary)]" aria-hidden="true" />
+                  Sign Out
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

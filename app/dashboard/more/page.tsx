@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import {
   School, FileText, Bookmark, ClipboardList, BarChart3, Home as HomeIcon,
-  BookOpen, Newspaper, Route, Star, Baby, Settings, LogOut, ChevronRight, ArrowLeftRight,
+  BookOpen, Newspaper, Route, Star, Baby, Settings, LogOut, ChevronRight, ArrowLeftRight, Bell,
   type LucideIcon,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
@@ -49,6 +49,7 @@ const GROUPS: Array<{ title: string; rows: Row[] }> = [
   {
     title: 'Learn',
     rows: [
+      { label: 'News & Events', href: '/dashboard/updates', icon: Bell },
       { label: 'Full Library', href: '/dashboard/library', icon: BookOpen },
       { label: "Tomorrow's Child", href: '/dashboard/explore?collection=tomorrows-child', icon: Newspaper },
     ],

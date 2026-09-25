@@ -19,6 +19,15 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import Button from '@/components/ui/Button'
 import Skeleton from '@/components/ui/Skeleton'
 import { useTrackView, getSafeChildAnalyticsContext } from '@/lib/analytics'
+import { listPublishedResources, type Resource } from '@/lib/resources'
+import {
+  loadAnnouncementFeed, markAnnouncementsRead, upcomingEvents, newsItems,
+  type Announcement,
+} from '@/lib/announcements'
+import PinnedBanner from '@/components/updates/PinnedBanner'
+import LatestContent from '@/components/updates/LatestContent'
+import EventCard from '@/components/updates/EventCard'
+import NewsCard from '@/components/updates/NewsCard'
 
 function firstName(name: string | null | undefined): string {
   return (name || '').trim().split(/\s+/)[0]
@@ -30,6 +39,9 @@ export default function DashboardHome() {
   const [devLevels, setDevLevels] = useState<Array<{ area: string; level: number | null }>>([])
   const [recentObs, setRecentObs] = useState<Observation | null>(null)
   const [childDataLoading, setChildDataLoading] = useState(true)
+  const [latestContent, setLatestContent] = useState<Resource[]>([])
+  const [announcements, setAnnouncements] = useState<Announcement[]>([])
+  const [readIds, setReadIds] = useState<Set<string>>(new Set())
   const supabase = createClient()
 
   useEffect(() => {
@@ -41,6 +53,48 @@ export default function DashboardHome() {
     }
     load()
   }, [])
+
+  // Latest published content + news/events pushed from /admin. Independent of
+  // the selected child; failures just leave the sections hidden.
+  useEffect(() => {
+    listPublishedResources(supabase, 'parent')
+      .then(r => setLatestContent(r.slice(0, 6)))
+      .catch(() => {})
+    loadAnnouncementFeed(supabase, 'parent')
+      .then(({ items, readIds }) => { setAnnouncements(items); setReadIds(readIds) })
+      .catch(() => {})
+  }, [])
+
+  const pinned = announcements.find(a => a.isPinned && !readIds.has(a.id))
+  const dismissPinned = (id: string) => {
+    setReadIds(prev => new Set(prev).add(id))
+    markAnnouncementsRead(supabase, [id])
+  }
+  const events = upcomingEvents(announcements).slice(0, 2)
+  const news = newsItems(announcements).filter(a => a.id !== pinned?.id).slice(0, 2)
+
+  const latestContentSection = latestContent.length > 0 && (
+    <section aria-label="Latest content">
+      <SectionHeader title="Latest Content" actionLabel="All resources" actionHref="/dashboard/resources" />
+      <LatestContent resources={latestContent} />
+    </section>
+  )
+  const eventsSection = events.length > 0 && (
+    <section aria-label="Upcoming events">
+      <SectionHeader title="Upcoming Events" actionLabel="All events" actionHref="/dashboard/updates" />
+      <div className="space-y-3">
+        {events.map(e => <EventCard key={e.id} event={e} unread={!readIds.has(e.id)} />)}
+      </div>
+    </section>
+  )
+  const newsSection = news.length > 0 && (
+    <section aria-label="News and updates">
+      <SectionHeader title="News & Updates" actionLabel="See all" actionHref="/dashboard/updates" />
+      <div className="space-y-3">
+        {news.map(n => <NewsCard key={n.id} item={n} unread={!readIds.has(n.id)} compact />)}
+      </div>
+    </section>
+  )
 
   // Per-child data: development levels + most recent observation.
   // Reloads when the selected child changes.
@@ -97,6 +151,9 @@ export default function DashboardHome() {
         </h1>
       </div>
 
+      {/* ── Pinned message from the Foundation ── */}
+      {pinned && <PinnedBanner item={pinned} onDismiss={() => dismissPinned(pinned.id)} />}
+
       {/* ── Child selector ── */}
       <div className="mb-6">
         <ChildSwitcher />
@@ -135,6 +192,15 @@ export default function DashboardHome() {
         </section>
       )}
 
+      {/* ── No child yet: still show what's new ── */}
+      {noChild && (
+        <div className="space-y-8 mt-8">
+          {latestContentSection}
+          {eventsSection}
+          {newsSection}
+        </div>
+      )}
+
       {/* ── Personalized feed ── */}
       {hasChild && !childDataLoading && selectedChild && (
         <div className="space-y-8">
@@ -147,10 +213,16 @@ export default function DashboardHome() {
             <ActivityCarousel activities={getHomeActivities(selectedChild)} childName={childFirst} analyticsSource="home" />
           </section>
 
-          {/* 3. Ask Abigail */}
+          {/* 3. Latest content published from /admin */}
+          {latestContentSection}
+
+          {/* 4. Upcoming events */}
+          {eventsSection}
+
+          {/* 5. Ask Abigail */}
           <AbigailCard childName={childFirst} />
 
-          {/* 4. Growth snapshot */}
+          {/* 6. Growth snapshot */}
           <section aria-label="Growth">
             <SectionHeader title={`${childFirst}'s Growth`} />
             {growthAreas.length > 0 ? (
@@ -170,13 +242,16 @@ export default function DashboardHome() {
             )}
           </section>
 
-          {/* 5. One learning recommendation */}
+          {/* 7. One learning recommendation */}
           <section aria-label="Learn something useful">
             <SectionHeader title="Learn Something Useful" actionLabel="Library" actionHref="/dashboard/library" />
             <EditorialCard article={getLearningRecommendation(selectedChild)} />
           </section>
 
-          {/* 6. Recent moment OR observation prompt */}
+          {/* 8. News & updates */}
+          {newsSection}
+
+          {/* 9. Recent moment OR observation prompt */}
           {obsIsRecent && recentObs ? (
             <MomentCard observation={recentObs} childName={childFirst} />
           ) : (
