@@ -39,3 +39,4 @@ next-env.d.ts
 /exported-articles/
 
 .vercel
+scripts/.robly-backfill-done.json
