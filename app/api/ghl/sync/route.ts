@@ -3,6 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { syncContactToGHL } from '@/lib/ghl'
+import { syncParentToRobly } from '@/lib/robly'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,6 +16,7 @@ export const dynamic = 'force-dynamic'
 // layouts (once per session) so new signups flow into GHL automatically for
 // segmented marketing. Nothing is taken from the client — email and roles come
 // from the session + DB, so it can't be used to inject arbitrary contacts.
+// Parents are also pushed into the dedicated Robly parent list.
 export async function POST() {
   const cookieStore = cookies()
   const ssr = createServerClient(
@@ -73,6 +75,9 @@ export async function POST() {
     return NextResponse.json({ ok: false, reason: 'no email or role' })
   }
 
-  const ok = await syncContactToGHL({ email, name, tags, companyName })
-  return NextResponse.json({ ok })
+  const [ok, robly] = await Promise.all([
+    syncContactToGHL({ email, name, tags, companyName }),
+    parent ? syncParentToRobly({ email, name }) : Promise.resolve(false),
+  ])
+  return NextResponse.json({ ok, robly })
 }
