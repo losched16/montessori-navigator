@@ -4,6 +4,7 @@ import { createServerClient } from '@supabase/ssr'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { sendSchoolAdminWelcome } from '@/lib/email'
+import { linkSchoolAdmin } from '@/lib/school-admin-link'
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -84,40 +85,24 @@ export async function POST(req: NextRequest) {
       }, { status: 409 })
     }
 
-    // Link the user as the school admin
-    const { error: updateError } = await service
-      .from('schools')
-      .update({
-        admin_user_id: user.id,
-        ...(schoolName && schoolName.trim() ? { name: schoolName.trim() } : {}),
-      })
-      .eq('id', school.id)
-
-    if (updateError) {
-      return NextResponse.json({ error: 'Failed to update school: ' + updateError.message }, { status: 500 })
+    if (schoolName && schoolName.trim()) {
+      const { error: nameError } = await service.from('schools').update({ name: schoolName.trim() }).eq('id', school.id)
+      if (nameError) {
+        return NextResponse.json({ error: 'Failed to update school: ' + nameError.message }, { status: 500 })
+      }
     }
 
-    // Upsert the school_staff entry
-    const { data: existingStaff } = await service
-      .from('school_staff')
-      .select('id, role')
-      .eq('school_id', school.id)
-      .eq('user_id', user.id)
-      .maybeSingle()
+    const linkResult = await linkSchoolAdmin(service, school.id, user.id)
+    if (linkResult === 'has_other_admin') {
+      return NextResponse.json({
+        error: 'This school already has an admin. Contact support if you believe this is an error.',
+      }, { status: 409 })
+    }
 
-    if (!existingStaff) {
-      await service
-        .from('school_staff')
-        .insert({
-          school_id: school.id,
-          user_id: user.id,
-          role: 'admin',
-        })
-    } else if (existingStaff.role !== 'admin') {
-      await service
-        .from('school_staff')
-        .update({ role: 'admin' })
-        .eq('id', existingStaff.id)
+    // Already linked (e.g. the webhook auto-linked this account at checkout
+    // and sent the welcome then) — nothing more to do.
+    if (linkResult === 'already_linked') {
+      return NextResponse.json({ ok: true, schoolId: school.id, schoolName: school.name, alreadyLinked: true })
     }
 
     // Send welcome email (best-effort)

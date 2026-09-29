@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { createClient } from '@supabase/supabase-js'
+import { linkSchoolAdmin, findVerifiedUserByEmail } from '@/lib/school-admin-link'
+import { sendSchoolAdminWelcome } from '@/lib/email'
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -70,6 +72,40 @@ async function syncSubscription(
     if (data && data.length > 0) return
   }
   console.log(`[webhook] No parent or school owns ${subscriptionId} (${customerId})`)
+}
+
+// Best-effort: never fails the webhook (the school row is already saved and
+// the signup/claim path remains as a fallback).
+async function autoLinkSchoolAdmin(
+  supabase: ReturnType<typeof getSupabase>,
+  schoolId: string,
+  session: Stripe.Checkout.Session,
+  schoolName: string,
+) {
+  try {
+    let userId: string | null = null
+    const signedInBuyer = session.metadata?.admin_user_id
+    if (signedInBuyer) {
+      const { data } = await supabase.auth.admin.getUserById(signedInBuyer)
+      userId = data?.user?.id ?? null
+    }
+    const checkoutEmail = session.customer_details?.email || session.customer_email
+    if (!userId) userId = await findVerifiedUserByEmail(supabase, checkoutEmail)
+    if (!userId) return
+
+    const result = await linkSchoolAdmin(supabase, schoolId, userId)
+    console.log(`[webhook] school ${schoolId} admin auto-link: ${result}`)
+    if (result !== 'linked') return
+
+    const { data: user } = await supabase.auth.admin.getUserById(userId)
+    const to = checkoutEmail || user?.user?.email
+    if (to) {
+      await sendSchoolAdminWelcome({ to, schoolName, appUrl: process.env.NEXT_PUBLIC_APP_URL }).catch(err =>
+        console.error('[webhook] admin welcome email failed:', err))
+    }
+  } catch (err) {
+    console.error('[webhook] school admin auto-link failed:', err)
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -172,6 +208,7 @@ export async function POST(req: NextRequest) {
           .select('id')
           .eq('stripe_customer_id', customerId)
           .maybeSingle()
+        let schoolId: string | null = existingSchool?.id ?? null
 
         if (existingSchool) {
           const { error: updateError } = await supabase
@@ -200,7 +237,7 @@ export async function POST(req: NextRequest) {
           // /api/school/claim once the admin completes signup. The schema
           // allows admin_user_id to be NULL for this reason (see
           // supabase-migration-school-admin-nullable.sql).
-          const { error: insertError } = await supabase.from('schools').insert({
+          const { data: inserted, error: insertError } = await supabase.from('schools').insert({
             name: schoolName,
             slug,
             stripe_customer_id: customerId,
@@ -210,13 +247,21 @@ export async function POST(req: NextRequest) {
             billing_email: billingEmail,
             trial_ends_at: schoolTrialEndsAt,
             current_period_end: schoolCurrentPeriodEnd,
-          })
+          }).select('id').single()
           if (insertError) {
             console.error('[webhook] Failed to insert school:', insertError.message, insertError)
             // Return 500 so Stripe retries the webhook
             return NextResponse.json({ error: 'School insert failed' }, { status: 500 })
           }
+          schoolId = inserted?.id ?? null
         }
+
+        // Link the buyer as admin right away when they already have an
+        // account. Otherwise a head of school who previewed the app before
+        // buying signs in, never passes through /auth/signup/school (where
+        // /api/school/claim runs), and is left outside a paid school. New
+        // buyers with no account still link via signup + claim as before.
+        if (schoolId) await autoLinkSchoolAdmin(supabase, schoolId, session, schoolName)
         break
       }
 

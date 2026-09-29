@@ -11,6 +11,25 @@ function getStripe() {
 
 type Plan = 'school' | 'individual_monthly' | 'individual_annual'
 
+// Id of the signed-in user making this request, if any (verified from the
+// session cookie server-side, so it can't be spoofed from the request body).
+async function signedInUserId(): Promise<string | null> {
+  const cookieStore = cookies()
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) { return cookieStore.get(name)?.value },
+        set(name: string, value: string, options: any) { try { cookieStore.set({ name, value, ...options }) } catch (e) {} },
+        remove(name: string, options: any) { try { cookieStore.set({ name, value: '', ...options }) } catch (e) {} },
+      },
+    }
+  )
+  const { data: { user } } = await supabase.auth.getUser()
+  return user?.id ?? null
+}
+
 const PRICE_MAP: Record<Plan, string | undefined> = {
   school: process.env.STRIPE_PRICE_ID_SCHOOL || process.env.STRIPE_PRICE_ID, // back-compat
   individual_monthly: process.env.STRIPE_PRICE_ID_INDIVIDUAL_MONTHLY,
@@ -67,6 +86,11 @@ export async function POST(req: NextRequest) {
       // Enforce 10-family minimum: schools with fewer families pay for the minimum.
       const billedQuantity = Math.max(Number(familyCount), MIN_FAMILIES)
 
+      // If the buyer is already signed in (e.g. a head of school who previewed
+      // the app first), the webhook makes that account the school admin even
+      // when the billing email differs from their login email.
+      const buyerUserId = await signedInUserId()
+
       const session = await stripe.checkout.sessions.create({
         mode: 'subscription',
         customer_email: email,
@@ -77,6 +101,7 @@ export async function POST(req: NextRequest) {
           familyCount: String(familyCount),
           billedQuantity: String(billedQuantity),
           schoolName,
+          ...(buyerUserId ? { admin_user_id: buyerUserId } : {}),
         },
         // No free trial for schools: the first year is charged at checkout.
         subscription_data: {

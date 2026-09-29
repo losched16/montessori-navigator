@@ -1,9 +1,10 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Logo from '@/components/ui/Logo'
+import { createClient } from '@/lib/supabase'
 
 export default function SchoolWelcomePage() {
   return (
@@ -16,9 +17,51 @@ export default function SchoolWelcomePage() {
 function SchoolWelcomePageInner() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
+  const router = useRouter()
   const signupHref = sessionId
     ? `/auth/signup/school?session_id=${encodeURIComponent(sessionId)}`
     : '/auth/signup/school'
+  // Existing accounts log in and come straight back here to finish linking.
+  const loginHref = sessionId
+    ? `/auth/login?next=${encodeURIComponent(`/for-schools/welcome?session_id=${sessionId}`)}`
+    : '/auth/login'
+
+  // Already signed in (a head of school who previewed the app before buying):
+  // link this account to the new school now instead of sending them through
+  // signup, which they'd skip. The webhook usually links them already; claim
+  // is idempotent either way.
+  const [linking, setLinking] = useState<'idle' | 'working' | 'error'>('idle')
+  const [linkError, setLinkError] = useState('')
+  useEffect(() => {
+    if (!sessionId) return
+    let cancelled = false
+    ;(async () => {
+      const { data: { user } } = await createClient().auth.getUser()
+      if (!user || cancelled) return
+      setLinking('working')
+      for (let attempt = 0; attempt < 6 && !cancelled; attempt++) {
+        const res = await fetch('/api/school/claim', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId }),
+        })
+        if (res.ok) { router.push('/school'); return }
+        if (res.status !== 404) {
+          const body = await res.json().catch(() => ({}))
+          setLinkError(body.error || 'We couldn’t connect your account to your school.')
+          setLinking('error')
+          return
+        }
+        // 404 = the Stripe webhook hasn't created the school yet; give it a moment.
+        await new Promise(r => setTimeout(r, 2000))
+      }
+      if (!cancelled) {
+        setLinkError('We’re still finishing your school’s setup. Refresh this page in a minute.')
+        setLinking('error')
+      }
+    })()
+    return () => { cancelled = true }
+  }, [sessionId, router])
 
   return (
     <div className="min-h-screen bg-[#fafaf8]">
@@ -26,7 +69,7 @@ function SchoolWelcomePageInner() {
       <header className="bg-white border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Logo />
-          <Link href="/auth/login" className="text-sm text-navy-600 hover:text-navy-700 font-medium">Log in</Link>
+          <Link href={loginHref} className="text-sm text-navy-600 hover:text-navy-700 font-medium">Log in</Link>
         </div>
       </header>
 
@@ -39,6 +82,17 @@ function SchoolWelcomePageInner() {
           Welcome to Montessori Family Alliance. Let&apos;s get your school set up so families can start using the platform.
         </p>
 
+        {linking === 'working' && (
+          <div className="mb-8 rounded-xl border border-navy-100 bg-white px-4 py-3 text-sm text-navy-700">
+            Connecting your account to your school…
+          </div>
+        )}
+        {linking === 'error' && (
+          <div role="alert" className="mb-8 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {linkError}
+          </div>
+        )}
+
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 px-6 sm:px-8 py-8 text-left space-y-6">
           <h2 className="text-lg font-bold text-navy-700">Next Steps</h2>
 
@@ -46,8 +100,8 @@ function SchoolWelcomePageInner() {
             <div className="flex gap-4">
               <div className="w-8 h-8 rounded-full bg-warm-100 text-warm-600 flex items-center justify-center font-bold text-sm shrink-0">1</div>
               <div>
-                <h3 className="font-medium text-navy-700">Create your admin account</h3>
-                <p className="text-sm text-navy-600/60 mt-0.5">Sign up with the email you used for billing. You&apos;ll automatically be linked as the school admin.</p>
+                <h3 className="font-medium text-navy-700">Create your admin account, or log in</h3>
+                <p className="text-sm text-navy-600/60 mt-0.5">New here? Sign up with the email you used for billing. Already have a Family Alliance account? Just log in. Either way you&apos;ll be linked as the school admin automatically.</p>
               </div>
             </div>
 
@@ -77,7 +131,7 @@ function SchoolWelcomePageInner() {
             Create Your Account
           </Link>
           <Link
-            href="/auth/login"
+            href={loginHref}
             className="border border-gray-200 text-navy-600 font-medium px-8 py-3.5 rounded-xl hover:bg-gray-50 transition text-center"
           >
             Already have an account? Log in
