@@ -40,13 +40,14 @@ export async function POST(request: NextRequest) {
 
     const { childId, reportType, dateRangeStart, dateRangeEnd } = await request.json()
 
-    // Get child
+    // Get child. Access is decided by RLS ("Family members can view
+    // children"), not by children.parent_id — co-parents and guardians who
+    // joined the family must be able to print reports too.
     const { data: child } = await supabase
       .from('children')
       .select('*')
       .eq('id', childId)
-      .eq('parent_id', parent.id)
-      .single()
+      .maybeSingle()
 
     if (!child) {
       return NextResponse.json({ error: 'Child not found' }, { status: 404 })

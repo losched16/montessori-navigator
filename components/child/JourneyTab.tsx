@@ -36,6 +36,18 @@ export default function JourneyTab({ child, events, devLevels, onLogMoment }: {
 
   return (
     <div className="space-y-8">
+      {/* Printable record of everything — the Journey Keepsake */}
+      {events.length > 0 && (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-[20px] bg-[color:var(--mfa-surface-warm)] px-5 py-4">
+          <p className="text-[14.5px] text-[color:var(--mfa-ink)]">
+            <span className="font-semibold">{first}&apos;s Journey Keepsake</span> — every Moment, milestone and area of growth, ready to print.
+          </p>
+          <Button href="/dashboard/children/keepsake" variant="secondary" size="md">
+            Print {first}&apos;s journey
+          </Button>
+        </div>
+      )}
+
       {/* This Month — plain-language summary */}
       {summary.length > 0 && (
         <section aria-label="This month">

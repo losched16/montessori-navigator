@@ -202,19 +202,24 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         }
       `}</style>
 
-      <AppHeader />
-      <DesktopNavRail />
+      {/* App chrome never prints (Reports, Journey Keepsake use window.print). */}
+      <div className="contents print:hidden">
+        <AppHeader />
+        <DesktopNavRail />
+      </div>
 
       {/* Main content — offset for the desktop rail. Padding must stay
           p-4 sm:p-6: several pages (chat, resources) use matching negative
           margins to go full-bleed, and chat's height math depends on it. */}
-      <div className="sm:pl-20">
-        <main className="p-4 sm:p-6 min-w-0">
+      <div className="sm:pl-20 print:pl-0">
+        <main className="p-4 sm:p-6 print:p-0 min-w-0">
           {children}
         </main>
       </div>
 
-      <MobileBottomNav />
+      <div className="contents print:hidden">
+        <MobileBottomNav />
+      </div>
     </div>
   )
 }

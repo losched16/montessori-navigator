@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { createClient } from '@/lib/supabase'
+import Link from 'next/link'
+import { useChild } from '@/lib/child-context'
 import type { Child } from '@/lib/supabase'
 import { formatAge } from '@/lib/utils'
 
@@ -43,29 +44,23 @@ export default function ReportsPage() {
   const [reportData, setReportData] = useState<ReportData | null>(null)
   const printRef = useRef<HTMLDivElement>(null)
 
-  const supabase = createClient()
+
+  // Children come from the shared family-based context (same as My Child), so
+  // co-parents see the family's children, not only ones they created.
+  const { children: familyChildren, selectedChildId: activeChildId } = useChild()
+  useEffect(() => {
+    if (familyChildren.length === 0) return
+    setChildren(familyChildren)
+    setSelectedChildId(prev => prev ?? activeChildId ?? familyChildren[0].id)
+  }, [familyChildren, activeChildId])
 
   useEffect(() => {
-    const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
-      const { data: parent } = await supabase.from('parents').select('id').eq('user_id', user.id).single()
-      if (!parent) return
-
-      const { data: kids } = await supabase.from('children').select('*').eq('parent_id', parent.id).order('created_at')
-      if (kids && kids.length > 0) {
-        setChildren(kids)
-        setSelectedChildId(kids[0].id)
-      }
-
-      // Default date range: last 3 months
-      const end = new Date()
-      const start = new Date()
-      start.setMonth(start.getMonth() - 3)
-      setDateEnd(end.toISOString().split('T')[0])
-      setDateStart(start.toISOString().split('T')[0])
-    }
-    load()
+    // Default date range: last 3 months
+    const end = new Date()
+    const start = new Date()
+    start.setMonth(start.getMonth() - 3)
+    setDateEnd(end.toISOString().split('T')[0])
+    setDateStart(start.toISOString().split('T')[0])
   }, [])
 
   const selectedChild = children.find(c => c.id === selectedChildId)
@@ -118,6 +113,9 @@ export default function ReportsPage() {
           <div>
             <h1 className="text-xl font-bold text-navy-600">Progress Reports</h1>
             <p className="text-sm text-gray-500 mt-0.5">Generate developmental summaries and portfolio documentation</p>
+            <Link href="/dashboard/children/keepsake" className="inline-block mt-2 text-sm font-semibold text-navy-600 hover:underline">
+              Want every Moment and milestone on paper? Print a Journey Keepsake →
+            </Link>
           </div>
         </div>
 
