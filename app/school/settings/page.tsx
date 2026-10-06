@@ -11,6 +11,9 @@ export default function SchoolSettingsPage() {
   const [website, setWebsite] = useState('')
   const [phone, setPhone] = useState('')
   const [credentials, setCredentials] = useState('')
+  const [logoUrl, setLogoUrl] = useState<string | null>(null)
+  const [logoBusy, setLogoBusy] = useState(false)
+  const [logoError, setLogoError] = useState('')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -53,6 +56,7 @@ export default function SchoolSettingsPage() {
         setWebsite(school.website || '')
         setPhone(school.phone || '')
         setCredentials(school.credentials || '')
+        setLogoUrl(school.logo_url || null)
         setSubscriptionStatus(school.subscription_status || 'inactive')
         setTrialEndsAt(school.trial_ends_at || null)
         setCurrentPeriodEnd(school.current_period_end || null)
@@ -103,6 +107,33 @@ export default function SchoolSettingsPage() {
     })
   }
 
+  const uploadLogo = async (file: File | undefined) => {
+    if (!file) return
+    setLogoError('')
+    setLogoBusy(true)
+    try {
+      const fd = new FormData()
+      fd.set('file', file)
+      const res = await fetch('/api/school/logo', { method: 'POST', body: fd })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data.error || 'Upload failed')
+      setLogoUrl(data.logoUrl)
+    } catch (e: any) {
+      setLogoError(e.message || 'Upload failed')
+    } finally {
+      setLogoBusy(false)
+    }
+  }
+
+  const removeLogo = async () => {
+    setLogoError('')
+    setLogoBusy(true)
+    const res = await fetch('/api/school/logo', { method: 'DELETE' })
+    if (res.ok) setLogoUrl(null)
+    else setLogoError('Could not remove the logo. Please try again.')
+    setLogoBusy(false)
+  }
+
   const save = async () => {
     if (!schoolId) return
     setSaving(true)
@@ -135,6 +166,31 @@ export default function SchoolSettingsPage() {
       <div className="bg-white border border-gray-100 rounded-xl p-6">
         <h2 className="font-semibold text-navy-600 mb-4">School Profile</h2>
         <div className="space-y-4">
+          {/* Logo — parents see it with "Your membership is made possible by …" */}
+          <div>
+            <label className="block text-sm font-medium text-navy-600 mb-1">School logo</label>
+            <div className="flex items-center gap-4">
+              <div className="w-20 h-20 shrink-0 rounded-xl border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden">
+                {logoUrl
+                  // eslint-disable-next-line @next/next/no-img-element
+                  ? <img src={logoUrl} alt="School logo" className="max-w-full max-h-full object-contain p-1.5" />
+                  : <span className="text-xs text-gray-400 text-center px-2">No logo yet</span>}
+              </div>
+              <div className="space-y-2">
+                <label className={`inline-block cursor-pointer text-sm font-medium px-4 py-2 rounded-lg border border-gray-200 hover:bg-gray-50 transition ${logoBusy ? 'opacity-50 pointer-events-none' : ''}`}>
+                  {logoBusy ? 'Saving…' : logoUrl ? 'Replace logo' : 'Upload logo'}
+                  <input type="file" accept="image/png,image/jpeg,image/webp" className="hidden"
+                    onChange={e => { uploadLogo(e.target.files?.[0]); e.target.value = '' }} />
+                </label>
+                {logoUrl && !logoBusy && (
+                  <button type="button" onClick={removeLogo} className="block text-xs text-gray-500 hover:text-red-600">Remove logo</button>
+                )}
+                <p className="text-xs text-gray-500">PNG, JPG or WEBP, up to 2 MB. Families see it as &ldquo;Your membership is made possible by {name || 'your school'}.&rdquo;</p>
+              </div>
+            </div>
+            {logoError && <p role="alert" className="text-sm text-red-600 mt-2">{logoError}</p>}
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-navy-600 mb-1">School name</label>
             <input

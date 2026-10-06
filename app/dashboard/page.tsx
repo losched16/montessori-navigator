@@ -15,6 +15,7 @@ import GrowthCard from '@/components/family/GrowthCard'
 import EditorialCard from '@/components/family/EditorialCard'
 import MomentCard from '@/components/family/MomentCard'
 import ObservationPromptCard from '@/components/family/ObservationPromptCard'
+import SchoolSponsorCard from '@/components/family/SchoolSponsorCard'
 import SectionHeader from '@/components/ui/SectionHeader'
 import Button from '@/components/ui/Button'
 import Skeleton from '@/components/ui/Skeleton'
@@ -153,6 +154,9 @@ export default function DashboardHome() {
 
       {/* ── Pinned message from the Foundation ── */}
       {pinned && <PinnedBanner item={pinned} onDismiss={() => dismissPinned(pinned.id)} />}
+
+      {/* ── School sponsorship (school-invited families only) ── */}
+      <SchoolSponsorCard className="mb-6" />
 
       {/* ── Child selector ── */}
       <div className="mb-6">

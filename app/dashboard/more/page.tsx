@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import SchoolSponsorCard from '@/components/family/SchoolSponsorCard'
 import {
   School, FileText, Bookmark, ClipboardList, BarChart3, Home as HomeIcon,
   BookOpen, Newspaper, Route, Star, Baby, Settings, LogOut, ChevronRight, ArrowLeftRight, Bell,
@@ -93,6 +94,8 @@ export default function MorePage() {
           Everything else in Family Alliance.
         </p>
       </div>
+
+      <SchoolSponsorCard variant="compact" className="mb-6" />
 
       <div className="space-y-6">
         {GROUPS.map(group => (

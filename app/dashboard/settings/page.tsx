@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import SchoolSponsorCard from '@/components/family/SchoolSponsorCard'
+import { useSchoolSponsor } from '@/lib/school-sponsor'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import type { Child } from '@/lib/supabase'
@@ -84,6 +86,9 @@ export default function SettingsPage() {
   const [userRole, setUserRole] = useState<string>('primary')
 
   // Billing state
+  // School-covered families see who provides their membership instead of a
+  // "start a free trial" pitch.
+  const { sponsor: schoolSponsor } = useSchoolSponsor()
   const [subscriptionStatus, setSubscriptionStatus] = useState<string>('inactive')
   const [subscriptionPlan, setSubscriptionPlan] = useState<string | null>(null)
   const [trialEndsAt, setTrialEndsAt] = useState<string | null>(null)
@@ -877,6 +882,8 @@ export default function SettingsPage() {
       {/* ═══ Billing ═══ */}
       {tab === 'billing' && (
         <div className="space-y-4">
+          <SchoolSponsorCard variant="billing" />
+          {!(schoolSponsor && !hasStripeCustomer) && (
           <div className="bg-white border border-gray-100 rounded-xl p-6">
             <h2 className="font-semibold text-navy-600 mb-4">Subscription</h2>
 
@@ -956,6 +963,7 @@ export default function SettingsPage() {
               </div>
             )}
           </div>
+          )}
         </div>
       )}
 
