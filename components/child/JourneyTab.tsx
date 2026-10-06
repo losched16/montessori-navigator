@@ -36,17 +36,22 @@ export default function JourneyTab({ child, events, devLevels, onLogMoment }: {
 
   return (
     <div className="space-y-8">
-      {/* Printable record of everything — the Journey Keepsake */}
-      {events.length > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-[20px] bg-[color:var(--mfa-surface-warm)] px-5 py-4">
-          <p className="text-[14.5px] text-[color:var(--mfa-ink)]">
-            <span className="font-semibold">{first}&apos;s Journey Keepsake</span> — every Moment, milestone and area of growth, ready to print.
-          </p>
-          <Button href="/dashboard/children/keepsake" variant="secondary" size="md">
-            Print {first}&apos;s journey
-          </Button>
+      {/* Print & share — always visible so parents can find it (Reports also
+          lives under Menu → Tools, which is easy to miss). */}
+      <section aria-label="Print or share" className="rounded-[20px] bg-[color:var(--mfa-surface-warm)] border border-[color:var(--mfa-border)] p-5">
+        <h2 className="font-[family-name:var(--mfa-serif)] text-[20px] font-semibold text-[color:var(--mfa-navy)] tracking-tight">
+          Print or share {first}&apos;s journey
+        </h2>
+        <p className="mt-1 text-[14.5px] text-[color:var(--mfa-ink-secondary)]">
+          {events.length > 0
+            ? 'A keepsake of every Moment, milestone and area of growth, or a written progress report for a portfolio or conference.'
+            : `Once you log a few Moments, you can print a keepsake of everything ${first} accomplishes, or a written progress report.`}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2.5">
+          <Button href="/dashboard/children/keepsake" size="md">Journey Keepsake</Button>
+          <Button href="/dashboard/reports" variant="secondary" size="md">Progress Report</Button>
         </div>
-      )}
+      </section>
 
       {/* This Month — plain-language summary */}
       {summary.length > 0 && (
