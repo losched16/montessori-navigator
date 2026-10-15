@@ -31,38 +31,21 @@ export default function JoinStaffPage() {
 
   useEffect(() => {
     const load = async () => {
-      // Look up invitation (public read via service-role-less query)
-      const { data: inv } = await supabase
-        .from('invitations')
-        .select('email, status, expires_at, school_id')
-        .eq('token', token)
-        .eq('type', 'school_staff')
-        .maybeSingle()
-
-      if (!inv) {
+      // Server-side lookup: the invitee usually isn't signed in yet, and the
+      // invitations table's RLS hides the row from the browser client.
+      const res = await fetch(`/api/school/staff/invite-info?token=${encodeURIComponent(token)}`, { cache: 'no-store' })
+      if (!res.ok) {
         setError('Invitation not found.')
         setLoading(false)
         return
       }
-
-      // Look up school name (schools table has public SELECT policy)
-      let schoolName: string | null = null
-      if (inv.school_id) {
-        const { data: school } = await supabase
-          .from('schools')
-          .select('name')
-          .eq('id', inv.school_id)
-          .maybeSingle()
-        schoolName = school?.name || null
-      }
-
-      const expired = new Date(inv.expires_at) < new Date()
+      const inv = await res.json()
 
       setInvite({
         email: inv.email,
-        schoolName,
+        schoolName: inv.schoolName,
         status: inv.status,
-        expired,
+        expired: inv.expired,
       })
 
       const { data: { user } } = await supabase.auth.getUser()
@@ -206,7 +189,7 @@ export default function JoinStaffPage() {
                 disabled={submitting}
                 className="w-full bg-warm-500 hover:bg-warm-600 text-white font-medium py-3 rounded-lg transition disabled:opacity-50"
               >
-                {submitting ? 'Accepting…' : `Accept &amp; Manage ${invite.schoolName || 'School'}`}
+                {submitting ? 'Accepting…' : `Accept & Manage ${invite.schoolName || 'School'}`}
               </button>
             </>
           ) : (
