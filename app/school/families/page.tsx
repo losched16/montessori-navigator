@@ -7,6 +7,7 @@ interface EnrolledFamily {
   id: string
   displayName: string  // best available human-readable label
   childrenCount: number
+  parents: string[]    // names of the parents linked to this family
   joinedAt: string
   status: string
 }
@@ -16,16 +17,6 @@ interface PendingInvite {
   email: string
   createdAt: string
   expiresAt: string
-}
-
-// Generic / placeholder family.name values that we should treat as "no real
-// name set" and fall back to the parent's name instead. These come from older
-// signup paths that didn't capture a proper name.
-const GENERIC_FAMILY_NAMES = new Set(['my family', 'unnamed family', "'s family", ''])
-
-function isGenericName(name: string | null | undefined): boolean {
-  if (!name) return true
-  return GENERIC_FAMILY_NAMES.has(name.trim().toLowerCase())
 }
 
 export default function SchoolFamiliesPage() {
@@ -48,86 +39,15 @@ export default function SchoolFamiliesPage() {
 
       if (!staff) return
 
-      // --- Active enrollments
-      const { data: enrollments } = await supabase
-        .from('school_families')
-        .select('id, family_id, status, joined_at')
-        .eq('school_id', staff.school_id)
-        .order('joined_at', { ascending: false })
-
-      const familyIds = (enrollments || []).map(e => e.family_id)
-
-      const [familyRes, childRes, memberRes] = await Promise.all([
-        familyIds.length === 0
-          ? Promise.resolve({ data: [] })
-          : supabase
-              .from('families')
-              .select('id, name')
-              .in('id', familyIds),
-        familyIds.length === 0
-          ? Promise.resolve({ data: [] })
-          : supabase
-              .from('children')
-              .select('id, family_id')
-              .in('family_id', familyIds),
-        familyIds.length === 0
-          ? Promise.resolve({ data: [] })
-          : supabase
-              .from('family_members')
-              // Pull the primary member's parent record so we can show their
-              // name when the family.name is generic ("My Family" etc).
-              .select('family_id, role, parents!inner(display_name, email)')
-              .in('family_id', familyIds)
-              .eq('role', 'primary'),
-      ])
-
-      const familyMap = new Map((familyRes.data || []).map((f: any) => [f.id, f]))
-      const childCountMap = new Map<string, number>()
-      ;(childRes.data || []).forEach((c: any) => {
-        childCountMap.set(c.family_id, (childCountMap.get(c.family_id) || 0) + 1)
-      })
-      const primaryParentMap = new Map<string, { display_name: string | null; email: string | null }>()
-      ;(memberRes.data || []).forEach((m: any) => {
-        const parent = Array.isArray(m.parents) ? m.parents[0] : m.parents
-        if (parent) {
-          primaryParentMap.set(m.family_id, {
-            display_name: parent.display_name,
-            email: parent.email,
-          })
-        }
-      })
-
-      const enriched: EnrolledFamily[] = (enrollments || []).map(e => {
-        const family = familyMap.get(e.family_id) as any
-        const familyName = family?.name as string | null | undefined
-        const primary = primaryParentMap.get(e.family_id)
-
-        // Display-name resolution order:
-        //   1. family.name if it's a real name (not "My Family" etc)
-        //   2. "{parent display_name}'s Family" if we have a parent name
-        //   3. "{parent email}'s Family"
-        //   4. "Unnamed Family" as a last resort
-        let displayName: string
-        if (!isGenericName(familyName)) {
-          displayName = familyName as string
-        } else if (primary?.display_name && primary.display_name.trim()) {
-          displayName = `${primary.display_name.trim()}'s Family`
-        } else if (primary?.email) {
-          displayName = `${primary.email.split('@')[0]}'s Family`
-        } else {
-          displayName = 'Unnamed Family'
-        }
-
-        return {
-          id: e.id,
-          displayName,
-          childrenCount: childCountMap.get(e.family_id) || 0,
-          joinedAt: e.joined_at,
-          status: e.status,
-        }
-      })
-
-      setFamilies(enriched)
+      // Families come from a server route: school staff can't read the
+      // families / children / family_members tables directly (RLS), so the old
+      // browser-side lookup returned nothing — every family showed up as
+      // "Unnamed Family" with 0 children.
+      const res = await fetch('/api/school/families', { cache: 'no-store' })
+      if (res.ok) {
+        const data = await res.json()
+        setFamilies(data.families || [])
+      }
 
       // --- Pending family invitations
       const { data: pendingInvites } = await supabase
@@ -229,7 +149,14 @@ export default function SchoolFamiliesPage() {
                 key={family.id}
                 className="bg-white border border-gray-100 rounded-xl p-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:items-center"
               >
-                <div className="font-medium text-navy-700">{family.displayName}</div>
+                <div>
+                  <div className="font-medium text-navy-700">{family.displayName}</div>
+                  {family.parents.length > 0 && (
+                    <div className="text-xs text-gray-500 mt-0.5">
+                      {family.parents.length === 1 ? '1 parent' : `${family.parents.length} parents`} linked: {family.parents.join(', ')}
+                    </div>
+                  )}
+                </div>
                 <div className="text-sm text-navy-600">
                   <span className="sm:hidden text-navy-600">Children: </span>
                   {family.childrenCount} {family.childrenCount === 1 ? 'child' : 'children'}

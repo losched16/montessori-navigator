@@ -1,63 +1,52 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { createClient as createServiceClient } from '@supabase/supabase-js'
 
+export const dynamic = 'force-dynamic'
+
+// GET /api/invite/info?token=...
+//
+// Public: the invitee usually isn't signed in (often has no account yet). The
+// invitations table's RLS only shows a row to its creator or to a signed-in
+// parent whose email matches, so reading it as the visitor returned nothing
+// and every new spouse / family saw "Invitation not found". This looks the
+// invitation up with the service role and returns only what the page needs to
+// render. The token is the credential (unguessable UUID), same as the link.
 export async function GET(request: NextRequest) {
   try {
-    const token = request.nextUrl.searchParams.get('token')
-
-    if (!token) {
-      return NextResponse.json({ error: 'Token is required' }, { status: 400 })
+    const token = request.nextUrl.searchParams.get('token')?.trim()
+    if (!token || token.length > 100) {
+      return NextResponse.json({ error: 'Invitation not found' }, { status: 404 })
     }
 
-    const cookieStore = cookies()
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          get(name: string) { return cookieStore.get(name)?.value },
-          set(name: string, value: string, options: any) { try { cookieStore.set({ name, value, ...options }) } catch (e) {} },
-          remove(name: string, options: any) { try { cookieStore.set({ name, value: '', ...options }) } catch (e) {} },
-        },
-      }
-    )
+    const service = createServiceClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
-    const { data: invitation } = await supabase
+    const { data: invitation } = await service
       .from('invitations')
-      .select('type, status, expires_at, family_id, school_id')
+      .select('type, status, expires_at, family_id, school_id, email')
       .eq('token', token)
-      .single()
+      .maybeSingle()
 
     if (!invitation) {
       return NextResponse.json({ error: 'Invitation not found' }, { status: 404 })
     }
 
-    let familyName = null
-    let schoolName = null
+    let familyName: string | null = null
+    let schoolName: string | null = null
 
     if (invitation.family_id) {
-      const { data: family } = await supabase
-        .from('families')
-        .select('name')
-        .eq('id', invitation.family_id)
-        .single()
-      familyName = family?.name
+      const { data: family } = await service.from('families').select('name').eq('id', invitation.family_id).maybeSingle()
+      familyName = family?.name ?? null
     }
-
     if (invitation.school_id) {
-      const { data: school } = await supabase
-        .from('schools')
-        .select('name, logo_url')
-        .eq('id', invitation.school_id)
-        .single()
-      schoolName = school?.name
+      const { data: school } = await service.from('schools').select('name').eq('id', invitation.school_id).maybeSingle()
+      schoolName = school?.name ?? null
     }
 
     return NextResponse.json({
       type: invitation.type,
       status: invitation.status,
       expires_at: invitation.expires_at,
+      email: invitation.email,
       familyName,
       schoolName,
       expired: new Date(invitation.expires_at) < new Date(),

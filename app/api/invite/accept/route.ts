@@ -30,15 +30,30 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invitation token is required' }, { status: 400 })
     }
 
-    // Find the invitation
-    const { data: invitation } = await supabase
+    // Find the invitation with the service role. Reading it as the signed-in
+    // user went through RLS, which only shows an invitation to a parent whose
+    // stored email already matches — so a brand-new account (no parent profile
+    // yet) or an address that differs only in case got "Invitation not found".
+    const service = createServiceClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    )
+    const { data: invitation } = await service
       .from('invitations')
       .select('*')
       .eq('token', token)
-      .single()
+      .maybeSingle()
 
     if (!invitation) {
       return NextResponse.json({ error: 'Invitation not found' }, { status: 404 })
+    }
+
+    // The invitation was sent to a specific address; only that account may
+    // accept it (this was previously enforced implicitly by RLS).
+    if ((user.email || '').toLowerCase() !== String(invitation.email || '').toLowerCase()) {
+      return NextResponse.json({
+        error: `This invitation was sent to ${invitation.email}. Sign in or create your account with that email, or ask for a new invitation to the address you use.`,
+      }, { status: 403 })
     }
 
     if (invitation.status !== 'pending') {
@@ -47,7 +62,7 @@ export async function POST(request: NextRequest) {
 
     if (new Date(invitation.expires_at) < new Date()) {
       // Mark as expired
-      await supabase
+      await service
         .from('invitations')
         .update({ status: 'expired' })
         .eq('id', invitation.id)
@@ -109,16 +124,37 @@ export async function POST(request: NextRequest) {
       if (memberError) {
         return NextResponse.json({ error: 'Failed to join family' }, { status: 500 })
       }
+
+      // A spouse who already created their own account was given an empty
+      // personal family at signup. The app opens a parent's first family, so
+      // leaving it would hide the shared child. Remove ONLY the membership of
+      // a family that has no children, no other members and no school
+      // enrollment; anything with real data is left alone.
+      try {
+        const { data: others } = await service
+          .from('family_members')
+          .select('id, family_id')
+          .eq('parent_id', parent.id)
+          .neq('family_id', invitation.family_id)
+        for (const o of others || []) {
+          const [{ count: kids }, { count: people }, { count: enrolled }] = await Promise.all([
+            service.from('children').select('*', { count: 'exact', head: true }).eq('family_id', o.family_id),
+            service.from('family_members').select('*', { count: 'exact', head: true }).eq('family_id', o.family_id),
+            service.from('school_families').select('*', { count: 'exact', head: true }).eq('family_id', o.family_id),
+          ])
+          if (!kids && people === 1 && !enrolled) {
+            await service.from('family_members').delete().eq('id', o.id)
+          }
+        }
+      } catch (e) {
+        console.error('[invite/accept] solo-family cleanup failed:', e)
+      }
     } else if (invitation.type === 'school_family') {
       // Gate at accept time: under the new cap rule, pending invites don't
       // count toward the trial seat cap — only active members do. So even
       // if an invitation was sent freely, we have to verify there's still
       // an open slot before letting this person actually join the school.
       if (invitation.school_id) {
-        const service = createServiceClient(
-          process.env.NEXT_PUBLIC_SUPABASE_URL!,
-          process.env.SUPABASE_SERVICE_ROLE_KEY!,
-        )
         const { data: school } = await service
           .from('schools')
           .select('subscription_status')
@@ -199,8 +235,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Mark invitation as accepted
-    await supabase
+    // Mark invitation as accepted. Service role: the invitee isn't the creator,
+    // so RLS silently skipped this update and invitations stayed "pending".
+    await service
       .from('invitations')
       .update({
         status: 'accepted',
