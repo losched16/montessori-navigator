@@ -131,23 +131,7 @@ export default function InvitePage() {
                   {accepting ? 'Accepting...' : 'Accept Invitation'}
                 </button>
               ) : (
-                <div className="space-y-3">
-                  <p className="text-sm text-navy-600 text-center mb-2">
-                    Sign in or create an account to accept this invitation.
-                  </p>
-                  <Link
-                    href={`/auth/login?next=/invite/${token}`}
-                    className="block w-full text-center bg-warm-500 hover:bg-warm-600 text-white font-medium py-3 rounded-lg transition"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href={`/auth/signup?next=/invite/${token}`}
-                    className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-navy-600 font-medium py-3 rounded-lg transition"
-                  >
-                    Create Account
-                  </Link>
-                </div>
+                <AuthChoice token={token} email={inviteInfo?.email} prompt="Sign in or create an account to accept this invitation." />
               )}
             </>
           ) : inviteInfo?.type === 'school_family' ? (
@@ -169,28 +153,40 @@ export default function InvitePage() {
                   {accepting ? 'Joining...' : 'Join School Community'}
                 </button>
               ) : (
-                <div className="space-y-3">
-                  <p className="text-sm text-navy-600 text-center mb-2">
-                    Sign in or create an account to join.
-                  </p>
-                  <Link
-                    href={`/auth/login?next=/invite/${token}`}
-                    className="block w-full text-center bg-warm-500 hover:bg-warm-600 text-white font-medium py-3 rounded-lg transition"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href={`/auth/signup?next=/invite/${token}`}
-                    className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-navy-600 font-medium py-3 rounded-lg transition"
-                  >
-                    Create Account
-                  </Link>
-                </div>
+                <AuthChoice token={token} email={inviteInfo?.email} prompt="Sign in or create an account to join." />
               )}
             </>
           ) : null}
         </div>
       </div>
+    </div>
+  )
+}
+
+// Sign-in choices for a visitor who isn't signed in. Most invitees have NO
+// account yet, so "create" is the primary action and carries the invited email
+// (the account must use that address to accept). Existing users sign in.
+function AuthChoice({ token, email, prompt }: { token: string; email?: string | null; prompt: string }) {
+  const next = encodeURIComponent(`/invite/${token}`)
+  const signup = `/auth/signup?next=${next}${email ? `&email=${encodeURIComponent(email)}` : ''}`
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-navy-600 text-center mb-1">{prompt}</p>
+      {email && (
+        <p className="text-xs text-gray-500 text-center">This invitation was sent to <strong>{email}</strong>.</p>
+      )}
+      <Link
+        href={signup}
+        className="block w-full text-center bg-warm-500 hover:bg-warm-600 text-white font-medium py-3 rounded-lg transition"
+      >
+        I&apos;m new — create my account
+      </Link>
+      <Link
+        href={`/auth/login?next=${next}`}
+        className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-navy-600 font-medium py-3 rounded-lg transition"
+      >
+        I already have an account — sign in
+      </Link>
     </div>
   )
 }

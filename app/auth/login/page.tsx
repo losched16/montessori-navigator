@@ -22,7 +22,13 @@ export default function LoginPage() {
     const { data: signInData, error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
-      setError(error.message)
+      // Supabase's bare "Invalid login credentials" reads like a bug to someone
+      // who simply doesn't have an account yet (the usual case for invitees).
+      setError(
+        /invalid login credentials/i.test(error.message)
+          ? "We couldn't find an account with that email and password. If you're new, go back and choose “create my account”, or use “Forgot password” if you've signed up before."
+          : error.message,
+      )
       setLoading(false)
       return
     }
@@ -30,7 +36,8 @@ export default function LoginPage() {
     // Honor an explicit ?next= override (e.g. invite flows)
     const params = new URLSearchParams(window.location.search)
     const next = params.get('next')
-    if (next) {
+    // Same-site paths only (never an absolute or protocol-relative URL).
+    if (next && next.startsWith('/') && !next.startsWith('//')) {
       router.push(next)
       return
     }

@@ -22,6 +22,11 @@ function SignupPageInner() {
   const prefillEmail = searchParams.get('email')
   const schoolSlug = searchParams.get('school')
   const planParam = searchParams.get('plan')
+  // Arriving from a spouse/family invitation (/invite/<token>): the invitation
+  // is the pass. Only a well-formed /invite/<token> path is honored, so this
+  // can't be used as an open redirect.
+  const nextParam = searchParams.get('next')
+  const inviteNext = nextParam && /^\/invite\/[A-Za-z0-9-]{8,100}$/.test(nextParam) ? nextParam : null
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState(prefillEmail || '')
@@ -37,15 +42,17 @@ function SignupPageInner() {
   }, [prefillEmail])
 
   // Payment gate: signup is only valid via Stripe checkout (session_id),
-  // a school invite (school slug), or the legacy plan param.
-  // Direct visitors are sent to /pricing to choose a plan first.
+  // a school invite (school slug), a family invitation, or the legacy plan
+  // param. Direct visitors are sent to /pricing to choose a plan first.
+  // (A family invitation used to be missing here, so spouses invited to share
+  // a family were redirected to the pricing page instead of joining.)
   useEffect(() => {
-    if (sessionId || schoolSlug || planParam === 'monthly' || planParam === 'annual') {
+    if (sessionId || schoolSlug || inviteNext || planParam === 'monthly' || planParam === 'annual') {
       setGateChecked(true)
       return
     }
     router.replace('/pricing')
-  }, [sessionId, schoolSlug, planParam])
+  }, [sessionId, schoolSlug, inviteNext, planParam])
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -139,6 +146,14 @@ function SignupPageInner() {
           }
         }
       }
+    }
+
+    // Came from a family invitation: go straight back to it so it gets accepted
+    // (the accept step joins the shared family and drops the empty personal
+    // family created above). Skip onboarding — the shared family has the child.
+    if (inviteNext) {
+      router.push(inviteNext)
+      return
     }
 
     // If they came from Stripe Checkout (session_id present), link the subscription
@@ -237,8 +252,11 @@ function SignupPageInner() {
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-warm-500 focus:border-transparent outline-none disabled:bg-gray-50 disabled:text-gray-600"
                 placeholder="you@email.com"
                 required
-                disabled={fromCheckout}
+                disabled={fromCheckout || (!!inviteNext && !!prefillEmail)}
               />
+              {inviteNext && prefillEmail && (
+                <p className="mt-1.5 text-xs text-gray-500">Your invitation was sent to this address, so your account uses it.</p>
+              )}
             </div>
 
             <div>
