@@ -138,6 +138,9 @@ export default function OnboardingChecklist() {
                 <p className="text-xs text-navy-600/70 leading-relaxed mt-0.5">
                   {step.description}
                 </p>
+                {!step.completed && step.progressLabel && (
+                  <p className="text-xs font-medium text-warm-700 mt-1">{step.progressLabel}</p>
+                )}
               </div>
 
               {/* Affordance */}

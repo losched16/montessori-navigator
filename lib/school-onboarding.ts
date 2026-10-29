@@ -22,6 +22,8 @@ export interface OnboardingStep {
   completed: boolean
   /** Short human-readable confirmation when completed (e.g. "Invited 3 families"). */
   doneLabel?: string
+  /** Progress note shown while the step is still open (e.g. "4 invited · 1 joined of 22 goal"). */
+  progressLabel?: string
 }
 
 export interface OnboardingState {
@@ -30,6 +32,19 @@ export interface OnboardingState {
   completedCount: number
   totalCount: number
   isComplete: boolean
+}
+
+/**
+ * How many families must have JOINED before the rollout step counts as done.
+ * A quarter of the school's families (at least 5), never more than the number
+ * of families the school has, and capped at the 3-member trial limit for
+ * schools still on a trial (they can't go past it). One test invitation used to
+ * mark this done, which let schools stop at "1 of 87".
+ */
+export function rolloutTarget(familyCount: number | null | undefined, isTrial = false): number {
+  const n = Math.max(0, Math.floor(familyCount || 0))
+  const target = n > 0 ? Math.min(n, Math.max(5, Math.ceil(n * 0.25))) : 5
+  return isTrial ? Math.min(target, 3) : target
 }
 
 interface RawState {
@@ -60,7 +75,7 @@ export async function getOnboardingState(
   ] = await Promise.all([
     supabase
       .from('schools')
-      .select('address, website, phone, credentials, onboarding_state')
+      .select('address, website, phone, credentials, onboarding_state, family_count, subscription_status')
       .eq('id', schoolId)
       .maybeSingle(),
     supabase
@@ -121,6 +136,8 @@ export async function getOnboardingState(
   const familyInviteCount = familyInviteRes.count || 0
   const activeFamilyCount = activeFamilyRes.count || 0
   const firstInviteSent = familyInviteCount > 0 || activeFamilyCount > 0
+  const goal = rolloutTarget(school?.family_count, school?.subscription_status === 'trialing')
+  const rolloutDone = activeFamilyCount >= goal
 
   // --- Added a co-admin
   // school_staff includes the original admin, so 2+ means a co-admin exists.
@@ -151,16 +168,17 @@ export async function getOnboardingState(
     },
     {
       id: 'invite',
-      title: 'Send your first family invitation',
+      title: 'Roll out to your families',
       description:
-        'Start with yourself, a teacher, or a family who would love to test it. Watch what they experience.',
+        'A short step-by-step guide: your school link, inviting by email, a ready-to-send note to parents, and how to bring in staff and spouses.',
       icon: '✉️',
-      href: '/school/invite',
-      completed: firstInviteSent,
-      doneLabel: firstInviteSent
-        ? activeFamilyCount > 0
-          ? `${activeFamilyCount} ${activeFamilyCount === 1 ? 'family' : 'families'} enrolled`
-          : `${familyInviteCount} ${familyInviteCount === 1 ? 'invite' : 'invites'} sent`
+      href: '/school/rollout',
+      completed: rolloutDone,
+      doneLabel: rolloutDone
+        ? `${activeFamilyCount} ${activeFamilyCount === 1 ? 'family' : 'families'} joined`
+        : undefined,
+      progressLabel: !rolloutDone && firstInviteSent
+        ? `${activeFamilyCount} joined of ${goal} to reach${familyInviteCount > 0 ? ` · ${familyInviteCount} invited` : ''}`
         : undefined,
     },
     {

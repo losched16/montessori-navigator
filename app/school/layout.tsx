@@ -116,6 +116,7 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
 
   const navItems = [
     { href: '/school', label: 'Dashboard', icon: '📊' },
+    { href: '/school/rollout', label: 'Roll out', icon: '🚀' },
     { href: '/school/families', label: 'Families', icon: '👨‍👩‍👧' },
     { href: '/school/invite', label: 'Invitations', icon: '✉️' },
     { href: '/school/resources', label: 'Resources', icon: '📚' },

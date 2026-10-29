@@ -206,7 +206,7 @@ export async function sendSchoolAdminWelcome({ to, schoolName, trialEndDate, app
     ${statusLine}
     <p style="margin:0 0 12px;"><strong>Getting started:</strong></p>
     <ol style="margin:0 0 12px; padding-left:20px; color:#5c4a7e;">
-      <li style="margin-bottom:6px;">Invite your families — they get free access while your subscription is active</li>
+      <li style="margin-bottom:6px;">Invite your families — they get free access while your subscription is active. Open <strong>Roll out</strong> in your dashboard for a step-by-step guide and a ready-to-send note for your parents</li>
       <li style="margin-bottom:6px;">Customize your school profile (credentials, address, photo) so families recognize you</li>
       <li style="margin-bottom:6px;">Add other admins on your team so they can help manage</li>
     </ol>

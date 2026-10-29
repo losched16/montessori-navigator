@@ -155,6 +155,9 @@ export default function SchoolWelcomePage() {
                 To yourself, a teacher, a board member, or one family who would love to test it.
                 Watch what they experience. Adjust before you scale to your whole community.
               </p>
+              <Link href="/school/rollout" className="inline-block mt-2 text-sm font-medium text-warm-700 hover:text-warm-800">
+                See the step-by-step rollout guide →
+              </Link>
             </div>
           </div>
         </div>

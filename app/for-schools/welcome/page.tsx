@@ -117,7 +117,7 @@ function SchoolWelcomePageInner() {
               <div className="w-8 h-8 rounded-full bg-warm-100 text-warm-600 flex items-center justify-center font-bold text-sm shrink-0">3</div>
               <div>
                 <h3 className="font-medium text-navy-700">Invite your families</h3>
-                <p className="text-sm text-navy-600/60 mt-0.5">Share your unique school link or upload a CSV of parent emails. Families will receive an invitation to create their accounts.</p>
+                <p className="text-sm text-navy-600/60 mt-0.5">Share your unique school link or upload a CSV of parent emails. Families will receive an invitation to create their accounts. Once you&apos;re in, a step-by-step <strong>Roll out</strong> guide walks you through it, including a ready-to-send note for your parents.</p>
               </div>
             </div>
           </div>

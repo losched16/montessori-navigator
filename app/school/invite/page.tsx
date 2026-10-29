@@ -136,7 +136,12 @@ export default function SchoolInvitePage() {
 
   return (
     <div className="max-w-4xl pb-20 sm:pb-0">
-      <h1 className="text-xl font-bold text-navy-600 mb-6">Invite Families</h1>
+      <h1 className="text-xl font-bold text-navy-600 mb-2">Invite Families</h1>
+      <p className="text-sm text-navy-600/80 mb-6">
+        New to this? Follow the{' '}
+        <Link href="/school/rollout" className="text-warm-700 font-medium hover:text-warm-800">step-by-step rollout guide</Link>
+        {' '}— it includes a ready-to-send note for your parents.
+      </p>
 
       {/* Trial limit banner */}
       {usage?.isTrial && usage.limit !== null && (
