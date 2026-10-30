@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { createClient } from '@supabase/supabase-js'
 import { linkSchoolAdmin, findVerifiedUserByEmail } from '@/lib/school-admin-link'
-import { sendSchoolAdminWelcome } from '@/lib/email'
+import { sendSchoolAdminWelcome, sendPaymentReceipt } from '@/lib/email'
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -106,6 +106,62 @@ async function autoLinkSchoolAdmin(
   } catch (err) {
     console.error('[webhook] school admin auto-link failed:', err)
   }
+}
+
+// Emails a receipt for a paid invoice, once.
+//
+// Stripe's own "email customers about successful payments" is a dashboard
+// setting that can't be read or changed through the API, so we can't be sure
+// it's on; sending from here guarantees a branded receipt (with the school
+// name, what it covers, and links to the invoice and PDF). $0 invoices (free
+// codes, trials) get no receipt. Idempotent: after sending, the invoice is
+// stamped in Stripe metadata, so webhook retries can't send it twice.
+async function sendInvoiceReceipt(stripe: Stripe, eventInvoice: any) {
+  if (!(eventInvoice.amount_paid > 0)) return
+
+  const invoice: any = await stripe.invoices.retrieve(eventInvoice.id)
+  if (invoice.metadata?.mfa_receipt_sent) return
+
+  const to: string | null = invoice.customer_email || null
+  if (!to) {
+    console.log(`[webhook] receipt skipped for ${invoice.id}: no customer email`)
+    return
+  }
+
+  const subMeta = invoice.parent?.subscription_details?.metadata || invoice.subscription_details?.metadata || {}
+  const line = invoice.lines?.data?.[0]
+  const secs = (n?: number | null) => (n ? new Date(n * 1000) : null)
+
+  const result = await sendPaymentReceipt({
+    to,
+    customerName: invoice.customer_name,
+    schoolName: subMeta.schoolName || null,
+    description: line?.description || null,
+    amountPaidCents: invoice.amount_paid,
+    currency: invoice.currency || 'usd',
+    invoiceNumber: invoice.number,
+    paidAt: secs(invoice.status_transitions?.paid_at) || new Date(),
+    periodStart: secs(line?.period?.start),
+    periodEnd: secs(line?.period?.end),
+    receiptUrl: invoice.hosted_invoice_url,
+    pdfUrl: invoice.invoice_pdf,
+    isFirstSchoolPayment: !!subMeta.schoolName && invoice.billing_reason === 'subscription_create',
+    appUrl: process.env.NEXT_PUBLIC_APP_URL,
+  })
+
+  if (result.error) {
+    const status = (result.error as any).statusCode
+    // A bad address or rejected message will never succeed: log it and move on.
+    // Anything else (rate limit, outage) throws so Stripe retries the event.
+    if (status && status >= 400 && status < 500 && status !== 429) {
+      console.error(`[webhook] receipt for ${invoice.id} rejected (${status}):`, result.error.message)
+      return
+    }
+    throw new Error(`receipt email failed for ${invoice.id}: ${result.error.message}`)
+  }
+
+  await stripe.invoices.update(invoice.id, { metadata: { ...(invoice.metadata || {}), mfa_receipt_sent: new Date().toISOString() } })
+  console.log(`[webhook] receipt sent for ${invoice.id}`)
 }
 
 export async function POST(req: NextRequest) {
@@ -270,6 +326,11 @@ export async function POST(req: NextRequest) {
       case 'customer.subscription.deleted': {
         const subscription = event.data.object as Stripe.Subscription
         await syncSubscription(stripe, supabase, subscription.id, subscription.customer as string)
+        break
+      }
+
+      case 'invoice.paid': {
+        await sendInvoiceReceipt(stripe, event.data.object)
         break
       }
 

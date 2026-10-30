@@ -377,3 +377,106 @@ export async function sendAnnouncementEmails({
   }
   return { sent, errors }
 }
+
+// -----------------------------------------------------------
+// Payment receipt (sent from our own code on invoice.paid)
+// -----------------------------------------------------------
+
+export interface PaymentReceiptParams {
+  to: string
+  customerName?: string | null
+  schoolName?: string | null
+  description?: string | null   // what the payment covers, from the invoice line
+  amountPaidCents: number
+  currency: string
+  invoiceNumber?: string | null
+  paidAt: Date
+  periodStart?: Date | null
+  periodEnd?: Date | null
+  receiptUrl?: string | null    // Stripe-hosted receipt/invoice page
+  pdfUrl?: string | null
+  isFirstSchoolPayment?: boolean
+  appUrl?: string
+}
+
+function escHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+}
+
+// Pure (no network): builds the receipt so it can be previewed and tested.
+export function buildPaymentReceiptEmail(p: PaymentReceiptParams) {
+  const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: p.currency.toUpperCase() }).format(p.amountPaidCents / 100)
+  const day = (d: Date) => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  const first = (p.customerName || '').trim().split(/\s+/)[0]
+  const forWhom = p.schoolName ? ` for <strong>${escHtml(p.schoolName)}</strong>` : ''
+  const appUrl = p.appUrl || 'https://familyalliance.montessori.org'
+
+  const rows: Array<[string, string]> = [['Amount paid', `<strong>${escHtml(money)}</strong>`], ['Date paid', escHtml(day(p.paidAt))]]
+  if (p.schoolName) rows.push(['School', escHtml(p.schoolName)])
+  if (p.description) rows.push(['Covers', escHtml(p.description.replace(/\s+/g, ' ').trim())])
+  if (p.periodStart && p.periodEnd) rows.push(['Service period', `${escHtml(day(p.periodStart))} – ${escHtml(day(p.periodEnd))}`])
+  if (p.invoiceNumber) rows.push(['Receipt number', escHtml(p.invoiceNumber)])
+
+  const table = `
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:16px 0 8px; border-top:1px solid ${COLORS.border};">
+      ${rows.map(([k, v]) => `<tr>
+        <td style="padding:10px 12px 10px 0; border-bottom:1px solid ${COLORS.border}; color:${COLORS.muted}; font-size:14px; width:38%; vertical-align:top;">${k}</td>
+        <td style="padding:10px 0; border-bottom:1px solid ${COLORS.border}; color:${COLORS.text}; font-size:14px;">${v}</td>
+      </tr>`).join('')}
+    </table>`
+
+  const pdf = p.pdfUrl ? `<p style="margin:8px 0 0; font-size:14px;"><a href="${p.pdfUrl}" style="color:${COLORS.royalPurple};">Download a PDF copy</a></p>` : ''
+  const next = p.isFirstSchoolPayment
+    ? `<p style="margin:16px 0 0;"><strong>What's next:</strong> sign in and open <strong>Roll out</strong> in your dashboard for a step-by-step guide to inviting your families, including a ready-to-send note for your parents.</p>`
+    : ''
+
+  const body = `
+    <p style="margin:0 0 12px;">${first ? `Hi ${escHtml(first)},` : 'Hello,'}</p>
+    <p style="margin:0 0 4px;">Thank you. We've received your payment${forWhom}. Here is your receipt.</p>
+    ${table}
+    ${pdf}
+    ${next}
+  `
+  const heading = 'Thank you — here’s your receipt'
+  const footnote = 'Please keep this email for your records. Questions about billing? Just reply to this email.'
+  const subject = `Your receipt from Montessori Family Alliance — ${money}`
+  const details = [
+    `Amount paid: ${money}`,
+    `Date paid: ${day(p.paidAt)}`,
+    p.schoolName ? `School: ${p.schoolName}` : '',
+    p.description ? `Covers: ${p.description.replace(/\s+/g, ' ').trim()}` : '',
+    p.periodStart && p.periodEnd ? `Service period: ${day(p.periodStart)} – ${day(p.periodEnd)}` : '',
+    p.invoiceNumber ? `Receipt number: ${p.invoiceNumber}` : '',
+  ].filter(Boolean)
+  const links = [
+    p.receiptUrl ? `View your receipt: ${p.receiptUrl}` : '',
+    p.pdfUrl ? `PDF copy: ${p.pdfUrl}` : '',
+  ].filter(Boolean)
+  const text = [
+    first ? `Hi ${first},` : 'Hello,',
+    '',
+    `Thank you. We've received your payment${p.schoolName ? ` for ${p.schoolName}` : ''}.`,
+    '',
+    ...details,
+    ...(links.length ? ['', ...links] : []),
+    '',
+    'Please keep this email for your records. Questions about billing? Just reply to this email.',
+  ].join('\n')
+
+  return {
+    subject,
+    text,
+    html: emailLayout({
+      heading,
+      body,
+      ctaLabel: p.receiptUrl ? 'View receipt' : undefined,
+      ctaUrl: p.receiptUrl || undefined,
+      footnote,
+    }),
+  }
+}
+
+export async function sendPaymentReceipt(p: PaymentReceiptParams) {
+  const { subject, html, text } = buildPaymentReceiptEmail(p)
+  return sendEmail({ to: p.to, subject, html, text })
+}
