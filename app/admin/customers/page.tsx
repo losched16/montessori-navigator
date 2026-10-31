@@ -125,13 +125,18 @@ export default function AdminCustomersPage() {
   // Schools the signed-in super admin can already open in the school portal.
   const [myAccess, setMyAccess] = useState<Record<string, { isSupport: boolean }>>({})
   const [accessBusy, setAccessBusy] = useState<string | null>(null)
+  // Only super admins granted can_manage_schools see the support controls.
+  const [canManage, setCanManage] = useState(false)
 
   useEffect(() => {
     fetch('/api/admin/school-access')
-      .then(r => (r.ok ? r.json() : { schools: [] }))
-      .then(({ schools }) => setMyAccess(Object.fromEntries(
-        (schools || []).map((s: { schoolId: string; isSupport: boolean }) => [s.schoolId, { isSupport: s.isSupport }]),
-      )))
+      .then(r => (r.ok ? r.json() : { allowed: false, schools: [] }))
+      .then(({ allowed, schools }) => {
+        setCanManage(!!allowed)
+        setMyAccess(Object.fromEntries(
+          (schools || []).map((s: { schoolId: string; isSupport: boolean }) => [s.schoolId, { isSupport: s.isSupport }]),
+        ))
+      })
       .catch(() => {})
   }, [])
 
@@ -328,28 +333,30 @@ export default function AdminCustomersPage() {
                   {expandedSchoolId === school.id && (
                     <div className="px-5 pb-5 pt-1 bg-gray-50/50 border-t border-gray-100">
                       {/* Support access: open this school's portal on its behalf */}
-                      <div className="flex flex-wrap items-center gap-3 mt-3">
-                        <button
-                          onClick={() => manageSchool(school.id)}
-                          disabled={accessBusy === school.id}
-                          className="px-3.5 py-2 bg-warm-500 hover:bg-warm-600 text-white text-xs font-medium rounded-lg transition disabled:opacity-50"
-                        >
-                          {accessBusy === school.id ? 'Opening…' : 'Manage this school →'}
-                        </button>
-                        {myAccess[school.id]?.isSupport ? (
+                      {canManage && (
+                        <div className="flex flex-wrap items-center gap-3 mt-3">
                           <button
-                            onClick={() => removeAccess(school.id, school.name)}
+                            onClick={() => manageSchool(school.id)}
                             disabled={accessBusy === school.id}
-                            className="text-xs text-red-500 hover:text-red-600 disabled:opacity-50"
+                            className="px-3.5 py-2 bg-warm-500 hover:bg-warm-600 text-white text-xs font-medium rounded-lg transition disabled:opacity-50"
                           >
-                            Remove my support access
+                            {accessBusy === school.id ? 'Opening…' : 'Manage this school →'}
                           </button>
-                        ) : !myAccess[school.id] && (
-                          <span className="text-xs text-navy-600/60">
-                            Adds you as Foundation support — the school will see you in its Admins list.
-                          </span>
-                        )}
-                      </div>
+                          {myAccess[school.id]?.isSupport ? (
+                            <button
+                              onClick={() => removeAccess(school.id, school.name)}
+                              disabled={accessBusy === school.id}
+                              className="text-xs text-red-500 hover:text-red-600 disabled:opacity-50"
+                            >
+                              Remove my support access
+                            </button>
+                          ) : !myAccess[school.id] && (
+                            <span className="text-xs text-navy-600/60">
+                              Adds you as Foundation support — the school will see you in its Admins list.
+                            </span>
+                          )}
+                        </div>
+                      )}
                       {/* Subscription mini-summary */}
                       <div className="grid sm:grid-cols-3 gap-3 mt-3 mb-4">
                         <MiniStat label="Status" value={school.subscriptionStatus || 'inactive'} capitalize />

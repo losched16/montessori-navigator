@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { createServerSupabase } from '@/lib/supabase-server'
-import { isSuperAdmin } from '@/lib/super-admin'
+import { canManageSchools, isSuperAdmin } from '@/lib/super-admin'
 import { ACTIVE_SCHOOL_COOKIE } from '@/lib/active-school'
 
 export const dynamic = 'force-dynamic'
 
-// /api/admin/school-access — super admins manage a school's portal on its
-// behalf (e.g. Foundation staff inviting families for a school that asked for
-// help).
+// /api/admin/school-access — super admins with can_manage_schools manage a
+// school's portal on its behalf (e.g. Foundation staff inviting families for
+// a school that asked for help).
 //
-// GET    → { schools: [{ schoolId, isSupport }] } the caller's memberships
+// GET    → { allowed, schools: [{ schoolId, isSupport }] } for any super
+//          admin; schools is the caller's memberships (empty if not allowed)
 // POST   → { schoolId } add the caller as a support admin of that school
 //          (school_staff row, is_support = true) and make it the active school
 // DELETE → ?schoolId=… remove the caller's support row for that school. Never
@@ -24,12 +25,21 @@ async function authedSuperAdmin() {
   const { data: { user } } = await createServerSupabase().auth.getUser()
   if (!user) return { error: 'Not authenticated', status: 401 as const }
   if (!(await isSuperAdmin(user.id))) return { error: 'Forbidden', status: 403 as const }
-  return { user }
+  return { user, allowed: await canManageSchools(user.id) }
+}
+
+// POST/DELETE require the per-person can_manage_schools grant.
+async function authedSchoolManager() {
+  const auth = await authedSuperAdmin()
+  if ('error' in auth) return auth
+  if (!auth.allowed) return { error: 'You don\'t have school support access.', status: 403 as const }
+  return auth
 }
 
 export async function GET() {
   const auth = await authedSuperAdmin()
   if ('error' in auth) return NextResponse.json({ error: auth.error }, { status: auth.status })
+  if (!auth.allowed) return NextResponse.json({ allowed: false, schools: [] })
 
   const { data, error } = await service()
     .from('school_staff')
@@ -37,12 +47,13 @@ export async function GET() {
     .eq('user_id', auth.user.id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({
+    allowed: true,
     schools: (data || []).map(r => ({ schoolId: r.school_id, isSupport: !!r.is_support })),
   })
 }
 
 export async function POST(req: NextRequest) {
-  const auth = await authedSuperAdmin()
+  const auth = await authedSchoolManager()
   if ('error' in auth) return NextResponse.json({ error: auth.error }, { status: auth.status })
 
   const body = await req.json().catch(() => ({}))
@@ -76,7 +87,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const auth = await authedSuperAdmin()
+  const auth = await authedSchoolManager()
   if ('error' in auth) return NextResponse.json({ error: auth.error }, { status: auth.status })
 
   const schoolId = req.nextUrl.searchParams.get('schoolId')
