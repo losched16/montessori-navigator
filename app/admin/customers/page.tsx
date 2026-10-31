@@ -122,6 +122,57 @@ export default function AdminCustomersPage() {
   const [expandedSchoolId, setExpandedSchoolId] = useState<string | null>(null)
   const [search, setSearch] = useState('')
   const [tab, setTab] = useState<'schools' | 'parents'>('schools')
+  // Schools the signed-in super admin can already open in the school portal.
+  const [myAccess, setMyAccess] = useState<Record<string, { isSupport: boolean }>>({})
+  const [accessBusy, setAccessBusy] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetch('/api/admin/school-access')
+      .then(r => (r.ok ? r.json() : { schools: [] }))
+      .then(({ schools }) => setMyAccess(Object.fromEntries(
+        (schools || []).map((s: { schoolId: string; isSupport: boolean }) => [s.schoolId, { isSupport: s.isSupport }]),
+      )))
+      .catch(() => {})
+  }, [])
+
+  // Adds you to the school as Foundation support (if needed), makes it your
+  // active school, and opens its portal.
+  const manageSchool = async (schoolId: string) => {
+    setAccessBusy(schoolId)
+    try {
+      const res = await fetch('/api/admin/school-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ schoolId }),
+      })
+      if (!res.ok) {
+        alert((await res.json().catch(() => ({}))).error || 'Could not open the school.')
+        return
+      }
+      window.location.href = '/school'
+    } finally {
+      setAccessBusy(null)
+    }
+  }
+
+  const removeAccess = async (schoolId: string, name: string) => {
+    if (!confirm(`Remove your support access to ${name}? You can add it back any time.`)) return
+    setAccessBusy(schoolId)
+    try {
+      const res = await fetch(`/api/admin/school-access?schoolId=${schoolId}`, { method: 'DELETE' })
+      if (!res.ok) {
+        alert((await res.json().catch(() => ({}))).error || 'Could not remove access.')
+        return
+      }
+      setMyAccess(prev => {
+        const next = { ...prev }
+        delete next[schoolId]
+        return next
+      })
+    } finally {
+      setAccessBusy(null)
+    }
+  }
 
   useEffect(() => {
     const load = async () => {
@@ -276,6 +327,29 @@ export default function AdminCustomersPage() {
 
                   {expandedSchoolId === school.id && (
                     <div className="px-5 pb-5 pt-1 bg-gray-50/50 border-t border-gray-100">
+                      {/* Support access: open this school's portal on its behalf */}
+                      <div className="flex flex-wrap items-center gap-3 mt-3">
+                        <button
+                          onClick={() => manageSchool(school.id)}
+                          disabled={accessBusy === school.id}
+                          className="px-3.5 py-2 bg-warm-500 hover:bg-warm-600 text-white text-xs font-medium rounded-lg transition disabled:opacity-50"
+                        >
+                          {accessBusy === school.id ? 'Opening…' : 'Manage this school →'}
+                        </button>
+                        {myAccess[school.id]?.isSupport ? (
+                          <button
+                            onClick={() => removeAccess(school.id, school.name)}
+                            disabled={accessBusy === school.id}
+                            className="text-xs text-red-500 hover:text-red-600 disabled:opacity-50"
+                          >
+                            Remove my support access
+                          </button>
+                        ) : !myAccess[school.id] && (
+                          <span className="text-xs text-navy-600/60">
+                            Adds you as Foundation support — the school will see you in its Admins list.
+                          </span>
+                        )}
+                      </div>
                       {/* Subscription mini-summary */}
                       <div className="grid sm:grid-cols-3 gap-3 mt-3 mb-4">
                         <MiniStat label="Status" value={school.subscriptionStatus || 'inactive'} capitalize />

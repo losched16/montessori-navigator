@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
+import { getActiveMembership } from '@/lib/active-school'
 
 interface EnrolledFamily {
   id: string
@@ -30,12 +31,7 @@ export default function SchoolFamiliesPage() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
 
-      const { data: staff } = await supabase
-        .from('school_staff')
-        .select('school_id')
-        .eq('user_id', user.id)
-        .limit(1)
-        .single()
+      const staff = await getActiveMembership(supabase, user.id)
 
       if (!staff) return
 

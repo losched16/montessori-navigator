@@ -81,7 +81,8 @@ export async function getOnboardingState(
     supabase
       .from('school_staff')
       .select('id', { count: 'exact', head: true })
-      .eq('school_id', schoolId),
+      .eq('school_id', schoolId)
+      .eq('is_support', false), // Foundation support access isn't a school seat
     supabase
       .from('invitations')
       .select('id', { count: 'exact', head: true })

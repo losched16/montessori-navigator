@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { createServerSupabase } from '@/lib/supabase-server'
+import { getActiveMembershipServer } from '@/lib/active-school-server'
 
 export const dynamic = 'force-dynamic'
 
@@ -22,13 +23,7 @@ function service() {
 async function adminSchoolId(): Promise<{ schoolId: string } | { error: string; status: number }> {
   const { data: { user } } = await createServerSupabase().auth.getUser()
   if (!user) return { error: 'Not authenticated', status: 401 }
-  const { data: staff } = await service()
-    .from('school_staff')
-    .select('school_id')
-    .eq('user_id', user.id)
-    .eq('role', 'admin')
-    .limit(1)
-    .maybeSingle()
+  const staff = await getActiveMembershipServer(service(), user.id, { adminOnly: true })
   if (!staff) return { error: 'Only school admins can change the logo', status: 403 }
   return { schoolId: staff.school_id }
 }

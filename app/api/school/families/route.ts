@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { createServerSupabase } from '@/lib/supabase-server'
+import { getActiveMembershipServer } from '@/lib/active-school-server'
 
 export const dynamic = 'force-dynamic'
 
@@ -24,7 +25,7 @@ export async function GET() {
 
   const service = createServiceClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
 
-  const { data: staff } = await service.from('school_staff').select('school_id').eq('user_id', user.id).limit(1).maybeSingle()
+  const staff = await getActiveMembershipServer(service, user.id)
   if (!staff) return NextResponse.json({ error: 'Only school staff can view families' }, { status: 403 })
   const schoolId = staff.school_id
 
