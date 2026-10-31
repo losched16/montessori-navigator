@@ -28,3 +28,20 @@ export async function isSuperAdmin(userId: string | null | undefined): Promise<b
     .maybeSingle()
   return !!data
 }
+
+// Whether this super admin may manage schools' portals on their behalf
+// (support access from /admin/customers). Granted per person via
+// super_admins.can_manage_schools. Server-only, like isSuperAdmin.
+export async function canManageSchools(userId: string | null | undefined): Promise<boolean> {
+  if (!userId) return false
+  const service = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  )
+  const { data } = await service
+    .from('super_admins')
+    .select('can_manage_schools')
+    .eq('user_id', userId)
+    .maybeSingle()
+  return !!data?.can_manage_schools
+}

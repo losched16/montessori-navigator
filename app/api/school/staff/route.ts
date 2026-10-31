@@ -5,6 +5,7 @@ import { cookies } from 'next/headers'
 import { randomUUID } from 'crypto'
 import { sendSchoolStaffInvite } from '@/lib/email'
 import { getInviteUsage } from '@/lib/school-invite-limits'
+import { getActiveMembershipServer } from '@/lib/active-school-server'
 
 export const dynamic = 'force-dynamic'
 
@@ -32,13 +33,7 @@ async function getAuthedAdmin(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Not authenticated', status: 401 as const }
 
-  const { data: staff } = await supabase
-    .from('school_staff')
-    .select('school_id, role')
-    .eq('user_id', user.id)
-    .eq('role', 'admin')
-    .limit(1)
-    .maybeSingle()
+  const staff = await getActiveMembershipServer(supabase, user.id, { adminOnly: true })
 
   if (!staff) return { error: 'You must be a school admin to manage staff', status: 403 as const }
 
@@ -55,7 +50,7 @@ export async function GET(req: NextRequest) {
   // Current staff (with auth user emails)
   const { data: staff } = await service
     .from('school_staff')
-    .select('id, user_id, role, created_at')
+    .select('id, user_id, role, is_support, created_at')
     .eq('school_id', auth.schoolId)
     .order('created_at', { ascending: true })
 
@@ -92,6 +87,7 @@ export async function GET(req: NextRequest) {
       userId: s.user_id,
       email: emails[s.user_id] || null,
       role: s.role,
+      isSupport: !!s.is_support,
       createdAt: s.created_at,
       isYou: s.user_id === auth.user.id,
     })),

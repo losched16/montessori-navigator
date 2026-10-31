@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
+import { getActiveMembership } from '@/lib/active-school'
 
 interface InviteUsage {
   used: number
@@ -33,12 +34,7 @@ export default function SchoolInvitePage() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
 
-      const { data: staff } = await supabase
-        .from('school_staff')
-        .select('school_id')
-        .eq('user_id', user.id)
-        .limit(1)
-        .single()
+      const staff = await getActiveMembership(supabase, user.id)
 
       if (!staff) return
       setSchoolId(staff.school_id)

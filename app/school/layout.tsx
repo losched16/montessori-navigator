@@ -6,11 +6,16 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import type { School } from '@/lib/supabase'
 import Logo from '@/components/ui/Logo'
+import { listMemberships, pickMembership, readActiveSchoolCookie, setActiveSchoolCookie } from '@/lib/active-school'
 
 export default function SchoolLayout({ children }: { children: React.ReactNode }) {
   const [school, setSchool] = useState<School | null>(null)
   const [loading, setLoading] = useState(true)
   const [hasParentRole, setHasParentRole] = useState(false)
+  // Every school this user can manage (for the switcher), and whether the
+  // current one is Foundation support access rather than the school's own.
+  const [mySchools, setMySchools] = useState<Array<{ id: string; name: string }>>([])
+  const [isSupport, setIsSupport] = useState(false)
   const router = useRouter()
   const pathname = usePathname()
   const supabase = createClient()
@@ -20,13 +25,9 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) { router.push('/auth/login'); return }
 
-      // Get school via staff membership
-      const { data: staffEntry } = await supabase
-        .from('school_staff')
-        .select('school_id, role')
-        .eq('user_id', user.id)
-        .limit(1)
-        .maybeSingle()
+      // Get school via staff membership (the active one, for multi-school users)
+      const memberships = await listMemberships(supabase, user.id)
+      const staffEntry = pickMembership(memberships, readActiveSchoolCookie())
 
       if (!staffEntry) {
         router.push('/auth/signup/school')
@@ -39,6 +40,15 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
         .eq('id', staffEntry.school_id)
         .single()
 
+      setIsSupport(staffEntry.is_support)
+      if (memberships.length > 1) {
+        const { data: names } = await supabase
+          .from('schools')
+          .select('id, name')
+          .in('id', memberships.map(m => m.school_id))
+        setMySchools(((names || []) as Array<{ id: string; name: string }>).sort((a, b) => a.name.localeCompare(b.name)))
+      }
+
       if (schoolData) {
         setSchool(schoolData)
 
@@ -47,13 +57,23 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
         // redirect (otherwise it would loop). We also exempt the auth flow
         // and any settings sub-paths just in case.
         const onboarding = (schoolData.onboarding_state as any) || {}
+        // Skipped for Foundation support access: the welcome flow is the
+        // school's own first-login moment.
         if (
+          !staffEntry.is_support &&
           !onboarding.welcomed_at &&
           pathname !== '/school/welcome'
         ) {
           router.push('/school/welcome')
           return
         }
+      }
+
+      // Support access stops here: no parent self-account or marketing sync
+      // for Foundation staff acting on a school's behalf.
+      if (staffEntry.is_support) {
+        setLoading(false)
+        return
       }
 
       // Check whether this user also has a parent role (for the context switcher)
@@ -104,6 +124,12 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
     load()
   }, [])
 
+  const switchSchool = (schoolId: string) => {
+    setActiveSchoolCookie(schoolId)
+    // Full reload so every page re-reads the newly active school.
+    window.location.href = '/school'
+  }
+
   const handleSignOut = async () => {
     await supabase.auth.signOut()
     router.push('/auth/login')
@@ -149,6 +175,16 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
             )}
           </div>
           <div className="flex items-center gap-3">
+            {mySchools.length > 1 && school && (
+              <select
+                value={school.id}
+                onChange={e => switchSchool(e.target.value)}
+                aria-label="Switch school"
+                className="max-w-[180px] sm:max-w-[240px] text-xs text-navy-700 border border-gray-200 rounded-lg px-2 py-1.5 bg-white"
+              >
+                {mySchools.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+              </select>
+            )}
             {hasParentRole && (
               <Link
                 href="/dashboard"
@@ -164,6 +200,20 @@ export default function SchoolLayout({ children }: { children: React.ReactNode }
           </div>
         </div>
       </header>
+
+      {isSupport && (
+        <div className="bg-amber-50 border-b border-amber-200 text-amber-800 text-xs sm:text-sm">
+          <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+            <span>
+              You&apos;re managing <strong>{school?.name}</strong> as Montessori Foundation support.
+              Invitations and changes you make are made on the school&apos;s behalf.
+            </span>
+            <Link href="/admin/customers" className="shrink-0 font-medium underline">
+              Back to admin
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* On the welcome page we hide the nav chrome — first-login feels like
           a special moment, not just another tab. The top bar stays so the

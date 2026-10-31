@@ -8,6 +8,7 @@ interface StaffMember {
   userId: string
   email: string | null
   role: string
+  isSupport: boolean
   createdAt: string
   isYou: boolean
 }
@@ -211,7 +212,7 @@ export default function SchoolStaffPage() {
                   {s.isYou && <span className="text-xs text-warm-600 ml-2">(you)</span>}
                 </div>
                 <div className="text-xs text-gray-500">
-                  {s.role} · added {new Date(s.createdAt).toLocaleDateString()}
+                  {s.isSupport ? 'Montessori Foundation support' : s.role} · added {new Date(s.createdAt).toLocaleDateString()}
                 </div>
               </div>
               {!s.isYou && (

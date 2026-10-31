@@ -3,6 +3,7 @@ import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { createServerSupabase } from '@/lib/supabase-server'
 import { getInviteUsage, STAFF_BUFFER } from '@/lib/school-invite-limits'
 import { rolloutTarget } from '@/lib/school-onboarding'
+import { getActiveMembershipServer } from '@/lib/active-school-server'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,7 +17,7 @@ export async function GET() {
   if (!user) return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
 
   const service = createServiceClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
-  const { data: staff } = await service.from('school_staff').select('school_id').eq('user_id', user.id).limit(1).maybeSingle()
+  const staff = await getActiveMembershipServer(service, user.id)
   if (!staff) return NextResponse.json({ error: 'Only school staff can view this' }, { status: 403 })
 
   const { data: school } = await service

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
+import { getActiveMembership } from '@/lib/active-school'
 import OnboardingChecklist from '@/components/school/OnboardingChecklist'
 import SchoolAnnouncements from '@/components/school/SchoolAnnouncements'
 
@@ -17,12 +18,7 @@ export default function SchoolDashboard() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
 
-      const { data: staff } = await supabase
-        .from('school_staff')
-        .select('school_id')
-        .eq('user_id', user.id)
-        .limit(1)
-        .single()
+      const staff = await getActiveMembership(supabase, user.id)
 
       if (!staff) return
 

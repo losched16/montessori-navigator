@@ -58,7 +58,8 @@ export async function getInviteUsage(
     supabase
       .from('school_staff')
       .select('*', { count: 'exact', head: true })
-      .eq('school_id', schoolId),
+      .eq('school_id', schoolId)
+      .eq('is_support', false), // Foundation support access isn't a school seat
     supabase
       .from('schools')
       .select('family_count')

@@ -7,6 +7,7 @@ import {
   markWelcomeSeen,
   recordResourceView,
 } from '@/lib/school-onboarding'
+import { getActiveMembershipServer } from '@/lib/active-school-server'
 
 export const dynamic = 'force-dynamic'
 
@@ -44,12 +45,7 @@ async function getAuthedAdmin(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { error: 'Not authenticated', status: 401 as const }
 
-  const { data: staff } = await supabase
-    .from('school_staff')
-    .select('school_id')
-    .eq('user_id', user.id)
-    .limit(1)
-    .maybeSingle()
+  const staff = await getActiveMembershipServer(supabase, user.id)
 
   if (!staff) return { error: 'You must be a school admin', status: 403 as const }
 
